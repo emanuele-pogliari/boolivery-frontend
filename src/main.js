@@ -6,3 +6,4 @@ import "./style.scss";
 createApp(App).mount("#app");
 
 import "bootstrap/dist/js/bootstrap.js";
+import * as bootstrap from 'bootstrap';
