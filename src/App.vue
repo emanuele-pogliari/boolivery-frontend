@@ -1,8 +1,14 @@
 <script>
 import axios from "axios";
 
+import AppHeader from './components/AppHeader.vue';
+
 export default {
-  components: {},
+  components: {
+
+    AppHeader,
+
+  },
   data() {
     return {};
   },
@@ -11,6 +17,8 @@ export default {
 
 <template>
   <div class="bg-primary">Funziona</div>
+
+  <AppHeader></AppHeader>
 </template>
 
 <style></style>
