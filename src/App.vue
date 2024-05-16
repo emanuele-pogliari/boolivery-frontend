@@ -1,8 +1,12 @@
 <script>
 import axios from "axios";
 
+import AppMainContent from './components/AppMainContent.vue';
+
 export default {
-  components: {},
+  components: {
+    AppMainContent,
+  },
   data() {
     return {};
   },
@@ -11,6 +15,7 @@ export default {
 
 <template>
   <div class="bg-primary">Funziona</div>
+  <AppMainContent></AppMainContent>
 </template>
 
 <style></style>
