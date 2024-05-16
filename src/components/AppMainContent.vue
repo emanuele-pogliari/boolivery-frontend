@@ -1,9 +1,12 @@
 <script>
 
+import AppCardItem from './AppCardItem.vue';
+
 export default {
     name: 'AppMainContent',
 
     components: {
+        AppCardItem,
     },  
 
     data() {
@@ -37,19 +40,24 @@ export default {
             </a>
         </nav>
 
-        <section>
+        <section id="cards_section">
+            <AppCardItem></AppCardItem>
+            <AppCardItem></AppCardItem>
+            <AppCardItem></AppCardItem>
+            <AppCardItem></AppCardItem>
             <!-- card -->
         </section>
     </section>
 
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
     // @use '../style/variables' as *;
     // @use '../style/mixins' as *;
 
     section {
         display: flex;
+        flex-flow: column;
         justify-content: center;
         align-items: center;
 
@@ -72,11 +80,11 @@ export default {
 
             #food_types {
                 display: flex;
-                gap: 3em;
+                gap: 3rem;
 
                 button {
                     padding: 6px 12px;
-                    width: 7em;
+                    width: 7rem;
                     border-radius: 20px;
                     border: 1px solid whitesmoke;
 
@@ -102,8 +110,17 @@ export default {
                 border-radius: 20px;
 
                 padding: 6px 12px;
-                width: 12em;
+                width: 12rem;
             }
+        }
+        #cards_section {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-evenly;
+            align-items: center;
+
+            max-width: 70vw;
+            width: 100%;
         }
     }
 </style>
