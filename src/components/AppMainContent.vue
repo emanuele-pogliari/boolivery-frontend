@@ -22,7 +22,7 @@ export default {
         <nav>
 
             <h3>
-                Our Things
+                Our <span>Things</span>
             </h3>
 
             <div id="food_types">
@@ -33,7 +33,7 @@ export default {
             </div>
 
             <a href="">
-                Catalogo
+                Vai al Catalogo
             </a>
         </nav>
 
@@ -64,6 +64,12 @@ export default {
             max-width: 70vw;
             width: 100%;
 
+            h3 {
+                span {
+                    font-weight: normal;
+                }
+            }
+
             #food_types {
                 display: flex;
                 gap: 3em;
@@ -72,7 +78,31 @@ export default {
                     padding: 6px 12px;
                     width: 7em;
                     border-radius: 20px;
+                    border: 1px solid whitesmoke;
+
+                    background-color: whitesmoke;
+
+                    &:hover {
+                    background-color: #36373b;
+                    color: whitesmoke;
+                    }
                 }
+            }
+
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                text-decoration: none;
+                color: black;
+                background-color: whitesmoke;
+
+                border: 2px solid black;
+                border-radius: 20px;
+
+                padding: 6px 12px;
+                width: 12em;
             }
         }
     }
