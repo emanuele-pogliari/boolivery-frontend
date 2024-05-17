@@ -18,12 +18,12 @@ export default {
 
 <template>
     
-    <div class="card py-3 px-3" style="width: 15rem;">
+    <div class="card my_card py-3 px-3" style="width: 15rem;">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiiK7GcmVeLr_tbOQIgB1Otfspbc64nLvXnwGBleYCXw&s" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title text-center">Nome Ristorante</h5>
             <p class="card-text text-center">$$$</p>
-            <p class="card-text text-center">Qua ci sarà l'anteprima della descrizione inserita dal ristoratore</p>
+            <p class="card-text text-center">Tipologia/e</p>
             <div class="text-center">
                 <a href="#" class="btn btn-primary">Visita</a>
             </div>
@@ -35,4 +35,14 @@ export default {
 <style lang="scss" scoped>
     // @use '../style/variables' as *;
     // @use '../style/mixins' as *;
+
+    .my_card {
+        border-radius: 24px;
+        border-color: transparent;
+
+        box-shadow: 10px 10px 15px rgba(13, 110, 253, 0.3);
+        img {
+            border-radius: 16px;
+        }
+    }
 </style>
