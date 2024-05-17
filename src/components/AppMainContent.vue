@@ -64,6 +64,8 @@ export default {
         background-color: #eceff4;
         padding: 30px 0;
 
+        border-radius: 50px;
+
         nav {
             display: flex;
             justify-content: space-between;
@@ -73,6 +75,9 @@ export default {
             width: 100%;
 
             h3 {
+                color: #36373b;
+                cursor: default;
+                
                 span {
                     font-weight: normal;
                 }
@@ -89,6 +94,9 @@ export default {
                     border: 1px solid whitesmoke;
 
                     background-color: whitesmoke;
+                    color: #36373b;
+
+                    transition: all 0.2s linear;
 
                     &:hover {
                     background-color: #36373b;
@@ -103,14 +111,21 @@ export default {
                 align-items: center;
 
                 text-decoration: none;
-                color: black;
+                color: #36373b;
                 background-color: whitesmoke;
 
-                border: 2px solid black;
+                border: 2px solid #36373b;
                 border-radius: 20px;
 
                 padding: 6px 12px;
                 width: 12rem;
+
+                transition: all 0.2s linear;
+
+                &:hover {
+                    background-color: #36373b;
+                    color: whitesmoke;
+                }
             }
         }
         #cards_section {
