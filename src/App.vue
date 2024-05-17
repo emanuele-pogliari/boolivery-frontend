@@ -16,9 +16,9 @@ export default {
 </script>
 
 <template>
-  <div class="bg-primary">Funziona</div>
 
   <AppHeader></AppHeader>
+  
 </template>
 
 <style></style>

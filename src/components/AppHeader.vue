@@ -13,7 +13,7 @@ export default {
 
             <div class="left-nav">
                 
-                <img class="logo-nav" src="/img/Logo2.png" alt="">
+                <img class="logo-nav" src="/img/booliverylogo.svg" alt="">
 
                 <span>Boolivery - Delivery at your door</span>
 
@@ -35,9 +35,15 @@ export default {
 
                 <span><i class="fa-solid fa-magnifying-glass"></i></span>
 
+                <span><i class="fa-solid fa-cart-shopping"></i></span>
+
             </div>
 
             <div class="right-nav">
+
+                <i class="fa-solid fa-phone"></i>
+
+                <span>NUMERO TELEFONO</span>
 
             </div>
 
@@ -52,16 +58,40 @@ export default {
 
 .nav-container {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
 }
 
 .left-nav {
     background-color: rgb(121, 121, 121);
     border-radius: 45px;
-    padding: 5px 25px;
+    padding: 15px 25px;
 }
 
 .logo-nav {
-    width: 100px;
+    width: 200px;
+}
+
+.middle-nav {
+    display:flex;
+    gap: 25px;
+    justify-content: center;
+    margin: auto;
+    background-color: #3d3d3d;
+    border-radius: 45px;
+    padding: 20px 25px;
+    width: 700px;
+    color: white;
+}
+
+.right-nav {
+    background-color: #3d3d3d;
+    border-radius: 45px;
+    padding: 20px 25px;
+    color: white;
+    width: 400px;
+    text-align: center;
 }
 
 </style>
