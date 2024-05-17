@@ -20,7 +20,7 @@ export default {
 
     <footer class="text-center p-0 rounded-top-5">
         <!-- <hr class=""> -->
-        <div class="d-flex justify-content-around gap-5 pt-5 pb-5 px-3">
+        <div class=" container d-flex justify-content-around gap-5 pt-5 pb-5 px-3">
 
 
             <div class="d-flex flex-column align-items-start">
@@ -29,17 +29,17 @@ export default {
                 <a href="#" class="btn primary-btn ">ORDER NOW</a>
             </div>
 
-            <div class="d-flex flex-wrap gap-4 align-content-center">
-                <h5>HOME</h5>
-                <h5>DELIVERY</h5>
-                <h5>PAYMENT</h5>
-                <h5>CONTACT</h5>
+            <div class="foter_links d-flex flex-wrap gap-4 align-content-center">
+                <h6>HOME</h6>
+                <h6>DELIVERY</h6>
+                <h6>PAYMENT</h6>
+                <h6>CONTACT</h6>
             </div>
 
 
 
 
-            <div class="d-flex gap-3 flex-wrap align-content-center">
+            <div class="social_media_contacts d-flex gap-3 flex-wrap align-content-center">
                 <span>
                     <a href="">
                         <i class="fa-brands fa-twitter"></i>
@@ -76,7 +76,7 @@ export default {
                         <label for="exampleInputEmail1" class="form-label"></label>
                         <input type="email" class="form-control" id="exampleInputEmail1"
                             placeholder="enter email adress" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        <div id="emailHelp" class="form-text">Subscribe to our newsletter</div>
                     </div>
                 </form>
 
@@ -94,16 +94,16 @@ export default {
             </div>
             <div class="d-flex gap-2">
                 <span class="badge rounded-pill">
-                    <a href="https://github.com/rpalanga">Luca</a>
+                    <a href="https://github.com/rpalanga">Luca F.</a>
                 </span>
                 <span class="badge rounded-pill">
-                    <a href="">Christian</a>
+                    <a href="">Christian DG.</a>
                 </span>
                 <span class="badge rounded-pill">
-                    <a href="https://github.com/emanuele-pogliari">Emanuele</a>
+                    <a href="https://github.com/emanuele-pogliari">Emanuele P.</a>
                 </span>
                 <span class="badge rounded-pill">
-                    <a href="">Christian</a>
+                    <a href="">Christian S.</a>
                 </span>
             </div>
         </div>
@@ -121,8 +121,8 @@ export default {
 
 footer {
 
-
-    background-color: $secondary_color;
+    color: $deactivated_text;
+    background-color: $primary_color;
 
     img {
         height: 100px;
@@ -132,26 +132,47 @@ footer {
         @include primary_button_style;
     }
 
+    .foter_links {
+        h6 {
+            font-size: 1rem;
+            color: $deactivated_text;
+
+            &:hover {
+                color: $secondary_color;
+            }
+        }
+    }
+
+    .social_media_contacts {
+        span {
+            font-size: 1rem;
+            color: $deactivated_text;
+
+            a {
+                color: $deactivated_text;
+
+                &:hover {
+                    color: $secondary_color;
+                }
+            }
+        }
+    }
+
 
     .developers-pills {
-        background-color: $primary_color;
-        color: white;
+        background-color: $secondary_color;
         font-size: 1rem;
         font-weight: 500;
+        color: $primary_color;
 
         span {
 
             width: 150px;
 
-            @include footer_button_style;
 
             a {
                 text-decoration: none;
-                color: $secondary_color;
-
-                &:hover {
-                    color: white;
-                }
+                @include footer_button_style_pills;
 
             }
         }
