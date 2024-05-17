@@ -14,7 +14,6 @@ export default {
 </script>
 
 <template>
-  <div class="bg-primary">Funziona</div>
   <AppFooter></AppFooter>
 </template>
 
