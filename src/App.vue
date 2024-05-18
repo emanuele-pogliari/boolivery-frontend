@@ -1,7 +1,6 @@
 <script>
-import axios from "axios";
 import AppFooter from "./components/AppFooter.vue";
-import AppMainContent from './components/AppMainContent.vue';
+import AppMainContent from "./components/AppMainContent.vue";
 
 export default {
   components: {
@@ -16,6 +15,9 @@ export default {
 
 <template>
   <AppMainContent></AppMainContent>
+  <div class="container">
+    <router-view></router-view>
+  </div>
   <AppFooter></AppFooter>
 </template>
 
