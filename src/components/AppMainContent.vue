@@ -36,7 +36,7 @@ export default {
             </div>
 
             <a href="">
-                Vai al Catalogo
+                Cerchi altro?
             </a>
         </nav>
 
@@ -52,8 +52,8 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-    // @use '../style/variables' as *;
-    // @use '../style/mixins' as *;
+    @use "/src/variabiles.scss" as *;
+    @use "/src/mixins.scss" as *;
 
     section {
         display: flex;
@@ -61,7 +61,7 @@ export default {
         justify-content: center;
         align-items: center;
 
-        background-color: #eceff4;
+        background-color: $background_color_dark;
         padding: 30px 0;
 
         border-radius: 50px;
@@ -75,7 +75,9 @@ export default {
             width: 100%;
 
             h3 {
-                color: #36373b;
+                font-size: 2.1rem;               
+                color: $text_color;
+
                 cursor: default;
                 
                 span {
@@ -89,18 +91,19 @@ export default {
 
                 button {
                     padding: 6px 12px;
-                    width: 7rem;
+                    width: 8rem;
                     border-radius: 20px;
-                    border: 1px solid whitesmoke;
+                    border: 1px solid $background_color;
 
-                    background-color: whitesmoke;
-                    color: #36373b;
+                    background-color: $background_color;
+                    color: $text_color;
+                    font-weight: 600;
 
                     transition: all 0.2s linear;
 
                     &:hover {
-                    background-color: #36373b;
-                    color: whitesmoke;
+                    background-color: $text_color;
+                    color: $background_color;
                     }
                 }
             }
@@ -111,10 +114,14 @@ export default {
                 align-items: center;
 
                 text-decoration: none;
-                color: #36373b;
-                background-color: whitesmoke;
+                color: $background_color;
+                background-color: $text_color;
+                
+                font-weight: 600;
+                word-spacing: 2px;
+                letter-spacing: 0.5px;
 
-                border: 2px solid #36373b;
+                border: 2px solid $text_color;
                 border-radius: 20px;
 
                 padding: 6px 12px;
@@ -123,8 +130,9 @@ export default {
                 transition: all 0.2s linear;
 
                 &:hover {
-                    background-color: #36373b;
-                    color: whitesmoke;
+                    background-color: $secondary_color;
+                    border-color: $secondary_color;
+                    color: $text_color;
                 }
             }
         }

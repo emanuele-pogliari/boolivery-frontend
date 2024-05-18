@@ -22,25 +22,27 @@ export default {
         <img src="https://img.freepik.com/foto-gratuito/pizza-hawaiana_1203-2455.jpg?t=st=1715969805~exp=1715973405~hmac=7ae6002232c8be51caf786f83822757cc37badce87ef60bee7d71515671884c2&w=1380" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title text-center">L'Orologio</h5>
-            <p class="card-text text-center" style="color: grey;">Italiano</p>
+            <p class="card-text text-center restaurant_type">Italiano</p>
             <p class="card-text text-center" style="font-weight: 500;">$$$</p>
-            <a href="#" class="btn btn-primary my_btn"><!-- <i class="fa-solid fa-eye"></i>-->👁</a>
+            <a href="#" class="btn btn-primary my_btn"><i class="fa-solid fa-eye"></i></a>
         </div>
     </div>
 
 </template>
 
 <style lang="scss" scoped>
-    // @use '../style/variables' as *;
-    // @use '../style/mixins' as *;
+    @use "/src/variabiles.scss" as *;
+    @use "/src/mixins.scss" as *;
 
     .my_card {
         border-radius: 24px;
         border-color: transparent;
+        color: $text_color;
 
         position: relative;
 
         box-shadow: 10px 10px 15px rgba(20, 20, 20, 0.1);
+        background-color: $background_color;
 
         cursor: default;
 
@@ -53,6 +55,10 @@ export default {
 
         p {
             margin: 0.1rem 0.1rem 0.25rem 0.1rem;
+        }
+
+        .restaurant_type {
+            color: $deactivated_text;
         }
 
         .card-title {
@@ -71,11 +77,11 @@ export default {
             transform: translate(-50%, 50%);
 
             border-radius: 50%;
-            padding: 0.7rem 0.8rem;
+            padding: 0.7rem 0.9rem;
 
             transition: all 0.2s linear;
-            background: linear-gradient(to bottom right, rgb(28, 28, 255), #0f0f88);
-            color: white;
+            background: linear-gradient(to bottom right, #f2ca39, #c59a00);
+            color: $background_color_dark;
             border: none;
 
             box-shadow: 10px 10px 15px rgba(20, 20, 20, 0.15);
