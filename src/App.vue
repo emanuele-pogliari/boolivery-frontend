@@ -1,7 +1,6 @@
 <script>
-import axios from "axios";
 import AppFooter from "./components/AppFooter.vue";
-import AppMainContent from './components/AppMainContent.vue';
+import AppMainContent from "./components/AppMainContent.vue";
 
 export default {
   components: {
@@ -15,8 +14,10 @@ export default {
 </script>
 
 <template>
-  <div class="bg-primary">Funziona</div>
   <AppMainContent></AppMainContent>
+  <div class="container">
+    <router-view></router-view>
+  </div>
   <AppFooter></AppFooter>
 </template>
 
