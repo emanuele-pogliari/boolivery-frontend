@@ -1,8 +1,6 @@
 <script>
 import axios from "axios";
 import AppFooter from "./components/AppFooter.vue";
-
-
 import AppMainContent from './components/AppMainContent.vue';
 
 export default {
