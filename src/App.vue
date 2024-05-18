@@ -1,7 +1,5 @@
 <script>
-import axios from "axios";
 import AppFooter from "./components/AppFooter.vue";
-
 
 export default {
   components: {
@@ -14,6 +12,9 @@ export default {
 </script>
 
 <template>
+  <div class="container">
+    <router-view></router-view>
+  </div>
   <AppFooter></AppFooter>
 </template>
 
