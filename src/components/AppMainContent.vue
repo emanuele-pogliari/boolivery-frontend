@@ -29,15 +29,35 @@ export default {
             </h3>
 
             <div id="food_types">
-                <button>Italian</button>
-                <button>Chinese</button>
-                <button>Korean</button>
-                <button>Sushi</button>
+                <button class="type_res_button">Italian</button>
+                <button class="type_res_button">Pizzeria</button>
+                <button class="type_res_button">Fusion</button>
+                <button class="type_res_button">Chinese</button>
             </div>
 
-            <a href="">
+            <button type="button" class="btn btn-primary more" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Cerchi altro?
-            </a>
+            </button>
+
+            <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Cerchi altro?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body my_modal_body">
+                            <button class="type_res_button">Mexican</button>
+                            <button class="type_res_button">Japanese</button>
+                            <button class="type_res_button">Thai</button>
+                            <button class="type_res_button">Indian</button>
+                            <button class="type_res_button">Greek</button>
+                            <button class="type_res_button">Steakhouse</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
         </nav>
 
         <section id="cards_section">
@@ -88,32 +108,13 @@ export default {
             #food_types {
                 display: flex;
                 gap: 3rem;
-
-                button {
-                    padding: 6px 12px;
-                    width: 8rem;
-                    border-radius: 20px;
-                    border: 1px solid $background_color;
-
-                    background-color: $background_color;
-                    color: $text_color;
-                    font-weight: 600;
-
-                    transition: all 0.2s linear;
-
-                    &:hover {
-                    background-color: $text_color;
-                    color: $background_color;
-                    }
-                }
             }
 
-            a {
+            .more {
                 display: flex;
                 justify-content: center;
                 align-items: center;
 
-                text-decoration: none;
                 color: $background_color;
                 background-color: $text_color;
                 
@@ -135,7 +136,33 @@ export default {
                     color: $text_color;
                 }
             }
-        }
+
+            .type_res_button {
+                padding: 6px 12px;
+                width: 8rem;
+                border-radius: 20px;
+                border: 1px solid $background_color;
+
+                background-color: $background_color;
+                color: $text_color;
+                font-weight: 600;
+
+                transition: all 0.2s linear;
+
+                &:hover {
+                background-color: $text_color;
+                color: $background_color;
+                }
+            }
+
+            .my_modal_body {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-around;
+                width: 100%;
+                row-gap: .5rem;
+            }
+    }
         #cards_section {
             display: flex;
             flex-flow: row nowrap;

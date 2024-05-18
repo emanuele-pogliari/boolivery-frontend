@@ -23,7 +23,7 @@ export default {
         <div class="card-body">
             <h5 class="card-title text-center">L'Orologio</h5>
             <p class="card-text text-center restaurant_type">Italiano</p>
-            <p class="card-text text-center" style="font-weight: 500;">$$$</p>
+            <p class="card-text text-center" style="font-weight: 500;">Via Polesine 5, Milano</p>
             <a href="#" class="btn btn-primary my_btn"><i class="fa-solid fa-eye"></i></a>
         </div>
     </div>
@@ -55,6 +55,9 @@ export default {
 
         p {
             margin: 0.1rem 0.1rem 0.25rem 0.1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .restaurant_type {
