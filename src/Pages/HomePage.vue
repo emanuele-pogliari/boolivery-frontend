@@ -14,20 +14,23 @@ export default {
   },
 
   mounted() {
-    axios
-      .get(this.baseApiUrl + "restaurants")
-      .then((res) => {
-        console.log(res);
-        this.restaurants = res.data.results;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios
+    //   .get(this.baseApiUrl + "restaurants")
+    //   .then((res) => {
+    //     console.log(res);
+    //     this.restaurants = res.data.results;
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
     axios
       .get(this.baseApiUrl + "types")
       .then((res) => {
-        console.log(res);
         this.types = res.data.results;
+        console.log(this.baseApiUrl + "types");
+        console.log(res.data.results);
+        console.log(this.types);
       })
       .catch((error) => {
         console.log(error);
