@@ -16,7 +16,26 @@ export default {
       types: [],
     };
   },
-  methods: {},
+  methods: {
+
+    apiFilterTypes(){
+            if(this.checkButtonValue.length > 0) {
+                axios.get(this.apiBaseUrl + '/restaurants?types=' + this.checkButtonValue, {
+                  
+                }).then(res => {
+                    // console.log(res.data.results)
+
+                    this.restaurants = res.data.results
+
+                    console.log(this.checkButtonValue)
+                })
+
+            } else {
+                this.apiCall();
+            }
+        },
+
+  },
 
   mounted() {
     axios
