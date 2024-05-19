@@ -14,6 +14,7 @@ export default {
       baseApiUrl: "http://127.0.0.1:8000/api/",
       restaurants: [],
       types: [],
+      checkButtonValue: [],
     };
   },
   methods: {
@@ -35,10 +36,9 @@ export default {
             }
         },
 
-  },
+    apiCall() {
 
-  mounted() {
-    axios
+      axios
       .get(this.baseApiUrl + "restaurants")
       .then((res) => {
         console.log(res);
@@ -59,6 +59,36 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+
+    }
+
+  },
+
+  mounted() {
+
+    this.apiCall();
+
+    // axios
+    //   .get(this.baseApiUrl + "restaurants")
+    //   .then((res) => {
+    //     console.log(res);
+    //     this.restaurants = res.data.results;
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    // axios
+    //   .get(this.baseApiUrl + "types")
+    //   .then((res) => {
+    //     this.types = res.data.results;
+    //     console.log(this.baseApiUrl + "types");
+    //     console.log(res.data.results);
+    //     console.log(this.types);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   },
 };
 </script>
@@ -106,9 +136,12 @@ export default {
               ></button>
             </div>
             <div class="modal-body my_modal_body">
-              <button v-for="type in types" class="type_res_button">
-                {{ type.type }}
-              </button>
+              
+              <div v-for="type in types" class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" :value="type.type" :id="type.type" :name="type.type" v-model="checkButtonValue" @change="apiFilterTypes()"> 
+                <label class="form-check-label" :for="type.type">{{type.type}}</label>
+              </div>
+            
             </div>
           </div>
         </div>
