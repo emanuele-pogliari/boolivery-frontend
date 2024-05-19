@@ -39,11 +39,7 @@ export default {
 };
 </script>
 <template>
-  <div>
-    <ul>
-      <li v-for="type in types">{{ type.type }}</li>
-    </ul>
-  </div>
+  <div></div>
 </template>
 
 <style></style>
