@@ -21,7 +21,7 @@ export default {
 
     apiFilterTypes(){
             if(this.checkButtonValue.length > 0) {
-                axios.get(this.apiBaseUrl + '/restaurants?types=' + this.checkButtonValue, {
+                axios.get(this.baseApiUrl + 'restaurants?types=' + this.checkButtonValue, {
                   
                 }).then(res => {
                     // console.log(res.data.results)
