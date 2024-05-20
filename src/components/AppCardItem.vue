@@ -17,12 +17,19 @@ export default {
 <template>
   <div class="card my_card py-3 gap-2" style="width: 15.5rem">
     <img
+      v-if="restaurant.image"
       :src="
         restaurant.image.startsWith('http')
           ? restaurant.image
           : 'http://localhost:8000/storage/' + restaurant.image
       "
       class="card-img-top"
+      alt="..."
+    />
+    <img
+      v-else
+      class="card-img-top"
+      src="/img/homepage/placeholdertemp.jpg"
       alt="..."
     />
     <div class="card-body">
