@@ -62,36 +62,46 @@ export default {
 
 
 
-        <div class="jumbotron">
 
-            <img class="jumbotron-picture" src="/img/boolivery-food.png" alt="">
 
-            <div class="title-jumbotron-1">WE DELIVER</div>
 
-            <div class="title-jumbotron-2">AT YOUR DOOR</div>
 
-            <img class="jumbotron-divider" src="/img/divider.png">
 
-            <div class="jumbotron-subsection">But I must explain to you how all this mistaken
-                <br>idea of denouncing of a pleasure
+
+
+        <!-- --------------------------- -->
+        <!-- START JUMBOTRON -->
+        <div class="jumbotron container">
+            <div class="rounded-bottom-circle border-black">
+                <img class="jumbotron-picture" src="/img/homepage/boolivery-jumbo-img-1.jpg" alt="">
+            </div>
+            <div class="jumbotron-content">
+                <h1 class="text-uppercase">flying food</h1>
+                <h1 class="text-uppercase">delivery</h1>
+                <p>But i must explain to you how all this mistaken idea of denauncing of a pleasure</p>
+                <div>
+                    <button href="#"> RESTAURANTS </button>
+                </div>
             </div>
 
-            <div class="buy-jumbotron">
 
-                <div class="skew-background"></div>
-
-                <div class="skew-text">GO TO CATALOG</div>
-
-            </div>
 
         </div>
+        <!-- --------------------------- -->
+        <!-- END JUMBOTRON -->
 
     </header>
+
+
+
 </template>
 
 <style lang="scss" scoped>
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
+
+// ---------------------------
+// START NAVBAR
 
 .navbar {
     padding-top: 0;
@@ -161,6 +171,8 @@ export default {
     }
 }
 
+// ---------------------------
+// END NAVBAR   
 
 
 
@@ -170,6 +182,8 @@ export default {
 
 
 
+// ---------------------------
+// START JUMBOTRON
 
 .jumbotron {
 
@@ -179,66 +193,39 @@ export default {
         object-fit: cover;
         width: 100%;
         height: 700px;
+
+        border-bottom-left-radius: 4.5rem;
     }
 
-    .title-jumbotron-1 {
-        font-size: 70px;
+    .jumbotron-content {
         position: absolute;
-        top: 175px;
-        left: 100px;
-    }
+        top: 50%;
+        left: 45%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        transform: translate(-50%, -50%);
+        text-align: start;
+        color: $background_color;
 
-    .title-jumbotron-2 {
-        font-size: 70px;
-        position: absolute;
-        top: 250px;
-        left: 150px;
-    }
-
-    .jumbotron-divider {
-        width: 250px;
-        height: 30px;
-        position: absolute;
-        z-index: 99;
-        top: 350px;
-        left: 200px;
-        object-fit: cover;
-    }
-
-    .jumbotron-subsection {
-        position: absolute;
-        top: 390px;
-        left: 200px;
-    }
-
-    .buy-jumbotron {
-        position: absolute;
-        width: 250px;
-        text-align: center;
-        top: 470px;
-        left: 250px;
-
-        .skew-background {
-            background-color: #f39939;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            transform: skewX(20deg);
-            z-index: 1;
-            display: inline-block;
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
         }
 
-        .skew-text {
-            position: relative;
-            z-index: 2;
-            color: black;
-            font-size: 24px;
-            padding: 15px;
-            display: inline-block;
-            font-weight: bold;
+        p {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        button {
+            @include footer_button_style_pills;
         }
     }
+
+
 }
 </style>
+
+// END JUMBOTRON
+// ---------------------------
