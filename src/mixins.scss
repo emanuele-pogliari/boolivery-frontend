@@ -1,3 +1,6 @@
+// -----------------------------------------------------------------------------
+// BUTTONS
+
 @mixin primary_button_style {
     border: none;
     text-decoration: none;
@@ -16,6 +19,7 @@
     }
 }
 
+
 @mixin footer_button_style_pills {
     border: none;
     text-decoration: none;
@@ -31,5 +35,26 @@
     &:hover {
         background-color: #ffffff;
         color: #3d3d3d;
+    }
+}
+
+// -----------------------------------------------------------------------------
+
+
+
+
+// -----------------------------------------------------------------------------
+// LINKS
+
+
+@mixin nav_links_style {
+    border: none;
+    text-decoration: none;
+    color: #f6f7f8 !important;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+        color: #f2ca39 !important;
     }
 }
