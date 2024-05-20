@@ -1,7 +1,6 @@
 <script>
 export default {
   name: "AppCardItem",
-
   components: {},
 
   props: {
@@ -15,7 +14,7 @@ export default {
 </script>
 
 <template>
-  <div class="card my_card py-3 gap-2" style="width: 15.5rem">
+  <div class="container card my_card py-3 gap-2" style="width: 15.5rem">
     <img
       src="https://img.freepik.com/foto-gratuito/pizza-hawaiana_1203-2455.jpg?t=st=1715969805~exp=1715973405~hmac=7ae6002232c8be51caf786f83822757cc37badce87ef60bee7d71515671884c2&w=1380"
       class="card-img-top" alt="..." />
@@ -43,8 +42,6 @@ export default {
   border-color: transparent;
   color: $text_color;
 
-  position: relative;
-
   box-shadow: 10px 10px 15px rgba(20, 20, 20, 0.1);
   background-color: $background_color;
 
@@ -52,7 +49,6 @@ export default {
 
   img {
     border-radius: 16px;
-
     height: 10rem;
     object-fit: cover;
   }
@@ -72,8 +68,6 @@ export default {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 100%;
-
     line-height: 1.8rem;
   }
 
@@ -87,8 +81,8 @@ export default {
     padding: 0.7rem 0.9rem;
 
     transition: all 0.2s linear;
-    background: linear-gradient(to bottom right, #f2ca39, #c59a00);
-    color: $background_color_dark;
+    background: $primary_color;
+    color: $background_color;
     border: none;
 
     box-shadow: 10px 10px 15px rgba(20, 20, 20, 0.15);
