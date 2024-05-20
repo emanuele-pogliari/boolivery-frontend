@@ -6,7 +6,6 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '~fontawesome': path.resolve(__dirname, 'node_modules/@fortawesome/fontawesome-free'),
     }
   }
 })

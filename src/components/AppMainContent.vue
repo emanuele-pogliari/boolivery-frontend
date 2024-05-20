@@ -150,8 +150,8 @@ export default {
                 transition: all 0.2s linear;
 
                 &:hover {
-                background-color: $text_color;
-                color: $background_color;
+                background-color: $secondary_color;
+                // color: $background_color;
                 }
             }
 
