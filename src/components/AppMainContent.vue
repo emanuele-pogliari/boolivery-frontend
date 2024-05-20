@@ -1,109 +1,192 @@
 <script>
-
-import AppCardItem from './AppCardItem.vue';
+import axios from "axios";
+import AppCardItem from "./AppCardItem.vue";
 
 export default {
-    name: 'AppMainContent',
+  name: "AppMainContent",
 
-    components: {
-        AppCardItem,
-    },  
+  components: {
+    AppCardItem,
+  },
 
-    data() {
-        return {
-            
-        }
+  data() {
+    return {
+      baseApiUrl: "http://127.0.0.1:8000/api/",
+      restaurants: [],
+      types: [],
+      checkButtonValue: [],
+    };
+  },
+  methods: {
+
+    apiFilterTypes(){
+            if(this.checkButtonValue.length > 0) {
+                axios.get(this.baseApiUrl + 'restaurants?types=' + this.checkButtonValue, {
+                  
+                }).then(res => {
+                    // console.log(res.data.results)
+
+                    this.restaurants = res.data.results
+
+                    console.log(this.checkButtonValue)
+                })
+
+            } else {
+                this.apiCall();
+            }
+        },
+
+    apiCall() {
+
+      axios
+      .get(this.baseApiUrl + "restaurants")
+      .then((res) => {
+        console.log(res);
+        this.restaurants = res.data.results;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    axios
+      .get(this.baseApiUrl + "types")
+      .then((res) => {
+        this.types = res.data.results;
+        console.log(this.baseApiUrl + "types");
+        console.log(res.data.results);
+        console.log(this.types);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     }
-}
 
+  },
 
+  mounted() {
+
+    this.apiCall();
+
+    // axios
+    //   .get(this.baseApiUrl + "restaurants")
+    //   .then((res) => {
+    //     console.log(res);
+    //     this.restaurants = res.data.results;
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    // axios
+    //   .get(this.baseApiUrl + "types")
+    //   .then((res) => {
+    //     this.types = res.data.results;
+    //     console.log(this.baseApiUrl + "types");
+    //     console.log(res.data.results);
+    //     console.log(this.types);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+  },
+};
 </script>
 
 <template>
-    
-    <section>
-        <nav>
+  <section>
+    <nav>
+      <h3>Our <span>Things</span></h3>
 
-            <h3>
-                Our <span>Things</span>
-            </h3>
+      <div id="food_types">
+        <button class="type_res_button">Italian</button>
+        <button class="type_res_button">Pizzeria</button>
+        <button class="type_res_button">Fusion</button>
+        <button class="type_res_button">Chinese</button>
+      </div>
 
-            <div id="food_types">
-                <button class="type_res_button">Italian</button>
-                <button class="type_res_button">Pizzeria</button>
-                <button class="type_res_button">Fusion</button>
-                <button class="type_res_button">Chinese</button>
-            </div>
+      <button
+        type="button"
+        class="btn btn-primary more"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Cerchi altro?
+      </button>
 
-            <button type="button" class="btn btn-primary more" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
                 Cerchi altro?
-            </button>
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body my_modal_body">
+              
+              <div v-for="type in types" class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" :value="type.type" :id="type.type" :name="type.type" v-model="checkButtonValue" @change="apiFilterTypes()"> 
+                <label class="form-check-label" :for="type.type">{{type.type}}</label>
+              </div>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
 
-            <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Cerchi altro?</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body my_modal_body">
-                            <button class="type_res_button">Mexican</button>
-                            <button class="type_res_button">Japanese</button>
-                            <button class="type_res_button">Thai</button>
-                            <button class="type_res_button">Indian</button>
-                            <button class="type_res_button">Greek</button>
-                            <button class="type_res_button">Steakhouse</button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-        </nav>
+    <section id="cards_section">
+      <AppCardItem
+        v-for="restaurant in restaurants.data"
+        :restaurant="restaurant"
+      ></AppCardItem>
 
-        <section id="cards_section">
-            <AppCardItem></AppCardItem>
-            <AppCardItem></AppCardItem>
-            <AppCardItem></AppCardItem>
-            <AppCardItem></AppCardItem>
-            <!-- card -->
-        </section>
+      <!-- card -->
     </section>
-
+  </section>
 </template>
 
 <style lang="scss" scoped>
-    @use "/src/variabiles.scss" as *;
-    @use "/src/mixins.scss" as *;
+@use "/src/variabiles.scss" as *;
+@use "/src/mixins.scss" as *;
 
-    section {
-        display: flex;
-        flex-flow: column;
-        justify-content: center;
-        align-items: center;
+section {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 
-        background-color: $background_color_dark;
-        padding: 30px 0;
+  background-color: $background_color_dark;
+  padding: 30px 0;
 
-        border-radius: 50px;
+  border-radius: 50px;
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-            max-width: 70vw;
-            width: 100%;
+    max-width: 70vw;
+    width: 100%;
 
-            h3 {
-                font-size: 2.1rem;               
-                color: $text_color;
+    h3 {
+      font-size: 2.1rem;
+      color: $text_color;
 
-                cursor: default;
-                
-                span {
-                    font-weight: normal;
-                }
-            }
+      cursor: default;
 
             #food_types {
                 display: flex;
@@ -162,15 +245,77 @@ export default {
                 width: 100%;
                 row-gap: .5rem;
             }
+      span {
+        font-weight: normal;
+      }
     }
-        #cards_section {
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: space-evenly;
-            align-items: center;
 
-            max-width: 70vw;
-            width: 100%;
-        }
+    #food_types {
+      display: flex;
+      gap: 3rem;
     }
+
+    .more {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      color: $background_color;
+      background-color: $text_color;
+
+      font-weight: 600;
+      word-spacing: 2px;
+      letter-spacing: 0.5px;
+
+      border: 2px solid $text_color;
+      border-radius: 20px;
+
+      padding: 6px 12px;
+      width: 12rem;
+
+      transition: all 0.2s linear;
+
+      &:hover {
+        background-color: $secondary_color;
+        border-color: $secondary_color;
+        color: $text_color;
+      }
+    }
+
+    .type_res_button {
+      padding: 6px 12px;
+      width: 8rem;
+      border-radius: 20px;
+      border: 1px solid $background_color;
+
+      background-color: $background_color;
+      color: $text_color;
+      font-weight: 600;
+
+      transition: all 0.2s linear;
+
+      &:hover {
+        background-color: $text_color;
+        color: $background_color;
+      }
+    }
+
+    .my_modal_body {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+      width: 100%;
+      row-gap: 0.5rem;
+    }
+  }
+  #cards_section {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+    max-width: 70vw;
+    width: 100%;
+  }
+}
 </style>
