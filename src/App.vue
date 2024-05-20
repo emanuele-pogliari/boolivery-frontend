@@ -16,7 +16,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader></AppHeader>
+  <!-- <AppHeader></AppHeader> -->
   <AppMainContent></AppMainContent>
   <div class="container">
     <router-view></router-view>

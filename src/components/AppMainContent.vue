@@ -2,6 +2,13 @@
 import axios from "axios";
 import AppCardItem from "./AppCardItem.vue";
 
+// import Swiper JS
+import Swiper from 'swiper';
+// import Swiper styles
+import 'swiper/css';
+
+const swiper = new Swiper('.swiper');
+
 export default {
   name: "AppMainContent",
 
@@ -94,7 +101,7 @@ export default {
 </script>
 
 <template>
-  <section>
+  <section class="rounded-5">
     <nav>
       <h3>Our <span>Things</span></h3>
 
@@ -125,9 +132,9 @@ export default {
       >
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header my_modal_head">
               <h1 class="modal-title fs-5 text-center" id="restaurantModalLabel">
-                Ti mostreremo i migliori ristoranti di?
+                Ti interessano i migliori ristoranti di?
               </h1>
               <button
                 type="button"
@@ -173,86 +180,58 @@ section {
   background-color: $background_color_dark;
   padding: 30px 0;
 
-  border-radius: 50px;
-
   nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    max-width: 70vw;
+    max-width: 1200px;
     width: 100%;
 
     h3 {
       font-size: 2.1rem;
       color: $text_color;
+      padding-left: 0.5rem;
 
       cursor: default;
 
-            #food_types {
-                display: flex;
-                gap: 3rem;
-            }
-
-            .more {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                color: $background_color;
-                background-color: $text_color;
-                
-                font-weight: 600;
-                word-spacing: 2px;
-                letter-spacing: 0.5px;
-
-                border: 2px solid $text_color;
-                border-radius: 20px;
-
-                padding: 6px 12px;
-                width: 12rem;
-
-                transition: all 0.2s linear;
-
-                &:hover {
-                    background-color: $secondary_color;
-                    border-color: $secondary_color;
-                    color: $text_color;
-                }
-            }
-
-            .type_res_button {
-                padding: 6px 12px;
-                width: 8rem;
-                border-radius: 20px;
-                border: 1px solid $background_color;
-
-                background-color: $background_color;
-                color: $text_color;
-                font-weight: 600;
-
-                transition: all 0.2s linear;
-
-                &:hover {
-                background-color: $secondary_color;
-                }
-            }
-
-            .my_modal_body {
-                display: flex;
-                flex-flow: row wrap;
-                justify-content: flex-start;
-                width: 50%;
-                row-gap: 3rem;
-            }
-        span {
-          font-weight: normal;
-        }
+      span {
+        font-weight: normal;
       }
+    }
+
+    .more {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      color: $background_color;
+      background-color: $text_color;
+      
+      font-weight: 600;
+      word-spacing: 2px;
+      letter-spacing: 0.5px;
+
+      border: 2px solid $text_color;
+      border-radius: 20px;
+
+      padding: 6px 12px;
+      width: 12rem;
+
+      transition: all 0.2s linear;
+
+      &:hover {
+          background-color: $secondary_color;
+          border-color: $secondary_color;
+          color: $text_color;
+      }
+    }
 
       #food_types {
         display: flex;
-        gap: 3rem;
+        justify-content: space-around;
+
+        width: 50%;
       }
 
       .more {
@@ -307,11 +286,24 @@ section {
       justify-content: space-evenly;
       align-items: center;
 
-      max-width: 70vw;
+      max-width: 1200px;
       width: 100%;
     }
 
     /* ----- Modal Classes ----- */
+
+    .my_modal_head {
+      background-color: $secondary_color;
+      color: $text_color
+    }
+
+    .my_modal_body {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      width: 50%;
+      row-gap: 3rem;
+    }
 
     .custom-checkbox input[type="checkbox"] {
       display: none;
@@ -334,4 +326,23 @@ section {
       color: $text_color;
     }
   }
+
+
+/* ----- RESPONSIVE ----- */
+
+@media screen and (max-width: 1200px) {
+  section nav .more {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  };
+
+  section nav #food_types {
+    background-color: $background_color;
+    border-radius: 20px;
+  };
+
+  section nav .type_res_button:not(:first-child):not(:last-child) {
+  border-radius: 0px;
+  }
+}
 </style>
