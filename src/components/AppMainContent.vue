@@ -98,6 +98,7 @@ export default {
     <nav>
       <h3>Our <span>Things</span></h3>
 
+      <!-- Da implementare una volta realizzati i counter -->
       <div id="food_types">
         <button class="type_res_button">Italian</button>
         <button class="type_res_button">Pizzeria</button>
@@ -107,9 +108,9 @@ export default {
 
       <button
         type="button"
-        class="btn btn-primary more"
+        class="btn more"
         data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
+        data-bs-target="#restaurantModal"
       >
         Cerchi altro?
       </button>
@@ -117,16 +118,16 @@ export default {
       <!-- Modal -->
       <div
         class="modal fade"
-        id="exampleModal"
+        id="restaurantModal"
         tabindex="-1"
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="restaurantModalLabel"
         aria-hidden="true"
       >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
-                Cerchi altro?
+              <h1 class="modal-title fs-5 text-center" id="restaurantModalLabel">
+                Ti mostreremo i migliori ristoranti di?
               </h1>
               <button
                 type="button"
@@ -137,9 +138,9 @@ export default {
             </div>
             <div class="modal-body my_modal_body">
               
-              <div v-for="type in types" class="form-check form-switch">
+              <div v-for="type in types" class="custom-checkbox">
                 <input class="form-check-input" type="checkbox" role="switch" :value="type.type" :id="type.type" :name="type.type" v-model="checkButtonValue" @change="apiFilterTypes()"> 
-                <label class="form-check-label" :for="type.type">{{type.type}}</label>
+                <label class="form-check-label custom-checkbox-label" :for="type.type">{{ type.type }}</label>
               </div>
             
             </div>
@@ -234,88 +235,103 @@ section {
 
                 &:hover {
                 background-color: $secondary_color;
-                // color: $background_color;
                 }
             }
 
             .my_modal_body {
                 display: flex;
                 flex-flow: row wrap;
-                justify-content: space-around;
-                width: 100%;
-                row-gap: .5rem;
+                justify-content: flex-start;
+                width: 50%;
+                row-gap: 3rem;
             }
-      span {
-        font-weight: normal;
+        span {
+          font-weight: normal;
+        }
+      }
+
+      #food_types {
+        display: flex;
+        gap: 3rem;
+      }
+
+      .more {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: $background_color;
+        background-color: $text_color;
+
+        font-weight: 600;
+        word-spacing: 2px;
+        letter-spacing: 0.5px;
+
+        border: 2px solid $text_color;
+        border-radius: 20px;
+
+        padding: 6px 12px;
+        width: 12rem;
+
+        transition: all 0.2s linear;
+
+        &:hover {
+          background-color: $secondary_color;
+          border-color: $secondary_color;
+          color: $text_color;
+        }
+      }
+
+      .type_res_button {
+
+      @include restaurant_button_style;
+
+        &:hover {
+          background-color: $secondary_color;
+          color: $text_color;
+        }
+      }
+
+      .my_modal_body {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        width: 100%;
+        row-gap: 0.5rem;
       }
     }
 
-    #food_types {
+    #cards_section {
       display: flex;
-      gap: 3rem;
-    }
-
-    .more {
-      display: flex;
-      justify-content: center;
+      flex-flow: row nowrap;
+      justify-content: space-evenly;
       align-items: center;
 
-      color: $background_color;
-      background-color: $text_color;
-
-      font-weight: 600;
-      word-spacing: 2px;
-      letter-spacing: 0.5px;
-
-      border: 2px solid $text_color;
-      border-radius: 20px;
-
-      padding: 6px 12px;
-      width: 12rem;
-
-      transition: all 0.2s linear;
-
-      &:hover {
-        background-color: $secondary_color;
-        border-color: $secondary_color;
-        color: $text_color;
-      }
-    }
-
-    .type_res_button {
-      padding: 6px 12px;
-      width: 8rem;
-      border-radius: 20px;
-      border: 1px solid $background_color;
-
-      background-color: $background_color;
-      color: $text_color;
-      font-weight: 600;
-
-      transition: all 0.2s linear;
-
-      &:hover {
-        background-color: $text_color;
-        color: $background_color;
-      }
-    }
-
-    .my_modal_body {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-around;
+      max-width: 70vw;
       width: 100%;
-      row-gap: 0.5rem;
+    }
+
+    /* ----- Modal Classes ----- */
+
+    .custom-checkbox input[type="checkbox"] {
+      display: none;
+    }
+
+    .custom-checkbox-label {
+      
+      @include restaurant_button_style;
+
+      text-align: center;
+    }
+
+    .custom-checkbox input[type="checkbox"]:checked + .custom-checkbox-label {
+      background-color: $secondary_color;
+      color: $text_color;
+    }
+
+    .custom-checkbox-label:hover {
+      background-color: $secondary_color;
+      color: $text_color;
     }
   }
-  #cards_section {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-evenly;
-    align-items: center;
-
-    max-width: 70vw;
-    width: 100%;
-  }
-}
 </style>

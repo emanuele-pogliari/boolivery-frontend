@@ -33,3 +33,18 @@
         color: #3d3d3d;
     }
 }
+
+@mixin restaurant_button_style {
+    cursor: pointer;
+      
+    padding: 6px 12px;
+    width: 8rem;
+    border-radius: 20px;
+    border: 1px solid #fefefe;
+
+    background-color: #fefefe;
+    color: #36373b;
+    font-weight: 600;
+
+    transition: all 0.2s linear;
+}
