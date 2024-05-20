@@ -15,8 +15,6 @@ export default {
                 
                 <img class="logo-nav" src="/img/booliverylogo.svg" alt="">
 
-                <span> - Delivery at your door</span>
-
             </div>
 
             <div class="middle-nav">
@@ -53,7 +51,7 @@ export default {
 
     <div class="jumbotron">
 
-        <img class="jumbotron-picture" src="/img/delivery-food.jpg" alt="">
+        <img class="jumbotron-picture" src="/img/boolivery-food.png" alt="">
 
         <div class="title-jumbotron-1">WE DELIVER</div>
 
@@ -90,15 +88,16 @@ export default {
     padding-top: 40px;
 
     .left-nav {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: white;
     border-radius: 45px;
     padding: 15px 25px;
     position: absolute;
     top: 20px;
     left: 0;
+    width: 18%;
     z-index: 99;
     }
 
@@ -107,28 +106,39 @@ export default {
     gap: 25px;
     position: absolute;
     top: 20px;
-    left: 500px;
+    left: 375px;
     z-index: 99;
     justify-content: center;
     margin: auto;
     background-color: #3d3d3d;
     border-radius: 45px;
-    padding: 20px 25px;
-    width: 700px;
+    padding: 25px 25px;
+    width: 30%;
+    font-size: 11px;
     color: white;
+    }
+
+    .middle-nav span:hover {
+        color: #f2ca39;
     }
 
     .right-nav {
     background-color: #3d3d3d;
     position: absolute;
     top: 20px;
-    left: 1225px;
+    left: 980px;
     z-index: 99;
     border-radius: 45px;
-    padding: 20px 25px;
+    padding: 25px 30px;
+    font-size: 11px;
     color: white;
-    width: 400px;
+    width: 15%;
     text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
     }
 
 }
@@ -184,7 +194,7 @@ export default {
         top: 470px;
         left: 250px;
         .skew-background {
-            background-color: #f2ca39;
+            background-color: #f39939;
             position: absolute;
             top: 0;
             left: 0;
@@ -197,10 +207,11 @@ export default {
         .skew-text {
             position: relative;
             z-index: 2;
-            color: white;
+            color: black;
             font-size: 24px;
             padding: 15px;
-            display: inline-block
+            display: inline-block;
+            font-weight: bold;
         }
     }
 }
