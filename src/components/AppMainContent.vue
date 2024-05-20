@@ -342,7 +342,17 @@ section {
   };
 
   section nav .type_res_button:not(:first-child):not(:last-child) {
-  border-radius: 0px;
-  }
+    border-radius: 0px;
+  };
+
+  section nav .type_res_button:first-child {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  };
+
+  section nav .type_res_button:last-child {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  };
 }
 </style>
