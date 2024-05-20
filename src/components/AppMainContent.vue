@@ -15,6 +15,13 @@ export default {
       restaurants: [],
       types: [],
       checkButtonValue: [],
+      apiLinks: [],
+      //keeps track of current page
+      apiPageNumber: 1,
+
+      per_page: 1,
+      last_page: 1,
+      total_items: 1,
     };
   },
   methods: {
@@ -37,12 +44,40 @@ export default {
       }
     },
 
+    changePage(pageNumber) {
+      // previous page
+      if (pageNumber === "Prev" && this.apiPageNumber > 1) {
+        this.apiPageNumber--;
+      }
+      // next page
+      if (
+        pageNumber === "Next" &&
+        this.apiPageNumber < this.restaurants.last_page
+      ) {
+        this.apiPageNumber++;
+      }
+      // specific page
+      if (!isNaN(pageNumber)) {
+        this.apiPageNumber = parseInt(pageNumber); // Converti in numero intero
+      }
+      this.apiCall();
+    },
+
     apiCall() {
       axios
-        .get(this.baseApiUrl + "restaurants")
+        .get(this.baseApiUrl + "restaurants", {
+          params: {
+            // sets current page as parameter, by default it's 1
+            page: this.apiPageNumber,
+          },
+        })
         .then((res) => {
           console.log(res);
           this.restaurants = res.data.results;
+          this.apiLinks = res.data.results.links;
+          this.per_page = res.data.results.per_page;
+          this.last_page = res.data.results.last_page;
+          this.total_items = res.data.results.total;
         })
         .catch((error) => {
           console.log(error);
@@ -170,11 +205,11 @@ export default {
     </section>
     <div>
       <vue-awesome-paginate
-        :total-items="50"
-        v-model="currentPage"
-        :items-per-page="5"
-        :max-pages-shown="5"
-        :on-click="onClickHandler"
+        :total-items="total_items"
+        v-model="apiPageNumber"
+        :items-per-page="per_page"
+        :max-pages-shown="last_page"
+        :on-click="changePage"
         :hide-prev-next-when-ends="true"
       />
     </div>
