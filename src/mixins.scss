@@ -1,3 +1,6 @@
+// -----------------------------------------------------------------------------
+// BUTTONS
+
 @mixin primary_button_style {
     border: none;
     text-decoration: none;
@@ -15,6 +18,7 @@
         color: #ffffff;
     }
 }
+
 
 @mixin footer_button_style_pills {
     border: none;
@@ -34,9 +38,30 @@
     }
 }
 
+// -----------------------------------------------------------------------------
+
+
+
+
+// -----------------------------------------------------------------------------
+// LINKS
+
+
+@mixin nav_links_style {
+    border: none;
+    text-decoration: none;
+    color: #f6f7f8 !important;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+        color: #f2ca39 !important;
+    }
+}
+
 @mixin restaurant_button_style {
     cursor: pointer;
-      
+
     padding: 6px 12px;
     width: 8rem;
     border-radius: 20px;

@@ -1,151 +1,145 @@
 <script>
 export default {
-      name:"AppHeader",
+    name: "AppHeader",
 }
 </script>
 
 <template>
-<header>
-   
-    <nav>
+    <header class="">
 
-        <div class="nav-container">
 
-            <div class="left-nav">
-                
-                <img class="logo-nav" src="/img/booliverylogo.svg" alt="">
+        <!-- --------------------------- -->
+        <!-- START NAVBAR -->
+
+        <nav class="navbar d-fle justify-content-between navbar-expand-lg gap-1 position-fixed z-1 w-100">
+            <div class="nav-logo d-flex justify-content-end rounded-end-pill">
+                <!-- <a class="navbar-brand" href="#">BOOLIVERY</a> -->
+                <img class="navbar-brand" src="/img/logo/boolivery-logo-1.png" alt="">
+            </div>
+            <div class="d-flex">
+                <div class="nav-links collapse d-flex justify-content-center navbar-collapse accordion rounded-pill"
+                    id="navbarSupportedContent">
+                    <ul class="navbar-nav mb-lg-0 d-flex justify-content-between align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link active text-uppercase" aria-current="page" href="#">home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active text-uppercase" aria-current="page" href="#">menu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active text-uppercase" aria-current="page" href="#">delivery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active text-uppercase" aria-current="page" href="#">about us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active text-uppercase" aria-current="page" href="#">contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active text-uppercase" aria-current="page" href="#">payment</a>
+                        </li>
+                        <li class="nav-item">
+                            <i class="nav-link fa-solid fa-cart-shopping"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="d-flex nav-restaurant-login d-flex justify-content-end rounded-start-pill gap-3">
+                <a class="navbar-brand d-flex gap-2 align-items-center text-uppercase" href="#">
+                    <i class="fa-solid fa-utensils"></i>
+                    <span>Restaurant Login</span>
+                </a>
 
             </div>
+        </nav>
 
-            <div class="middle-nav">
+        <!-- --------------------------- -->
+        <!-- END NAVBAR -->
 
-                <span>HOME</span>
 
-                <span>MENU</span>
 
-                <span>DELIVERY</span>
 
-                <span>ABOUT US</span>
 
-                <span>PAYMENT</span>
 
-                <span>CONTACT</span>
+        <div class="jumbotron">
 
-                <span><i class="fa-solid fa-magnifying-glass"></i></span>
+            <img class="jumbotron-picture" src="/img/boolivery-food.png" alt="">
 
-                <span><i class="fa-solid fa-cart-shopping"></i></span>
+            <div class="title-jumbotron-1">WE DELIVER</div>
 
+            <div class="title-jumbotron-2">AT YOUR DOOR</div>
+
+            <img class="jumbotron-divider" src="/img/divider.png">
+
+            <div class="jumbotron-subsection">But I must explain to you how all this mistaken
+                <br>idea of denouncing of a pleasure
             </div>
 
-            <div class="right-nav">
+            <div class="buy-jumbotron">
 
-                <i class="fa-solid fa-phone"></i>
+                <div class="skew-background"></div>
 
-                <span>NUMERO TELEFONO</span>
+                <div class="skew-text">GO TO CATALOG</div>
 
             </div>
 
         </div>
 
-    </nav>
-
-    <div class="jumbotron">
-
-        <img class="jumbotron-picture" src="/img/boolivery-food.png" alt="">
-
-        <div class="title-jumbotron-1">WE DELIVER</div>
-
-        <div class="title-jumbotron-2">AT YOUR DOOR</div>
-
-        <img class="jumbotron-divider" src="/img/divider.png">
-
-        <div class="jumbotron-subsection">But I must explain to you how all this mistaken
-            <br>idea of denouncing of a pleasure
-        </div>
-
-        <div class="buy-jumbotron">
-            
-            <div class="skew-background"></div>
-            
-            <div class="skew-text">GO TO CATALOG</div>
-        
-        </div>
-
-    </div>
-
-</header>
+    </header>
 </template>
 
 <style lang="scss" scoped>
+@use "/src/variabiles.scss" as *;
+@use "/src/mixins.scss" as *;
 
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    background-color: #f2ca39;
-    padding: 10px;
-    padding-top: 40px;
+.navbar {
+    padding-top: 0;
 
-    .left-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    border-radius: 45px;
-    padding: 15px 25px;
-    position: absolute;
-    top: 20px;
-    left: 0;
-    width: 18%;
-    z-index: 99;
+    .nav-logo {
+        background-color: $background_color;
+        padding: 0.4rem 1.4rem 0.4rem 1.4rem;
+
+        img {
+            height: 39px;
+        }
     }
 
-    .middle-nav {
-    display:flex;
-    gap: 25px;
-    position: absolute;
-    top: 20px;
-    left: 375px;
-    z-index: 99;
-    justify-content: center;
-    margin: auto;
-    background-color: #3d3d3d;
-    border-radius: 45px;
-    padding: 25px 25px;
-    width: 30%;
-    font-size: 11px;
-    color: white;
+    .nav-links {
+        background-color: $primary_color;
+
+
+        padding: 0.4rem 1.4rem 0.4rem 1.4rem;
+
+        .nav-item {
+
+            a {
+
+                @include nav_links_style
+            }
+
+            i {
+                @include nav_links_style
+            }
+        }
+
     }
 
-    .middle-nav span:hover {
-        color: #f2ca39;
+    .nav-restaurant-login {
+        background-color: $primary_color;
+        padding: 0.4rem 1.4rem 0.4rem 1.4rem;
+
     }
-
-    .right-nav {
-    background-color: #3d3d3d;
-    position: absolute;
-    top: 20px;
-    left: 980px;
-    z-index: 99;
-    border-radius: 45px;
-    padding: 25px 30px;
-    font-size: 11px;
-    color: white;
-    width: 15%;
-    text-align: center;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    }
-
 }
 
-.logo-nav {
-    width: 200px;
-}
+
+
+
+
+
+
+
+
+
 
 .jumbotron {
 
@@ -193,6 +187,7 @@ export default {
         text-align: center;
         top: 470px;
         left: 250px;
+
         .skew-background {
             background-color: #f39939;
             position: absolute;
@@ -204,6 +199,7 @@ export default {
             z-index: 1;
             display: inline-block;
         }
+
         .skew-text {
             position: relative;
             z-index: 2;
@@ -215,5 +211,4 @@ export default {
         }
     }
 }
-
 </style>
