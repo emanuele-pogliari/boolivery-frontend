@@ -17,8 +17,14 @@ export default {
 <template>
   <div class="card my_card py-3 gap-2" style="width: 15.5rem">
     <img
-      src="https://img.freepik.com/foto-gratuito/pizza-hawaiana_1203-2455.jpg?t=st=1715969805~exp=1715973405~hmac=7ae6002232c8be51caf786f83822757cc37badce87ef60bee7d71515671884c2&w=1380"
-      class="card-img-top" alt="..." />
+      :src="
+        restaurant.image.startsWith('http')
+          ? restaurant.image
+          : 'http://localhost:8000/storage/' + restaurant.image
+      "
+      class="card-img-top"
+      alt="..."
+    />
     <div class="card-body">
       <h5 class="card-title text-center">{{ restaurant.name }}</h5>
       <div class="card-text text-center restaurant_type">
@@ -29,7 +35,9 @@ export default {
       <p class="card-text text-center" style="font-weight: 500">
         {{ restaurant.address }}
       </p>
-      <a href="#" class="btn btn-primary my_btn"><i class="fa-solid fa-eye"></i></a>
+      <a href="#" class="btn btn-primary my_btn"
+        ><i class="fa-solid fa-eye"></i
+      ></a>
     </div>
   </div>
 </template>
