@@ -211,12 +211,14 @@ export default {
         :max-pages-shown="last_page"
         :on-click="changePage"
         :hide-prev-next-when-ends="true"
+        paginate-buttons-class="paginate-buttons"
+        active-page-class="active-page"
       />
     </div>
   </section>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
@@ -364,6 +366,36 @@ section {
 
     max-width: 70vw;
     width: 100%;
+  }
+  .pagination-container {
+    display: flex;
+    column-gap: 10px;
+  }
+  .paginate-buttons {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: rgb(242, 242, 242);
+    border: 1px solid rgb(217, 217, 217);
+    color: black;
+  }
+  .paginate-buttons:hover {
+    background-color: $secondary_color;
+  }
+  .active-page {
+    background-color: $secondary_color;
+    border: 1px solid $secondary_color;
+    color: white;
+  }
+  .active-page:hover {
+    background-color: $secondary_color;
+  }
+
+  .next-button,
+  .back-button {
+    background-color: $primary_color;
+    color: $text_color_highlight;
   }
 
   /* ----- Modal Classes ----- */
