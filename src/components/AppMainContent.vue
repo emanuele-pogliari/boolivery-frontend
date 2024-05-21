@@ -72,7 +72,12 @@ export default {
 
     apiCall() {
       axios
-        .get(this.baseApiUrl + "restaurants")
+        .get(this.baseApiUrl + "restaurants", {
+          params: {
+            // sets current page as parameter, by default it's 1
+            page: this.apiPageNumber,
+          },
+        })
         .then((res) => {
           console.log(res);
           this.restaurants = res.data.results;
