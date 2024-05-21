@@ -15,9 +15,24 @@ export default {
 
 <template>
   <div class="container card my_card py-3 gap-2" style="width: 15.5rem">
+
     <img
-      src="https://img.freepik.com/foto-gratuito/pizza-hawaiana_1203-2455.jpg?t=st=1715969805~exp=1715973405~hmac=7ae6002232c8be51caf786f83822757cc37badce87ef60bee7d71515671884c2&w=1380"
-      class="card-img-top" alt="..." />
+      v-if="restaurant.image"
+      :src="
+        restaurant.image.startsWith('http')
+          ? restaurant.image
+          : 'http://localhost:8000/storage/' + restaurant.image
+      "
+      class="card-img-top"
+      alt="..."
+    />
+    <img
+      v-else
+      class="card-img-top"
+      src="/img/homepage/placeholdertemp.jpg"
+      alt="..."
+    />
+
     <div class="card-body">
       <h5 class="card-title text-center">{{ restaurant.name }}</h5>
       <div class="card-text text-center restaurant_type">
@@ -81,7 +96,7 @@ export default {
     padding: 0.7rem 0.9rem;
 
     transition: all 0.2s linear;
-    background: $primary_color;
+    background: linear-gradient(to bottom right, #fbb345, #c2862d);
     color: $background_color;
     border: none;
 

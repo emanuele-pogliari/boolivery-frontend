@@ -75,34 +75,13 @@ export default {
 
     this.apiCall();
 
-    // axios
-    //   .get(this.baseApiUrl + "restaurants")
-    //   .then((res) => {
-    //     console.log(res);
-    //     this.restaurants = res.data.results;
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-    // axios
-    //   .get(this.baseApiUrl + "types")
-    //   .then((res) => {
-    //     this.types = res.data.results;
-    //     console.log(this.baseApiUrl + "types");
-    //     console.log(res.data.results);
-    //     console.log(this.types);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   },
 };
 </script>
 
 <template>
-  <section>
-    <nav class="container">
+  <section class="rounded-5">
+    <nav>
       <h3>Popular <span>Category</span></h3>
 
       <!-- Da implementare una volta realizzati i counter -->
@@ -319,5 +298,33 @@ section {
     background-color: $secondary_color;
     color: $text_color;
   }
+}
+
+/* ----- RESPONSIVE ----- */
+
+@media screen and (max-width: 1200px) {
+  section nav .more {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  };
+
+  section nav #food_types {
+    background-color: $background_color;
+    border-radius: 20px;
+  };
+
+  section nav .type_res_button:not(:first-child):not(:last-child) {
+    border-radius: 0px;
+  };
+
+  section nav .type_res_button:first-child {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  };
+
+  section nav .type_res_button:last-child {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  };
 }
 </style>
