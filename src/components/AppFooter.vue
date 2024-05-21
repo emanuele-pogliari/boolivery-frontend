@@ -122,7 +122,6 @@ export default {
 footer {
 
     color: $deactivated_text;
-    margin-top: 10rem;
     background-color: $primary_color;
 
     img {

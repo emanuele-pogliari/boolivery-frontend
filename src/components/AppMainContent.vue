@@ -209,7 +209,7 @@ section {
   align-items: center;
 
   background-color: $background_color_dark;
-  padding: 30px 0;
+  padding: 30px 0 70px;
 
   nav {
     display: flex;
@@ -347,7 +347,7 @@ section {
   .pagination-container {
     display: flex;
     column-gap: 10px;
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
   .paginate-buttons {
     height: 40px;
@@ -469,6 +469,12 @@ section {
 
   section nav .more .more-txt {
     display: none;
+  };
+}
+
+@media screen and (max-width: 768px) {
+  section nav .type_res_button {
+    width: 6rem;
   };
 }
 </style>

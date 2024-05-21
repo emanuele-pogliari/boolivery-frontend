@@ -9,21 +9,14 @@ export default {
 
         <!-- --------------------------- -->
         <!-- START JUMBOTRON -->
-        <div class="jumbotron container">
-            <div class="rounded-bottom-circle border-black">
-                <img class="jumbotron-picture" src="/img/homepage/boolivery-jumbo-img-1.jpg" alt="">
+        <div class="jumbotron">
+            <div class="my_jumbo">
+                <div class="jumbotron-content">
+                <h1 class="text-uppercase">Boolivery</h1>
+                <h1 class="text-uppercase">Delivery</h1>
+                <p>Speedy Delivery, Right to Your Doorstep!</p>
             </div>
-            <div class="jumbotron-content">
-                <h1 class="text-uppercase">flying food</h1>
-                <h1 class="text-uppercase">delivery</h1>
-                <p>But i must explain to you how all this mistaken idea of denauncing of a pleasure</p>
-                <div>
-                    <button href="#"> RESTAURANTS </button>
-                </div>
             </div>
-
-
-
         </div>
         <!-- --------------------------- -->
         <!-- END JUMBOTRON -->
@@ -43,17 +36,11 @@ export default {
 .jumbotron {
 
     position: relative;
-    margin-bottom: 10rem;
 
-
-    img {
-        object-fit: cover;
+    .my_jumbo {
+        background-color: $secondary_color;
         width: 100%;
-        height: 700px;
-
-        border-bottom-left-radius: 4.5rem;
-        border-bottom-right-radius: 4.5rem;
-       
+        height: 28rem;
     }
 
     .jumbotron-content {
@@ -70,11 +57,15 @@ export default {
         h1 {
             font-size: 3rem;
             font-weight: 700;
+
+            color: $text_color;
         }
 
         p {
             font-size: 1rem;
             font-weight: 400;
+
+            color: $text_color;
         }
 
         button {
