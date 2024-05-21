@@ -125,7 +125,7 @@ export default {
 
       <button type="button" class="btn more" data-bs-toggle="modal" data-bs-target="#restaurantModal">
         <span class="more-icon"><i class="fa-solid fa-magnifying-glass"></i></span> 
-        <span class="more-txt">Cerchi altro?</span>
+        <span class="more-txt">Want more?</span>
       </button>
 
       <!-- Modal -->
@@ -143,7 +143,7 @@ export default {
                 class="modal-title fs-5 text-center"
                 id="restaurantModalLabel"
               >
-                Ti interessano i migliori ristoranti di?
+                What are you looking for?
               </h1>
               <button
                 type="button"
