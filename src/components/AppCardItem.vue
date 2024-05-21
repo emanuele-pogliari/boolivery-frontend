@@ -96,7 +96,7 @@ export default {
     padding: 0.7rem 0.9rem;
 
     transition: all 0.2s linear;
-    background: linear-gradient(to bottom right, #fbb345, #c2862d);
+    background: linear-gradient(to bottom right, #f2ca39, #b19019);
     color: $background_color;
     border: none;
 

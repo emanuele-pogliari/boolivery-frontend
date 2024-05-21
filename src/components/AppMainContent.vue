@@ -211,6 +211,8 @@ section {
   background-color: $background_color_dark;
   padding: 30px 0 70px;
 
+  margin-bottom: 1rem;
+
   nav {
     display: flex;
     justify-content: space-between;

@@ -10,7 +10,7 @@ export default {
         <!-- --------------------------- -->
         <!-- START JUMBOTRON -->
         <div class="jumbotron">
-            <div class="my_jumbo">
+            <div class="my_jumbo rounded-5">
                 <div class="jumbotron-content">
                 <h1 class="text-uppercase">Boolivery</h1>
                 <h1 class="text-uppercase">Delivery</h1>
@@ -36,6 +36,7 @@ export default {
 .jumbotron {
 
     position: relative;
+    margin: 1rem 0;
 
     .my_jumbo {
         background-color: $secondary_color;

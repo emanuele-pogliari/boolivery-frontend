@@ -19,11 +19,19 @@ export default {
 </script>
 
 <template>
-  <AppNav></AppNav>
-  <AppHeader></AppHeader>
-  <AppMainContent></AppMainContent>
-  <router-view></router-view>
-  <AppFooter></AppFooter>
+
+  <body>
+    <AppNav></AppNav>
+    <AppHeader></AppHeader>
+    <AppMainContent></AppMainContent>
+    <router-view></router-view>
+    <AppFooter></AppFooter>
+  </body>
+  
 </template>
 
-<style></style>
+<style>
+  body {
+    background-color: #fefefe;
+  }
+</style>
