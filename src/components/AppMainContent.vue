@@ -93,7 +93,8 @@ export default {
       </div>
 
       <button type="button" class="btn more" data-bs-toggle="modal" data-bs-target="#restaurantModal">
-        Cerchi altro?
+        <span class="more-icon"><i class="fa-solid fa-magnifying-glass"></i></span> 
+        <span class="more-txt">Cerchi altro?</span>
       </button>
 
       <!-- Modal -->
@@ -122,9 +123,10 @@ export default {
     </nav>
 
     <section id="cards_section">
-      <AppCardItem v-for="restaurant in restaurants.data" :restaurant="restaurant"></AppCardItem>
+      <AppCardItem 
+        v-for="restaurant in restaurants.data" :restaurant="restaurant">
+      </AppCardItem>
 
-      <!-- card -->
     </section>
   </section>
 </template>
@@ -147,17 +149,15 @@ section {
     justify-content: space-between;
     align-items: center;
 
+    max-width: 1200px;
+    width: 100%;
+
     h3 {
       font-size: 2.1rem;
       color: $text_color;
       padding-left: 0.5rem;
 
       cursor: default;
-
-      #food_types {
-        display: flex;
-        gap: 3rem;
-      }
 
       .more {
         display: flex;
@@ -174,14 +174,16 @@ section {
         border: 2px solid $text_color;
         border-radius: 20px;
 
-        padding: 6px 12px;
-
         transition: all 0.2s linear;
 
         &:hover {
           background-color: $secondary_color;
           border-color: $secondary_color;
           color: $text_color;
+        }
+
+        .more-icon {
+          display: none;
         }
       }
 
@@ -269,10 +271,10 @@ section {
   #cards_section {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
 
-    max-width: 70vw;
+    max-width: 1200px;
     width: 100%;
   }
 
@@ -311,6 +313,7 @@ section {
   section nav #food_types {
     background-color: $background_color;
     border-radius: 20px;
+    gap: 0;
   };
 
   section nav .type_res_button:not(:first-child):not(:last-child) {
@@ -325,6 +328,50 @@ section {
   section nav .type_res_button:last-child {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
+  };
+}
+
+@media screen and (max-width: 992px) {
+  section nav h3 {
+    display: none;
+  };
+
+  section nav #food_types {
+    background-color: $background_color_dark;
+    border-radius: 20px;
+
+    justify-content: space-around;
+    width: 100%;
+  };
+
+  section nav .type_res_button:not(:first-child):not(:last-child) {
+    border-radius: 20px;
+  };
+
+  section nav .type_res_button:first-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  };
+
+  section nav .type_res_button:last-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  };
+
+  section nav .type_res_button {
+    width: 10rem;
+  };
+
+  section nav .more {
+    width: 5rem;
+  };
+
+  section nav .more .more-icon {
+    display: inline !important;
+  };
+
+  section nav .more .more-txt {
+    display: none;
   };
 }
 </style>
