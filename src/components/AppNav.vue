@@ -23,9 +23,9 @@ export default {
                     <a class="nav-link" href="#">Payment</a>
                     <a class="nav-link" href="#">Contact</a>
                     <a class="nav-link" href="#">About</a>
+                    <!-- Login Button -->
+                    <button class="btn btn-sm btn-outline-secondary ms-auto" type="button">Login</button>
                 </div>
-                <!-- Login Button -->
-                <button class="btn btn-sm btn-outline-secondary ms-auto" type="button">Login</button>
             </div>
         </div>
     </div>
