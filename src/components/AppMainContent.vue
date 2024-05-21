@@ -182,6 +182,7 @@ export default {
       </AppCardItem>
 
     </section>
+
     <div>
       <vue-awesome-paginate
         :total-items="total_items"
@@ -246,10 +247,6 @@ section {
           background-color: $secondary_color;
           border-color: $secondary_color;
           color: $text_color;
-        }
-
-        .more-icon {
-          display: none;
         }
       }
 
@@ -342,9 +339,15 @@ section {
     max-width: 1200px;
     width: 100%;
   }
+
+  .more-icon {
+    display: none;
+  }
+
   .pagination-container {
     display: flex;
     column-gap: 10px;
+    margin-top: 2rem;
   }
   .paginate-buttons {
     height: 40px;
@@ -361,7 +364,7 @@ section {
   .active-page {
     background-color: $secondary_color;
     border: 1px solid $secondary_color;
-    color: white;
+    color: $text_color;
   }
   .active-page:hover {
     background-color: $secondary_color;
