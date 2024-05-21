@@ -81,6 +81,10 @@ export default {
         .then((res) => {
           console.log(res);
           this.restaurants = res.data.results;
+          this.apiLinks = res.data.results.links;
+          this.per_page = res.data.results.per_page;
+          this.last_page = res.data.results.last_page;
+          this.total_items = res.data.results.total;
         })
         .catch((error) => {
           console.log(error);
