@@ -3,11 +3,11 @@ import axios from "axios";
 import AppCardItem from "./AppCardItem.vue";
 
 // import Swiper JS
-import Swiper from 'swiper';
+import Swiper from "swiper";
 // import Swiper styles
-import 'swiper/css';
+import "swiper/css";
 
-const swiper = new Swiper('.swiper');
+const swiper = new Swiper(".swiper");
 
 export default {
   name: "AppMainContent",
@@ -25,26 +25,26 @@ export default {
     };
   },
   methods: {
-
     apiFilterTypes() {
       if (this.checkButtonValue.length > 0) {
-        axios.get(this.baseApiUrl + 'restaurants?types=' + this.checkButtonValue, {
+        axios
+          .get(
+            this.baseApiUrl + "restaurants?types=" + this.checkButtonValue,
+            {}
+          )
+          .then((res) => {
+            // console.log(res.data.results)
 
-        }).then(res => {
-          // console.log(res.data.results)
+            this.restaurants = res.data.results;
 
-          this.restaurants = res.data.results
-
-          console.log(this.checkButtonValue)
-        })
-
+            console.log(this.checkButtonValue);
+          });
       } else {
         this.apiCall();
       }
     },
 
     apiCall() {
-
       axios
         .get(this.baseApiUrl + "restaurants")
         .then((res) => {
@@ -66,15 +66,11 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-
-    }
-
+    },
   },
 
   mounted() {
-
     this.apiCall();
-
   },
 };
 </script>
@@ -92,29 +88,57 @@ export default {
         <button class="type_res_button">Chinese</button>
       </div>
 
-      <button type="button" class="btn more" data-bs-toggle="modal" data-bs-target="#restaurantModal">
+      <button
+        type="button"
+        class="btn more"
+        data-bs-toggle="modal"
+        data-bs-target="#restaurantModal"
+      >
         Cerchi altro?
       </button>
 
       <!-- Modal -->
-      <div class="modal fade" id="restaurantModal" tabindex="-1" aria-labelledby="restaurantModalLabel"
-        aria-hidden="true">
+      <div
+        class="modal fade"
+        id="restaurantModal"
+        tabindex="-1"
+        aria-labelledby="restaurantModalLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header my_modal_head">
-              <h1 class="modal-title fs-5 text-center" id="restaurantModalLabel">
+              <h1
+                class="modal-title fs-5 text-center"
+                id="restaurantModalLabel"
+              >
                 Ti interessano i migliori ristoranti di?
               </h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
             <div class="modal-body my_modal_body">
-
               <div v-for="type in types" class="custom-checkbox">
-                <input class="form-check-input" type="checkbox" role="switch" :value="type.type" :id="type.type"
-                  :name="type.type" v-model="checkButtonValue" @change="apiFilterTypes()">
-                <label class="form-check-label custom-checkbox-label" :for="type.type">{{ type.type }}</label>
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  :value="type.type"
+                  :id="type.type"
+                  :name="type.type"
+                  v-model="checkButtonValue"
+                  @change="apiFilterTypes()"
+                />
+                <label
+                  class="form-check-label custom-checkbox-label"
+                  :for="type.type"
+                  >{{ type.type }}</label
+                >
               </div>
-
             </div>
           </div>
         </div>
@@ -122,10 +146,25 @@ export default {
     </nav>
 
     <section id="cards_section">
-      <AppCardItem v-for="restaurant in restaurants.data" :restaurant="restaurant"></AppCardItem>
+      <AppCardItem
+        v-for="restaurant in restaurants.data"
+        :restaurant="restaurant"
+      ></AppCardItem>
 
       <!-- card -->
     </section>
+    <div>
+      <vue-awesome-paginate
+        :total-items="total_items"
+        v-model="apiPageNumber"
+        :items-per-page="per_page"
+        :max-pages-shown="last_page"
+        :on-click="changePage"
+        :hide-prev-next-when-ends="true"
+        paginate-buttons-class="paginate-buttons"
+        active-page-class="active-page"
+      />
+    </div>
   </section>
 </template>
 
@@ -248,7 +287,6 @@ section {
     }
 
     .type_res_button {
-
       @include restaurant_button_style;
 
       &:hover {
@@ -283,13 +321,12 @@ section {
   }
 
   .custom-checkbox-label {
-
     @include restaurant_button_style;
 
     text-align: center;
   }
 
-  .custom-checkbox input[type="checkbox"]:checked+.custom-checkbox-label {
+  .custom-checkbox input[type="checkbox"]:checked + .custom-checkbox-label {
     background-color: $secondary_color;
     color: $text_color;
   }
@@ -306,25 +343,25 @@ section {
   section nav .more {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
-  };
+  }
 
   section nav #food_types {
     background-color: $background_color;
     border-radius: 20px;
-  };
+  }
 
   section nav .type_res_button:not(:first-child):not(:last-child) {
     border-radius: 0px;
-  };
+  }
 
   section nav .type_res_button:first-child {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
-  };
+  }
 
   section nav .type_res_button:last-child {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
-  };
+  }
 }
 </style>
