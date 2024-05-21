@@ -37,8 +37,7 @@ export default {
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
-// ---------------------------
-// START NAVBAR
+
 
 
 </style>

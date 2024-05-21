@@ -130,12 +130,17 @@ footer {
 
     .primary-btn {
         @include primary_button_style;
+
+        &:hover {
+            background-color: $primary_color;
+        }
     }
 
     .foter_links {
         h6 {
             font-size: 1rem;
             color: $deactivated_text;
+            cursor: pointer;
 
             &:hover {
                 color: $secondary_color;
@@ -169,11 +174,14 @@ footer {
 
             width: 150px;
 
-
             a {
                 text-decoration: none;
                 @include footer_button_style_pills;
+                cursor: default;
 
+                &:hover {
+                    background-color: $secondary_color;
+                }
             }
         }
     }

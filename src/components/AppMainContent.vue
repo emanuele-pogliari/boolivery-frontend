@@ -355,11 +355,16 @@ section {
     border-radius: 50%;
     cursor: pointer;
     background-color: rgb(242, 242, 242);
-    border: 1px solid rgb(217, 217, 217);
+    border: 1px solid $text_color;
     color: black;
+
+    font-weight: 600;
   }
   .paginate-buttons:hover {
     background-color: $secondary_color;
+    color: $text_color;
+
+    border: 1px solid $secondary_color;
   }
   .active-page {
     background-color: $secondary_color;
@@ -374,6 +379,8 @@ section {
   .back-button {
     background-color: $primary_color;
     color: $text_color_highlight;
+
+    font-weight: 600;
   }
 
   /* ----- Modal Classes ----- */
