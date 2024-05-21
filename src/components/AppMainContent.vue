@@ -22,6 +22,13 @@ export default {
       restaurants: [],
       types: [],
       checkButtonValue: [],
+      apiLinks: [],
+      //keeps track of current page
+      apiPageNumber: 1,
+
+      per_page: 1,
+      last_page: 1,
+      total_items: 1,
     };
   },
   methods: {
@@ -168,7 +175,7 @@ export default {
   </section>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
