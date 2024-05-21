@@ -2,7 +2,7 @@
 import $ from 'jquery';
 
 export default {
-  name: "AppNavbar",
+  name: "AppNav",
   mounted() {
     const navbarToggle = $('#navbarToggle');
     const navbarCollapse = $('#navbarSupportedContent');
