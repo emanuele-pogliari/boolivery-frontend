@@ -51,6 +51,25 @@ export default {
       }
     },
 
+    changePage(pageNumber) {
+      // previous page
+      if (pageNumber === "Prev" && this.apiPageNumber > 1) {
+        this.apiPageNumber--;
+      }
+      // next page
+      if (
+        pageNumber === "Next" &&
+        this.apiPageNumber < this.restaurants.last_page
+      ) {
+        this.apiPageNumber++;
+      }
+      // specific page
+      if (!isNaN(pageNumber)) {
+        this.apiPageNumber = parseInt(pageNumber); // Converti in numero intero
+      }
+      this.apiCall();
+    },
+
     apiCall() {
       axios
         .get(this.baseApiUrl + "restaurants")
