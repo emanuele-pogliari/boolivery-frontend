@@ -18,7 +18,7 @@ export default {
 
 <template>
 
-    <footer class="text-center p-0 rounded-top-5">
+    <footer class="text-center p-0">
         <!-- <hr class=""> -->
         <div class=" container d-flex justify-content-around gap-5 pt-5 pb-5 px-3">
 
@@ -76,7 +76,7 @@ export default {
                         <label for="exampleInputEmail1" class="form-label"></label>
                         <input type="email" class="form-control" id="exampleInputEmail1"
                             placeholder="enter email adress" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">Subscribe to our newsletter</div>
+                        <div id="emailHelp" class="form-text text-light">Subscribe to our newsletter</div>
                     </div>
                 </form>
 
@@ -94,7 +94,7 @@ export default {
             </div>
             <div class="d-flex gap-2">
                 <span class="badge rounded-pill">
-                    <a href="https://github.com/rpalanga">Luca F.</a>
+                    <a href="https://github.com/lucafagiolini">Luca F.</a>
                 </span>
                 <span class="badge rounded-pill">
                     <a href="">Christian DG.</a>
@@ -122,6 +122,7 @@ export default {
 footer {
 
     color: $deactivated_text;
+    margin-top: 10rem;
     background-color: $primary_color;
 
     img {
