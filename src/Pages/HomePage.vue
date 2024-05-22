@@ -1,9 +1,17 @@
 <script>
 import axios from "axios";
+import AppMainContent from "../components/AppMainContent.vue";
+import AppHeader from "../components/AppHeader.vue";
+
+
 export default {
   name: "HomePage",
 
-  components: {},
+
+  components: {
+    AppMainContent,
+    AppHeader,
+  },
 
   data() {
     return {
@@ -40,8 +48,8 @@ export default {
 };
 </script>
 <template>
-
-
+  <AppHeader></AppHeader>
+  <AppMainContent></AppMainContent>
 </template>
 
 <style></style>

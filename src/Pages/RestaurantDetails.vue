@@ -6,10 +6,7 @@ export default {
 
     data() {
         return {
-
             restaurants: [],
-            RestaurantsSlug: '',
-
             baseApiUrl: 'http://127.0.0.1:8000/api/',
         }
     },
@@ -20,8 +17,8 @@ export default {
         // this.restaurantsId = this.$route.params.id;
         // this.restaurantsSlug = this.$route.params.slug;
 
-        console.log('chiamata api:', this.baseApiUrl + 'restaraunts' + this.restaurantsSlug)
-        axios.get(this.baseApiUrl + 'restaurants' + this.restaurantsSlug).then(res => {
+        console.log('chiamata api:', this.baseApiUrl + 'restaraunts')
+        axios.get(this.baseApiUrl + 'restaurants').then(res => {
 
             // console.log(res.data.restaurants);
 
@@ -44,9 +41,132 @@ export default {
 </script>
 
 <template>
-    <div>
-        HELLOOO
+    <div class="container">
+
+        <!-- --------------------------- -->
+        <!-- RESTAURANT DETAILS-->
+        <div class="d-flex row">
+
+            <div class="col-4">
+                <img v-if="restaurants.image"
+                    :src="restaurants.image.startsWith('http') ? restaurants.image : 'http://localhost:8000/storage/' + restaurants.image"
+                    class="card-img-top" alt="...">
+                <img v-else class="card-img-top" src="/img/homepage/placeholdertemp.jpg" alt="...">
+            </div>
+
+
+
+            <div class="col-4">
+                <div>
+                    <h2 class="card-title">Restaurant Name</h2>
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            Pizzeria
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <div class="col-4">
+                <ul>
+                    <li>Phone number</li>
+                    <li>Adress</li>
+                    <li>Vat: 11112312312</li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- --------------------------- -->
+        <!-- END RESTAURANT DETAILS-->
+
+
+
+
+
+
+
+        <div class="d-flex row">
+            <div class="col-8">
+
+                <!-- --------------------------- -->
+                <!-- RESTAURANT DISHES-->
+                <ul>
+                    <li>
+                        <div>
+                            <h3>
+                                LASAGNA SPAZIALE
+                            </h3>
+                            <span>
+                                12.00€
+                            </span>
+                            <p>
+                                stelle cotte, formaggio spaziale, ragù di stelle, polvere di stelle.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <h3>
+                                PASTA BELLA
+                            </h3>
+                            <span>
+                                15.00€
+                            </span>
+                            <p>
+                                pasta, pomodoro, basilico, mozzarella, olio.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <h3>
+                                SCROTOLETTA IMPANATA
+                            </h3>
+                            <span>
+                                9.00€
+                            </span>
+                            <p>
+                                scroto di alta qualità, impanato e fritto.
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- --------------------------- -->
+            <!--END RESTAURANT DISHES-->
+
+
+            <!-- --------------------------- -->
+            <!-- DISHES CART -->
+
+            <div class="col-4">
+                <h1>SHOPPING CART</h1>
+                <hr>
+                <ul>
+                    <li>
+                        TRIPPA
+                    </li>
+                    <li>
+                        CACIUCCO
+                    </li>
+                </ul>
+                <hr>
+                <h3>TOTAL: 21.00€</h3>
+
+            </div>
+
+            <!-- --------------------------- -->
+            <!-- END DISHES CART -->
+        </div>
+
+
+
+
     </div>
+
 
 </template>
 
