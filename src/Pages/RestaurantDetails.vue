@@ -31,7 +31,7 @@ export default {
     <div class="container">
       <!-- --------------------------- -->
       <!-- RESTAURANT DETAILS-->
-      <div class="restaurant_main_content d-flex row mt-5 rounded-5 pb-5">
+      <div class="restaurant_main_content d-flex row mt-5 rounded-5">
         <div class="col-4 p-0 m-0">
           <img
             v-if="restaurants.image"
@@ -53,7 +53,7 @@ export default {
 
         <div class="col-4">
           <div>
-            <h2 class="card-title">{{ restaurants.name }}</h2>
+            <h2 class="roboto-bold fw-bolder">{{ restaurants.name }}</h2>
             <!-- <h4 v-for="dish in restaurants.dishes">{{ dish.name }}</h4> -->
             <h2 class="card-title"></h2>
           </div>
@@ -62,7 +62,7 @@ export default {
       <!-- --------------------------- -->
       <!-- END RESTAURANT DETAILS-->
 
-      <div class="d-flex row">
+      <div class="dishes_main_content d-flex row mt-5 mb-5">
         <div class="col-8">
           <!-- --------------------------- -->
           <!-- RESTAURANT DISHES-->
@@ -75,7 +75,7 @@ export default {
               <div class="col-8">
                 <h3>SCROTOLETTA IMPANATA</h3>
                 <ul class="d-flex">
-                    <li>
+                    <li class="ingredient"> 
                         red meat
                     </li>
                     <li>
@@ -89,6 +89,7 @@ export default {
                      <i class="fa-solid fa-cart-shopping"></i>
                 </button>
               </div>
+               <hr class="border-black">
             </li>
           </ul>
         </div>
@@ -98,7 +99,7 @@ export default {
         <!-- --------------------------- -->
         <!-- DISHES CART -->
 
-        <div class="col-4">
+        <div class="col-4 shopping_cart_main_content">
           <h1>SHOPPING CART</h1>
           <hr/>
           <ul>
@@ -119,6 +120,7 @@ export default {
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
+
 .restaurant_main_content {
     background-color: $background_color_dark;
     border-top-right-radius: 10rem !important;
@@ -136,17 +138,56 @@ export default {
 }
 
 
-.dish_image {
-    width: 100%;
-    height: 100%;
-    border-radius: 24px;
-    border-color: transparent;
-    color: $text_color;
+.dishes_main_content {
+     background-color: $background_color_dark;
+     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+
+    .dish_image {
+        width: 100%;
+        height: 100%;
+        border-radius: 24px;
+        color: $text_color;
+    }
+
+    .ingredient {
+        border: 1px solid $primary_color;
+        border-radius: 24px;
+        padding: 0.5rem;
+        margin-right: 0.5rem;
+
+        text-decoration: none;
+    }
+
+    .dish_btn {
+        @include footer_button_style_pills;
+    }
 }
 
-.dish_btn {
-    @include footer_button_style_pills;
+
+.shopping_cart_main_content
+{
+    background-color: $background_color_dark;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 24px;
+   
+
+    h1 {
+        text-align: center;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    hr {
+        border: 0.5px solid $text_color;
+    }
 }
+
+
+
 
 
 
