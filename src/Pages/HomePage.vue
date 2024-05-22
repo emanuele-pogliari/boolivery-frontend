@@ -14,6 +14,7 @@ export default {
   },
 
   mounted() {
+
     // axios
     //   .get(this.baseApiUrl + "restaurants")
     //   .then((res) => {
@@ -39,7 +40,8 @@ export default {
 };
 </script>
 <template>
-  <div></div>
+
+
 </template>
 
 <style></style>

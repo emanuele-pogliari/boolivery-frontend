@@ -43,7 +43,8 @@ export default {
       <p class="card-text text-center" style="font-weight: 500">
         {{ restaurant.address }}
       </p>
-      <a href="#" class="btn btn-primary my_btn"><i class="fa-solid fa-eye"></i></a>
+      <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }"
+            class="btn btn-primary my_btn"><i class="fa-solid fa-eye"></i></router-link>
     </div>
   </div>
 </template>
