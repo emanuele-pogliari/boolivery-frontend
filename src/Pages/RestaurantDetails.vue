@@ -28,7 +28,6 @@ export default {
 </script>
 
 <template>
-  <div v-if="restaurants">
     <div class="container">
       <!-- --------------------------- -->
       <!-- RESTAURANT DETAILS-->
@@ -56,13 +55,88 @@ export default {
           <div>
             <h2 class="card-title">{{ restaurants.name }}</h2>
             <h4 v-for="dish in restaurants.dishes">{{ dish.name }}</h4>
+            <h2 class="card-title"></h2>
           </div>
         </div>
       </div>
       <!-- --------------------------- -->
       <!-- END RESTAURANT DETAILS-->
+
+      <div class="d-flex row">
+        <div class="col-8">
+          <!-- --------------------------- -->
+          <!-- RESTAURANT DISHES-->
+          <ul class="m-0 p-0">
+            <li class="d-flex row">
+              <div class="col-4">
+                <img class="dish_image" src="/img/dishes_images/Boolivery_hamburger_1.jpg" alt="" />
+                    
+              </div>
+              <div class="col-8">
+                <h3>SCROTOLETTA IMPANATA</h3>
+                <h4>available</h4>
+                <span> 9.00€ </span>
+                <p>scroto di alta qualità, impanato e fritto.</p>
+                <button class="dish_btn">
+                     ADD TO CART  
+                     <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- --------------------------- -->
+        <!--END RESTAURANT DISHES-->
+
+        <!-- --------------------------- -->
+        <!-- DISHES CART -->
+
+        <div class="col-4">
+          <h1>SHOPPING CART</h1>
+          <hr/>
+          <ul>
+            <li>TRIPPA</li>
+            <li>CACIUCCO</li>
+          </ul>
+          <hr />
+          <h3>TOTAL: 21.00€</h3>
+        </div>
+
+        <!-- --------------------------- -->
+        <!-- END DISHES CART -->
+      </div>
     </div>
-  </div>
 </template>
 
-<style lang="sass" scoped></style>
+<style lang="scss" scoped>
+@use "/src/variabiles.scss" as *;
+@use "/src/mixins.scss" as *;
+
+
+.restaurant_image {
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    border-color: transparent;
+    color: $text_color;
+}
+
+.dish_image {
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    border-color: transparent;
+    color: $text_color;
+}
+
+.dish_btn {
+    @include footer_button_style_pills;
+}
+
+
+
+
+
+</style>
+
+
