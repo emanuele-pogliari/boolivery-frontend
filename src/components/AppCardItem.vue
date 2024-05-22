@@ -15,7 +15,6 @@ export default {
 
 <template>
   <div class="container card my_card py-3 gap-2" style="width: 15.5rem">
-
     <img
       v-if="restaurant.image"
       :src="
@@ -43,8 +42,11 @@ export default {
       <p class="card-text text-center" style="font-weight: 500">
         {{ restaurant.address }}
       </p>
-      <router-link :to="{ name: 'restaurant', params: { id: restaurant.id } }"
-            class="btn btn-primary my_btn"><i class="fa-solid fa-eye"></i></router-link>
+      <router-link
+        :to="{ name: 'restaurant', params: { id: restaurant.id } }"
+        class="btn btn-primary my_btn"
+        ><i class="fa-solid fa-eye"></i
+      ></router-link>
     </div>
   </div>
 </template>
