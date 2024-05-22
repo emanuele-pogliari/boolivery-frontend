@@ -28,7 +28,6 @@ export default {
 </script>
 
 <template>
-  <div v-if="restaurants">
     <div class="container">
       <!-- --------------------------- -->
       <!-- RESTAURANT DETAILS-->
@@ -50,11 +49,12 @@ export default {
           src="/img/homepage/placeholdertemp.jpg"
           alt="..."
         /> -->
+        <img class="restaurant_image" src="/img/restaurants/restaurant-2.jpg" alt="">
         </div>
 
         <div class="col-4">
           <div>
-            <h2 class="card-title">{{ restaurants.name }}</h2>
+            <h2 class="card-title"></h2>
           </div>
           <div>
             <ul>
@@ -78,29 +78,18 @@ export default {
         <div class="col-8">
           <!-- --------------------------- -->
           <!-- RESTAURANT DISHES-->
-          <ul>
-            <li>
-              <div>
-                <h3>LASAGNA SPAZIALE</h3>
-                <span> 12.00€ </span>
-                <p>
-                  stelle cotte, formaggio spaziale, ragù di stelle, polvere di
-                  stelle.
-                </p>
+          <ul class="m-0 p-0">
+            <li class="d-flex row">
+              <div class="col-4">
+                <img class="dish_image" src="/img/dishes_images/Boolivery_hamburger_1.jpg" alt="" />
+                    
               </div>
-            </li>
-            <li>
-              <div>
-                <h3>PASTA BELLA</h3>
-                <span> 15.00€ </span>
-                <p>pasta, pomodoro, basilico, mozzarella, olio.</p>
-              </div>
-            </li>
-            <li>
-              <div>
+              <div class="col-8">
                 <h3>SCROTOLETTA IMPANATA</h3>
+                <h4>available</h4>
                 <span> 9.00€ </span>
                 <p>scroto di alta qualità, impanato e fritto.</p>
+                <button> ADD TO CART </button>
               </div>
             </li>
           </ul>
@@ -126,7 +115,31 @@ export default {
         <!-- END DISHES CART -->
       </div>
     </div>
-  </div>
 </template>
 
-<style lang="sass" scoped></style>
+<style lang="scss" scoped>
+@use "/src/variabiles.scss" as *;
+@use "/src/mixins.scss" as *;
+
+
+.restaurant_image {
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    border-color: transparent;
+    color: $text_color;
+}
+
+.dish_image {
+    width: 100%;
+    height: 10rem;
+    border-radius: 24px;
+    border-color: transparent;
+    color: $text_color;
+}
+
+
+
+</style>
+
+
