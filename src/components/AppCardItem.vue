@@ -43,7 +43,7 @@ export default {
       <p class="card-text text-center" style="font-weight: 500">
         {{ restaurant.address }}
       </p>
-      <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }"
+      <router-link :to="{ name: 'restaurant', params: { id: restaurant.id } }"
             class="btn btn-primary my_btn"><i class="fa-solid fa-eye"></i></router-link>
     </div>
   </div>
