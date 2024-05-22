@@ -7,7 +7,7 @@ export default {
     data() {
         return {
             restaurants: [],
-            restaurants_id: 1,
+            restaurants_id: '',
             baseApiUrl: 'http://127.0.0.1:8000/api/',
         }
     },
@@ -18,10 +18,10 @@ export default {
         // this.restaurantsId = this.$route.params.id;
         // this.restaurantsSlug = this.$route.params.slug;
 
-        console.log('chiamata api:', this.baseApiUrl + 'restaraunt/' + this.restaurants_id)
-        axios.get(this.baseApiUrl + 'restaurants/' + this.restaurants_id).then(res => {
+        console.log('chiamata api:', this.baseApiUrl + 'restaurants/' + this.id)
+        axios.get(this.baseApiUrl + 'restaurants/' + this.id).then(res => {
 
-            // console.log(res.data.restaurants);
+            console.log(res.data.restaurants);
 
             if (res.data.success) {
                 // if the restaurant exists
@@ -59,7 +59,7 @@ export default {
 
             <div class="col-4">
                 <div>
-                    <h2 class="card-title">Restaurant Name</h2>
+                    <h2 class="card-title">{{ restaurants.name }}</h2>
                 </div>
                 <div>
                     <ul>
