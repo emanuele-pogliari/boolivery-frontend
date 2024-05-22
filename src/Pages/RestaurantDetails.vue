@@ -7,6 +7,7 @@ export default {
     data() {
         return {
             restaurants: [],
+            restaurants_id: 1,
             baseApiUrl: 'http://127.0.0.1:8000/api/',
         }
     },
@@ -17,8 +18,8 @@ export default {
         // this.restaurantsId = this.$route.params.id;
         // this.restaurantsSlug = this.$route.params.slug;
 
-        console.log('chiamata api:', this.baseApiUrl + 'restaraunts')
-        axios.get(this.baseApiUrl + 'restaurants').then(res => {
+        console.log('chiamata api:', this.baseApiUrl + 'restaraunt/' + this.restaurants_id)
+        axios.get(this.baseApiUrl + 'restaurants/' + this.restaurants_id).then(res => {
 
             // console.log(res.data.restaurants);
 
