@@ -89,7 +89,11 @@ export default {
                 <h4>available</h4>
                 <span> 9.00€ </span>
                 <p>scroto di alta qualità, impanato e fritto.</p>
-                <button> ADD TO CART </button>
+                <button class="dish_btn">
+                     ADD TO CART  
+                     <i class="fa-solid fa-cart-shopping"></i>
+
+                </button>
               </div>
             </li>
           </ul>
@@ -102,7 +106,7 @@ export default {
 
         <div class="col-4">
           <h1>SHOPPING CART</h1>
-          <hr />
+          <hr/>
           <ul>
             <li>TRIPPA</li>
             <li>CACIUCCO</li>
@@ -132,11 +136,17 @@ export default {
 
 .dish_image {
     width: 100%;
-    height: 10rem;
+    height: 100%;
     border-radius: 24px;
     border-color: transparent;
     color: $text_color;
 }
+
+.dish_btn {
+    @include footer_button_style_pills;
+}
+
+
 
 
 

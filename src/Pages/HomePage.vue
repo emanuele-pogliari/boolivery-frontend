@@ -52,4 +52,5 @@ export default {
   <AppMainContent></AppMainContent>
 </template>
 
-<style></style>
+<style>
+</style>
