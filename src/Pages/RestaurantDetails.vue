@@ -28,7 +28,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  
     <div class="container">
       <!-- --------------------------- -->
       <!-- RESTAURANT DETAILS-->
@@ -55,89 +55,83 @@ export default {
         <div class="col-4">
           <div>
             <h2 class="roboto-bold fw-bolder">{{ restaurants.name }}</h2>
-            <!-- <h4 v-for="dish in restaurants.dishes">{{ dish.name }}</h4> -->
             <h2 class="card-title"></h2>
           </div>
         </div>
       </div>
+       <!-- --------------------------- -->
+      <!--END RESTAURANT DETAILS-->
 
-      <div class="dishes_main_content d-flex row mt-5 mb-5">
-        <div class="col-8">
+      
+      
+      <div class="d-flex p-0 mt-5">
+
+          <div class="dishes_main_content flex-grow-1">
+            <!-- --------------------------- -->
+            <!-- RESTAURANT DISHES-->
+            <ul class="m-0 p-0">
+               <li class="d-flex row mb-4">
+                <div class="col-4 m-0 p-0">
+                  <img class="dish_image" src="/img/dishes_images/Boolivery_hamburger_1.jpg" alt="" />
+            
+                </div>
+
+                <div class="col-4 py-3">
+                  <h4 class="text-capitalize">scrotoletta impanata</h4>
+                  <p>scroto di alta qualità, impanato e fritto.</p>
+                  <h4>9.00€</h4>
+                  
+                  
+                </div>
+                <div class="col-4 py-3">
+                  <button class="dish_btn">
+                      ADD TO CART  
+                      <i class="fa-solid fa-cart-shopping"></i>
+                  </button>
+                  <ul class="d-flex p-2">
+                      <li class="ingredient"> 
+                          red meat
+                      </li>
+                      <li class="ingredient">
+                          breaded
+                      </li>
+                  </ul>
+                
+
+                </div>
+              </li>
+             
+            </ul>
+          </div>
+      
           <!-- --------------------------- -->
-          <!-- RESTAURANT DISHES-->
-          <ul class="m-0 p-0">
-            <li class="d-flex row">
-              <div class="col-4">
-                <img class="dish_image" src="/img/dishes_images/Boolivery_hamburger_1.jpg" alt="" />
-                    
-              </div>
-              <div class="col-8">
-                <h3>SCROTOLETTA IMPANATA</h3>
-                <ul class="d-flex">
-                    <li class="ingredient"> 
-                        red meat
-                    </li>
-                    <li>
-                        breaded
-                    </li>
-                </ul>
-                <h4>9.00€</h4>
-                <p>scroto di alta qualità, impanato e fritto.</p>
-                <button class="dish_btn">
-                     ADD TO CART  
-                     <i class="fa-solid fa-cart-shopping"></i>
-                </button>
-              </div>
-               <hr class="border-black">
-            </li>
-            <li class="d-flex row">
-              <div class="col-4">
-                <img class="dish_image" src="/img/dishes_images/Boolivery_hamburger_1.jpg" alt="" />
-                    
-              </div>
-              <div class="col-8">
-                <h3>SCROTOLETTA IMPANATA</h3>
-                <ul class="d-flex">
-                    <li class="ingredient"> 
-                        red meat
-                    </li>
-                    <li>
-                        breaded
-                    </li>
-                </ul>
-                <h4>9.00€</h4>
-                <p>scroto di alta qualità, impanato e fritto.</p>
-                <button class="dish_btn">
-                     ADD TO CART  
-                     <i class="fa-solid fa-cart-shopping"></i>
-                </button>
-              </div>
-               <hr class="border-black">
-            </li>
-          </ul>
-        </div>
-        <!-- --------------------------- -->
-        <!--END RESTAURANT DISHES-->
+          <!--END RESTAURANT DISHES-->
+
+
+
+
+
+
 
         <!-- --------------------------- -->
         <!-- DISHES CART -->
-
-        <div class="col-4 shopping_cart_main_content">
+        <section class="col-4 shopping_cart_main_content">
           <h1>SHOPPING CART</h1>
-          <hr/>
+ 
           <ul>
             <li>TRIPPA</li>
             <li>CACIUCCO</li>
           </ul>
-          <hr />
+  
           <h3>TOTAL: 21.00€</h3>
-        </div>
-
+        </section>
         <!-- --------------------------- -->
         <!-- END DISHES CART -->
+
+
+        
       </div>
     </div>
-  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -166,24 +160,30 @@ export default {
      background-color: $background_color_dark;
      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 
+     list-style: none;
+      padding: 0;
+      margin: 0;
+
     .dish_image {
+       object-fit: cover;
         width: 100%;
-        height: 100%;
+        height: 10rem;
         border-radius: 24px;
         color: $text_color;
     }
 
     .ingredient {
         border: 1px solid $primary_color;
-        border-radius: 24px;
-        padding: 0.5rem;
-        margin-right: 0.5rem;
-
+        border-radius: 0.5rem;
+        padding: 0.2rem;
+        margin-right: 0.2rem;
         text-decoration: none;
+        list-style: none;
+
     }
 
     .dish_btn {
-        @include footer_button_style_pills;
+        @include shopping_cart_button;
     }
 }
 
@@ -193,6 +193,7 @@ export default {
     background-color: $background_color_dark;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     border-radius: 24px;
+    max-height: 15rem;
    
 
     h1 {
@@ -209,14 +210,5 @@ export default {
         border: 0.5px solid $text_color;
     }
 }
-
-
-
-
-
-
-
-
-
 
 </style>

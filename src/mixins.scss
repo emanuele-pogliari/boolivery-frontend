@@ -38,6 +38,24 @@
     }
 }
 
+@mixin shopping_cart_button {
+    border: none;
+    text-decoration: none;
+    border-radius: 1.5rem;
+    padding: 0.4rem 1.4rem 0.4rem 1.4rem;
+    text-transform: uppercase;
+
+    background-color: #3d3d3d;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+        background-color: #f2ca39;
+        color: #3d3d3d;
+    }
+}
+
 // -----------------------------------------------------------------------------
 
 
