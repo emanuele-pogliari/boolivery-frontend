@@ -38,7 +38,7 @@ export default {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="d-flex justify-content-between right-side ms-auto">
                 <!-- Centered Navigation Links -->
-                <div class="navbar-nav ms-auto">
+                <div class="navbar-nav ms-auto w-100">
                     <a class="nav-link text-center active" aria-current="page" href="#">Home</a>
                     <a class="nav-link text-center" href="#">Delivery</a>
                     <a class="nav-link text-center" href="#">Payment</a>
