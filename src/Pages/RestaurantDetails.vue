@@ -28,325 +28,258 @@ export default {
 </script>
 
 <template>
-  
-    <div class="container">
-      <!-- --------------------------- -->
-      <!-- RESTAURANT DETAILS-->
-      <div class="restaurant_main_content d-flex row mt-5 rounded-5">
-        <div class="col-4 p-0 m-0">
-          <img
-            v-if="restaurants.image"
-            :src="
-              restaurants.image.startsWith('http')
-                ? restaurants.image
-                : 'http://localhost:8000/storage/' + restaurants.image
-            "
-            class="card-img-top restaurant_image"
-            alt="..."
-          />
-          <img
-            v-else
-            class="card-img-top"
-            src="/img/homepage/placeholdertemp.jpg"
-            alt="..."
-          />
-        </div>
+  <div class="container">
+    <!-- --------------------------- -->
+    <!-- RESTAURANT DETAILS-->
+    <div class="restaurant_main_content d-flex row mt-5 rounded-5">
+      <div class="col-4 p-0 m-0">
+        <img
+          v-if="restaurants.image"
+          :src="
+            restaurants.image.startsWith('http')
+              ? restaurants.image
+              : 'http://localhost:8000/storage/' + restaurants.image
+          "
+          class="card-img-top restaurant_image"
+          alt="..."
+        />
+        <img
+          v-else
+          class="card-img-top"
+          src="/img/homepage/placeholdertemp.jpg"
+          alt="..."
+        />
+      </div>
 
-        <div class="col-4 py-3 px-5">
-          <div>
-            <div class="d-flex align-items-center gap-2">
-              <h2 class="roboto-bold fw-bolder">{{ restaurants.name }}</h2>
-              <div>
-                <span>75% </span>
-                <i class="fa-solid fa-thumbs-up text-success"></i>
-              </div>
-            </div>
-            <div class="free_delivery_tag d-flex align-items-center gap-1">
-              <i class="fa-solid fa-tag"></i>
-              <p class="m-0">Free delivery for any order over 25€</p>
+      <div class="col-4 py-3 px-5">
+        <div>
+          <div class="d-flex align-items-center gap-2">
+            <h2 class="roboto-bold fw-bolder">{{ restaurants.name }}</h2>
+            <div>
+              <span>75% </span>
+              <i class="fa-solid fa-thumbs-up text-success"></i>
             </div>
           </div>
-          <hr>
-
-          <div>
-            <!-- variabile inidirizzo -->
-            <h4 class="roboto-bold">indirizzo</h4>
-            <div class="d-flex flex-column">
-              <!-- variabile numero di telefono -->
-              <span>phone number</span>
-              <!-- variabile VAT -->
-              <span>partita iva</span>
-            </div>
+          <div class="free_delivery_tag d-flex align-items-center gap-1">
+            <i class="fa-solid fa-tag"></i>
+            <p class="m-0">Free delivery for any order over 25€</p>
           </div>
         </div>
+        <hr />
 
-        <div class="col-4 py-3 px-5">
-          <h4>type</h4>
-          <ul class="d-flex flex-wrap p-0">
-            <!-- variabile restaurant type -->
-            <li style="list-style: none">
-              <button class="type_tag_btn">
-                cannibalismo
-              </button>
-            </li>
-            <!-- cancella questi qua sotto -->
-            <li style="list-style: none">
-              <button class="type_tag_btn">
-                cannibalismo
-              </button>
-            </li>
-            <li style="list-style: none">
-              <button class="type_tag_btn">
-                cannibalismo
-              </button>
-            </li>
-            <li style="list-style: none">
-              <button class="type_tag_btn">
-                cannibalismo
-              </button>
-            </li>
-          </ul>
-          
-
+        <div>
+          <!-- variabile inidirizzo -->
+          <h4 class="roboto-bold">{{ restaurants.address }}</h4>
+          <div class="d-flex flex-column">
+            <!-- variabile numero di telefono -->
+            <span>da migrare</span>
+            <!-- variabile VAT -->
+            <span>{{ restaurants.vat }}</span>
+          </div>
         </div>
       </div>
-       <!-- --------------------------- -->
-      <!--END RESTAURANT DETAILS-->
 
-      
-      
-      <div class="d-flex p-0 mt-5">
-
-          <div class="dishes_main_content flex-grow-1">
-            <!-- --------------------------- -->
-            <!-- RESTAURANT DISHES-->
-            <ul class="m-0 p-0">
-               <li class="d-flex row mb-4">
-                <div class="col-4 m-0 p-0">
-                  <img class="dish_image" src="/img/dishes_images/Boolivery_hamburger_1.jpg" alt="" />
-            
-                </div>
-
-                <div class="col-4 py-3">
-                  <!-- variabile nome piatto -->
-                  <h4 class="text-capitalize">scrotoletta impanata</h4>
-                  <!-- variabile descrizione piatto -->
-                  <p>scroto di alta qualità, impanato e fritto.</p>
-                  <!-- variabile prezzo piatto -->
-                  <h4>9.00€</h4>
-                  
-                  
-                </div>
-                <div class="col-4 py-3">
-                  <button class="dish_btn">
-                      ADD TO CART  
-                      <i class="fa-solid fa-cart-shopping"></i>
-                  </button>
-                  <ul class="d-flex p-2">
-                      <!-- variabile ingredienti piatto-->
-                      <li class="ingredient"> 
-                          red meat
-                      </li>
-                      <li class="ingredient">
-                          breaded
-                      </li>
-                  </ul>
-                
-
-                </div>
-              </li>
-            </ul>
-          </div>
-      
-          <!-- --------------------------- -->
-          <!--END RESTAURANT DISHES-->
-
-
-
-
-
-
-
-        <!-- --------------------------- -->
-        <!-- DISHES CART -->
-        <div class="shopping_cart_main_content p-3">
-          <h1>SHOPPING CART</h1>
-          <hr>
- 
-          <ul class="d-flex flex-column shopping_cart_items overflow-auto">
-            <li class="d-flex align-items-center justify-content-between">
-              <!-- variabile per la visualizazione dell'item selezionato nel carrello -->
-              <span>
-                TRIPPA
-              </span>
-              <!-- btn per eliminare l'item della lista -->
-              <button class="delete_cart_item_btn">
-                <i class="fa-regular fa-circle-xmark"></i>
-              </button>
-            </li>
-
-            <!-- cancella questi qua sotto  -->
-            <li class="d-flex align-items-center justify-content-between">
-              <span>
-                TRIPPA
-              </span>
-              <button class="delete_cart_item_btn">
-                <i class="fa-regular fa-circle-xmark"></i>
-              </button>
-            </li>
-            <li class="d-flex align-items-center justify-content-between">
-              <span>
-                TRIPPA
-              </span>
-              <button class="delete_cart_item_btn">
-                <i class="fa-regular fa-circle-xmark"></i>
-              </button>
-            </li>
-            <li class="d-flex align-items-center justify-content-between">
-              <span>
-                TRIPPA
-              </span>
-              <button class="delete_cart_item_btn">
-                <i class="fa-regular fa-circle-xmark"></i>
-              </button>
-            </li>
-            <li class="d-flex align-items-center justify-content-between">
-              <span>
-                TRIPPA
-              </span>
-              <button class="delete_cart_item_btn">
-                <i class="fa-regular fa-circle-xmark"></i>
-              </button>
-            </li>
-          </ul>
-
-
-
-          <hr>
-  
-          <h4 class="d-flex justify-content-between">
-            <span>
-              TOTAL:
-            </span>
-            <span>
-              <!-- variabile totale prezzo items scelti  -->
-              21.00€
-            </span>
-          </h4>
-        </div>
-        <!-- --------------------------- -->
-        <!-- END DISHES CART -->
-
-
-        
+      <div class="col-4 py-3 px-5">
+        <h4>Category</h4>
+        <ul class="d-flex flex-wrap p-0">
+          <!-- variabile restaurant type -->
+          <li style="list-style: none">
+            <button class="type_tag_btn">cannibalismo</button>
+          </li>
+        </ul>
       </div>
     </div>
+    <!-- --------------------------- -->
+    <!--END RESTAURANT DETAILS-->
+
+    <div class="d-flex p-0 mt-5">
+      <div class="dishes_main_content flex-grow-1">
+        <!-- --------------------------- -->
+        <!-- RESTAURANT DISHES-->
+        <ul class="m-0 p-0" v-for="dish in restaurants.dishes">
+          <li class="d-flex row mb-4">
+            <div class="col-4 m-0 p-0">
+              <img class="dish_image" :src="dish.image" alt="" />
+            </div>
+
+            <div class="col-4 py-3">
+              <!-- variabile nome piatto -->
+              <h4 class="text-capitalize">{{ dish.name }}</h4>
+              <!-- variabile descrizione piatto -->
+              <p>{{ dish.description }}</p>
+              <!-- variabile prezzo piatto -->
+              <h4>{{ dish.price }} €</h4>
+            </div>
+            <div class="col-4 py-3">
+              <button class="dish_btn">
+                ADD TO CART
+                <i class="fa-solid fa-cart-shopping"></i>
+              </button>
+              <ul class="d-flex p-2">
+                <!-- variabile ingredienti piatto-->
+                <li class="ingredient">red meat</li>
+                <li class="ingredient">breaded</li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- --------------------------- -->
+      <!--END RESTAURANT DISHES-->
+
+      <!-- --------------------------- -->
+      <!-- DISHES CART -->
+      <div class="shopping_cart_main_content p-3">
+        <h1>SHOPPING CART</h1>
+        <hr />
+
+        <ul class="d-flex flex-column shopping_cart_items overflow-auto">
+          <li class="d-flex align-items-center justify-content-between">
+            <!-- variabile per la visualizazione dell'item selezionato nel carrello -->
+            <span> TRIPPA </span>
+            <!-- btn per eliminare l'item della lista -->
+            <button class="delete_cart_item_btn">
+              <i class="fa-regular fa-circle-xmark"></i>
+            </button>
+          </li>
+
+          <!-- cancella questi qua sotto  -->
+          <li class="d-flex align-items-center justify-content-between">
+            <span> TRIPPA </span>
+            <button class="delete_cart_item_btn">
+              <i class="fa-regular fa-circle-xmark"></i>
+            </button>
+          </li>
+          <li class="d-flex align-items-center justify-content-between">
+            <span> TRIPPA </span>
+            <button class="delete_cart_item_btn">
+              <i class="fa-regular fa-circle-xmark"></i>
+            </button>
+          </li>
+          <li class="d-flex align-items-center justify-content-between">
+            <span> TRIPPA </span>
+            <button class="delete_cart_item_btn">
+              <i class="fa-regular fa-circle-xmark"></i>
+            </button>
+          </li>
+          <li class="d-flex align-items-center justify-content-between">
+            <span> TRIPPA </span>
+            <button class="delete_cart_item_btn">
+              <i class="fa-regular fa-circle-xmark"></i>
+            </button>
+          </li>
+        </ul>
+
+        <hr />
+
+        <h4 class="d-flex justify-content-between">
+          <span> TOTAL: </span>
+          <span>
+            <!-- variabile totale prezzo items scelti  -->
+            21.00€
+          </span>
+        </h4>
+      </div>
+      <!-- --------------------------- -->
+      <!-- END DISHES CART -->
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
-
 .restaurant_main_content {
-    background-color: $background_color_dark;
-    border-top-right-radius: 10rem !important;
-   
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  background-color: $background_color_dark;
+  border-top-right-radius: 10rem !important;
 
-    .restaurant_image {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+
+  .restaurant_image {
     width: 100%;
     height: 100%;
     border-radius: 24px;
     border-color: transparent;
     color: $text_color;
-    }
+  }
 
-    .free_delivery_tag {
-        background-color: $secondary_color;
-        color: $text_color;
-        padding: 0.5rem;
-        border-radius: 0.5rem;
-    }    
+  .free_delivery_tag {
+    background-color: $secondary_color;
+    color: $text_color;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+  }
 
-    .type_tag_btn {
-      @include tag_type_btn;
-    }
-
+  .type_tag_btn {
+    @include tag_type_btn;
+  }
 }
-
 
 .dishes_main_content {
-     background-color: $background_color_dark;
-     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  background-color: $background_color_dark;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 
-     list-style: none;
-      padding: 0;
-      margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 
-    .dish_image {
-       object-fit: cover;
-        width: 100%;
-        height: 10rem;
-        border-radius: 24px;
-        color: $text_color;
-    }
-
-    .ingredient {
-        border: 1px solid $primary_color;
-        border-radius: 0.5rem;
-        padding: 0.2rem;
-        margin-right: 0.2rem;
-        text-decoration: none;
-        list-style: none;
-
-    }
-
-    .dish_btn {
-        @include shopping_cart_button;
-    }
-}
-
-
-.shopping_cart_main_content
-{
-    background-color: $background_color_dark;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  .dish_image {
+    object-fit: cover;
+    width: 100%;
+    height: 10rem;
     border-radius: 24px;
-    max-height: 15rem;
-   
+    color: $text_color;
+  }
 
-    .shopping_cart_items {
-        max-height: 4rem;
-    }
-   
+  .ingredient {
+    border: 1px solid $primary_color;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+    margin-right: 0.2rem;
+    text-decoration: none;
+    list-style: none;
+  }
 
-    h1 {
-        text-align: center;
-    }
-
-    ul {
-        text-align: start;
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-
-      li {
-
-        .delete_cart_item_btn {
-            background-color: transparent;
-            border: none;
-            padding: 0.5rem;
-            margin-left: 0.5rem;
-            cursor: pointer;
-        }
-      }
-
-    }
-
-    hr {
-        border: 0.5px solid $text_color;
-    }
+  .dish_btn {
+    @include shopping_cart_button;
+  }
 }
 
+.shopping_cart_main_content {
+  background-color: $background_color_dark;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
+  max-height: 15rem;
+
+  .shopping_cart_items {
+    max-height: 4rem;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  ul {
+    text-align: start;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      .delete_cart_item_btn {
+        background-color: transparent;
+        border: none;
+        padding: 0.5rem;
+        margin-left: 0.5rem;
+        cursor: pointer;
+      }
+    }
+  }
+
+  hr {
+    border: 0.5px solid $text_color;
+  }
+}
 </style>
