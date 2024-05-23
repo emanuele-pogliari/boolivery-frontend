@@ -21,6 +21,11 @@ export default {
     totalItems() {
       return this.items.length;
     },
+    totalCartPrice() {
+      return this.items
+        .reduce((total, item) => total + parseFloat(item.price), 0)
+        .toFixed(2);
+    },
   },
 
   mounted() {
@@ -192,7 +197,7 @@ export default {
           <span> TOTAL: </span>
           <span>
             <!-- variabile totale prezzo items scelti  -->
-            21.00€
+            {{ totalCartPrice }} €
           </span>
         </h4>
       </div>
