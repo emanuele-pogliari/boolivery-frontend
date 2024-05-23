@@ -33,22 +33,9 @@ export default {
   },
   methods: {
     apiFilterTypes() {
-      if (this.checkButtonValue.length > 0) {
-        axios
-          .get(
-            this.baseApiUrl + "restaurants?types=" + this.checkButtonValue,
-            {}
-          )
-          .then((res) => {
-            // console.log(res.data.results)
-
-            this.restaurants = res.data.results;
-
-            console.log(this.checkButtonValue);
-          });
-      } else {
-        this.apiCall();
-      }
+      this.apiPageNumber = 1;
+      // Chiama apiCall con i parametri aggiornati
+      this.apiCall();
     },
 
     changePage(pageNumber) {
@@ -71,13 +58,15 @@ export default {
     },
 
     apiCall() {
+      const params = {
+        // sets current page as parameter, by default it's 1
+        page: this.apiPageNumber,
+      };
+      if (this.checkButtonValue.length > 0) {
+        params.types = this.checkButtonValue.join(",");
+      }
       axios
-        .get(this.baseApiUrl + "restaurants", {
-          params: {
-            // sets current page as parameter, by default it's 1
-            page: this.apiPageNumber,
-          },
-        })
+        .get(this.baseApiUrl + "restaurants", { params })
         .then((res) => {
           console.log(res);
           this.restaurants = res.data.results;
@@ -123,8 +112,15 @@ export default {
         <button class="type_res_button">Chinese</button>
       </div>
 
-      <button type="button" class="btn more" data-bs-toggle="modal" data-bs-target="#restaurantModal">
-        <span class="more-icon"><i class="fa-solid fa-magnifying-glass"></i></span> 
+      <button
+        type="button"
+        class="btn more"
+        data-bs-toggle="modal"
+        data-bs-target="#restaurantModal"
+      >
+        <span class="more-icon"
+          ><i class="fa-solid fa-magnifying-glass"></i
+        ></span>
         <span class="more-txt">Want more?</span>
       </button>
 
@@ -177,10 +173,11 @@ export default {
     </nav>
 
     <section id="cards_section">
-      <AppCardItem 
-        v-for="restaurant in restaurants.data" :restaurant="restaurant">
+      <AppCardItem
+        v-for="restaurant in restaurants.data"
+        :restaurant="restaurant"
+      >
       </AppCardItem>
-
     </section>
 
     <div>
@@ -420,7 +417,7 @@ section {
     background-color: $background_color;
     border-radius: 20px;
     gap: 0;
-  };
+  }
 
   section nav .type_res_button:not(:first-child):not(:last-child) {
     border-radius: 0px;
@@ -440,7 +437,7 @@ section {
 @media screen and (max-width: 992px) {
   section nav h3 {
     display: none;
-  };
+  }
 
   section nav #food_types {
     background-color: $background_color_dark;
@@ -448,42 +445,42 @@ section {
 
     justify-content: space-around;
     width: 100%;
-  };
+  }
 
   section nav .type_res_button:not(:first-child):not(:last-child) {
     border-radius: 20px;
-  };
+  }
 
   section nav .type_res_button:first-child {
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-  };
+  }
 
   section nav .type_res_button:last-child {
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-  };
+  }
 
   section nav .type_res_button {
     width: 10rem;
-  };
+  }
 
   section nav .more {
     width: 5rem;
-  };
+  }
 
   section nav .more .more-icon {
     display: inline !important;
-  };
+  }
 
   section nav .more .more-txt {
     display: none;
-  };
+  }
 }
 
 @media screen and (max-width: 768px) {
   section nav .type_res_button {
     width: 6rem;
-  };
+  }
 }
 </style>

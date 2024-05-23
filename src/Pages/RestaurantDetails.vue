@@ -46,22 +46,22 @@ export default {
 
   methods: {
     addItem(dish) {
-      if (
-        this.items.length === 0 ||
-        this.currentRestaurantId === this.restaurantsId
-      ) {
-        this.items.push(dish);
-        dish = "";
-        localStorage.setItem("items", JSON.stringify(this.items));
-        localStorage.setItem(
-          "currentRestaurantId",
-          JSON.stringify(this.currentRestaurantId)
-        );
-      } else {
-        alert(
-          "You are adding dishes from a different restaurant. Empty the cart or complete the current order."
-        );
-      }
+      // if (
+      //   this.items.length === 0 ||
+      //   this.currentRestaurantId === this.restaurantsId
+      // ) {
+      this.items.push(dish);
+      dish = "";
+      localStorage.setItem("items", JSON.stringify(this.items));
+      localStorage.setItem(
+        "currentRestaurantId",
+        JSON.stringify(this.currentRestaurantId)
+      );
+      // } else {
+      //   alert(
+      //     "You are adding dishes from a different restaurant. Empty the cart or complete the current order."
+      //   );
+      // }
     },
 
     removeItem(index) {
