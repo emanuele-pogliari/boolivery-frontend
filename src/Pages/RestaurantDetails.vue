@@ -9,7 +9,22 @@ export default {
       restaurants: null,
       restaurantsId: null,
       baseApiUrl: "http://127.0.0.1:8000/api/",
+
+      //variable for cart
+      newItem: "",
+      items: [],
     };
+  },
+
+  computed: {
+    totalItems() {
+      return this.items.length;
+    },
+  },
+
+  mounted() {
+    // Load items from localStorage on component mount
+    this.items = JSON.parse(localStorage.getItem("items")) || [];
   },
 
   created() {
@@ -23,7 +38,18 @@ export default {
       });
   },
 
-  methods: {},
+  methods: {
+    addItem() {
+      this.items.push(this.newItem);
+      this.newItem = "";
+      localStorage.setItem("items", JSON.stringify(this.items));
+      console.log(this.items);
+    },
+    removeItem(index) {
+      this.items.splice(index, 1);
+      localStorage.setItem("items", JSON.stringify(this.items));
+    },
+  },
 };
 </script>
 
@@ -111,7 +137,7 @@ export default {
               <h4>{{ dish.price }} €</h4>
             </div>
             <div class="col-4 py-3">
-              <button class="dish_btn">
+              <button class="dish_btn" @click="addItem(dish)">
                 ADD TO CART
                 <i class="fa-solid fa-cart-shopping"></i>
               </button>
@@ -134,6 +160,18 @@ export default {
         <h1>SHOPPING CART</h1>
         <hr />
 
+        <!-- base cart -->
+        <div>
+          <form></form>
+          <ul>
+            <li v-for="(item, index) in items" :key="index">
+              {{ item }}
+              <button @click="removeItem(index)">Remove</button>
+            </li>
+          </ul>
+          <p>Total Items: {{ totalItems }}</p>
+        </div>
+
         <ul class="d-flex flex-column shopping_cart_items overflow-auto">
           <li class="d-flex align-items-center justify-content-between">
             <!-- variabile per la visualizazione dell'item selezionato nel carrello -->
@@ -143,36 +181,8 @@ export default {
               <i class="fa-regular fa-circle-xmark"></i>
             </button>
           </li>
-
-          <!-- cancella questi qua sotto  -->
-          <li class="d-flex align-items-center justify-content-between">
-            <span> TRIPPA </span>
-            <button class="delete_cart_item_btn">
-              <i class="fa-regular fa-circle-xmark"></i>
-            </button>
-          </li>
-          <li class="d-flex align-items-center justify-content-between">
-            <span> TRIPPA </span>
-            <button class="delete_cart_item_btn">
-              <i class="fa-regular fa-circle-xmark"></i>
-            </button>
-          </li>
-          <li class="d-flex align-items-center justify-content-between">
-            <span> TRIPPA </span>
-            <button class="delete_cart_item_btn">
-              <i class="fa-regular fa-circle-xmark"></i>
-            </button>
-          </li>
-          <li class="d-flex align-items-center justify-content-between">
-            <span> TRIPPA </span>
-            <button class="delete_cart_item_btn">
-              <i class="fa-regular fa-circle-xmark"></i>
-            </button>
-          </li>
         </ul>
-
         <hr />
-
         <h4 class="d-flex justify-content-between">
           <span> TOTAL: </span>
           <span>
