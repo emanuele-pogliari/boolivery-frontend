@@ -13,6 +13,7 @@ export default {
       //variable for cart
       newItem: "",
       items: [],
+      currentRestaurantId: null,
     };
   },
 
@@ -39,12 +40,25 @@ export default {
   },
 
   methods: {
-    addItem() {
-      this.items.push(this.newItem);
-      this.newItem = "";
-      localStorage.setItem("items", JSON.stringify(this.items));
-      console.log(this.items);
+    addItem(dish) {
+      if (
+        this.items.length === 0 ||
+        this.currentRestaurantId === this.restaurantsId
+      ) {
+        this.items.push(dish);
+        dish = "";
+        localStorage.setItem("items", JSON.stringify(this.items));
+        localStorage.setItem(
+          "currentRestaurantId",
+          JSON.stringify(this.currentRestaurantId)
+        );
+      } else {
+        alert(
+          "You are adding dishes from a different restaurant. Empty the cart or complete the current order."
+        );
+      }
     },
+
     removeItem(index) {
       this.items.splice(index, 1);
       localStorage.setItem("items", JSON.stringify(this.items));
@@ -110,7 +124,7 @@ export default {
         <ul class="d-flex flex-wrap p-0">
           <!-- variabile restaurant type -->
           <li style="list-style: none">
-            <button class="type_tag_btn">cannibalismo</button>
+            <button class="type_tag_btn">Category</button>
           </li>
         </ul>
       </div>
@@ -143,8 +157,8 @@ export default {
               </button>
               <ul class="d-flex p-2">
                 <!-- variabile ingredienti piatto-->
-                <li class="ingredient">red meat</li>
-                <li class="ingredient">breaded</li>
+                <!-- <li class="ingredient">red meat</li>
+                <li class="ingredient">breaded</li> -->
               </ul>
             </div>
           </li>
@@ -165,23 +179,14 @@ export default {
           <form></form>
           <ul>
             <li v-for="(item, index) in items" :key="index">
-              {{ item }}
-              <button @click="removeItem(index)">Remove</button>
+              {{ item.name }} - {{ item.price }}
+              <button class="delete_cart_item_btn" @click="removeItem(index)">
+                <i class="fa-regular fa-circle-xmark"></i>
+              </button>
             </li>
           </ul>
           <p>Total Items: {{ totalItems }}</p>
         </div>
-
-        <ul class="d-flex flex-column shopping_cart_items overflow-auto">
-          <li class="d-flex align-items-center justify-content-between">
-            <!-- variabile per la visualizazione dell'item selezionato nel carrello -->
-            <span> TRIPPA </span>
-            <!-- btn per eliminare l'item della lista -->
-            <button class="delete_cart_item_btn">
-              <i class="fa-regular fa-circle-xmark"></i>
-            </button>
-          </li>
-        </ul>
         <hr />
         <h4 class="d-flex justify-content-between">
           <span> TOTAL: </span>
