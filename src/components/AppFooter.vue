@@ -115,7 +115,7 @@ export default {
 
 </template>
 
-<style lang="scss">
+<style lang="scss" >
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
