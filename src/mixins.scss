@@ -38,6 +38,50 @@
     }
 }
 
+@mixin shopping_cart_button {
+    border: none;
+    text-decoration: none;
+    border-radius: 1.5rem;
+    padding: 0.4rem 1.4rem 0.4rem 1.4rem;
+    text-transform: uppercase;
+
+    background-color: #3d3d3d;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+        background-color: #f2ca39;
+        color: #3d3d3d;
+    }
+}
+
+
+@mixin tag_type_btn {
+        cursor: pointer;
+    
+        padding: 6px 12px;
+        width: 8rem;
+        border-radius: 20px;
+        border: 1px solid #fefefe;
+    
+    
+        background-color: #37373b;
+        color: #ffffff;
+        font-weight: 600;
+    
+        transition: all 0.2s linear;
+    
+        &:hover {
+            background-color: #fbb345;
+            color: #ffffff;
+            border: 1px solid #fefefe;
+        }
+
+        
+
+
+}
 // -----------------------------------------------------------------------------
 
 

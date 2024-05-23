@@ -1,9 +1,17 @@
 <script>
 import axios from "axios";
+import AppMainContent from "../components/AppMainContent.vue";
+import AppHeader from "../components/AppHeader.vue";
+
+
 export default {
   name: "HomePage",
 
-  components: {},
+
+  components: {
+    AppMainContent,
+    AppHeader,
+  },
 
   data() {
     return {
@@ -14,6 +22,7 @@ export default {
   },
 
   mounted() {
+
     // axios
     //   .get(this.baseApiUrl + "restaurants")
     //   .then((res) => {
@@ -39,7 +48,9 @@ export default {
 };
 </script>
 <template>
-  <div></div>
+  <AppHeader></AppHeader>
+  <AppMainContent></AppMainContent>
 </template>
 
-<style></style>
+<style>
+</style>
