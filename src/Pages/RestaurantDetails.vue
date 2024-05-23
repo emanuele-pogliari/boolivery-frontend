@@ -1,8 +1,13 @@
 <script>
 import axios from "axios";
+import AppCart from "../components/AppCart.vue";
 
 export default {
   name: "RestaurantDetails",
+
+  components: {
+    AppCart,
+  },
 
   data() {
     return {
@@ -175,7 +180,7 @@ export default {
 
       <!-- --------------------------- -->
       <!-- DISHES CART -->
-
+      <AppCart></AppCart>
       <!-- --------------------------- -->
       <!-- END DISHES CART -->
     </div>
