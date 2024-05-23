@@ -52,11 +52,62 @@ export default {
           />
         </div>
 
-        <div class="col-4">
+        <div class="col-4 py-3 px-5">
           <div>
-            <h2 class="roboto-bold fw-bolder">{{ restaurants.name }}</h2>
-            <h2 class="card-title"></h2>
+            <div class="d-flex align-items-center gap-2">
+              <h2 class="roboto-bold fw-bolder">{{ restaurants.name }}</h2>
+              <div>
+                <span>75% </span>
+                <i class="fa-solid fa-thumbs-up text-success"></i>
+              </div>
+            </div>
+            <div class="free_delivery_tag d-flex align-items-center gap-1">
+              <i class="fa-solid fa-tag"></i>
+              <p class="m-0">Free delivery for any order over 25€</p>
+            </div>
           </div>
+          <hr>
+
+          <div>
+            <!-- variabile inidirizzo -->
+            <h4 class="roboto-bold">indirizzo</h4>
+            <div class="d-flex flex-column">
+              <!-- variabile numero di telefono -->
+              <span>phone number</span>
+              <!-- variabile VAT -->
+              <span>partita iva</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-4 py-3 px-5">
+          <h4>type</h4>
+          <ul class="d-flex flex-wrap p-0">
+            <!-- variabile restaurant type -->
+            <li style="list-style: none">
+              <button class="type_tag_btn">
+                cannibalismo
+              </button>
+            </li>
+            <!-- cancella questi qua sotto -->
+            <li style="list-style: none">
+              <button class="type_tag_btn">
+                cannibalismo
+              </button>
+            </li>
+            <li style="list-style: none">
+              <button class="type_tag_btn">
+                cannibalismo
+              </button>
+            </li>
+            <li style="list-style: none">
+              <button class="type_tag_btn">
+                cannibalismo
+              </button>
+            </li>
+          </ul>
+          
+
         </div>
       </div>
        <!-- --------------------------- -->
@@ -77,8 +128,11 @@ export default {
                 </div>
 
                 <div class="col-4 py-3">
+                  <!-- variabile nome piatto -->
                   <h4 class="text-capitalize">scrotoletta impanata</h4>
+                  <!-- variabile descrizione piatto -->
                   <p>scroto di alta qualità, impanato e fritto.</p>
+                  <!-- variabile prezzo piatto -->
                   <h4>9.00€</h4>
                   
                   
@@ -89,6 +143,7 @@ export default {
                       <i class="fa-solid fa-cart-shopping"></i>
                   </button>
                   <ul class="d-flex p-2">
+                      <!-- variabile ingredienti piatto-->
                       <li class="ingredient"> 
                           red meat
                       </li>
@@ -100,7 +155,6 @@ export default {
 
                 </div>
               </li>
-             
             </ul>
           </div>
       
@@ -115,16 +169,71 @@ export default {
 
         <!-- --------------------------- -->
         <!-- DISHES CART -->
-        <section class="col-4 shopping_cart_main_content">
+        <div class="shopping_cart_main_content p-3">
           <h1>SHOPPING CART</h1>
+          <hr>
  
-          <ul>
-            <li>TRIPPA</li>
-            <li>CACIUCCO</li>
+          <ul class="d-flex flex-column shopping_cart_items overflow-auto">
+            <li class="d-flex align-items-center justify-content-between">
+              <!-- variabile per la visualizazione dell'item selezionato nel carrello -->
+              <span>
+                TRIPPA
+              </span>
+              <!-- btn per eliminare l'item della lista -->
+              <button class="delete_cart_item_btn">
+                <i class="fa-regular fa-circle-xmark"></i>
+              </button>
+            </li>
+
+            <!-- cancella questi qua sotto  -->
+            <li class="d-flex align-items-center justify-content-between">
+              <span>
+                TRIPPA
+              </span>
+              <button class="delete_cart_item_btn">
+                <i class="fa-regular fa-circle-xmark"></i>
+              </button>
+            </li>
+            <li class="d-flex align-items-center justify-content-between">
+              <span>
+                TRIPPA
+              </span>
+              <button class="delete_cart_item_btn">
+                <i class="fa-regular fa-circle-xmark"></i>
+              </button>
+            </li>
+            <li class="d-flex align-items-center justify-content-between">
+              <span>
+                TRIPPA
+              </span>
+              <button class="delete_cart_item_btn">
+                <i class="fa-regular fa-circle-xmark"></i>
+              </button>
+            </li>
+            <li class="d-flex align-items-center justify-content-between">
+              <span>
+                TRIPPA
+              </span>
+              <button class="delete_cart_item_btn">
+                <i class="fa-regular fa-circle-xmark"></i>
+              </button>
+            </li>
           </ul>
+
+
+
+          <hr>
   
-          <h3>TOTAL: 21.00€</h3>
-        </section>
+          <h4 class="d-flex justify-content-between">
+            <span>
+              TOTAL:
+            </span>
+            <span>
+              <!-- variabile totale prezzo items scelti  -->
+              21.00€
+            </span>
+          </h4>
+        </div>
         <!-- --------------------------- -->
         <!-- END DISHES CART -->
 
@@ -146,11 +255,22 @@ export default {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 
     .restaurant_image {
-    width: 20rem;
-    height: 15rem;
+    width: 100%;
+    height: 100%;
     border-radius: 24px;
     border-color: transparent;
     color: $text_color;
+    }
+
+    .free_delivery_tag {
+        background-color: $secondary_color;
+        color: $text_color;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+    }    
+
+    .type_tag_btn {
+      @include tag_type_btn;
     }
 
 }
@@ -196,14 +316,32 @@ export default {
     max-height: 15rem;
    
 
+    .shopping_cart_items {
+        max-height: 4rem;
+    }
+   
+
     h1 {
         text-align: center;
     }
 
     ul {
+        text-align: start;
         list-style-type: none;
         padding: 0;
         margin: 0;
+
+      li {
+
+        .delete_cart_item_btn {
+            background-color: transparent;
+            border: none;
+            padding: 0.5rem;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+      }
+
     }
 
     hr {

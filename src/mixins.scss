@@ -56,6 +56,32 @@
     }
 }
 
+
+@mixin tag_type_btn {
+        cursor: pointer;
+    
+        padding: 6px 12px;
+        width: 8rem;
+        border-radius: 20px;
+        border: 1px solid #fefefe;
+    
+    
+        background-color: #37373b;
+        color: #ffffff;
+        font-weight: 600;
+    
+        transition: all 0.2s linear;
+    
+        &:hover {
+            background-color: #fbb345;
+            color: #ffffff;
+            border: 1px solid #fefefe;
+        }
+
+        
+
+
+}
 // -----------------------------------------------------------------------------
 
 
