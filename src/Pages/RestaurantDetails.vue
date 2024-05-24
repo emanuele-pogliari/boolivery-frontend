@@ -75,10 +75,10 @@ export default {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container" style="max-width: 1200px;">
     <!-- --------------------------- -->
     <!-- RESTAURANT DETAILS-->
-    <div class="restaurant_main_content d-flex row mt-5 rounded-5">
+    <div class="restaurant_main_content d-flex row mt-5 rounded-4">
       <div class="col-4 p-0 m-0">
         <img
           v-if="restaurants.image"
@@ -102,10 +102,6 @@ export default {
         <div>
           <div class="d-flex align-items-center gap-2">
             <h2 class="roboto-bold fw-bolder">{{ restaurants.name }}</h2>
-            <div>
-              <span>75% </span>
-              <i class="fa-solid fa-thumbs-up text-success"></i>
-            </div>
           </div>
           <div class="free_delivery_tag d-flex align-items-center gap-1">
             <i class="fa-solid fa-tag"></i>
@@ -140,7 +136,7 @@ export default {
     <!--END RESTAURANT DETAILS-->
 
     <div class="d-flex p-0 mt-5">
-      <div class="dishes_main_content flex-grow-1">
+      <div class="dishes_main_content">
         <!-- --------------------------- -->
         <!-- RESTAURANT DISHES-->
         <ul class="m-0 p-0" v-for="dish in restaurants.dishes">
@@ -157,7 +153,7 @@ export default {
               <!-- variabile prezzo piatto -->
               <h4>{{ dish.price }} €</h4>
             </div>
-            <div class="col-4 py-3">
+            <div class="col-3 py-3">
               <button class="dish_btn" @click="addItem(dish)">
                 ADD TO CART
                 <i class="fa-solid fa-cart-shopping"></i>
@@ -195,9 +191,11 @@ export default {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 
   .restaurant_image {
-    width: 100%;
+    max-height: 16rem;
     height: 100%;
-    border-radius: 24px;
+    padding: 1rem;
+
+    border-radius: 28px;
     border-color: transparent;
     color: $text_color;
   }

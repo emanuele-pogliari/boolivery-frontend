@@ -39,14 +39,19 @@ export default {
           {{ type.type }}
         </span>
       </div>
+      
+      <div class="d-flex gap-1 justify-content-center mb-2">
+        <i class="fa-solid fa-user"></i><i class="fa-solid fa-user"></i><i class="fa-solid fa-user"></i><i class="fa-regular fa-user"></i><i class="fa-regular fa-user"></i>
+      </div>
+
       <p class="card-text text-center" style="font-weight: 500">
         {{ restaurant.address }}
       </p>
       <router-link
         :to="{ name: 'restaurant', params: { id: restaurant.id } }"
         class="btn btn-primary my_btn"
-        ><i class="fa-solid fa-eye"></i
-      ></router-link>
+        ><i class="fa-solid fa-person-biking"></i>
+      </router-link>
     </div>
   </div>
 </template>
@@ -81,6 +86,7 @@ export default {
   .restaurant_type {
     display: flex;
     justify-content: center;
+    margin-bottom: 1rem;
     
     span {
       display: inline-block;
