@@ -1,6 +1,10 @@
 <script>
 import axios from "axios";
+import AppCart from "../components/AppCart.vue";
 export default {
+  components: {
+    AppCart,
+  },
   data() {
     return {
       clientToken: null,
@@ -66,6 +70,9 @@ export default {
         >
           Purchase
         </button>
+      </div>
+      <div class="col-4">
+        <AppCart></AppCart>
       </div>
     </div>
   </div>

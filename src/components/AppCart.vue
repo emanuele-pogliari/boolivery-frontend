@@ -101,6 +101,9 @@ export default {
         {{ totalCartPrice }} €
       </span>
     </h4>
+    <router-link :to="{ name: 'checkout' }">
+      <button class="btn btn-warning">Checkout</button>
+    </router-link>
   </div>
 </template>
 
@@ -111,7 +114,6 @@ export default {
   background-color: $background_color_dark;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   border-radius: 24px;
-  max-height: 15rem;
 
   .shopping_cart_items {
     max-height: 4rem;

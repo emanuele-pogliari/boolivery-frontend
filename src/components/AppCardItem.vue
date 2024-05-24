@@ -34,7 +34,9 @@ export default {
 
     <div class="card-body">
       <h5 class="card-title text-center">{{ restaurant.name }}</h5>
-      <div class="card-text restaurant_type d-flex gap-1 justify-content-center">
+      <div
+        class="card-text restaurant_type d-flex gap-1 justify-content-center"
+      >
         <span v-for="type in restaurant.types">
           {{ type.type }}
         </span>
@@ -81,7 +83,7 @@ export default {
   .restaurant_type {
     display: flex;
     justify-content: center;
-    
+
     span {
       display: inline-block;
 
@@ -90,7 +92,7 @@ export default {
 
       padding: 0.1rem 0.6rem;
       border-radius: 16px;
-  }
+    }
   }
 
   .card-title {
