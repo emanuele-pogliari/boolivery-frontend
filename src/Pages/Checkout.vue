@@ -2,22 +2,42 @@
 import axios from "axios";
 export default {
   data() {
-    return {};
+    return {
+      clientToken: null,
+      instance: null,
+      baseApiUrl: "http://127.0.0.1:8000/api/",
+    };
   },
+
+  methods: {
+    // paymentFunction() {
+    //   axios
+    //     .post(this.baseApiUrl + "checkout");{
+    //       nonce: "fake-valid-nonce",
+    //     })
+    //     .then((response) => {
+    //       console.log(response);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
+
+    //get client token
+    getClientToken() {
+      axios.get(this.baseApiUrl + "token").then((response) => {
+        this.clientToken = response.data.token;
+        console.log(this.clientToken);
+      });
+    },
+  },
+
   mounted() {
-    braintree.dropin.create(
-      {
-        authorization: "sandbox_g42y39zw_348pk9cgf3bgyw2b",
+    this.getClientToken(),
+      braintree.dropin.create({
+        authorization: this.clientToken,
         selector: "#dropin-container",
-      },
-      function (err, instance) {
-        button.addEventListener("click", function () {
-          instance.requestPaymentMethod(function (err, payload) {
-            // Submit payload.nonce to your server
-          });
-        });
-      }
-    );
+      });
   },
 };
 </script>
@@ -26,7 +46,11 @@ export default {
     <div class="row">
       <div class="col-4">
         <div id="dropin-container"></div>
-        <button id="submit-button" class="button button--small button--green">
+        <button
+          id="submit-button"
+          class="button button--small button--green"
+          @click="paymentFunction"
+        >
           Purchase
         </button>
       </div>
