@@ -331,7 +331,7 @@ section {
 
   #cards_section {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     justify-content: space-around;
     align-items: center;
 
