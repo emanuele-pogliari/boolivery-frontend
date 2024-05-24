@@ -10,6 +10,12 @@ export default {
   },
 
   methods: {
+    //get client token
+    getClientToken() {
+      axios.get(this.baseApiUrl + "token").then((response) => {
+        this.clientToken = response.data.token;
+      });
+    },
     // paymentFunction() {
     //   axios
     //     .post(this.baseApiUrl + "checkout");{
@@ -22,22 +28,28 @@ export default {
     //       console.log(error);
     //     });
     // },
-
-    //get client token
-    getClientToken() {
-      axios.get(this.baseApiUrl + "token").then((response) => {
-        this.clientToken = response.data.token;
-        console.log(this.clientToken);
-      });
-    },
   },
 
   mounted() {
-    this.getClientToken(),
-      braintree.dropin.create({
+    getClientToken();
+    //call function that will get the client token
+
+    //initialize the braintree dropin
+    braintree.dropin.create(
+      {
+        //verify authorization
         authorization: this.clientToken,
         selector: "#dropin-container",
-      });
+      },
+      (err, instance) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        this.instance = instance;
+        console.log(instance);
+      }
+    );
   },
 };
 </script>
