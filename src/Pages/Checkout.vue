@@ -9,13 +9,18 @@ export default {
     };
   },
 
+  mounted() {
+    // this.getClientToken();
+    this.dropinStart();
+  },
   methods: {
     //get client token
-    getClientToken() {
-      axios.get(this.baseApiUrl + "token").then((response) => {
-        this.clientToken = response.data.token;
-      });
-    },
+    // getClientToken() {
+    //   axios.get(this.baseApiUrl + "token").then((response) => {
+    //     this.clientToken = response.data.token;
+    //   });
+    //   this.dropinStart();
+    // },
     // paymentFunction() {
     //   axios
     //     .post(this.baseApiUrl + "checkout");{
@@ -28,28 +33,21 @@ export default {
     //       console.log(error);
     //     });
     // },
-  },
-
-  mounted() {
-    getClientToken();
-    //call function that will get the client token
-
-    //initialize the braintree dropin
-    braintree.dropin.create(
-      {
-        //verify authorization
-        authorization: this.clientToken,
-        selector: "#dropin-container",
-      },
-      (err, instance) => {
-        if (err) {
-          console.error(err);
-          return;
+    dropinStart() {
+      braintree.dropin.create(
+        {
+          authorization: "sandbox_g42y39zw_348pk9cgf3bgyw2b",
+          container: "#dropin-container",
+        },
+        (err, instance) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          this.instance = instance;
         }
-        this.instance = instance;
-        console.log(instance);
-      }
-    );
+      );
+    },
   },
 };
 </script>
