@@ -1,18 +1,25 @@
 <script>
 import axios from "axios";
+import AppCart from "../components/AppCart.vue";
+import { store } from "../store/store.js";
 
 export default {
   name: "RestaurantDetails",
+
+  components: {
+    AppCart,
+  },
 
   data() {
     return {
       restaurants: null,
       restaurantsId: null,
       baseApiUrl: "http://127.0.0.1:8000/api/",
+      store,
 
       //variable for cart
-      newItem: "",
-      items: [],
+      // newItem: "",
+      // items: [],
       currentRestaurantId: null,
     };
   },
@@ -22,7 +29,7 @@ export default {
       return this.items.length;
     },
     totalCartPrice() {
-      return this.items
+      return this.store.items
         .reduce((total, item) => total + parseFloat(item.price), 0)
         .toFixed(2);
     },
@@ -30,7 +37,7 @@ export default {
 
   mounted() {
     // Load items from localStorage on component mount
-    this.items = JSON.parse(localStorage.getItem("items")) || [];
+    this.store.items = JSON.parse(localStorage.getItem("items")) || [];
   },
 
   created() {
@@ -50,9 +57,9 @@ export default {
       //   this.items.length === 0 ||
       //   this.currentRestaurantId === this.restaurantsId
       // ) {
-      this.items.push(dish);
+      this.store.items.push(dish);
       dish = "";
-      localStorage.setItem("items", JSON.stringify(this.items));
+      localStorage.setItem("items", JSON.stringify(this.store.items));
       localStorage.setItem(
         "currentRestaurantId",
         JSON.stringify(this.currentRestaurantId)
@@ -62,11 +69,6 @@ export default {
       //     "You are adding dishes from a different restaurant. Empty the cart or complete the current order."
       //   );
       // }
-    },
-
-    removeItem(index) {
-      this.items.splice(index, 1);
-      localStorage.setItem("items", JSON.stringify(this.items));
     },
   },
 };
@@ -175,32 +177,7 @@ export default {
 
       <!-- --------------------------- -->
       <!-- DISHES CART -->
-      <div class="shopping_cart_main_content p-3">
-        <h1>SHOPPING CART</h1>
-        <hr />
-
-        <!-- base cart -->
-        <div>
-          <form></form>
-          <ul>
-            <li v-for="(item, index) in items" :key="index">
-              {{ item.name }} - {{ item.price }}
-              <button class="delete_cart_item_btn" @click="removeItem(index)">
-                <i class="fa-regular fa-circle-xmark"></i>
-              </button>
-            </li>
-          </ul>
-          <p>Total Items: {{ totalItems }}</p>
-        </div>
-        <hr />
-        <h4 class="d-flex justify-content-between">
-          <span> TOTAL: </span>
-          <span>
-            <!-- variabile totale prezzo items scelti  -->
-            {{ totalCartPrice }} €
-          </span>
-        </h4>
-      </div>
+      <AppCart></AppCart>
       <!-- --------------------------- -->
       <!-- END DISHES CART -->
     </div>
@@ -264,42 +241,6 @@ export default {
 
   .dish_btn {
     @include shopping_cart_button;
-  }
-}
-
-.shopping_cart_main_content {
-  background-color: $background_color_dark;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 24px;
-  max-height: 15rem;
-
-  .shopping_cart_items {
-    max-height: 4rem;
-  }
-
-  h1 {
-    text-align: center;
-  }
-
-  ul {
-    text-align: start;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-
-    li {
-      .delete_cart_item_btn {
-        background-color: transparent;
-        border: none;
-        padding: 0.5rem;
-        margin-left: 0.5rem;
-        cursor: pointer;
-      }
-    }
-  }
-
-  hr {
-    border: 0.5px solid $text_color;
   }
 }
 </style>
