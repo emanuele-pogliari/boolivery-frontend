@@ -12,26 +12,17 @@ export default {
   mounted() {
     this.getClientToken();
   },
+
   methods: {
     //get client token
     getClientToken() {
       axios.get(this.baseApiUrl + "token").then((response) => {
         this.clientToken = response.data.token;
+        // inizialize drop in when the api is called
+        this.dropinStart();
       });
-      this.dropinStart();
     },
-    // paymentFunction() {
-    //   axios
-    //     .post(this.baseApiUrl + "checkout");{
-    //       nonce: "fake-valid-nonce",
-    //     })
-    //     .then((response) => {
-    //       console.log(response);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
+
     dropinStart() {
       braintree.dropin.create(
         {
@@ -46,6 +37,19 @@ export default {
           this.instance = instance;
         }
       );
+    },
+
+    paymentFunction() {
+      axios
+        .post(this.baseApiUrl + "payment", {
+          nonce: "fake-valid-nonce",
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
