@@ -37,25 +37,9 @@ export default {
   },
 
   methods: {
-    addItem(dish) {
-      // if (
-      //   this.items.length === 0 ||
-      //   this.currentRestaurantId === this.restaurantsId
-      // ) {
-      this.store.items.push(dish);
-      dish = "";
-      localStorage.setItem("items", JSON.stringify(this.store.items));
-      localStorage.setItem(
-        "currentRestaurantId",
-        JSON.stringify(this.currentRestaurantId)
-      );
-      // } else {
-      //   alert(
-      //     "You are adding dishes from a different restaurant. Empty the cart or complete the current order."
-      //   );
-      // }
-    },
+    // Add item to cart
 
+    // Remove item from cart
     removeItem(index) {
       this.store.items.splice(index, 1);
       localStorage.setItem("items", JSON.stringify(this.store.items));

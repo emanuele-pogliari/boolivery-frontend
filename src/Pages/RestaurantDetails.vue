@@ -52,23 +52,32 @@ export default {
   },
 
   methods: {
-    addItem(dish) {
-      // if (
-      //   this.items.length === 0 ||
-      //   this.currentRestaurantId === this.restaurantsId
-      // ) {
-      this.store.items.push(dish);
-      dish = "";
+    addItem(item) {
+      //controllo se il carrello è vuoto e contiene piatti di un altro ristorante
+      if (
+        this.store.items.length > 0 &&
+        this.store.items[0].restaurantsId !== item.restaurant_id
+      ) {
+        alert(
+          //questo messaggio qui sotto da tradurre in inglese
+          "Cart contains dishes from another restaurant, please, remove all dishes from cart before continue."
+        );
+        return;
+      }
+
+      const newItem = {
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: 1,
+        total_dish_price: item.price,
+        restaurantsId: item.restaurant_id,
+      };
+
+      console.log(newItem);
+      this.store.items.push(newItem);
+
       localStorage.setItem("items", JSON.stringify(this.store.items));
-      localStorage.setItem(
-        "currentRestaurantId",
-        JSON.stringify(this.currentRestaurantId)
-      );
-      // } else {
-      //   alert(
-      //     "You are adding dishes from a different restaurant. Empty the cart or complete the current order."
-      //   );
-      // }
     },
   },
 };
