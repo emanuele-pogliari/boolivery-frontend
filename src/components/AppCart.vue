@@ -36,17 +36,6 @@ export default {
     this.store.items = JSON.parse(localStorage.getItem("items")) || [];
   },
 
-  created() {
-    this.restaurantsId = this.$route.params.id;
-    console.log(this.baseApiUrl + "restaurants/" + this.restaurantsId);
-    axios
-      .get(this.baseApiUrl + "restaurants/" + this.restaurantsId)
-      .then((res) => {
-        console.log(res.data.results);
-        this.restaurants = res.data.results;
-      });
-  },
-
   methods: {
     addItem(dish) {
       // if (

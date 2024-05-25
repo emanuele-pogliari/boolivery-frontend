@@ -98,7 +98,7 @@ export default {
         />
         <img
           v-else
-          class="card-img-top"
+          class="card-img-top restaurant_image"
           src="/img/homepage/placeholdertemp.jpg"
           alt="..."
         />
@@ -158,12 +158,12 @@ export default {
                     ? dish.image
                     : 'http://localhost:8000/storage/' + dish.image
                 "
-                class="card-img-top restaurant_image"
+                class="dish_image"
                 alt="..."
               />
               <img
                 v-else
-                class="card-img-top"
+                class="dish_image"
                 src="/img/homepage/placeholdertemp.jpg"
                 alt="..."
               />
