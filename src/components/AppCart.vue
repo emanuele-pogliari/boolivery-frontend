@@ -38,11 +38,11 @@ export default {
 
   created() {
     this.restaurantsId = this.$route.params.id;
-    console.log(this.baseApiUrl + "restaurants/" + this.restaurantsId);
+    // console.log(this.baseApiUrl + "restaurants/" + this.restaurantsId);
     axios
       .get(this.baseApiUrl + "restaurants/" + this.restaurantsId)
       .then((res) => {
-        console.log(res.data.results);
+        // console.log(res.data.results);
         this.restaurants = res.data.results;
       });
   },
