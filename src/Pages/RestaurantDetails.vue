@@ -78,22 +78,11 @@ export default {
     <!-- RESTAURANT DETAILS-->
     <div class="restaurant_main_content d-flex row mt-5 rounded-5">
       <div class="col-4 p-0 m-0">
-        <img
-          v-if="restaurants.image"
-          :src="
-            restaurants.image.startsWith('http')
-              ? restaurants.image
-              : 'http://localhost:8000/storage/' + restaurants.image
-          "
-          class="card-img-top restaurant_image"
-          alt="..."
-        />
-        <img
-          v-else
-          class="card-img-top"
-          src="/img/homepage/placeholdertemp.jpg"
-          alt="..."
-        />
+        <img v-if="restaurants.image" :src="restaurants.image.startsWith('http')
+            ? restaurants.image
+            : 'http://localhost:8000/storage/' + restaurants.image
+          " class="card-img-top restaurant_image" alt="..." />
+        <img v-else class="card-img-top" src="/img/homepage/placeholdertemp.jpg" alt="..." />
       </div>
 
       <div class="col-4 py-3 px-5">
