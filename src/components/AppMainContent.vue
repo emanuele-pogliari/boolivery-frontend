@@ -174,7 +174,7 @@ export default {
 
     <!-- CATEGORIE SELEZIONATE -->
     <div v-if="checkButtonValue.length != 0" class="food_types">
-      <h4>Selected Category:</h4>
+      <h4>Selected Categories:</h4>
       <button class="type_res_button" v-for="category in checkButtonValue">
         {{ category }}
       </button>
@@ -187,12 +187,12 @@ export default {
         :restaurant="restaurant"
       >
       </AppCardItem>
-      <div v-if="restaurants.data.length === 0">
+      <!-- <div v-if="restaurants.data.length === 0">
         <h3>No restaurants found</h3>
-      </div>
+      </div> -->
     </section>
 
-    <div v-if="restaurants.length > 0">
+    <div>
       <vue-awesome-paginate
         :total-items="total_items"
         v-model="apiPageNumber"
