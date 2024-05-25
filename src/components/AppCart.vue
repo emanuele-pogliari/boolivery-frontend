@@ -59,6 +59,14 @@ export default {
       <ul>
         <li v-for="(item, index) in store.items" :key="index">
           {{ item.name }} - {{ item.price }}
+
+          <span class="change_quantity">
+            <i class="fa-solid fa-minus"></i>
+          </span>
+          <input :value="item.quantity" class="quantity_input"></input>
+          <span class="change_quantity">
+            <i class="fa-solid fa-plus"></i>
+          </span>
           <button class="delete_cart_item_btn" @click="removeItem(index)">
             <i class="fa-regular fa-circle-xmark"></i>
           </button>
@@ -108,6 +116,15 @@ export default {
         margin-left: 0.5rem;
         cursor: pointer;
       }
+    }
+    .change_quantity {
+      cursor: pointer;
+    }
+    .quantity_input{
+      width:30px;
+      text-align: center;
+      background-color: transparent;
+      border: none;
     }
   }
 
