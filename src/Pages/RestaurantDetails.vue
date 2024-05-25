@@ -75,9 +75,15 @@ export default {
 </script>
 
 <template>
-  <div class="container" style="max-width: 1200px;">
+  <div class="container" style="max-width: 1200px">
     <!-- --------------------------- -->
+    <router-link to="/">
+      <button class="btn">
+        <i class="fa-solid fa-arrow-left me-1"></i>Back
+      </button>
+    </router-link>
     <!-- RESTAURANT DETAILS-->
+
     <div class="restaurant_main_content d-flex row mt-5 rounded-4">
       <div class="col-4 p-0 m-0">
         <img
@@ -115,9 +121,12 @@ export default {
           <h4 class="roboto-bold">{{ restaurants.address }}</h4>
           <div class="d-flex flex-column">
             <!-- variabile numero di telefono -->
-            <span>da migrare</span>
+            <span
+              ><i class="fa-solid fa-phone me-2"></i
+              >{{ restaurants.phone }}</span
+            >
             <!-- variabile VAT -->
-            <span>{{ restaurants.vat }}</span>
+            <span>VAT: {{ restaurants.vat }}</span>
           </div>
         </div>
       </div>
@@ -126,8 +135,8 @@ export default {
         <h4>Category</h4>
         <ul class="d-flex flex-wrap p-0">
           <!-- variabile restaurant type -->
-          <li style="list-style: none">
-            <button class="type_tag_btn">Category</button>
+          <li v-for="type in restaurants.types" style="list-style: none">
+            <button class="type_tag_btn">{{ type.type }}</button>
           </li>
         </ul>
       </div>
@@ -142,7 +151,22 @@ export default {
         <ul class="m-0 p-0" v-for="dish in restaurants.dishes">
           <li class="d-flex row mb-4">
             <div class="col-4 m-0 p-0">
-              <img class="dish_image" :src="dish.image" alt="" />
+              <img
+                v-if="dish.image"
+                :src="
+                  dish.image.startsWith('http')
+                    ? dish.image
+                    : 'http://localhost:8000/storage/' + dish.image
+                "
+                class="card-img-top restaurant_image"
+                alt="..."
+              />
+              <img
+                v-else
+                class="card-img-top"
+                src="/img/homepage/placeholdertemp.jpg"
+                alt="..."
+              />
             </div>
 
             <div class="col-4 py-3">
