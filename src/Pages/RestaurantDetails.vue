@@ -120,22 +120,11 @@ export default {
 
     <div class="restaurant_main_content d-flex row mt-5 rounded-4">
       <div class="col-4 p-0 m-0">
-        <img
-          v-if="restaurants.image"
-          :src="
-            restaurants.image.startsWith('http')
-              ? restaurants.image
-              : 'http://localhost:8000/storage/' + restaurants.image
-          "
-          class="card-img-top restaurant_image"
-          alt="..."
-        />
-        <img
-          v-else
-          class="card-img-top restaurant_image"
-          src="/img/homepage/placeholdertemp.jpg"
-          alt="..."
-        />
+        <img v-if="restaurants.image" :src="restaurants.image.startsWith('http')
+          ? restaurants.image
+          : 'http://localhost:8000/storage/' + restaurants.image
+          " class="card-img-top restaurant_image" alt="..." />
+        <img v-else class="card-img-top" src="/img/homepage/placeholdertemp.jpg" alt="..." />
       </div>
 
       <div class="col-4 py-3 px-5">
@@ -155,10 +144,7 @@ export default {
           <h4 class="roboto-bold">{{ restaurants.address }}</h4>
           <div class="d-flex flex-column">
             <!-- variabile numero di telefono -->
-            <span
-              ><i class="fa-solid fa-phone me-2"></i
-              >{{ restaurants.phone }}</span
-            >
+            <span><i class="fa-solid fa-phone me-2"></i>{{ restaurants.phone }}</span>
             <!-- variabile VAT -->
             <span>VAT: {{ restaurants.vat }}</span>
           </div>
@@ -185,22 +171,11 @@ export default {
         <ul class="m-0 p-0" v-for="dish in restaurants.dishes">
           <li class="d-flex row mb-4">
             <div class="col-4 m-0 p-0">
-              <img
-                v-if="dish.image"
-                :src="
-                  dish.image.startsWith('http')
-                    ? dish.image
-                    : 'http://localhost:8000/storage/' + dish.image
-                "
-                class="dish_image"
-                alt="..."
-              />
-              <img
-                v-else
-                class="dish_image"
-                src="/img/homepage/placeholdertemp.jpg"
-                alt="..."
-              />
+              <img v-if="dish.image" :src="dish.image.startsWith('http')
+                  ? dish.image
+                  : 'http://localhost:8000/storage/' + dish.image
+                " class="dish_image" alt="..." />
+              <img v-else class="dish_image" src="/img/homepage/placeholdertemp.jpg" alt="..." />
             </div>
 
             <div class="col-4 py-3">
