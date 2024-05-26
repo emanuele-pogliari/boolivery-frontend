@@ -66,13 +66,18 @@ export default {
 
         console.log("Payment method selected:", payload);
 
-        const paymentData = {
-          amount: this.cartAmount, // Use the fetched cart amount
+        const orderData = {
+          customer_name: "",
+          customer_surname: "",
+          customer_email: "",
+          customer_phone: "",
+          customer_address: ""
+          total_order: this.cartAmount, // Use the fetched cart amount
           paymentMethodNonce: payload.nonce,
         };
 
         axios
-          .post(this.baseApiUrl + "payment", paymentData)
+          .post(this.baseApiUrl + "payment", orderData)
           .then((response) => {
             console.log(response);
             console.log("Payment successful");
