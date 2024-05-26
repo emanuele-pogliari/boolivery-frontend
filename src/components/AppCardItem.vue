@@ -34,14 +34,18 @@ export default {
 
     <div class="card-body">
       <h5 class="card-title text-center">{{ restaurant.name }}</h5>
-      <div class="card-text restaurant_type d-flex gap-1 justify-content-center">
+      <div
+        class="card-text restaurant_type d-flex gap-1 justify-content-center"
+      >
         <span v-for="type in restaurant.types">
           {{ type.type }}
         </span>
       </div>
-      
+
       <div class="d-flex gap-1 justify-content-center mb-2">
-        <i class="fa-solid fa-user"></i><i class="fa-solid fa-user"></i><i class="fa-solid fa-user"></i><i class="fa-regular fa-user"></i><i class="fa-regular fa-user"></i>
+        <i class="fa-solid fa-user"></i><i class="fa-solid fa-user"></i
+        ><i class="fa-solid fa-user"></i><i class="fa-regular fa-user"></i
+        ><i class="fa-regular fa-user"></i>
       </div>
 
       <p class="card-text text-center" style="font-weight: 500">
@@ -87,7 +91,7 @@ export default {
     display: flex;
     justify-content: center;
     margin-bottom: 1rem;
-    
+
     span {
       display: inline-block;
 
@@ -96,7 +100,7 @@ export default {
 
       padding: 0.1rem 0.6rem;
       border-radius: 16px;
-  }
+    }
   }
 
   .card-title {

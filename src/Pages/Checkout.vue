@@ -1,26 +1,37 @@
 <script>
 import axios from "axios";
+import { store } from "../store/store";
+
 export default {
   data() {
     return {
       clientToken: null,
       instance: null,
       baseApiUrl: "http://127.0.0.1:8000/api/",
+
+      store,
     };
   },
+
+  //NEW VERSION
 
   mounted() {
     this.getClientToken();
   },
 
   methods: {
-    //get client token
+    // Get client token
     getClientToken() {
-      axios.get(this.baseApiUrl + "token").then((response) => {
-        this.clientToken = response.data.token;
-        // inizialize drop in when the api is called
-        this.dropinStart();
-      });
+      axios
+        .get(this.baseApiUrl + "token")
+        .then((response) => {
+          this.clientToken = response.data.token;
+          // Initialize drop-in when the API is called
+          this.dropinStart();
+        })
+        .catch((error) => {
+          console.error("Error fetching client token:", error);
+        });
     },
 
     dropinStart() {
@@ -31,7 +42,7 @@ export default {
         },
         (err, instance) => {
           if (err) {
-            console.error(err);
+            console.error("Error creating drop-in:", err);
             return;
           }
           this.instance = instance;
@@ -40,16 +51,45 @@ export default {
     },
 
     paymentFunction() {
-      axios
-        .post(this.baseApiUrl + "payment", {
-          nonce: "fake-valid-nonce",
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (!this.instance) {
+        console.error("Drop-in instance is not available.");
+        return;
+      }
+
+      this.instance.requestPaymentMethod((err, payload) => {
+        if (err) {
+          console.error("Error requesting payment method:", err);
+          return;
+        }
+
+        if (!payload || !payload.nonce) {
+          console.error("Invalid payload received:", payload);
+          return;
+        }
+
+        console.log("Payment method selected:", payload);
+
+        const orderInfo = {
+          customer_name: "",
+          customer_surname: "",
+          customer_email: "",
+          customer_phone: "",
+          customer_address: "",
+          total_price: this.cartAmount, // Use the fetched cart amount
+          paymentMethodNonce: payload.nonce,
+        };
+
+        axios
+          .post(this.baseApiUrl + "payment", orderInfo)
+          .then((response) => {
+            console.log(response);
+            console.log("Payment successful");
+          })
+          .catch((error) => {
+            console.log(error);
+            console.log("Payment failed");
+          });
+      });
     },
   },
 };
