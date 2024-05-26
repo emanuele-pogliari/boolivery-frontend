@@ -17,9 +17,6 @@ export default {
       baseApiUrl: "http://127.0.0.1:8000/api/",
       store,
 
-      //variable for cart
-      // newItem: "",
-      // items: [],
       currentRestaurantId: null,
     };
   },
@@ -53,13 +50,11 @@ export default {
 
   methods: {
     addItem(item) {
-      //controllo se il carrello è vuoto e contiene piatti di un altro ristorante
       if (
         this.store.items.length > 0 &&
         this.store.items[0].restaurantsId !== item.restaurant_id
       ) {
         alert(
-          //questo messaggio qui sotto da tradurre in inglese
           "Cart contains dishes from another restaurant, please, remove all dishes from cart before continue."
         );
         return;
@@ -103,23 +98,25 @@ export default {
       console.log("Prezzo totale del carrello aggiornato:", totalCartPrice);
     },
 
-    // updateTotalCartPrice(item) {
-    //   this.totalCartPrice += item.price;
-    //   localStorage.setItem("totalCartPrice", this.totalCartPrice);
-    // },
+    updateTotalItems() {
+      const totalItems = this.store.items.reduce(
+        (total, item) => total + item.quantity,
+        0
+      );
+      this.store.totalItems = totalItems;
+      localStorage.setItem("totalItems", this.store.totalItems);
+    },
   },
 };
 </script>
 
 <template>
   <div class="container" style="max-width: 1200px">
-    <!-- --------------------------- -->
     <router-link to="/">
       <button class="btn">
         <i class="fa-solid fa-arrow-left me-1"></i>Back
       </button>
     </router-link>
-    <!-- RESTAURANT DETAILS-->
 
     <div class="restaurant_main_content d-flex row mt-5 rounded-4">
       <div class="col-4 p-0 m-0">
