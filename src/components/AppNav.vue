@@ -62,6 +62,8 @@ export default {
             <a class="nav-link text-center" href="#">About</a>
             <span id="space"></span>
             <!-- Login Button -->
+            <!-- just a placeholder -->
+            <p class="p-0 m-0">Are you a restaurant owner?</p>
             <a href="http://127.0.0.1:8000">
               <button class="btn btn-sm ms-auto my_button" type="button">
                 <i class="fa-solid fa-house-user"></i> Login
