@@ -10,16 +10,13 @@ export default {
     <div class="container-md">
         <div class="jumbotron gap-5 gap-md-0 row d-flex align-items-center">
 
-            <div class="col-md-6 col-12 d-flex justify-content-center">
-                <div>
-                    <div class="d-flex justify-content-center jumbotron-content">
-                        <h1 class="text-uppercase">Boolivery</h1>
-                        <h1 class="text-uppercase">Delivery</h1>
-                        <p class="text-capitalize">This Delicious Hamburger.</p>
-                        <button class="flip-horizontal-bottom">Right To Your Doorstep!</button>
-                    </div>
+            <div class="col-md-6 col-12 h-100 d-flex justify-content-center">
+                <div class="d-flex justify-content-center jumbotron-content">
+                    <h1 class="text-uppercase">Boolivery</h1>
+                    <h1 class="text-uppercase">Delivery</h1>
+                    <p class="text-capitalize">This Delicious Hamburger.</p>
+                    <button class="flip-horizontal-bottom">Right To Your Doorstep!</button>
                 </div>
-
             </div>
 
             <div class="col-md-6 col-12 justify-content-center">
