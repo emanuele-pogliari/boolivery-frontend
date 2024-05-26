@@ -30,7 +30,7 @@ export default {
     },
     totalCartPrice() {
       return this.store.items
-        .reduce((total, item) => total + parseFloat(item.price), 0)
+        .reduce((total, item) => total + item.price, 0)
         .toFixed(2);
     },
   },
@@ -68,17 +68,45 @@ export default {
       const newItem = {
         id: item.id,
         name: item.name,
-        price: item.price,
+        price: Number(item.price),
         quantity: 1,
-        total_dish_price: item.price,
+        total_dish_price: Number(item.price),
         restaurantsId: item.restaurant_id,
       };
 
-      console.log(newItem);
-      this.store.items.push(newItem);
+      const alreadyOnCart = this.store.items.find(
+        (item) => item.id === newItem.id
+      );
+      if (alreadyOnCart) {
+        alreadyOnCart.total_dish_price += alreadyOnCart.price;
+        alreadyOnCart.quantity++;
+      } else {
+        console.log(newItem);
+        this.store.items.push(newItem);
+      }
 
       localStorage.setItem("items", JSON.stringify(this.store.items));
+      this.updateTotalCartPrice(newItem);
     },
+
+    updateTotalCartPrice() {
+      const totalCartPrice = this.store.items
+        .reduce((total, item) => {
+          return total + item.price * item.quantity;
+        }, 0)
+        .toFixed(2);
+
+      this.store.totalCartPrice = totalCartPrice;
+      localStorage.setItem("items", JSON.stringify(this.store.items));
+      localStorage.setItem("totalCartPrice", totalCartPrice);
+
+      console.log("Prezzo totale del carrello aggiornato:", totalCartPrice);
+    },
+
+    // updateTotalCartPrice(item) {
+    //   this.totalCartPrice += item.price;
+    //   localStorage.setItem("totalCartPrice", this.totalCartPrice);
+    // },
   },
 };
 </script>

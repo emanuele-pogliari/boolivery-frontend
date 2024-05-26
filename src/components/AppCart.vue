@@ -37,14 +37,102 @@ export default {
   },
 
   methods: {
-    // Add item to cart
+    increaseItem(item) {
+      item.quantity++;
+      this.updateTotalCartPrice();
+    },
 
-    // Remove item from cart
-    removeItem(index) {
-      this.store.items.splice(index, 1);
+    decreaseItem(item) {
+      if (item.quantity > 1) {
+        item.quantity--;
+        this.updateTotalCartPrice();
+      } else {
+        this.removeItem(item);
+      }
+    },
+
+    removeItem(item) {
+      const index = this.store.items.indexOf(item);
+      if (index > -1) {
+        this.store.items.splice(index, 1);
+        this.updateTotalCartPrice();
+      }
+    },
+
+    updateTotalCartPrice() {
+      const totalCartPrice = this.store.items
+        .reduce((total, item) => {
+          return total + item.price * item.quantity;
+        }, 0)
+        .toFixed(2);
+
+      this.store.totalCartPrice = totalCartPrice;
       localStorage.setItem("items", JSON.stringify(this.store.items));
+      localStorage.setItem("totalCartPrice", totalCartPrice);
+
+      console.log("Prezzo totale del carrello aggiornato:", totalCartPrice);
     },
   },
+  // Add item to cart
+
+  // increaseItem(item) {
+  //   item.quantity++;
+  //   localStorage.setItem("totalCartPrice", this.store.totalCartPrice);
+  //   this.updateTotalCartPrice(item);
+  // },
+
+  // decreaseItem(item) {
+  //   if (item.quantity > 1) {
+  //     item.quantity--;
+  //     // const itemTotalPrice = item.price * item.quantity; // Calcola il prezzo totale dell'articolo
+  //     this.store.totalCartPrice -= item.price;
+  //     console.log(this.store.totalCartPrice); // Sottrai il prezzo totale calcolato dal prezzo totale del carrello
+  //     localStorage.setItem("totalCartPrice", this.store.totalCartPrice); // Aggiorna il prezzo totale nel localStorage
+  //     this.updateTotalCartPrice(item); // Aggiorna il prezzo totale visualizzato nell'interfaccia utente
+  //   } else {
+  //     this.removeItem(item);
+  //   }
+
+  //   // if (item.quantity > 1) {
+  //   //   item.quantity--;
+
+  //   //   // print store.items
+  //   //   console.log(this.store.items.price);
+  //   //   this.store.totalCartPrice -= this.store.items.price;
+  //   //   localStorage.setItem("totalCartPrice", this.store.totalCartPrice);
+  //   //   this.updateTotalCartPrice(item);
+  //   // } else {
+  //   //   this.removeItem(item);
+  //   // }
+  // },
+
+  // // Remove item from cart
+  // removeItem(item) {
+  //   this.store.items.splice(item, 1);
+  //   localStorage.setItem("items", JSON.stringify(this.store.items));
+  // },
+
+  // // updateTotalCartPrice(item) {
+  // //   // Calcola il prezzo totale del carrello sommando i prezzi totali di tutti gli articoli nel carrello
+  // //   const totalCartPrice = this.store.items.reduce(
+  // //     (total, item) => total + item.total_dish_price,
+  // //     0
+  // //   );
+
+  // //   // Aggiorna il prezzo totale del carrello nello store Vuex
+  // //   this.store.totalCartPrice = totalCartPrice;
+
+  // //   // Aggiorna il prezzo totale del carrello nel localStorage
+  // //   localStorage.setItem("totalCartPrice", totalCartPrice);
+
+  // //   // Console log per monitorare i valori
+  // //   console.log("Prezzo totale del carrello aggiornato:", totalCartPrice);
+  // // },
+  // updateTotalCartPrice(item) {
+  //   this.store.totalCartPrice += item.price;
+  //   console.log(this.store.totalCartPrice); // Update total based on item price and quantity
+  //   localStorage.setItem("totalCartPrice", this.store.totalCartPrice);
+  // },
 };
 </script>
 
@@ -59,13 +147,15 @@ export default {
       <ul>
         <li v-for="(item, index) in store.items" :key="index">
           {{ item.name }} - {{ item.price }}
-
+          <div>{{ item.total_dish_price }}</div>
           <span class="change_quantity">
-            <i class="fa-solid fa-minus"></i>
+            <i class="fa-solid fa-minus" @click="decreaseItem(item)"></i>
           </span>
-          <input :value="item.quantity" class="quantity_input"></input>
+          <span :v-model="item.quantity" class="mx-2 quantity_input">
+            {{ item.quantity }}</span
+          >
           <span class="change_quantity">
-            <i class="fa-solid fa-plus"></i>
+            <i class="fa-solid fa-plus" @click="increaseItem(item)"></i>
           </span>
           <button class="delete_cart_item_btn" @click="removeItem(index)">
             <i class="fa-regular fa-circle-xmark"></i>
@@ -79,7 +169,7 @@ export default {
       <span> TOTAL: </span>
       <span>
         <!-- variabile totale prezzo items scelti  -->
-        {{ totalCartPrice }} €
+        {{ store.totalCartPrice }} €
       </span>
     </h4>
   </div>
@@ -120,8 +210,8 @@ export default {
     .change_quantity {
       cursor: pointer;
     }
-    .quantity_input{
-      width:30px;
+    .quantity_input {
+      width: 30px;
       text-align: center;
       background-color: transparent;
       border: none;
