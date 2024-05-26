@@ -1,12 +1,15 @@
 <script>
 import axios from "axios";
+import { store } from "../store/store";
+
 export default {
   data() {
     return {
       clientToken: null,
       instance: null,
       baseApiUrl: "http://127.0.0.1:8000/api/",
-      cartAmount: 32.93,
+
+      store,
     };
   },
 
@@ -66,18 +69,18 @@ export default {
 
         console.log("Payment method selected:", payload);
 
-        const orderData = {
+        const orderInfo = {
           customer_name: "",
           customer_surname: "",
           customer_email: "",
           customer_phone: "",
-          customer_address: ""
-          total_order: this.cartAmount, // Use the fetched cart amount
+          customer_address: "",
+          total_price: this.cartAmount, // Use the fetched cart amount
           paymentMethodNonce: payload.nonce,
         };
 
         axios
-          .post(this.baseApiUrl + "payment", orderData)
+          .post(this.baseApiUrl + "payment", orderInfo)
           .then((response) => {
             console.log(response);
             console.log("Payment successful");

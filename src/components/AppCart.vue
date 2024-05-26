@@ -34,6 +34,7 @@ export default {
   mounted() {
     // Load items from localStorage on component mount
     this.store.items = JSON.parse(localStorage.getItem("items")) || [];
+    console.log(this.store.items);
   },
 
   created() {
