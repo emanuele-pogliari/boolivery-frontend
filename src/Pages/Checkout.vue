@@ -117,80 +117,80 @@ export default {
 };
 </script>
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-8 d-flex">
-        <form method="POST" @submit.prevent>
+  <div class="container my-4">
+    <div class="d-flex row justify-content-center">
+      <div class="col-6 d-flex">
+        <form method="POST" @submit.prevent class="form_data">
           <div id="dropin-container"></div>
-          <button
-            id="submit-button"
-            type="submit"
-            class="button button--small button--green"
-            @click="paymentFunction"
-          >
-            Purchase
-          </button>
 
-          <div class="mb-3 checkout_field">
-            <label for="orderInfo.customer_name" class="form-label">Name*</label>
-            <input
-              v-model="orderInfo.customer_name"
-              type="text"
-              class="form-control"
-              id="orderInfo.customer_name"
-            />
-          </div>
+            <div class="mb-3 checkout_field">
+              <label for="orderInfo.customer_name" class="form-label">Name *</label>
+              <input
+                v-model="orderInfo.customer_name"
+                type="text"
+                class="form-control"
+                id="orderInfo.customer_name"
+              />
+            </div>
 
-          <div class="mb-3 checkout_field">
-            <label for="orderInfo.customer_last_name" class="form-label">Lastname*</label
+            <div class="mb-3 checkout_field">
+              <label for="orderInfo.customer_last_name" class="form-label">Lastname *</label
+              >
+              <input
+                v-model="orderInfo.customer_last_name"
+                type="text"
+                class="form-control"
+                id="orderInfo.customer_last_name"
+              />
+            </div>
+
+            <div class="mb-3 checkout_field">
+              <label for="address" class="form-label">Address *</label>
+              <input
+                v-model="orderInfo.customer_address"
+                type="text"
+                class="form-control"
+                id="address"
+              />
+            </div>
+
+            <div class="mb-3 checkout_field">
+              <label for="phone" class="form-label">Phone *</label>
+              <input
+                v-model="orderInfo.customer_phone"
+                type="text"
+                class="form-control"
+                id="phone"
+              />
+            </div>
+
+            <div class="mb-3 checkout_field">
+              <label for="email" class="form-label">Email *</label>
+              <input
+                v-model="orderInfo.customer_email"
+                type="text"
+                class="form-control"
+                id="email"
+              />
+            </div>
+
+            <div class="mb-3 checkout_field">
+              <label for="rderInfo.customer_note" class="form-label">Note</label>
+              <textarea
+                v-model="orderInfo.customer_note"
+                class="form-control"
+                id="orderInfo.customer_note"
+                rows="3"
+              ></textarea>
+            </div>
+
+            <button
+              id="submit-button"
+              type="submit"
+              @click="paymentFunction"
             >
-            <input
-              v-model="orderInfo.customer_last_name"
-              type="text"
-              class="form-control"
-              id="orderInfo.customer_last_name"
-            />
-          </div>
-
-          <div class="mb-3 checkout_field">
-            <label for="address" class="form-label">Address*</label>
-            <input
-              v-model="orderInfo.customer_address"
-              type="text"
-              class="form-control"
-              id="address"
-            />
-          </div>
-
-          <div class="mb-3 checkout_field">
-            <label for="phone" class="form-label">Phone*</label>
-            <input
-              v-model="orderInfo.customer_phone"
-              type="text"
-              class="form-control"
-              id="phone"
-            />
-          </div>
-
-          <div class="mb-3 checkout_field">
-            <label for="email" class="form-label">Email*</label>
-            <input
-              v-model="orderInfo.customer_email"
-              type="text"
-              class="form-control"
-              id="email"
-            />
-          </div>
-
-          <div class="mb-3 checkout_field">
-            <label for="rderInfo.customer_note" class="form-label">Note</label>
-            <textarea
-              v-model="orderInfo.customer_note"
-              class="form-control"
-              id="orderInfo.customer_note"
-              rows="3"
-            ></textarea>
-          </div>
+              Purchase
+            </button>
 
         </form>
       </div>
@@ -200,47 +200,45 @@ export default {
     </div>
   </div>
 </template>
-<style lang="scss">
-.button {
-  cursor: pointer;
-  font-weight: 500;
-  left: 3px;
-  line-height: inherit;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 3px;
-  display: inline-block;
-}
 
-.button--small {
-  padding: 10px 20px;
-  font-size: 0.875rem;
-}
 
-.button--green {
-  outline: none;
-  background-color: #64d18a;
-  border-color: #64d18a;
-  color: white;
-  transition: all 200ms ease;
-}
+<style lang="scss" scoped>
+@use "/src/variabiles.scss" as *;
+@use "/src/mixins.scss" as *;
 
-.button--green:hover {
-  background-color: #8bdda8;
-  color: white;
-}
+.form_data {
 
-form {
+  background-color: $background_color_dark;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
 
-  background-color: red;
+  padding: 0 1rem 1rem;
+  width: 100%;
 
   .checkout_field {
 
+    padding-top: 1rem;
+
     label {
       font-weight: 500;
+    }
+  }
+
+  #submit-button {
+    margin-top: 1rem;
+    padding: .5rem .8rem;
+
+    background-color: $primary_color;
+    color: $secondary_color;
+    border: none;
+    border-radius: 12px;
+
+    transition: all .2s linear;
+    font-weight: 500;
+
+    &:hover {
+      background-color: $secondary_color;
+      color: $primary_color;
     }
   }
 }
