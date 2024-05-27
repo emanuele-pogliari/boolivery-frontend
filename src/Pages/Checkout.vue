@@ -1,8 +1,12 @@
 <script>
 import axios from "axios";
 import { store } from "../store/store";
+import AppCart from "../components/AppCart.vue";
 
 export default {
+  components: {
+    AppCart,
+  },
   data() {
     return {
       clientToken: null,
@@ -10,9 +14,19 @@ export default {
       baseApiUrl: "http://127.0.0.1:8000/api/",
 
       store,
+
+      orderInfo: {
+        total_price: localStorage.getItem("totalCartPrice") || 0,
+        customer_name: "",
+        customer_last_name: "",
+        customer_address: "",
+        customer_email: "",
+        customer_phone: "",
+        customer_note: "",
+      },
+      items: JSON.parse(localStorage.getItem("items")) || [],
     };
   },
-
   //NEW VERSION
 
   mounted() {
@@ -20,6 +34,11 @@ export default {
   },
 
   methods: {
+    //test orderinfo
+    checkOrderInfo() {
+      console.log(this.orderInfo);
+    },
+
     // Get client token
     getClientToken() {
       axios
@@ -51,6 +70,7 @@ export default {
     },
 
     paymentFunction() {
+      this.checkOrderInfo();
       if (!this.instance) {
         console.error("Drop-in instance is not available.");
         return;
@@ -69,18 +89,20 @@ export default {
 
         console.log("Payment method selected:", payload);
 
-        const orderInfo = {
-          customer_name: "",
-          customer_surname: "",
-          customer_email: "",
-          customer_phone: "",
-          customer_address: "",
-          total_price: this.cartAmount, // Use the fetched cart amount
+        const paymentData = {
+          ...this.orderInfo,
           paymentMethodNonce: payload.nonce,
+          userData: JSON.stringify(
+            this.items.map((item) => ({
+              dish_id: item.id,
+              quantity: item.quantity,
+            }))
+          ),
         };
+        console.log("pd " + paymentData);
 
         axios
-          .post(this.baseApiUrl + "payment", orderInfo)
+          .post(this.baseApiUrl + "payment", paymentData)
           .then((response) => {
             console.log(response);
             console.log("Payment successful");
@@ -97,15 +119,77 @@ export default {
 <template>
   <div class="container">
     <div class="row">
+      <div class="col-8 d-flex">
+        <form method="POST" @submit.prevent>
+          <div id="dropin-container"></div>
+          <button
+            id="submit-button"
+            type="submit"
+            class="button button--small button--green"
+            @click="paymentFunction"
+          >
+            Purchase
+          </button>
+          <div class="mb-3">
+            <label for="orderInfo.customer_name" class="form-label">Name</label>
+            <input
+              v-model="orderInfo.customer_name"
+              type="text"
+              class="form-control"
+              id="orderInfo.customer_name"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="orderInfo.customer_last_name" class="form-label"
+              >Lastname</label
+            >
+            <input
+              v-model="orderInfo.customer_last_name"
+              type="text"
+              class="form-control"
+              id="orderInfo.customer_last_name"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input
+              v-model="orderInfo.customer_address"
+              type="text"
+              class="form-control"
+              id="address"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">phone</label>
+            <input
+              v-model="orderInfo.customer_phone"
+              type="text"
+              class="form-control"
+              id="phone"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">email</label>
+            <input
+              v-model="orderInfo.customer_email"
+              type="text"
+              class="form-control"
+              id="email"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="rderInfo.customer_note" class="form-label">Note</label>
+            <textarea
+              v-model="orderInfo.customer_note"
+              class="form-control"
+              id="orderInfo.customer_note"
+              rows="3"
+            ></textarea>
+          </div>
+        </form>
+      </div>
       <div class="col-4">
-        <div id="dropin-container"></div>
-        <button
-          id="submit-button"
-          class="button button--small button--green"
-          @click="paymentFunction"
-        >
-          Purchase
-        </button>
+        <AppCart></AppCart>
       </div>
     </div>
   </div>
