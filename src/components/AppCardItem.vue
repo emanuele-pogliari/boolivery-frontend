@@ -70,7 +70,8 @@ export default {
   border-color: transparent;
   color: $text_color;
 
-  width: 250px;
+  max-width: 250px;
+  width: 100%;
 
   box-shadow: 10px 10px 15px rgba(20, 20, 20, 0.1);
   background-color: $background_color;
