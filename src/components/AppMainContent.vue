@@ -189,9 +189,9 @@ export default {
         :restaurant="restaurant"
       >
       </AppCardItem>
-      <div v-if="restaurants.data.length === 0">
+      <!-- <div v-if="restaurants.data.length === 0">
         <h3>No restaurants found</h3>
-      </div>
+      </div> -->
     </section>
 
     <div>

@@ -20,8 +20,8 @@ export default {
 
 <template>
   <AppNav></AppNav>
-  <!-- <AppHeader></AppHeader>
-  <AppMainContent></AppMainContent> -->
+  <AppHeader></AppHeader>
+  <AppMainContent></AppMainContent>
   <router-view></router-view>
   <AppFooter></AppFooter>
 </template>
