@@ -1,8 +1,12 @@
 <script>
 import axios from "axios";
 import { store } from "../store/store";
+import AppCart from "../components/AppCart.vue";
 
 export default {
+  components: {
+    AppCart,
+  },
   data() {
     return {
       clientToken: null,
@@ -10,6 +14,15 @@ export default {
       baseApiUrl: "http://127.0.0.1:8000/api/",
 
       store,
+
+      orderInfo: {
+        customer_name: "",
+        customer_surname: "",
+        customer_email: "",
+        customer_phone: "",
+        customer_address: "",
+        total_price: this.cartAmount, // Use the fetched cart amount
+      },
     };
   },
 
@@ -68,19 +81,12 @@ export default {
         }
 
         console.log("Payment method selected:", payload);
-
-        const orderInfo = {
-          customer_name: "",
-          customer_surname: "",
-          customer_email: "",
-          customer_phone: "",
-          customer_address: "",
-          total_price: this.cartAmount, // Use the fetched cart amount
+        const paymentData = {
+          ...this.orederInfo,
           paymentMethodNonce: payload.nonce,
         };
-
         axios
-          .post(this.baseApiUrl + "payment", orderInfo)
+          .post(this.baseApiUrl + "payment", paymentData)
           .then((response) => {
             console.log(response);
             console.log("Payment successful");
@@ -106,6 +112,50 @@ export default {
         >
           Purchase
         </button>
+      </div>
+      <div class="col-4">
+        <form>
+          <div class="mb-3">
+            <label for="orderInfo.customer_name" class="form-label">Name</label>
+            <input
+              v-model="orderInfo.customer_name"
+              type="text"
+              class="form-control"
+              id="orderInfo.customer_name"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="lastname" class="form-label">Lastname</label>
+            <input
+              v-model="orderInfo.customer_name"
+              type="text"
+              class="form-control"
+              id="lastname"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input
+              v-model="orderInfo.customer_address"
+              type="text"
+              class="form-control"
+              id="address"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">phone</label>
+            <input
+              v-model="orderInfo.phone"
+              type="text"
+              class="form-control"
+              id="phone"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <div class="col-4">
+        <AppCart></AppCart>
       </div>
     </div>
   </div>
