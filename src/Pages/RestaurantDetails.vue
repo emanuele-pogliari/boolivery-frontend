@@ -117,96 +117,96 @@ export default {
         <i class="fa-solid fa-arrow-left me-1"></i>Back
       </button>
     </router-link>
+    <img v-if="restaurants.image" :src="restaurants.image.startsWith('http')
+      ? restaurants.image
+      : 'http://localhost:8000/storage/' + restaurants.image
+      " class="store-img restaurant_image" alt="..." />
+    <img v-else class="store-img" src="/img/homepage/placeholdertemp.jpg" alt="..." />
 
-    <div class="restaurant_main_content d-flex row mt-5 rounded-4">
-      <div class="col-4 p-0 m-0">
-        <img v-if="restaurants.image" :src="restaurants.image.startsWith('http')
-          ? restaurants.image
-          : 'http://localhost:8000/storage/' + restaurants.image
-          " class="card-img-top restaurant_image" alt="..." />
-        <img v-else class="card-img-top" src="/img/homepage/placeholdertemp.jpg" alt="..." />
-      </div>
+    <div class="d-flex gap-3">
 
-      <div class="col-4 py-3 px-5">
-        <div>
-          <div class="d-flex align-items-center gap-2">
-            <h2 class="roboto-bold fw-bolder">{{ restaurants.name }}</h2>
+      <div class="restaurant_main_content d-flex row rounded-4 p-0 m-0">
+
+        <div class="col-6 py-3 px-5">
+          <div>
+            <div class="d-flex align-items-center gap-2">
+              <h2 class="roboto-bold fw-bolder">{{ restaurants.name }}</h2>
+            </div>
+            <div class="free_delivery_tag d-flex align-items-center gap-1">
+              <i class="fa-solid fa-tag"></i>
+              <p class="m-0">Free delivery for any order over 25€</p>
+            </div>
           </div>
-          <div class="free_delivery_tag d-flex align-items-center gap-1">
-            <i class="fa-solid fa-tag"></i>
-            <p class="m-0">Free delivery for any order over 25€</p>
+          <hr />
+
+          <div>
+            <ul class="d-flex flex-wrap p-0">
+              <!-- variabile restaurant type -->
+              <li v-for="type in restaurants.types" style="list-style: none">
+                <button class="type_tag_btn">{{ type.type }}</button>
+              </li>
+            </ul>
+            <!-- variabile inidirizzo -->
+            <h4 class="roboto-bold">{{ restaurants.address }}</h4>
+            <div class="d-flex flex-column">
+              <!-- variabile numero di telefono -->
+              <span><i class="fa-solid fa-phone me-2"></i>{{ restaurants.phone }}</span>
+              <!-- variabile VAT -->
+              <span>VAT: {{ restaurants.vat }}</span>
+            </div>
           </div>
         </div>
-        <hr />
-
-        <div>
-          <!-- variabile inidirizzo -->
-          <h4 class="roboto-bold">{{ restaurants.address }}</h4>
-          <div class="d-flex flex-column">
-            <!-- variabile numero di telefono -->
-            <span><i class="fa-solid fa-phone me-2"></i>{{ restaurants.phone }}</span>
-            <!-- variabile VAT -->
-            <span>VAT: {{ restaurants.vat }}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-4 py-3 px-5">
-        <h4>Category</h4>
-        <ul class="d-flex flex-wrap p-0">
-          <!-- variabile restaurant type -->
-          <li v-for="type in restaurants.types" style="list-style: none">
-            <button class="type_tag_btn">{{ type.type }}</button>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <!-- --------------------------- -->
-    <!--END RESTAURANT DETAILS-->
-
-    <div class="d-flex p-0 mt-5">
-      <div class="dishes_main_content">
         <!-- --------------------------- -->
-        <!-- RESTAURANT DISHES-->
-        <ul class="m-0 p-0" v-for="dish in restaurants.dishes">
-          <li class="d-flex row mb-4">
-            <div class="col-4 m-0 p-0">
-              <img v-if="dish.image" :src="dish.image.startsWith('http')
-                  ? dish.image
-                  : 'http://localhost:8000/storage/' + dish.image
-                " class="dish_image" alt="..." />
-              <img v-else class="dish_image" src="/img/homepage/placeholdertemp.jpg" alt="..." />
-            </div>
+        <!--END RESTAURANT DETAILS-->
 
-            <div class="col-4 py-3">
-              <!-- variabile nome piatto -->
-              <h4 class="text-capitalize">{{ dish.name }}</h4>
-              <!-- variabile descrizione piatto -->
-              <p>{{ dish.description }}</p>
-              <!-- variabile prezzo piatto -->
-              <h4>{{ dish.price }} €</h4>
-            </div>
-            <div class="col-3 py-3">
-              <button class="dish_btn" @click="addItem(dish)">
-                ADD TO CART
-                <i class="fa-solid fa-cart-shopping"></i>
-              </button>
-              <ul class="d-flex p-2">
-                <!-- variabile ingredienti piatto-->
-                <!-- <li class="ingredient">red meat</li>
-                <li class="ingredient">breaded</li> -->
-              </ul>
-            </div>
-          </li>
-        </ul>
+        <div class="d-flex p-0 mt-5">
+          <div class="dishes_main_content">
+            <!-- --------------------------- -->
+            <!-- RESTAURANT DISHES-->
+            <ul class="m-0 p-0" v-for="dish in restaurants.dishes">
+              <li class="d-flex row mb-4">
+                <div class="col-4 m-0 p-0">
+                  <img v-if="dish.image" :src="dish.image.startsWith('http')
+                    ? dish.image
+                    : 'http://localhost:8000/storage/' + dish.image
+                    " class="dish_image" alt="..." />
+                  <img v-else class="dish_image" src="/img/homepage/placeholdertemp.jpg" alt="..." />
+                </div>
+
+                <div class="col-4 py-3">
+                  <!-- variabile nome piatto -->
+                  <h4 class="text-capitalize">{{ dish.name }}</h4>
+                  <!-- variabile descrizione piatto -->
+                  <p>{{ dish.description }}</p>
+                  <!-- variabile prezzo piatto -->
+                  <h4>{{ dish.price }} €</h4>
+                </div>
+                <div class="col-3 py-3">
+                  <button class="dish_btn" @click="addItem(dish)">
+                    ADD TO CART
+                    <i class="fa-solid fa-cart-shopping"></i>
+                  </button>
+                  <ul class="d-flex p-2">
+                    <!-- variabile ingredienti piatto-->
+                    <!-- <li class="ingredient">red meat</li>
+                  <li class="ingredient">breaded</li> -->
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+        <!-- --------------------------- -->
+        <!--END RESTAURANT DISHES-->
+
+
+
+
       </div>
-
-      <!-- --------------------------- -->
-      <!--END RESTAURANT DISHES-->
-
       <!-- --------------------------- -->
       <!-- DISHES CART -->
-      <AppCart></AppCart>
+      <AppCart class="cart"></AppCart>
       <!-- --------------------------- -->
       <!-- END DISHES CART -->
     </div>
@@ -217,9 +217,23 @@ export default {
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
+.store-img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  filter: blur(5px);
+  border-top-right-radius: 100px;
+
+  border: 10px solid #ffffff;
+
+
+}
+
+
 .restaurant_main_content {
   background-color: $background_color_dark;
-  border-top-right-radius: 10rem !important;
+  border-top-right-radius: 100px !important;
+  translate: 0rem -5rem;
 
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 
@@ -273,5 +287,9 @@ export default {
   .dish_btn {
     @include shopping_cart_button;
   }
+}
+
+.cart {
+  translate: 0rem -5rem;
 }
 </style>
