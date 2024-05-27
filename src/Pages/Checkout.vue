@@ -16,16 +16,15 @@ export default {
       store,
 
       orderInfo: {
+        total_price: 30, // Use the fetched cart amount
         customer_name: "",
-        customer_surname: "",
+        customer_last_name: "",
+        customer_address: "",
         customer_email: "",
         customer_phone: "",
-        customer_address: "",
-        total_price: this.cartAmount, // Use the fetched cart amount
       },
     };
   },
-
   //NEW VERSION
 
   mounted() {
@@ -33,6 +32,11 @@ export default {
   },
 
   methods: {
+    //test orderinfo
+    checkOrderInfo() {
+      console.log(this.orderInfo);
+    },
+
     // Get client token
     getClientToken() {
       axios
@@ -64,6 +68,7 @@ export default {
     },
 
     paymentFunction() {
+      this.checkOrderInfo();
       if (!this.instance) {
         console.error("Drop-in instance is not available.");
         return;
@@ -82,7 +87,7 @@ export default {
 
         console.log("Payment method selected:", payload);
         const paymentData = {
-          ...this.orederInfo,
+          ...this.orderInfo,
           paymentMethodNonce: payload.nonce,
         };
         axios
@@ -103,18 +108,17 @@ export default {
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-4">
-        <div id="dropin-container"></div>
-        <button
-          id="submit-button"
-          class="button button--small button--green"
-          @click="paymentFunction"
-        >
-          Purchase
-        </button>
-      </div>
-      <div class="col-4">
-        <form>
+      <div class="col-8 d-flex">
+        <form method="POST" @submit.prevent>
+          <div id="dropin-container"></div>
+          <button
+            id="submit-button"
+            type="submit"
+            class="button button--small button--green"
+            @click="paymentFunction"
+          >
+            Purchase
+          </button>
           <div class="mb-3">
             <label for="orderInfo.customer_name" class="form-label">Name</label>
             <input
@@ -125,12 +129,14 @@ export default {
             />
           </div>
           <div class="mb-3">
-            <label for="lastname" class="form-label">Lastname</label>
+            <label for="orderInfo.customer_last_name" class="form-label"
+              >Lastname</label
+            >
             <input
-              v-model="orderInfo.customer_name"
+              v-model="orderInfo.customer_last_name"
               type="text"
               class="form-control"
-              id="lastname"
+              id="orderInfo.customer_last_name"
             />
           </div>
           <div class="mb-3">
@@ -145,13 +151,21 @@ export default {
           <div class="mb-3">
             <label for="phone" class="form-label">phone</label>
             <input
-              v-model="orderInfo.phone"
+              v-model="orderInfo.customer_phone"
               type="text"
               class="form-control"
               id="phone"
             />
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <div class="mb-3">
+            <label for="email" class="form-label">email</label>
+            <input
+              v-model="orderInfo.customer_email"
+              type="text"
+              class="form-control"
+              id="email"
+            />
+          </div>
         </form>
       </div>
       <div class="col-4">
