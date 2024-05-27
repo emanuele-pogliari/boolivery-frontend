@@ -22,6 +22,7 @@ export default {
         customer_address: "",
         customer_email: "",
         customer_phone: "",
+        customer_note: "",
       },
       items: JSON.parse(localStorage.getItem("items")) || [],
     };
@@ -175,6 +176,15 @@ export default {
               class="form-control"
               id="email"
             />
+          </div>
+          <div class="mb-3">
+            <label for="rderInfo.customer_note" class="form-label">Note</label>
+            <textarea
+              v-model="orderInfo.customer_note"
+              class="form-control"
+              id="orderInfo.customer_note"
+              rows="3"
+            ></textarea>
           </div>
         </form>
       </div>
