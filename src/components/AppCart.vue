@@ -17,6 +17,13 @@ export default {
     };
   },
 
+  props: {
+    hideButton: {
+      type: Boolean,
+      default: false
+    }
+  },
+
   computed: {
     totalItems() {
       return this.store.items.reduce((total, item) => total + item.quantity, 0);
@@ -121,7 +128,7 @@ export default {
       </span>
     </h4>
     <router-link :to="{ name: 'checkout' }">
-      <button class="btn btn-warning">Checkout</button>
+      <button v-if="!hideButton" class="btn btn-warning btn_checkout">Checkout</button>
     </router-link>
   </div>
 </template>

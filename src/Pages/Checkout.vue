@@ -130,8 +130,9 @@ export default {
           >
             Purchase
           </button>
-          <div class="mb-3">
-            <label for="orderInfo.customer_name" class="form-label">Name</label>
+
+          <div class="mb-3 checkout_field">
+            <label for="orderInfo.customer_name" class="form-label">Name*</label>
             <input
               v-model="orderInfo.customer_name"
               type="text"
@@ -139,9 +140,9 @@ export default {
               id="orderInfo.customer_name"
             />
           </div>
-          <div class="mb-3">
-            <label for="orderInfo.customer_last_name" class="form-label"
-              >Lastname</label
+
+          <div class="mb-3 checkout_field">
+            <label for="orderInfo.customer_last_name" class="form-label">Lastname*</label
             >
             <input
               v-model="orderInfo.customer_last_name"
@@ -150,8 +151,9 @@ export default {
               id="orderInfo.customer_last_name"
             />
           </div>
-          <div class="mb-3">
-            <label for="address" class="form-label">Address</label>
+
+          <div class="mb-3 checkout_field">
+            <label for="address" class="form-label">Address*</label>
             <input
               v-model="orderInfo.customer_address"
               type="text"
@@ -159,8 +161,9 @@ export default {
               id="address"
             />
           </div>
-          <div class="mb-3">
-            <label for="phone" class="form-label">phone</label>
+
+          <div class="mb-3 checkout_field">
+            <label for="phone" class="form-label">Phone*</label>
             <input
               v-model="orderInfo.customer_phone"
               type="text"
@@ -168,8 +171,9 @@ export default {
               id="phone"
             />
           </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">email</label>
+
+          <div class="mb-3 checkout_field">
+            <label for="email" class="form-label">Email*</label>
             <input
               v-model="orderInfo.customer_email"
               type="text"
@@ -177,7 +181,8 @@ export default {
               id="email"
             />
           </div>
-          <div class="mb-3">
+
+          <div class="mb-3 checkout_field">
             <label for="rderInfo.customer_note" class="form-label">Note</label>
             <textarea
               v-model="orderInfo.customer_note"
@@ -186,10 +191,11 @@ export default {
               rows="3"
             ></textarea>
           </div>
+
         </form>
       </div>
       <div class="col-4">
-        <AppCart></AppCart>
+        <AppCart :hideButton="true"></AppCart>
       </div>
     </div>
   </div>
@@ -226,4 +232,17 @@ export default {
   background-color: #8bdda8;
   color: white;
 }
+
+form {
+
+  background-color: red;
+
+  .checkout_field {
+
+    label {
+      font-weight: 500;
+    }
+  }
+}
+
 </style>
