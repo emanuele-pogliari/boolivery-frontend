@@ -184,7 +184,7 @@ export default {
     <!-- FINE -->
 
     <section id="cards_section">
-      <template v-if="restaurants.data.length > 0">
+      <template v-if="restaurants && restaurants.data && restaurants.data.length > 0">
         <AppCardItem
           v-for="restaurant in restaurants.data"
           :key="restaurant.id"
@@ -197,7 +197,7 @@ export default {
       </div>
     </section>
 
-    <div v-if="restaurants.data.length > 0">
+    <div v-if="restaurants && restaurants.data && restaurants.data.length > 0">
       <vue-awesome-paginate
         :total-items="total_items"
         v-model="apiPageNumber"
