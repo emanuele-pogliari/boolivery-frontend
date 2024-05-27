@@ -184,17 +184,20 @@ export default {
     <!-- FINE -->
 
     <section id="cards_section">
-      <AppCardItem
-        v-for="restaurant in restaurants.data"
-        :restaurant="restaurant"
-      >
-      </AppCardItem>
-      <!-- <div v-if="restaurants.data.length === 0">
+      <template v-if="restaurants.data.length > 0">
+        <AppCardItem
+          v-for="restaurant in restaurants.data"
+          :key="restaurant.id"
+          :restaurant="restaurant"
+        >
+        </AppCardItem>
+      </template>
+      <div v-else>
         <h3>No restaurants found</h3>
-      </div> -->
+      </div>
     </section>
 
-    <div>
+    <div v-if="restaurants.data.length > 0">
       <vue-awesome-paginate
         :total-items="total_items"
         v-model="apiPageNumber"

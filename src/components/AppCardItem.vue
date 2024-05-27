@@ -137,10 +137,10 @@ export default {
     position: absolute;
     bottom: 0%;
     right: 5%;
-    transform: translate(0%, 30%);
+    transform: translate(0%, 0%);
 
     border-radius: 50%;
-    padding: 0.5rem 1rem;
+    padding: .5rem .7rem;
 
     transition: all 0.2s linear;
     background: linear-gradient(to bottom right, #f2ca39, #eeba00);
@@ -152,6 +152,6 @@ export default {
 }
 
 .my_card:hover .my_btn{
-  transform: translate(0%, 30%) scale(1.1);
+  transform: translate(0%, 0%) scale(1.1);
 }
 </style>
