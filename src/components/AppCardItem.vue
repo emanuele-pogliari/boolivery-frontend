@@ -14,7 +14,9 @@ export default {
 </script>
 
 <template>
-  <div class="container card my_card pt-3 gap-1">
+  <router-link
+        :to="{ name: 'restaurant', params: { id: restaurant.id } }"
+        class="card my_card gap-1">
     <div class="img-container">
       <img
         v-if="restaurant.image"
@@ -32,33 +34,21 @@ export default {
         src="/img/homepage/placeholdertemp.jpg"
         alt="..."
       />
-      <div class="likes-pill">
-        <i class="fa-solid fa-thumbs-up"></i> 90%
+      <div class="types-pill">
+        <span v-for="type in restaurant.types">
+          <i class="fa-solid fa-pizza-slice"></i> {{ type.type }}
+        </span>
       </div>
     </div>
 
     <div class="card-body">
       <h5 class="card-title text-start">{{ restaurant.name }}</h5>
 
-      <p class="card-text text-start" style="font-weight: 500">
-        {{ restaurant.address }}
-      </p>
-
-      <div
-        class="card-text restaurant_type d-flex gap-1 justify-content-center"
-      >
-        <span v-for="type in restaurant.types">
-          {{ type.type }}
-        </span>
-      </div>
-
-      <router-link
-        :to="{ name: 'restaurant', params: { id: restaurant.id } }"
-        class="btn btn-primary my_btn"
-        ><i class="fa-solid fa-person-biking"></i>
-      </router-link>
+      <btn class="btn btn-primary my_btn">
+        <i class="fa-solid fa-person-biking"></i>
+      </btn>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <style lang="scss" scoped>
@@ -70,13 +60,13 @@ export default {
   border-color: transparent;
   color: $text_color;
 
-  max-width: 250px;
+  max-width: 275px;
   width: 100%;
 
-  box-shadow: 10px 10px 15px rgba(20, 20, 20, 0.1);
-  background-color: $background_color;
+  background-color: $background_color_dark;
 
-  cursor: default;
+  cursor: pointer;
+  text-decoration: none;
 
   .img-container {
 
@@ -87,29 +77,28 @@ export default {
       object-fit: cover;
     }
 
-    .likes-pill {
+    .types-pill {
       font-weight: 500;
 
       position: absolute;
       bottom: 10px;
-      right: 10px;
+      left: 10px;
 
       background-color: $secondary_color;
       color: $text_color;
+      border: 1px solid $text_color;
       padding: 0.1rem 0.5em;
 
       border-radius: 12px;
       text-align: center;
+
+      opacity: .85;
     }
 
   }
-  
 
-  p {
-    margin: 0.1rem 0.1rem 0.25rem 0.1rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .card-body {
+    padding: 0.5rem 0 1.25rem;
   }
 
   .restaurant_type {
@@ -139,8 +128,8 @@ export default {
   .my_btn {
     position: absolute;
     bottom: 0%;
-    left: 50%;
-    transform: translate(-50%, 50%);
+    right: 0%;
+    transform: translate(0%, 50%);
 
     border-radius: 50%;
     padding: 0.7rem 0.9rem;
@@ -151,10 +140,10 @@ export default {
     border: none;
 
     box-shadow: 10px 10px 15px rgba(20, 20, 20, 0.15);
-
-    &:hover {
-      transform: translate(-50%, 50%) scale(1.1);
-    }
   }
+}
+
+.my_card:hover .my_btn{
+  transform: translate(0%, 50%) scale(1.1);
 }
 </style>

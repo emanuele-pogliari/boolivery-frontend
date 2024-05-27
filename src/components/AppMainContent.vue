@@ -346,7 +346,7 @@ section {
   #cards_section {
     display: flex;
     flex-flow: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 
     width: 100%;
