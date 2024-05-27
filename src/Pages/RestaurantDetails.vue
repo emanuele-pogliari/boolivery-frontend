@@ -123,11 +123,11 @@ export default {
       " class="store-img restaurant_image" alt="..." />
     <img v-else class="store-img" src="/img/homepage/placeholdertemp.jpg" alt="..." />
 
-    <div class="d-flex gap-3">
+    <div class="d-flex gap-3 position-relative">
 
       <div class="restaurant_main_content d-flex row rounded-4 p-0 m-0">
 
-        <div class="col-6 py-3 px-5">
+        <div class="col-6 py-3 px-3">
           <div>
             <div class="d-flex align-items-center gap-2">
               <h2 class="roboto-bold fw-bolder">{{ restaurants.name }}</h2>
@@ -140,7 +140,7 @@ export default {
           <hr />
 
           <div>
-            <ul class="d-flex flex-wrap p-0">
+            <ul class="d-flex p-0">
               <!-- variabile restaurant type -->
               <li v-for="type in restaurants.types" style="list-style: none">
                 <button class="type_tag_btn">{{ type.type }}</button>
@@ -159,39 +159,38 @@ export default {
         <!-- --------------------------- -->
         <!--END RESTAURANT DETAILS-->
 
-        <div class="d-flex p-0 mt-5">
-          <div class="dishes_main_content">
+        <div class="d-flex p-0 my-5">
+          <div class="dishes_main_content d-flex gap-2 flex-wrap p-0 m-0">
             <!-- --------------------------- -->
             <!-- RESTAURANT DISHES-->
-            <ul class="m-0 p-0" v-for="dish in restaurants.dishes">
-              <li class="d-flex row mb-4">
-                <div class="col-4 m-0 p-0">
+            <ul class="m-0 p-3 d-flex" v-for="dish in restaurants.dishes">
+              <li class="d-flex p-3 mx-0 flex-column border rounded-4">
+                <div class=" m-0 p-0 m-0 d-flex">
                   <img v-if="dish.image" :src="dish.image.startsWith('http')
                     ? dish.image
                     : 'http://localhost:8000/storage/' + dish.image
                     " class="dish_image" alt="..." />
                   <img v-else class="dish_image" src="/img/homepage/placeholdertemp.jpg" alt="..." />
-                </div>
 
-                <div class="col-4 py-3">
-                  <!-- variabile nome piatto -->
-                  <h4 class="text-capitalize">{{ dish.name }}</h4>
-                  <!-- variabile descrizione piatto -->
-                  <p>{{ dish.description }}</p>
-                  <!-- variabile prezzo piatto -->
-                  <h4>{{ dish.price }} €</h4>
+                  <div class="px-3">
+                    <!-- variabile nome piatto -->
+                    <h4 class="text-capitalize">{{ dish.name }}</h4>
+                    <!-- variabile descrizione piatto -->
+                    <p>{{ dish.description }}</p>
+                    <!-- variabile prezzo piatto -->
+
+                  </div>
+
                 </div>
-                <div class="col-3 py-3">
+                <div class="d-flex justify-content-between align-content-center pt-2">
+                  <div class="d-flex align-items-center">
+                    <h4 class="m-0 p-0">{{ dish.price }} €</h4>
+                  </div>
                   <button class="dish_btn" @click="addItem(dish)">
-                    ADD TO CART
                     <i class="fa-solid fa-cart-shopping"></i>
                   </button>
-                  <ul class="d-flex p-2">
-                    <!-- variabile ingredienti piatto-->
-                    <!-- <li class="ingredient">red meat</li>
-                  <li class="ingredient">breaded</li> -->
-                  </ul>
                 </div>
+
               </li>
             </ul>
           </div>
@@ -206,7 +205,9 @@ export default {
       </div>
       <!-- --------------------------- -->
       <!-- DISHES CART -->
-      <AppCart class="cart"></AppCart>
+      <div>
+        <AppCart class="cart position-fixed"></AppCart>
+      </div>
       <!-- --------------------------- -->
       <!-- END DISHES CART -->
     </div>
@@ -225,13 +226,12 @@ export default {
   border-top-right-radius: 100px;
 
   border: 10px solid #ffffff;
-
-
 }
 
 
 .restaurant_main_content {
-  background-color: $background_color_dark;
+  width: 75%;
+  background-color: #ffffff;
   border-top-right-radius: 100px !important;
   translate: 0rem -5rem;
 
@@ -260,17 +260,38 @@ export default {
 }
 
 .dishes_main_content {
-  background-color: $background_color_dark;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+
 
   list-style: none;
   padding: 0;
   margin: 0;
 
+  ul {
+    max-width: 425px;
+
+    li {
+
+      background-color: #ffffff;
+    }
+  }
+
+  h4 {
+
+    font-size: 1rem;
+    font-weight: 500;
+    color: $text_color;
+  }
+
+  p {
+    font-size: 0.8rem;
+    color: $text_color;
+  }
+
   .dish_image {
     object-fit: cover;
-    width: 100%;
-    height: 10rem;
+    width: 135px;
+    height: 135px;
     border-radius: 24px;
     color: $text_color;
   }
@@ -291,5 +312,6 @@ export default {
 
 .cart {
   translate: 0rem -5rem;
+  flex-grow: 1;
 }
 </style>

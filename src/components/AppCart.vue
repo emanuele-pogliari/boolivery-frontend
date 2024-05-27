@@ -89,16 +89,15 @@ export default {
     <div class="p-3">
 
       <div class="cart_title">
-        <h1 class="text text-capitalize">your order</h1>
+        <h1 class="text text-capitalize mx-5 px-3">your order</h1>
       </div>
       <hr />
 
       <!-- base cart -->
       <div>
-        <form></form>
         <ul>
           <li v-for="(item, index) in store.items" :key="index">
-            {{ item.name }} - {{ item.price }} €
+            {{ item.name }}
             <div>{{ item.total_dish_price }} €</div>
             <span class="change_quantity">
               <i class="fa-solid fa-minus" @click="decreaseItem(item)"></i>
@@ -140,6 +139,7 @@ export default {
   border-radius: 24px;
   min-width: fit-content;
   height: fit-content;
+
 
   .shopping_cart_items {
     max-height: 4rem;
