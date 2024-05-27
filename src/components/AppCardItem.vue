@@ -44,6 +44,8 @@ export default {
     <div class="card-body">
       <h5 class="card-title text-start">{{ restaurant.name }}</h5>
 
+      <p class="m-0"><i class="fa-solid fa-thumbs-up"></i> 90%</p>
+
       <btn class="btn btn-primary my_btn">
         <i class="fa-solid fa-person-biking"></i>
       </btn>
@@ -75,6 +77,10 @@ export default {
     img {
       border-radius: 16px;
       object-fit: cover;
+
+      height: 10rem;
+
+      box-shadow: 10px 10px 15px rgba(20, 20, 20, 0.15);
     }
 
     .types-pill {
@@ -98,7 +104,7 @@ export default {
   }
 
   .card-body {
-    padding: 0.5rem 0 1.25rem;
+    padding: 0.5rem 0 0;
   }
 
   .restaurant_type {
@@ -123,16 +129,18 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1.8rem;
+
+    text-shadow: 2px 2px 4px rgba(242, 202, 57, 0.3);
   }
 
   .my_btn {
     position: absolute;
     bottom: 0%;
-    right: 0%;
-    transform: translate(0%, 50%);
+    right: 5%;
+    transform: translate(0%, 30%);
 
     border-radius: 50%;
-    padding: 0.7rem 0.9rem;
+    padding: 0.5rem 1rem;
 
     transition: all 0.2s linear;
     background: linear-gradient(to bottom right, #f2ca39, #eeba00);
@@ -144,6 +152,6 @@ export default {
 }
 
 .my_card:hover .my_btn{
-  transform: translate(0%, 50%) scale(1.1);
+  transform: translate(0%, 30%) scale(1.1);
 }
 </style>
