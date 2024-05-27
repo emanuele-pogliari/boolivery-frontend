@@ -52,21 +52,21 @@ export default {
           <!-- Centered Navigation Links -->
           <div class="navbar-nav ms-auto w-100">
             <router-link class="text-decoration-none" to="/">
-              <a class="nav-link text-center active" aria-current="page"
+              <a class="nav-link text-center active nav_voice" aria-current="page"
                 >Home</a
               >
             </router-link>
-            <a class="nav-link text-center" href="#">Delivery</a>
-            <a class="nav-link text-center" href="#">Payment</a>
-            <a class="nav-link text-center" href="#">Contact</a>
-            <a class="nav-link text-center" href="#">About</a>
+            <a class="nav-link text-center nav_voice" href="#">Delivery</a>
+            <a class="nav-link text-center nav_voice" href="#">Payment</a>
+            <a class="nav-link text-center nav_voice" href="#">Contact</a>
+            <a class="nav-link text-center nav_voice" href="#">About</a>
             <span id="space"></span>
             <!-- Login Button -->
             <!-- just a placeholder -->
-            <p class="p-0 m-0">Are you a restaurant owner?</p>
+            <!-- <p class="ciao pt-1">Are you a restaurant owner?</p> -->
             <a href="http://127.0.0.1:8000">
               <button class="btn btn-sm ms-auto my_button" type="button">
-                <i class="fa-solid fa-house-user"></i> Login
+                <i class="fa-solid fa-house-user"></i> Restaurant Owner Login
               </button>
             </a>
           </div>
@@ -108,7 +108,7 @@ export default {
         position: relative;
       }
 
-      a::after {
+      .nav_voice::after {
         content: "";
         position: absolute;
         width: 0;
@@ -123,8 +123,8 @@ export default {
         transform: translateX(-50%);
       }
 
-      a:hover::after,
-      a.active::after {
+      .nav_voice:hover::after,
+      .nav_voice.active::after {
         width: 80%;
         background: $secondary_color;
       }
