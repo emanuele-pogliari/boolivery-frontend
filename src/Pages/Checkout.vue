@@ -16,13 +16,14 @@ export default {
       store,
 
       orderInfo: {
-        total_price: 30, // Use the fetched cart amount
+        total_price: localStorage.getItem("totalCartPrice") || 0,
         customer_name: "",
         customer_last_name: "",
         customer_address: "",
         customer_email: "",
         customer_phone: "",
       },
+      items: JSON.parse(localStorage.getItem("items")) || [],
     };
   },
   //NEW VERSION
@@ -86,10 +87,19 @@ export default {
         }
 
         console.log("Payment method selected:", payload);
+
         const paymentData = {
           ...this.orderInfo,
           paymentMethodNonce: payload.nonce,
+          userData: JSON.stringify(
+            this.items.map((item) => ({
+              dish_id: item.id,
+              quantity: item.quantity,
+            }))
+          ),
         };
+        console.log("pd " + paymentData);
+
         axios
           .post(this.baseApiUrl + "payment", paymentData)
           .then((response) => {
