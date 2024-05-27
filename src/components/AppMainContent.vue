@@ -173,11 +173,13 @@ export default {
     </nav>
 
     <!-- CATEGORIE SELEZIONATE -->
-    <div v-if="checkButtonValue.length != 0" class="food_types">
+    <div v-if="checkButtonValue.length != 0" class="food_selected">
       <h4>Selected Categories:</h4>
-      <button class="type_res_button" v-for="category in checkButtonValue">
-        {{ category }}
-      </button>
+      <div class="in_food_selected">
+        <p class="type_res_button" v-for="category in checkButtonValue">
+          {{ category }}
+        </p>
+      </div>
     </div>
     <!-- FINE -->
 
@@ -187,9 +189,9 @@ export default {
         :restaurant="restaurant"
       >
       </AppCardItem>
-      <!-- <div v-if="restaurants.data.length === 0">
+      <div v-if="restaurants.data.length === 0">
         <h3>No restaurants found</h3>
-      </div> -->
+      </div>
     </section>
 
     <div>
@@ -218,7 +220,7 @@ section {
   align-items: center;
 
   background-color: $background_color_dark;
-  padding: 30px 0 70px;
+  padding: 30px 0 40px;
 
   margin-bottom: 1rem;
 
@@ -343,12 +345,12 @@ section {
 
   #cards_section {
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
+    flex-flow: row;
+    justify-content: center;
     align-items: center;
 
-    max-width: 1200px;
     width: 100%;
+    max-width: 1200px;
   }
 
   .more-icon {
@@ -415,6 +417,33 @@ section {
     background-color: $secondary_color;
     color: $text_color;
   }
+}
+
+.food_selected {
+
+  margin-top: 1rem;
+
+  .in_food_selected {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 5%;
+
+    p {
+      background-color: $secondary_color;
+      color: $text_color;
+      font-weight: 500;
+
+      padding: 0.1rem 0.6rem;
+      border-radius: 16px;
+
+      cursor: default;
+    }
+
+  }
+
 }
 
 /* ----- RESPONSIVE ----- */
