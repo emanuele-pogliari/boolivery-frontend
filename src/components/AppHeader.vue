@@ -7,7 +7,7 @@ export default {
 </script>
 
 <template>
-    <div class="container-md">
+    <div class="container-md mb-5">
         <div class="jumbotron gap-5 gap-md-0 row d-flex align-items-center">
 
             <div class="col-md-6 col-12 h-100 d-flex justify-content-center">
