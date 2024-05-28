@@ -109,6 +109,9 @@ export default {
             console.log(response);
             console.log("Payment successful");
             this.isProcessing = false; // Set loader to false after payment is successful
+            //svuota il carrello dopo il pagamento
+            localStorage.removeItem("items");
+            this.store.totalCartPrice = 0;
           })
           .catch((error) => {
             console.log(error);
@@ -192,7 +195,7 @@ export default {
             ></textarea>
           </div>
 
-          <div class="loader-container"> 
+          <div class="loader-container">
             <button id="submit-button" type="submit" @click="paymentFunction">
               Purchase
             </button>
@@ -255,5 +258,9 @@ export default {
 .loader {
   @include loader;
 }
-@keyframes l9 {to{transform: rotate(1turn)}}
+@keyframes l9 {
+  to {
+    transform: rotate(1turn);
+  }
+}
 </style>
