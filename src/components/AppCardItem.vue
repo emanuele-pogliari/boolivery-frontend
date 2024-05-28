@@ -34,10 +34,10 @@ export default {
         src="/img/homepage/placeholdertemp.jpg"
         alt="..."
       />
-      <div class="types-pill">
-        <span v-for="type in restaurant.types">
+      <div class="types-pill d-flex">
+        <div class="types-single-pill" v-for="type in restaurant.types">
           <i class="fa-solid fa-pizza-slice"></i> {{ type.type }}
-        </span>
+        </div>
       </div>
     </div>
 
@@ -85,20 +85,23 @@ export default {
 
     .types-pill {
       font-weight: 500;
+      gap: .1rem;
 
       position: absolute;
       bottom: 10px;
       left: 10px;
 
-      background-color: $secondary_color;
-      color: $text_color;
-      border: 1px solid $text_color;
-      padding: 0.1rem 0.5em;
+      .types-single-pill {
+        background-color: $secondary_color;
+        color: $text_color;
+        border: 1px solid $text_color;
+        padding: 0.1rem 0.5em;
 
-      border-radius: 12px;
-      text-align: center;
+        border-radius: 12px;
+        text-align: center;
 
-      opacity: .85;
+        opacity: .85;
+      }
     }
 
   }
