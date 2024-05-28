@@ -231,7 +231,7 @@ export default {
 
 .restaurant_main_content {
   width: 75%;
-  background-color: #ffffff;
+  background-color: $background_color_dark;
   border-top-right-radius: 100px !important;
   translate: 0rem -5rem;
 
@@ -267,7 +267,7 @@ export default {
 }
 
 .dishes_main_content {
-  background-color: #ffffff;
+  background-color: $background_color_dark;
 
 
   list-style: none;

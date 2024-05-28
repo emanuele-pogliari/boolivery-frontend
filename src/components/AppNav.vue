@@ -101,7 +101,6 @@ export default {
     }
 
     .right-side {
-      padding-right: 1rem;
 
       a {
         font-weight: 600;

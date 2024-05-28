@@ -13,9 +13,9 @@ export default {
 <template>
   <footer class="p-0">
     <!-- <hr class=""> -->
-    <div class="container d-flex py-5">
+    <div class="container d-flex justify-content-around py-5">
 
-      <div class="row d-flex flex-grow-1 gap-5 gap-sm-0 gap-md-0 ">
+      <div class="row d-flex flex-grow-1 gap-5 gap-sm-0 gap-md-0 inside-container ">
 
         <div
           class="footer_links d-flex align-items-center align-items-sm-start col-12 col-sm-6 col-md-3 flex-column py-3">
@@ -160,6 +160,11 @@ footer {
   color: $deactivated_text;
   background-color: $primary_color;
   border-top-right-radius: 100px;
+
+  .inside-container {
+    max-width: 1200px !important;
+  }
+
 
   h5 {
     font-size: 1.2rem;
