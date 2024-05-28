@@ -17,13 +17,6 @@ export default {
     };
   },
 
-  props: {
-    hideButton: {
-      type: Boolean,
-      default: false
-    }
-  },
-
   computed: {
     totalItems() {
       return this.store.items.reduce((total, item) => total + item.quantity, 0);
@@ -145,7 +138,7 @@ export default {
       </div>
       <hr />
 
-      <router-link v-if="!hideButton" :to="{ name: 'checkout' }">
+      <router-link :to="{ name: 'checkout' }">
         <button class="checkout_btn">Order {{ totalItems }} at {{ store.totalCartPrice }} €</button>
       </router-link>
     </div>

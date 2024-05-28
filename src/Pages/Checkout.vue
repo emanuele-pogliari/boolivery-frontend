@@ -192,7 +192,7 @@ export default {
         </form>
       </div>
       <div class="col-4">
-        <AppCart :hideButton="true"></AppCart>
+        <AppCart></AppCart>
       </div>
     </div>
   </div>
