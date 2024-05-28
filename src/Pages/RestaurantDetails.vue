@@ -117,121 +117,97 @@ export default {
         <i class="fa-solid fa-arrow-left me-1"></i>Back
       </button>
     </router-link>
+    <img v-if="restaurants.image" :src="restaurants.image.startsWith('http')
+      ? restaurants.image
+      : 'http://localhost:8000/storage/' + restaurants.image
+      " class="store-img restaurant_image" alt="..." />
+    <img v-else class="store-img" src="/img/homepage/placeholdertemp.jpg" alt="..." />
 
-    <div class="restaurant_main_content d-flex row mt-5 rounded-4">
-      <div class="col-4 p-0 m-0">
-        <img
-          v-if="restaurants.image"
-          :src="
-            restaurants.image.startsWith('http')
-              ? restaurants.image
-              : 'http://localhost:8000/storage/' + restaurants.image
-          "
-          class="card-img-top restaurant_image"
-          alt="..."
-        />
-        <img
-          v-else
-          class="card-img-top"
-          src="/img/homepage/placeholdertemp.jpg"
-          alt="..."
-        />
-      </div>
+    <div class="d-flex gap-3 position-relative">
 
-      <div class="col-4 py-3 px-5">
-        <div>
-          <div class="d-flex align-items-center gap-2">
-            <h2 class="roboto-bold fw-bolder">{{ restaurants.name }}</h2>
+      <div class="restaurant_main_content d-flex row rounded-4 p-0 m-0">
+
+        <div class="col-6 pt-4 py-3 px-3">
+          <div>
+            <div class="d-flex align-items-center gap-2">
+              <h2 class="roboto-bold fw-bolder">{{ restaurants.name }}</h2>
+            </div>
+            <div class="free_delivery_tag d-flex align-items-center gap-1">
+              <i class="fa-solid fa-tag"></i>
+              <p class="m-0">Free delivery for any order over 25€</p>
+            </div>
           </div>
-          <div class="free_delivery_tag d-flex align-items-center gap-1">
-            <i class="fa-solid fa-tag"></i>
-            <p class="m-0">Free delivery for any order over 25€</p>
-          </div>
-        </div>
-        <hr />
+          <hr />
 
-        <div>
-          <!-- variabile inidirizzo -->
-          <h4 class="roboto-bold">{{ restaurants.address }}</h4>
-          <div class="d-flex flex-column">
-            <!-- variabile numero di telefono -->
-            <span
-              ><i class="fa-solid fa-phone me-2"></i
-              >{{ restaurants.phone }}</span
-            >
-            <!-- variabile VAT -->
-            <span>VAT: {{ restaurants.vat }}</span>
+          <div>
+            <ul class="d-flex p-0">
+              <!-- variabile restaurant type -->
+              <li v-for="type in restaurants.types" style="list-style: none">
+                <button class="type_tag_btn">{{ type.type }}</button>
+              </li>
+            </ul>
+            <!-- variabile inidirizzo -->
+            <h4 class="roboto-bold">{{ restaurants.address }}</h4>
+            <div class="d-flex flex-column">
+              <!-- variabile numero di telefono -->
+              <span><i class="fa-solid fa-phone me-2"></i>{{ restaurants.phone }}</span>
+              <!-- variabile VAT -->
+              <span>VAT: {{ restaurants.vat }}</span>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="col-4 py-3 px-5">
-        <h4>Category</h4>
-        <ul class="d-flex flex-wrap p-0">
-          <!-- variabile restaurant type -->
-          <li v-for="type in restaurants.types" style="list-style: none">
-            <button class="type_tag_btn">{{ type.type }}</button>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <!-- --------------------------- -->
-    <!--END RESTAURANT DETAILS-->
-
-    <div class="d-flex p-0 mt-5">
-      <div class="dishes_main_content">
         <!-- --------------------------- -->
-        <!-- RESTAURANT DISHES-->
-        <ul class="m-0 p-0" v-for="dish in restaurants.dishes">
-          <li class="d-flex row mb-4">
-            <div class="col-4 m-0 p-0">
-              <img
-                v-if="dish.image"
-                :src="
-                  dish.image.startsWith('http')
+        <!--END RESTAURANT DETAILS-->
+
+        <div class="d-flex p-0 my-2">
+          <div class="dishes_main_content d-flex gap-2 flex-wrap p-0 m-0">
+            <!-- --------------------------- -->
+            <!-- RESTAURANT DISHES-->
+            <ul class="m-0 p-3 d-flex" v-for="dish in restaurants.dishes">
+              <li class="d-flex p-3 mx-0 flex-column border rounded-4">
+                <div class=" m-0 p-0 m-0 d-flex">
+                  <img v-if="dish.image" :src="dish.image.startsWith('http')
                     ? dish.image
                     : 'http://localhost:8000/storage/' + dish.image
-                "
-                class="dish_image"
-                alt="..."
-              />
-              <img
-                v-else
-                class="dish_image"
-                src="/img/homepage/placeholdertemp.jpg"
-                alt="..."
-              />
-            </div>
+                    " class="dish_image" alt="..." />
+                  <img v-else class="dish_image" src="/img/homepage/placeholdertemp.jpg" alt="..." />
 
-            <div class="col-4 py-3">
-              <!-- variabile nome piatto -->
-              <h4 class="text-capitalize">{{ dish.name }}</h4>
-              <!-- variabile descrizione piatto -->
-              <p>{{ dish.description }}</p>
-              <!-- variabile prezzo piatto -->
-              <h4>{{ dish.price }} €</h4>
-            </div>
-            <div class="col-3 py-3">
-              <button class="dish_btn" @click="addItem(dish)">
-                ADD TO CART
-                <i class="fa-solid fa-cart-shopping"></i>
-              </button>
-              <ul class="d-flex p-2">
-                <!-- variabile ingredienti piatto-->
-                <!-- <li class="ingredient">red meat</li>
-                <li class="ingredient">breaded</li> -->
-              </ul>
-            </div>
-          </li>
-        </ul>
+                  <div class="px-3">
+                    <!-- variabile nome piatto -->
+                    <h4 class="text-capitalize">{{ dish.name }}</h4>
+                    <!-- variabile descrizione piatto -->
+                    <p>{{ dish.description }}</p>
+                    <!-- variabile prezzo piatto -->
+
+                  </div>
+
+                </div>
+                <div class="d-flex justify-content-between align-content-center pt-2">
+                  <div class="d-flex align-items-center">
+                    <h4 class="m-0 p-0">{{ dish.price }} €</h4>
+                  </div>
+                  <button class="dish_btn" @click="addItem(dish)">
+                    <i class="fa-solid fa-plus"></i>
+                  </button>
+                </div>
+
+              </li>
+            </ul>
+          </div>
+
+        </div>
+        <!-- --------------------------- -->
+        <!--END RESTAURANT DISHES-->
+
+
+
+
       </div>
-
-      <!-- --------------------------- -->
-      <!--END RESTAURANT DISHES-->
-
       <!-- --------------------------- -->
       <!-- DISHES CART -->
-      <AppCart></AppCart>
+      <div>
+        <AppCart class="cart position-fixed"></AppCart>
+      </div>
       <!-- --------------------------- -->
       <!-- END DISHES CART -->
     </div>
@@ -242,9 +218,22 @@ export default {
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
+.store-img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  filter: blur(5px);
+  border-top-right-radius: 100px;
+
+  border: 10px solid #ffffff;
+}
+
+
 .restaurant_main_content {
-  background-color: $background_color_dark;
-  border-top-right-radius: 10rem !important;
+  width: 75%;
+  background-color: #ffffff;
+  border-top-right-radius: 100px !important;
+  translate: 0rem -5rem;
 
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 
@@ -261,8 +250,15 @@ export default {
   .free_delivery_tag {
     background-color: $secondary_color;
     color: $text_color;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
+    padding: 0.2rem;
+    border-radius: 0.3rem;
+    padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+    max-width: fit-content;
+
+    p {
+      font-size: 0.8rem;
+    }
+
   }
 
   .type_tag_btn {
@@ -271,18 +267,44 @@ export default {
 }
 
 .dishes_main_content {
-  background-color: $background_color_dark;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+
 
   list-style: none;
   padding: 0;
   margin: 0;
 
+  ul {
+    max-width: 425px;
+
+    li {
+      background-color: #ffffff;
+
+      &:hover {
+
+        transform: scale(1.02);
+        transition: transform 0.3s ease-in-out;
+      }
+    }
+  }
+
+  h4 {
+
+    font-size: 1rem;
+    font-weight: 500;
+    color: $text_color;
+  }
+
+  p {
+    font-size: 0.8rem;
+    color: $text_color;
+  }
+
   .dish_image {
     object-fit: cover;
-    width: 100%;
-    height: 10rem;
-    border-radius: 24px;
+    width: 135px;
+    height: 135px;
+    border-radius: 1rem;
     color: $text_color;
   }
 
@@ -298,5 +320,10 @@ export default {
   .dish_btn {
     @include shopping_cart_button;
   }
+}
+
+.cart {
+  translate: 0rem -5rem;
+  flex-grow: 1;
 }
 </style>

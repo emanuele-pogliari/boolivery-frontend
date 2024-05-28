@@ -92,61 +92,91 @@ export default {
 </script>
 
 <template>
-  <div class="shopping_cart_main_content p-3">
-    <h1>SHOPPING CART</h1>
-    <hr />
+  <div class="shopping_cart_main_content p-0 m-0">
+    <div class="p-3">
 
-    <!-- base cart -->
-    <div>
-      <form></form>
-      <ul>
-        <li v-for="(item, index) in store.items" :key="index">
-          {{ item.name }} - {{ item.price }} €
-          <div>{{ item.total_dish_price }} €</div>
-          <span class="change_quantity">
-            <i class="fa-solid fa-minus" @click="decreaseItem(item)"></i>
-          </span>
-          <span :v-model="item.quantity" class="mx-2 quantity_input">
-            {{ item.quantity }}</span
-          >
-          <span class="change_quantity">
-            <i class="fa-solid fa-plus" @click="increaseItem(item)"></i>
-          </span>
-          <button class="delete_cart_item_btn" @click="removeItem(item)">
-            <i class="fa-regular fa-circle-xmark"></i>
-          </button>
-        </li>
-      </ul>
-      <p>Total Items: {{ totalItems }}</p>
+      <div class="cart_title">
+        <h1 class="text text-capitalize mx-5 px-3">your order</h1>
+      </div>
+      <hr />
+
+      <!-- base cart -->
+      <div>
+        <ul>
+          <li class="d-flex justify-content-between pb-3" v-for="(item, index) in store.items" :key="index">
+            <div class="d-flex flex-column align-items-start">
+
+              <span :v-model="item.quantity" class="quantity_input text-start">
+                {{ item.quantity }}x
+              </span>
+
+
+              <span class="change_quantity">
+                <i class="fa-solid fa-minus shopping_cart_button" @click="decreaseItem(item)"></i>
+              </span>
+
+
+            </div>
+
+
+
+            <div class="px-3">
+              {{ item.name }}
+            </div>
+
+
+            <div class="d-flex flex-column align-items-end">
+
+              <div class="text-end">
+                {{ item.total_dish_price }} €
+              </div>
+
+              <span class="change_quantity">
+                <i class="fa-solid fa-plus shopping_cart_button" @click="increaseItem(item)"></i>
+              </span>
+
+            </div>
+            <!-- <button class="delete_cart_item_btn" @click="removeItem(item)">
+              <i class="fa-regular fa-circle-xmark"></i>
+            </button> -->
+          </li>
+        </ul>
+        <!-- <p>Total Items: {{ totalItems }}</p> -->
+      </div>
+      <hr />
+
+      <router-link :to="{ name: 'checkout' }">
+        <button class="checkout_btn ">Order {{ totalItems }} at {{ store.totalCartPrice }} € </button>
+      </router-link>
     </div>
-    <hr />
-    <h4 class="d-flex justify-content-between">
-      <span> TOTAL: </span>
-      <span>
-        <!-- variabile totale prezzo items scelti  -->
-        {{ store.totalCartPrice }} €
-      </span>
-    </h4>
-    <router-link :to="{ name: 'checkout' }">
-      <button v-if="!hideButton" class="btn btn-warning btn_checkout">Checkout</button>
-    </router-link>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
+
 .shopping_cart_main_content {
   background-color: $background_color_dark;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   border-radius: 24px;
+  min-width: fit-content;
+  min-width: 300px;
+  height: fit-content;
+
 
   .shopping_cart_items {
     max-height: 4rem;
   }
 
-  h1 {
-    text-align: center;
+  .cart_title {
+    min-width: fit-content;
+
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
   }
 
   ul {
@@ -163,10 +193,18 @@ export default {
         margin-left: 0.5rem;
         cursor: pointer;
       }
+
+      .shopping_cart_button {
+        font-size: 0.5rem;
+        @include shopping_cart_button_small;
+        padding: 0.4rem;
+      }
     }
+
     .change_quantity {
       cursor: pointer;
     }
+
     .quantity_input {
       width: 30px;
       text-align: center;
@@ -177,6 +215,10 @@ export default {
 
   hr {
     border: 0.5px solid $text_color;
+  }
+
+  .checkout_btn {
+    @include checkout_btn;
   }
 }
 </style>
