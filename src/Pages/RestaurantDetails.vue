@@ -111,7 +111,7 @@ export default {
 </script>
 
 <template>
-  <div v-if="restaurants" class="container nunito-restaurant-details" style="max-width: 1200px">
+  <div v-if="restaurants" class="container nunito-restaurant-details p-0" style="max-width: 1200px">
     <router-link to="/">
       <button class="btn">
         <i class="fa-solid fa-arrow-left me-1"></i>Back
