@@ -64,7 +64,7 @@ export default {
             <!-- Login Button -->
             <!-- just a placeholder -->
             <!-- <p class="ciao pt-1">Are you a restaurant owner?</p> -->
-            <a href="http://127.0.0.1:8000">
+            <a class="text-center" href="http://127.0.0.1:8000">
               <button class="btn btn-sm ms-auto my_button" type="button">
                 <i class="fa-solid fa-house-user"></i> Restaurant Owner Login
               </button>
