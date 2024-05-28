@@ -127,7 +127,7 @@ export default {
 
       <div class="restaurant_main_content d-flex row rounded-4 p-0 m-0">
 
-        <div class="col-6 py-3 px-3">
+        <div class="col-6 pt-4 py-3 px-3">
           <div>
             <div class="d-flex align-items-center gap-2">
               <h2 class="roboto-bold fw-bolder">{{ restaurants.name }}</h2>
@@ -159,7 +159,7 @@ export default {
         <!-- --------------------------- -->
         <!--END RESTAURANT DETAILS-->
 
-        <div class="d-flex p-0 my-5">
+        <div class="d-flex p-0 my-2">
           <div class="dishes_main_content d-flex gap-2 flex-wrap p-0 m-0">
             <!-- --------------------------- -->
             <!-- RESTAURANT DISHES-->
@@ -187,7 +187,7 @@ export default {
                     <h4 class="m-0 p-0">{{ dish.price }} €</h4>
                   </div>
                   <button class="dish_btn" @click="addItem(dish)">
-                    <i class="fa-solid fa-cart-shopping"></i>
+                    <i class="fa-solid fa-plus"></i>
                   </button>
                 </div>
 
@@ -250,8 +250,15 @@ export default {
   .free_delivery_tag {
     background-color: $secondary_color;
     color: $text_color;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
+    padding: 0.2rem;
+    border-radius: 0.3rem;
+    padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+    max-width: fit-content;
+
+    p {
+      font-size: 0.8rem;
+    }
+
   }
 
   .type_tag_btn {
@@ -271,8 +278,13 @@ export default {
     max-width: 425px;
 
     li {
-
       background-color: #ffffff;
+
+      &:hover {
+
+        transform: scale(1.02);
+        transition: transform 0.3s ease-in-out;
+      }
     }
   }
 
@@ -292,7 +304,7 @@ export default {
     object-fit: cover;
     width: 135px;
     height: 135px;
-    border-radius: 24px;
+    border-radius: 1rem;
     color: $text_color;
   }
 

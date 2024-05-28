@@ -96,34 +96,50 @@ export default {
       <!-- base cart -->
       <div>
         <ul>
-          <li v-for="(item, index) in store.items" :key="index">
-            {{ item.name }}
-            <div>{{ item.total_dish_price }} €</div>
-            <span class="change_quantity">
-              <i class="fa-solid fa-minus" @click="decreaseItem(item)"></i>
-            </span>
-            <span :v-model="item.quantity" class="mx-2 quantity_input">
-              {{ item.quantity }}</span>
-            <span class="change_quantity">
-              <i class="fa-solid fa-plus" @click="increaseItem(item)"></i>
-            </span>
-            <button class="delete_cart_item_btn" @click="removeItem(item)">
+          <li class="d-flex justify-content-between pb-3" v-for="(item, index) in store.items" :key="index">
+            <div class="d-flex flex-column align-items-start">
+
+              <span :v-model="item.quantity" class="quantity_input text-start">
+                {{ item.quantity }}x
+              </span>
+
+
+              <span class="change_quantity">
+                <i class="fa-solid fa-minus shopping_cart_button" @click="decreaseItem(item)"></i>
+              </span>
+
+
+            </div>
+
+
+
+            <div class="px-3">
+              {{ item.name }}
+            </div>
+
+
+            <div class="d-flex flex-column align-items-end">
+
+              <div class="text-end">
+                {{ item.total_dish_price }} €
+              </div>
+
+              <span class="change_quantity">
+                <i class="fa-solid fa-plus shopping_cart_button" @click="increaseItem(item)"></i>
+              </span>
+
+            </div>
+            <!-- <button class="delete_cart_item_btn" @click="removeItem(item)">
               <i class="fa-regular fa-circle-xmark"></i>
-            </button>
+            </button> -->
           </li>
         </ul>
-        <p>Total Items: {{ totalItems }}</p>
+        <!-- <p>Total Items: {{ totalItems }}</p> -->
       </div>
       <hr />
-      <h4 class="d-flex justify-content-between">
-        <span> TOTAL: </span>
-        <span>
-          <!-- variabile totale prezzo items scelti  -->
-          {{ store.totalCartPrice }} €
-        </span>
-      </h4>
+
       <router-link :to="{ name: 'checkout' }">
-        <button class="btn btn-warning">Checkout</button>
+        <button class="checkout_btn ">Order {{ totalItems }} at {{ store.totalCartPrice }} € </button>
       </router-link>
     </div>
   </div>
@@ -138,6 +154,7 @@ export default {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   border-radius: 24px;
   min-width: fit-content;
+  min-width: 300px;
   height: fit-content;
 
 
@@ -169,6 +186,12 @@ export default {
         margin-left: 0.5rem;
         cursor: pointer;
       }
+
+      .shopping_cart_button {
+        font-size: 0.5rem;
+        @include shopping_cart_button_small;
+        padding: 0.4rem;
+      }
     }
 
     .change_quantity {
@@ -185,6 +208,10 @@ export default {
 
   hr {
     border: 0.5px solid $text_color;
+  }
+
+  .checkout_btn {
+    @include checkout_btn;
   }
 }
 </style>
