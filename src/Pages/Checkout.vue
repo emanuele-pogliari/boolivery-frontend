@@ -12,8 +12,8 @@ export default {
       clientToken: null,
       instance: null,
       baseApiUrl: "http://127.0.0.1:8000/api/",
-
       store,
+      isProcessing: false, // Add loader state
 
       orderInfo: {
         total_price: localStorage.getItem("totalCartPrice") || 0,
@@ -27,14 +27,13 @@ export default {
       items: JSON.parse(localStorage.getItem("items")) || [],
     };
   },
-  //NEW VERSION
 
   mounted() {
     this.getClientToken();
   },
 
   methods: {
-    //test orderinfo
+    // test orderinfo
     checkOrderInfo() {
       console.log(this.orderInfo);
     },
@@ -76,14 +75,18 @@ export default {
         return;
       }
 
+      this.isProcessing = true; // Set loader to true before processing payment
+
       this.instance.requestPaymentMethod((err, payload) => {
         if (err) {
           console.error("Error requesting payment method:", err);
+          this.isProcessing = false; // Set loader to false if there's an error
           return;
         }
 
         if (!payload || !payload.nonce) {
           console.error("Invalid payload received:", payload);
+          this.isProcessing = false; // Set loader to false if there's an error
           return;
         }
 
@@ -105,16 +108,19 @@ export default {
           .then((response) => {
             console.log(response);
             console.log("Payment successful");
+            this.isProcessing = false; // Set loader to false after payment is successful
           })
           .catch((error) => {
             console.log(error);
             console.log("Payment failed");
+            this.isProcessing = false; // Set loader to false if payment fails
           });
       });
     },
   },
 };
 </script>
+
 <template>
   <div class="container my-4">
     <div class="d-flex row justify-content-center">
@@ -177,7 +183,7 @@ export default {
           </div>
 
           <div class="mb-3 checkout_field">
-            <label for="rderInfo.customer_note" class="form-label">Note</label>
+            <label for="orderInfo.customer_note" class="form-label">Note</label>
             <textarea
               v-model="orderInfo.customer_note"
               class="form-control"
@@ -186,9 +192,12 @@ export default {
             ></textarea>
           </div>
 
-          <button id="submit-button" type="submit" @click="paymentFunction">
-            Purchase
-          </button>
+          <div class="loader-container"> 
+            <button id="submit-button" type="submit" @click="paymentFunction">
+              Purchase
+            </button>
+            <div v-if="isProcessing" class="loader"></div>
+          </div>
         </form>
       </div>
       <div class="col-4">
@@ -236,4 +245,15 @@ export default {
     }
   }
 }
+
+.loader-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loader {
+  @include loader;
+}
+@keyframes l9 {to{transform: rotate(1turn)}}
 </style>

@@ -23,12 +23,15 @@ export default {
       types: [],
       checkButtonValue: [],
       apiLinks: [],
-      //keeps track of current page
+      // keeps track of current page
       apiPageNumber: 1,
 
       per_page: 1,
       last_page: 1,
       total_items: 1,
+
+      // loader state
+      isLoading: false,
     };
   },
   methods: {
@@ -58,6 +61,8 @@ export default {
     },
 
     apiCall() {
+      this.isLoading = true; // Set loader to true before making the API call
+
       const params = {
         // sets current page as parameter, by default it's 1
         page: this.apiPageNumber,
@@ -77,6 +82,9 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+        })
+        .finally(() => {
+          this.isLoading = false; // Set loader to false after the API call is completed
         });
 
       axios
@@ -152,7 +160,10 @@ export default {
     <!-- FINE -->
 
     <section id="cards_section">
-      <template v-if="restaurants && restaurants.data && restaurants.data.length > 0">
+
+      <div v-if="isLoading" class="loader"></div>
+      
+      <template v-else-if="restaurants && restaurants.data && restaurants.data.length > 0">
         <AppCardItem v-for="restaurant in restaurants.data" :key="restaurant.id" :restaurant="restaurant">
         </AppCardItem>
       </template>
@@ -409,6 +420,12 @@ section {
   }
 
 }
+
+.loader {
+  @include loader;
+}
+@keyframes l9 {to{transform: rotate(1turn)}}
+
 
 /* ----- RESPONSIVE ----- */
 
