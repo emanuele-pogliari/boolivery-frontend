@@ -1,4 +1,15 @@
 // -----------------------------------------------------------------------------
+// FONT
+
+@mixin primary_font {
+    font-family: "Nunito", sans-serif !important;
+    font-optical-sizing: auto !important;
+    font-style: normal !important;
+}
+
+
+
+// -----------------------------------------------------------------------------
 // BUTTONS
 
 @mixin primary_button_style {
@@ -76,9 +87,8 @@
     background-color: #f2ca39;
     color: #37373b;
     font-weight: bolder;
-    padding: 0.5rem;
+    padding: 0.4rem 0.4rem;
     border-radius: 1.5rem;
-    margin: 0.5rem;
     width: 100%;
     cursor: pointer;
 

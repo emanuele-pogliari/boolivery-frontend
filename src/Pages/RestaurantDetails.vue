@@ -111,7 +111,7 @@ export default {
 </script>
 
 <template>
-  <div v-if="restaurants" class="container" style="max-width: 1200px">
+  <div v-if="restaurants" class="container nunito-restaurant-details" style="max-width: 1200px">
     <router-link to="/">
       <button class="btn">
         <i class="fa-solid fa-arrow-left me-1"></i>Back
@@ -164,7 +164,7 @@ export default {
             <!-- --------------------------- -->
             <!-- RESTAURANT DISHES-->
             <ul class="m-0 p-3 d-flex" v-for="dish in restaurants.dishes">
-              <li class="d-flex p-3 mx-0 flex-column border rounded-4">
+              <li class="d-flex p-3 mx-0 flex-column border rounded-4 flex-grow-1">
                 <div class=" m-0 p-0 m-0 d-flex">
                   <img v-if="dish.image" :src="dish.image.startsWith('http')
                     ? dish.image
@@ -204,12 +204,12 @@ export default {
 
       </div>
       <!-- --------------------------- -->
-      <!-- DISHES CART -->
-      <div>
+      <!-- CART -->
+      <div class="cart_responsive">
         <AppCart class="cart position-fixed"></AppCart>
       </div>
       <!-- --------------------------- -->
-      <!-- END DISHES CART -->
+      <!-- END CART -->
     </div>
   </div>
 </template>
@@ -217,6 +217,12 @@ export default {
 <style lang="scss" scoped>
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
+
+.nunito-restaurant-details {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
 
 .store-img {
   width: 100%;
@@ -234,8 +240,13 @@ export default {
   background-color: $background_color_dark;
   border-top-right-radius: 100px !important;
   translate: 0rem -5rem;
-
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 1200px) {
+
+    width: 100%;
+
+  }
 
   .restaurant_image {
     max-height: 16rem;
@@ -267,15 +278,28 @@ export default {
 }
 
 .dishes_main_content {
-  background-color: $background_color_dark;
-
-
   list-style: none;
   padding: 0;
   margin: 0;
+  background-color: $background_color_dark;
+
+  @media (max-width: 1200px) {
+    flex-wrap: nowrap !important;
+    width: 100%;
+    display: block !important;
+
+  }
 
   ul {
     max-width: 425px;
+    flex-grow: 1;
+
+    @media (max-width: 1200px) {
+
+      max-width: 100%;
+
+    }
+
 
     li {
       background-color: #ffffff;
@@ -302,28 +326,39 @@ export default {
 
   .dish_image {
     object-fit: cover;
-    width: 135px;
-    height: 135px;
+    width: 115px;
+    height: 115px;
     border-radius: 1rem;
     color: $text_color;
   }
 
-  .ingredient {
-    border: 1px solid $primary_color;
-    border-radius: 0.5rem;
-    padding: 0.2rem;
-    margin-right: 0.2rem;
-    text-decoration: none;
-    list-style: none;
-  }
+  // .ingredient {
+  //   border: 1px solid $primary_color;
+  //   border-radius: 0.5rem;
+  //   padding: 0.2rem;
+  //   margin-right: 0.2rem;
+  //   text-decoration: none;
+  //   list-style: none;
+  // }
 
   .dish_btn {
     @include shopping_cart_button;
   }
 }
 
-.cart {
-  translate: 0rem -5rem;
-  flex-grow: 1;
+
+.cart_responsive {
+
+  .cart {
+    translate: 0rem -5rem;
+    flex-grow: 1;
+  }
+
+  @media (max-width: 1200px) {
+    position: fixed;
+    bottom: 1%;
+
+  }
+
 }
 </style>

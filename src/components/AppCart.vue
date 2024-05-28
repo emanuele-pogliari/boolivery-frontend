@@ -86,39 +86,44 @@ export default {
 
 <template>
   <div class="shopping_cart_main_content p-0 m-0">
-    <div class="p-3">
+    <div class="p-lg-3 p-0">
 
-      <div class="cart_title">
+      <div class="cart_title cart_body">
         <h1 class="text text-capitalize mx-5 px-3">your order</h1>
       </div>
       <!-- <hr /> -->
 
       <!-- base cart -->
       <div>
-        <ul>
-          <li class="cart_item d-flex justify-content-between pb-3" v-for="(item, index) in store.items" :key="index">
-            <div class="d-flex flex-column align-items-start">
+        <ul class="cart_body">
+          <li class="cart_item justify-content-between d-flex pb-3" v-for="(item, index) in store.items" :key="index">
+            <div class="d-flex">
+              <div class="d-flex flex-column align-items-start">
 
-              <span :v-model="item.quantity" class="quantity_input text-start">
-                {{ item.quantity }}x
-              </span>
+                <span :v-model="item.quantity" class="quantity_input text-start fw-bolder">
+                  {{ item.quantity }}x
+                </span>
 
 
-              <span class="change_quantity">
-                <i class="fa-solid fa-minus shopping_cart_button" @click="decreaseItem(item)"></i>
-              </span>
+                <span class="change_quantity">
+                  <i class="fa-solid fa-minus shopping_cart_button" @click="decreaseItem(item)"></i>
+                </span>
 
+
+              </div>
+
+
+
+              <div class="d-flex justify-content-start">
+                <div class="item_name">
+                  {{ item.name }}
+                </div>
+              </div>
 
             </div>
 
 
-
-            <div class="px-3">
-              {{ item.name }}
-            </div>
-
-
-            <div class="d-flex flex-column align-items-end">
+            <div class="d-flex justify-content-end flex-column align-items-end">
 
               <div class="text-end">
                 {{ item.total_dish_price }} €
@@ -149,16 +154,32 @@ export default {
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
+@media (max-width: 1200px) {
+
+  .cart_body {
+    display: none;
+  }
+
+
+
+
+}
+
 .shopping_cart_main_content {
   background-color: $background_color_dark;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   border-radius: 24px;
   min-width: fit-content;
-  min-width: 300px;
+  // min-width: 300px;
   height: fit-content;
 
+  @media (max-width: 1200px) {
+    width: 100%;
+
+  }
+
   .cart_item {
-    background-color: $background_color_dark;
+    // background-color: $background_color_dark;
     -webkit-animation: bounce-in-top 1.1s both;
     animation: bounce-in-top 1.1s both;
 
@@ -311,6 +332,12 @@ export default {
         padding: 0.5rem;
         margin-left: 0.5rem;
         cursor: pointer;
+
+      }
+
+      .item_name {
+        font-size: 0.9rem;
+        font-weight: 500;
       }
 
       .shopping_cart_button {
@@ -332,9 +359,9 @@ export default {
     }
   }
 
-  hr {
-    border: 0.5px solid $text_color;
-  }
+  // hr {
+  //   border: 0.5px solid $text_color;
+  // }
 
   .checkout_btn {
     @include checkout_btn;

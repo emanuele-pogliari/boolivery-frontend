@@ -52,4 +52,11 @@ export default {
   <AppMainContent></AppMainContent>
 </template>
 
-<style></style>
+<style lang="scss" scoped>
+@use "/src/variabiles.scss" as *;
+@use "/src/mixins.scss" as *;
+
+template {
+  @include primary_font;
+}
+</style>

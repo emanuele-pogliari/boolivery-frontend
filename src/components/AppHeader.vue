@@ -7,13 +7,13 @@ export default {
 </script>
 
 <template>
-    <div class="container-md mb-5">
+    <div class="container-md mb-5 nunito-header">
         <div class="jumbotron gap-5 gap-md-0 row d-flex align-items-center">
 
             <div class="col-md-6 col-12 h-100 d-flex justify-content-center">
                 <div class="d-flex justify-content-center jumbotron-content">
                     <h1 class="text-uppercase">Boolivery</h1>
-                    <h1 class="text-uppercase">Delivery</h1>
+                    <h2 class="text-capitalize">Delivery</h2>
                     <p class="text-capitalize">This Delicious Hamburger.</p>
                     <button class="flip-horizontal-bottom">Right To Your Doorstep!</button>
                 </div>
@@ -35,6 +35,15 @@ export default {
 <style lang="scss" scoped>
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
+
+
+.nunito-header {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+
 
 .jumbotron {
     position: relative;
@@ -100,16 +109,21 @@ export default {
 
 
         h1 {
-            font-size: 3rem;
-            font-weight: 700;
+            font-size: 4rem;
+            font-weight: 800;
 
+            color: $text_color;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
             color: $text_color;
         }
 
         p {
             font-size: 1rem;
             font-weight: 400;
-
             color: $text_color;
         }
 
