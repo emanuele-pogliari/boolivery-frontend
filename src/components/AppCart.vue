@@ -145,8 +145,8 @@ export default {
       </div>
       <hr />
 
-      <router-link :to="{ name: 'checkout' }">
-        <button class="checkout_btn ">Order {{ totalItems }} at {{ store.totalCartPrice }} € </button>
+      <router-link v-if="!hideButton" :to="{ name: 'checkout' }">
+        <button class="checkout_btn">Order {{ totalItems }} at {{ store.totalCartPrice }} €</button>
       </router-link>
     </div>
   </div>
