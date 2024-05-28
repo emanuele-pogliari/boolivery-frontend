@@ -8,9 +8,11 @@ export default {
     const navbarCollapse = $("#navbarSupportedContent");
 
     // JavaScript per gestire il toggle del menu a tendina
-    navbarToggle.on("click", function () {
+    navbarToggle.on("click", function (event) {
+      event.stopPropagation();
       navbarCollapse.toggleClass("show");
     });
+
 
     // Chiudi il menu a tendina quando si fa clic al di fuori di esso
     $(document).on("click", function (event) {
@@ -24,6 +26,7 @@ export default {
     });
   },
 };
+
 </script>
 
 <template>
@@ -39,8 +42,7 @@ export default {
       <button
         class="navbar-toggler"
         type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
+        id="navbarToggle"
         aria-controls="navbarSupportedContent"
         aria-expanded="false"
         aria-label="Toggle navigation"
@@ -52,9 +54,7 @@ export default {
           <!-- Centered Navigation Links -->
           <div class="navbar-nav ms-auto w-100">
             <router-link class="text-decoration-none" to="/">
-              <a class="nav-link text-center active nav_voice" aria-current="page"
-                >Home</a
-              >
+              <a class="nav-link text-center active nav_voice" aria-current="page">Home</a>
             </router-link>
             <a class="nav-link text-center nav_voice" href="#">Delivery</a>
             <a class="nav-link text-center nav_voice" href="#">Payment</a>
@@ -62,11 +62,10 @@ export default {
             <a class="nav-link text-center nav_voice" href="#">About</a>
             <span id="space"></span>
             <!-- Login Button -->
-            <!-- just a placeholder -->
-            <!-- <p class="ciao pt-1">Are you a restaurant owner?</p> -->
             <a class="text-center" href="http://127.0.0.1:8000">
               <button class="btn btn-sm ms-auto my_button" type="button">
-                <i class="fa-solid fa-house-user"></i> Restaurant Owner Login
+                <i class="fa-solid fa-house-user"></i> 
+                <span> Restaurant Owner Login</span>
               </button>
             </a>
           </div>
@@ -75,6 +74,8 @@ export default {
     </div>
   </nav>
 </template>
+
+
 
 <style lang="scss" scoped>
 @use "/src/variabiles.scss" as *;
@@ -101,7 +102,6 @@ export default {
     }
 
     .right-side {
-
       a {
         font-weight: 600;
         position: relative;
@@ -124,7 +124,7 @@ export default {
 
       .nav_voice:hover::after,
       .nav_voice.active::after {
-        width: 80%;
+        width: 75%;
         background: $secondary_color;
       }
 
@@ -153,6 +153,21 @@ export default {
   #space {
     width: 3rem;
     height: 1rem;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 800px) {
+
+  .my_button span {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  .nav_voice:hover::after,
+  .nav_voice.active::after {
+    width: 15% !important;
   }
 }
 </style>
