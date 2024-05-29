@@ -139,7 +139,7 @@ export default {
 
           <div class="restaurant_info d-md-flex align-items-center">
             <!-- variabile inidirizzo -->
-            <ul class="d-flex m-0 mb-3 p-0 col-lg-4 me-2">
+            <ul class="d-flex my-lg-0 mb-3 p-0 col-lg-4 me-2">
               <!-- variabile restaurant type -->
               <li class="list-unstyled">
                 <button class="type_tag_btn">italian</button>
