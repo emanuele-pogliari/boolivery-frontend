@@ -33,11 +33,6 @@ export default {
   },
 
   methods: {
-    // test orderinfo
-    checkOrderInfo() {
-      console.log(this.orderInfo);
-    },
-
     // Get client token
     getClientToken() {
       axios
@@ -68,8 +63,26 @@ export default {
       );
     },
 
+    updateTotalCartPrice() {
+      const totalCartPrice = this.store.items
+        .reduce((total, item) => {
+          return total + item.price * item.quantity;
+        }, 0)
+        .toFixed(2);
+
+      this.store.totalCartPrice = totalCartPrice;
+      localStorage.setItem("items", JSON.stringify(this.store.items));
+      localStorage.setItem("totalCartPrice", totalCartPrice);
+
+      console.log("Prezzo totale del carrello aggiornato:", totalCartPrice);
+    },
+
+    updateTotalItems() {
+      this.store.totalItems = this.store.items.length;
+      localStorage.setItem("totalItems", this.store.totalItems);
+    },
+
     paymentFunction() {
-      this.checkOrderInfo();
       if (!this.instance) {
         console.error("Drop-in instance is not available.");
         return;
@@ -111,7 +124,16 @@ export default {
             this.isProcessing = false; // Set loader to false after payment is successful
             //svuota il carrello dopo il pagamento
             localStorage.removeItem("items");
+
+            // Clear Vuex store items and total price
+            this.store.items = [];
             this.store.totalCartPrice = 0;
+
+            // Update total items after clearing
+            this.updateTotalItems();
+
+            // Update total price after clearing
+            this.updateTotalCartPrice();
           })
           .catch((error) => {
             console.log(error);
