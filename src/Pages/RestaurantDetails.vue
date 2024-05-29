@@ -110,32 +110,21 @@ export default {
 </script>
 
 <template>
-  <div v-if="restaurants" class="container" style="max-width: 1200px">
+  <div v-if="restaurants" class="container nunito-restaurant-details p-0" style="max-width: 1200px">
     <router-link to="/">
       <button class="btn">
         <i class="fa-solid fa-arrow-left me-1"></i>Back
       </button>
     </router-link>
-    <img
-      v-if="restaurants.image"
-      :src="
-        restaurants.image.startsWith('http')
-          ? restaurants.image
-          : 'http://localhost:8000/storage/' + restaurants.image
-      "
-      class="store-img restaurant_image"
-      alt="..."
-    />
-    <img
-      v-else
-      class="store-img"
-      src="/img/homepage/placeholdertemp.jpg"
-      alt="..."
-    />
+    <img v-if="restaurants.image" :src="restaurants.image.startsWith('http')
+        ? restaurants.image
+        : 'http://localhost:8000/storage/' + restaurants.image
+      " class="store-img restaurant_image" alt="..." />
+    <img v-else class="store-img" src="/img/homepage/placeholdertemp.jpg" alt="..." />
 
     <div class="d-flex gap-3 position-relative">
       <div class="restaurant_main_content d-flex row rounded-4 p-0 m-0">
-        <div class="col-6 pt-4 py-3 px-3">
+        <div class="col-8 col-md-12 pt-4 py-3 px-3">
           <div>
             <div class="d-flex align-items-center gap-2">
               <h2 class="roboto-bold fw-bolder">{{ restaurants.name }}</h2>
@@ -147,23 +136,28 @@ export default {
           </div>
           <hr />
 
-          <div>
-            <ul class="d-flex p-0">
+          <div class="restaurant_info mb-3 d-md-flex align-items-center">
+            <!-- variabile inidirizzo -->
+            <ul class="d-flex my-md-0 mb-3 p-0 col-lg-4 me-2">
               <!-- variabile restaurant type -->
-              <li v-for="type in restaurants.types" style="list-style: none">
-                <button class="type_tag_btn">{{ type.type }}</button>
+              <li class="list-unstyled">
+                <button class="type_tag_btn">italian</button>
+                <button class="type_tag_btn">italian</button>
+                <button class="type_tag_btn">italian</button>
               </li>
             </ul>
-            <!-- variabile inidirizzo -->
-            <h4 class="roboto-bold">{{ restaurants.address }}</h4>
-            <div class="d-flex flex-column">
-              <!-- variabile numero di telefono -->
-              <span
-                ><i class="fa-solid fa-phone me-2"></i
-                >{{ restaurants.phone }}</span
-              >
-              <!-- variabile VAT -->
-              <span>VAT: {{ restaurants.vat }}</span>
+
+            <div class="col-lg-4 my-md-0 d-flex align-content-center me-2 mb-2">
+              <h4 class="bold m-0">{{ restaurants.address }}</h4>
+            </div>
+
+            <div class="d-flex col-lg-4">
+              <div class="d-flex flex-column align-items-center flex-md-row gap-2 gap-md-0">
+                <!-- variabile numero di telefono -->
+                <span><i class="fa-solid fa-phone me-2"></i>{{ restaurants.phone }}</span>
+                <!-- variabile VAT -->
+                <span><i class="fa-solid fa-id-card me-2"></i>{{ restaurants.vat }}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -174,38 +168,40 @@ export default {
           <div class="dishes_main_content d-flex gap-2 flex-wrap p-0 m-0">
             <!-- --------------------------- -->
             <!-- RESTAURANT DISHES-->
-            <ul class="m-0 p-3 d-flex" v-for="dish in restaurants.dishes">
-              <li class="d-flex p-3 mx-0 flex-column border rounded-4">
+            <ul class="m-0 mb-3 px-3 d-flex" v-for="dish in restaurants.dishes">
+              <li class="d-flex p-3 mx-0 flex-column rounded-4 flex-grow-1 position-relative">
+                <div class="item_quantity_badge fw-bolder slide-rotate-hor-top"
+                  v-if="store.items.some((cartItem) => cartItem.id === dish.id)" :key="index">
+                  {{
+                    store.items.find((cartItem) => cartItem.id === dish.id)
+                      .quantity
+                  }}x
+                </div>
+
                 <div class="m-0 p-0 m-0 d-flex">
-                  <img
-                    v-if="dish.image"
-                    :src="
-                      dish.image.startsWith('http')
-                        ? dish.image
-                        : 'http://localhost:8000/storage/' + dish.image
-                    "
-                    class="dish_image"
-                    alt="..."
-                  />
-                  <img
-                    v-else
-                    class="dish_image"
-                    src="/img/homepage/placeholdertemp.jpg"
-                    alt="..."
-                  />
+                  <img v-if="dish.image" :src="dish.image.startsWith('http')
+                    ? dish.image
+                    : 'http://localhost:8000/storage/' + dish.image
+                    " class="dish_image" alt="..." />
+                  <img v-else class="dish_image" src="/img/homepage/placeholdertemp.jpg" alt="..." />
 
                   <div class="px-3">
                     <!-- variabile nome piatto -->
-                    <h4 class="text-capitalize">{{ dish.name }}</h4>
+                    <h4 class="dish_name text-capitalize">{{ dish.name }}</h4>
                     <!-- variabile descrizione piatto -->
-                    <p>{{ dish.description }}</p>
+                    <p class="dish_description">{{ dish.description }}</p>
                     <!-- variabile prezzo piatto -->
                   </div>
                 </div>
-                <div
-                  class="d-flex justify-content-between align-content-center pt-2"
-                >
+                <div class="d-flex justify-content-between align-content-center pt-2">
                   <div class="d-flex align-items-center">
+                    <!-- !!!!!!!!!!!!! -->
+                    <!-- REMOVE BUTTON -->
+                    <button class="dish_btn me-3" @click="addItem(dish)">
+                      <i class="fa-solid fa-minus"></i>
+                    </button>
+                    <!-- !!!!!!!!!!!!! -->
+                    <!-- REMOVE BUTTON -->
                     <h4 class="m-0 p-0">{{ dish.price }} €</h4>
                   </div>
                   <button class="dish_btn" @click="addItem(dish)">
@@ -220,12 +216,12 @@ export default {
         <!--END RESTAURANT DISHES-->
       </div>
       <!-- --------------------------- -->
-      <!-- DISHES CART -->
-      <div>
+      <!-- CART -->
+      <div class="cart_responsive">
         <AppCart class="cart position-fixed"></AppCart>
       </div>
       <!-- --------------------------- -->
-      <!-- END DISHES CART -->
+      <!-- END CART -->
     </div>
   </div>
 </template>
@@ -233,6 +229,12 @@ export default {
 <style lang="scss" scoped>
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
+
+.nunito-restaurant-details {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
 
 .store-img {
   width: 100%;
@@ -249,8 +251,11 @@ export default {
   background-color: $background_color_dark;
   border-top-right-radius: 100px !important;
   translate: 0rem -5rem;
-
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
 
   .restaurant_image {
     max-height: 16rem;
@@ -275,66 +280,164 @@ export default {
     }
   }
 
-  .type_tag_btn {
-    @include tag_type_btn;
+  .restaurant_info {
+    .type_tag_btn {
+      @include tag_type_btn;
+    }
+
+    span {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: $text_color;
+      margin-right: 1rem;
+
+      min-width: fit-content;
+
+    }
+
+
+    i {
+      font-size: 0.6rem;
+      padding: 0.5rem;
+      border-radius: 50%;
+      background-color: $background_color;
+      color: $primary_color;
+      border: 1px solid $deactivated_text;
+
+    }
   }
 }
 
 .dishes_main_content {
-  background-color: $background_color_dark;
-
   list-style: none;
   padding: 0;
   margin: 0;
+  background-color: $background_color_dark;
+
+  @media (max-width: 1200px) {
+    flex-wrap: nowrap !important;
+    width: 100%;
+    display: block !important;
+  }
 
   ul {
-    max-width: 425px;
+    max-width: 445px;
+    flex-grow: 1;
 
-    li {
-      background-color: #ffffff;
+    @media (max-width: 1200px) {
+      max-width: 100%;
+    }
 
-      &:hover {
-        transform: scale(1.02);
-        transition: transform 0.3s ease-in-out;
+    .item_quantity_badge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: $secondary_color;
+      color: $text_color;
+      border-top-left-radius: 0.9rem;
+      border-bottom-right-radius: 0.3rem;
+
+      border-left: none;
+      border-top: none;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .slide-rotate-hor-top {
+      -webkit-animation: slide-rotate-hor-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
+      animation: slide-rotate-hor-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
+    }
+
+    @-webkit-keyframes slide-rotate-hor-top {
+      0% {
+        -webkit-transform: translateY(0) rotateX(0deg);
+        transform: translateY(0) rotateX(0deg);
+      }
+
+      100% {
+        -webkit-transform: translateY(-20px) rotateX(-90deg);
+        transform: translateY(-20px) rotateX(-90deg);
+      }
+    }
+
+    @keyframes slide-rotate-hor-top {
+      0% {
+        -webkit-transform: translateY(0) rotateX(0deg);
+        transform: translateY(0) rotateX(0deg);
+      }
+
+      100% {
+        -webkit-transform: translateY(-20px) rotateX(-90deg);
+        transform: translateY(-20px) rotateX(-90deg);
       }
     }
   }
 
-  h4 {
-    font-size: 1rem;
-    font-weight: 500;
-    color: $text_color;
-  }
+  li {
+    background-color: #ffffff;
+    border: 1px solid #949494;
 
-  p {
-    font-size: 0.8rem;
-    color: $text_color;
-  }
+    .dish_name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: $text_color;
+    }
 
-  .dish_image {
-    object-fit: cover;
-    width: 135px;
-    height: 135px;
-    border-radius: 1rem;
-    color: $text_color;
-  }
+    .dish_description {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: $text_color;
+    }
 
-  .ingredient {
-    border: 1px solid $primary_color;
-    border-radius: 0.5rem;
-    padding: 0.2rem;
-    margin-right: 0.2rem;
-    text-decoration: none;
-    list-style: none;
-  }
-
-  .dish_btn {
-    @include shopping_cart_button;
+    &:hover {
+      transform: scale(1.02);
+      transition: transform 0.3s ease-in-out;
+    }
   }
 }
 
-.cart {
-  translate: 0rem -5rem;
-  flex-grow: 1;
+h4 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: $text_color;
+}
+
+p {
+  font-size: 0.8rem;
+  color: $text_color;
+}
+
+.dish_image {
+  object-fit: cover;
+  width: 115px;
+  height: 115px;
+  border-radius: 1rem;
+  color: $text_color;
+}
+
+// .ingredient {
+//   border: 1px solid $primary_color;
+//   border-radius: 0.5rem;
+//   padding: 0.2rem;
+//   margin-right: 0.2rem;
+//   text-decoration: none;
+//   list-style: none;
+// }
+
+.dish_btn {
+  @include shopping_cart_button;
+}
+
+.cart_responsive {
+
+  .cart {
+    translate: 0rem -5rem;
+    flex-grow: 1;
+  }
+
+  @media (max-width: 1200px) {
+    position: fixed;
+    bottom: -3%;
+  }
 }
 </style>
