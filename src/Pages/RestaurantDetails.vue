@@ -324,8 +324,8 @@ export default {
     }
 
     .slide-rotate-hor-top {
-      -webkit-animation: slide-rotate-hor-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) reverse both;
-      animation: slide-rotate-hor-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) reverse both;
+      -webkit-animation: slide-rotate-hor-top 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) reverse both;
+      animation: slide-rotate-hor-top 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) reverse both;
     }
 
     @-webkit-keyframes slide-rotate-hor-top {
@@ -335,8 +335,8 @@ export default {
       }
 
       100% {
-        -webkit-transform: translateY(-150px) rotateX(-90deg);
-        transform: translateY(-150px) rotateX(-90deg);
+        -webkit-transform: translateY(-20px) rotateX(-90deg);
+        transform: translateY(-20px) rotateX(-90deg);
       }
     }
 
@@ -347,8 +347,8 @@ export default {
       }
 
       100% {
-        -webkit-transform: translateY(-150px) rotateX(-90deg);
-        transform: translateY(-150px) rotateX(-90deg);
+        -webkit-transform: translateY(-20px) rotateX(-90deg);
+        transform: translateY(-20px) rotateX(-90deg);
       }
     }
 
