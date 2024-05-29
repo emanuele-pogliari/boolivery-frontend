@@ -86,7 +86,7 @@ export default {
 
 <template>
   <div class="shopping_cart_main_content p-0 m-0">
-    <div class="p-lg-3 p-0">
+    <div class="cart_box p-xl-3 p-0">
 
       <div class="cart_title cart_body">
         <h1 class="text text-capitalize mx-5 px-3">your order</h1>
@@ -143,9 +143,12 @@ export default {
       </div>
       <!-- <hr /> -->
 
-      <router-link :to="{ name: 'checkout' }">
-        <button class="checkout_btn">Order {{ totalItems }} at {{ store.totalCartPrice }} €</button>
-      </router-link>
+      <div class="curtain_checkout_btn">
+        <router-link :to="{ name: 'checkout' }">
+          <button class="checkout_btn">Order {{ totalItems }} at {{ store.totalCartPrice }} €</button>
+        </router-link>
+
+      </div>
     </div>
   </div>
 </template>
@@ -154,16 +157,7 @@ export default {
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
-@media (max-width: 1200px) {
 
-  .cart_body {
-    display: none;
-  }
-
-
-
-
-}
 
 .shopping_cart_main_content {
   background-color: $background_color_dark;
@@ -172,6 +166,7 @@ export default {
   min-width: fit-content;
   // min-width: 300px;
   height: fit-content;
+
 
   @media (max-width: 1200px) {
     width: 100%;
@@ -365,6 +360,35 @@ export default {
 
   .checkout_btn {
     @include checkout_btn;
+
+    @media (max-width: 1200px) {
+      border-radius: 0;
+      border-top-right-radius: 15px !important;
+      border-top-left-radius: 15px !important;
+    }
+  }
+
+  @media (max-width: 1200px) {
+
+    .cart_box {
+      padding: 0 !important;
+    }
+
+    .curtain_checkout_btn {
+      height: 100vh;
+      background-color: $primary_color;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+
+    }
+
+    .cart_body {
+      display: none;
+    }
+
+
+
+
   }
 }
 </style>

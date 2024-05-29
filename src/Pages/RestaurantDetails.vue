@@ -139,7 +139,7 @@ export default {
 
           <div class="restaurant_info mb-3 d-md-flex align-items-center">
             <!-- variabile inidirizzo -->
-            <ul class="d-flex my-lg-0 mb-3 p-0 col-lg-4 me-2">
+            <ul class="d-flex my-md-0 mb-3 p-0 col-lg-4 me-2">
               <!-- variabile restaurant type -->
               <li class="list-unstyled">
                 <button class="type_tag_btn">italian</button>
@@ -148,7 +148,7 @@ export default {
               </li>
             </ul>
 
-            <div class="col-lg-4 d-flex align-content-center me-2 mb-2">
+            <div class="col-lg-4 my-md-0 d-flex align-content-center me-2 mb-2">
               <h4 class="bold m-0">{{ restaurants.address }}</h4>
             </div>
 
@@ -188,9 +188,9 @@ export default {
 
                   <div class="px-3">
                     <!-- variabile nome piatto -->
-                    <h4 class="text-capitalize">{{ dish.name }}</h4>
+                    <h4 class="dish_name text-capitalize">{{ dish.name }}</h4>
                     <!-- variabile descrizione piatto -->
-                    <p>{{ dish.description }}</p>
+                    <p class="dish_description">{{ dish.description }}</p>
                     <!-- variabile prezzo piatto -->
                   </div>
                 </div>
@@ -378,6 +378,18 @@ export default {
     background-color: #ffffff;
     border: 1px solid #949494;
 
+    .dish_name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: $text_color;
+    }
+
+    .dish_description {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: $text_color;
+    }
+
     &:hover {
       transform: scale(1.02);
       transition: transform 0.3s ease-in-out;
@@ -418,6 +430,7 @@ p {
 }
 
 .cart_responsive {
+
   .cart {
     translate: 0rem -5rem;
     flex-grow: 1;
@@ -425,7 +438,7 @@ p {
 
   @media (max-width: 1200px) {
     position: fixed;
-    bottom: 1%;
+    bottom: -3%;
   }
 }
 </style>
