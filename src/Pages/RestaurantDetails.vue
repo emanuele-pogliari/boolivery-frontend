@@ -137,7 +137,7 @@ export default {
           </div>
           <hr />
 
-          <div class="restaurant_info d-md-flex align-items-center">
+          <div class="restaurant_info mb-3 d-md-flex align-items-center">
             <!-- variabile inidirizzo -->
             <ul class="d-flex my-lg-0 mb-3 p-0 col-lg-4 me-2">
               <!-- variabile restaurant type -->
@@ -166,10 +166,10 @@ export default {
         <!--END RESTAURANT DETAILS-->
 
         <div class="d-flex p-0 my-2">
-          <div class="dishes_main_content d-flex justify-content-evenly gap-2 flex-wrap p-0 m-0">
+          <div class="dishes_main_content d-flex gap-2 flex-wrap p-0 m-0">
             <!-- --------------------------- -->
             <!-- RESTAURANT DISHES-->
-            <ul class="m-0 px-3 p-xl-0 py-3 d-flex" v-for="dish in restaurants.dishes">
+            <ul class="m-0 mb-3 px-3 d-flex" v-for="dish in restaurants.dishes">
               <li class="d-flex p-3 mx-0 flex-column rounded-4 flex-grow-1 position-relative">
                 <div class="item_quantity_badge fw-bolder slide-rotate-hor-top"
                   v-if="store.items.some((cartItem) => cartItem.id === dish.id)" :key="index">
@@ -196,6 +196,13 @@ export default {
                 </div>
                 <div class="d-flex justify-content-between align-content-center pt-2">
                   <div class="d-flex align-items-center">
+                    <!-- !!!!!!!!!!!!! -->
+                    <!-- REMOVE BUTTON -->
+                    <button class="dish_btn me-3" @click="addItem(dish)">
+                      <i class="fa-solid fa-minus"></i>
+                    </button>
+                    <!-- !!!!!!!!!!!!! -->
+                    <!-- REMOVE BUTTON -->
                     <h4 class="m-0 p-0">{{ dish.price }} €</h4>
                   </div>
                   <button class="dish_btn" @click="addItem(dish)">
@@ -315,7 +322,7 @@ export default {
   }
 
   ul {
-    max-width: 425px;
+    max-width: 445px;
     flex-grow: 1;
 
     @media (max-width: 1200px) {
