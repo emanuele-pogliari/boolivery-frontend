@@ -16,8 +16,6 @@ export default {
       restaurantsId: null,
       baseApiUrl: "http://127.0.0.1:8000/api/",
       store,
-
-      currentRestaurantId: null,
     };
   },
 
@@ -39,6 +37,7 @@ export default {
 
   created() {
     this.restaurantsId = this.$route.params.id;
+    this.store.currentRestaurantId = this.restaurantsId;
     console.log(this.baseApiUrl + "restaurants/" + this.restaurantsId);
     axios
       .get(this.baseApiUrl + "restaurants/" + this.restaurantsId)
@@ -117,16 +116,25 @@ export default {
         <i class="fa-solid fa-arrow-left me-1"></i>Back
       </button>
     </router-link>
-    <img v-if="restaurants.image" :src="restaurants.image.startsWith('http')
-      ? restaurants.image
-      : 'http://localhost:8000/storage/' + restaurants.image
-      " class="store-img restaurant_image" alt="..." />
-    <img v-else class="store-img" src="/img/homepage/placeholdertemp.jpg" alt="..." />
+    <img
+      v-if="restaurants.image"
+      :src="
+        restaurants.image.startsWith('http')
+          ? restaurants.image
+          : 'http://localhost:8000/storage/' + restaurants.image
+      "
+      class="store-img restaurant_image"
+      alt="..."
+    />
+    <img
+      v-else
+      class="store-img"
+      src="/img/homepage/placeholdertemp.jpg"
+      alt="..."
+    />
 
     <div class="d-flex gap-3 position-relative">
-
       <div class="restaurant_main_content d-flex row rounded-4 p-0 m-0">
-
         <div class="col-6 pt-4 py-3 px-3">
           <div>
             <div class="d-flex align-items-center gap-2">
@@ -150,7 +158,10 @@ export default {
             <h4 class="roboto-bold">{{ restaurants.address }}</h4>
             <div class="d-flex flex-column">
               <!-- variabile numero di telefono -->
-              <span><i class="fa-solid fa-phone me-2"></i>{{ restaurants.phone }}</span>
+              <span
+                ><i class="fa-solid fa-phone me-2"></i
+                >{{ restaurants.phone }}</span
+              >
               <!-- variabile VAT -->
               <span>VAT: {{ restaurants.vat }}</span>
             </div>
@@ -165,12 +176,23 @@ export default {
             <!-- RESTAURANT DISHES-->
             <ul class="m-0 p-3 d-flex" v-for="dish in restaurants.dishes">
               <li class="d-flex p-3 mx-0 flex-column border rounded-4">
-                <div class=" m-0 p-0 m-0 d-flex">
-                  <img v-if="dish.image" :src="dish.image.startsWith('http')
-                    ? dish.image
-                    : 'http://localhost:8000/storage/' + dish.image
-                    " class="dish_image" alt="..." />
-                  <img v-else class="dish_image" src="/img/homepage/placeholdertemp.jpg" alt="..." />
+                <div class="m-0 p-0 m-0 d-flex">
+                  <img
+                    v-if="dish.image"
+                    :src="
+                      dish.image.startsWith('http')
+                        ? dish.image
+                        : 'http://localhost:8000/storage/' + dish.image
+                    "
+                    class="dish_image"
+                    alt="..."
+                  />
+                  <img
+                    v-else
+                    class="dish_image"
+                    src="/img/homepage/placeholdertemp.jpg"
+                    alt="..."
+                  />
 
                   <div class="px-3">
                     <!-- variabile nome piatto -->
@@ -178,11 +200,11 @@ export default {
                     <!-- variabile descrizione piatto -->
                     <p>{{ dish.description }}</p>
                     <!-- variabile prezzo piatto -->
-
                   </div>
-
                 </div>
-                <div class="d-flex justify-content-between align-content-center pt-2">
+                <div
+                  class="d-flex justify-content-between align-content-center pt-2"
+                >
                   <div class="d-flex align-items-center">
                     <h4 class="m-0 p-0">{{ dish.price }} €</h4>
                   </div>
@@ -190,18 +212,12 @@ export default {
                     <i class="fa-solid fa-plus"></i>
                   </button>
                 </div>
-
               </li>
             </ul>
           </div>
-
         </div>
         <!-- --------------------------- -->
         <!--END RESTAURANT DISHES-->
-
-
-
-
       </div>
       <!-- --------------------------- -->
       <!-- DISHES CART -->
@@ -227,7 +243,6 @@ export default {
 
   border: 10px solid #ffffff;
 }
-
 
 .restaurant_main_content {
   width: 75%;
@@ -258,7 +273,6 @@ export default {
     p {
       font-size: 0.8rem;
     }
-
   }
 
   .type_tag_btn {
@@ -268,7 +282,6 @@ export default {
 
 .dishes_main_content {
   background-color: $background_color_dark;
-
 
   list-style: none;
   padding: 0;
@@ -281,7 +294,6 @@ export default {
       background-color: #ffffff;
 
       &:hover {
-
         transform: scale(1.02);
         transition: transform 0.3s ease-in-out;
       }
@@ -289,7 +301,6 @@ export default {
   }
 
   h4 {
-
     font-size: 1rem;
     font-weight: 500;
     color: $text_color;

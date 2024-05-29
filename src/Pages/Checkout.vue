@@ -148,11 +148,13 @@ export default {
 
 <template>
   <div class="container my-4">
-    <div class="d-flex row justify-content-center">
+    <div
+      v-if="store.items.length != 0"
+      class="d-flex row justify-content-center"
+    >
       <div class="col-6 d-flex">
         <form method="POST" @submit.prevent class="form_data">
           <div id="dropin-container"></div>
-
           <div class="mb-3 checkout_field">
             <label for="orderInfo.customer_name" class="form-label"
               >Name *</label
@@ -227,6 +229,24 @@ export default {
       </div>
       <div class="col-4">
         <AppCart></AppCart>
+      </div>
+    </div>
+    <div v-else class="d-flex row justify-content-center">
+      <div class="col-12">
+        <h2>
+          Your cart is empty. Please, back to restaurant page and add something
+          before continue.
+        </h2>
+        <button class="btn btn-warning">
+          <router-link
+            class="text-decoration-none text-black"
+            :to="{
+              name: 'restaurant',
+              params: { id: store.currentRestaurantId },
+            }"
+            >Back to restaurant</router-link
+          >
+        </button>
       </div>
     </div>
   </div>
