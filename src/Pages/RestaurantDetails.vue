@@ -164,8 +164,17 @@ export default {
             <!-- --------------------------- -->
             <!-- RESTAURANT DISHES-->
             <ul class="m-0 p-3 d-flex" v-for="dish in restaurants.dishes">
-              <li class="d-flex p-3 mx-0 flex-column border rounded-4 flex-grow-1">
+
+
+              <li class="d-flex p-3 mx-0 flex-column rounded-4 flex-grow-1 position-relative">
+
+                <div class="item_quantity_badge fw-bolder slide-rotate-hor-top" v-for="(item, index) in store.items"
+                  :key="index">
+                  {{ item.quantity }}x
+                </div>
+
                 <div class=" m-0 p-0 m-0 d-flex">
+
                   <img v-if="dish.image" :src="dish.image.startsWith('http')
                     ? dish.image
                     : 'http://localhost:8000/storage/' + dish.image
@@ -300,51 +309,102 @@ export default {
 
     }
 
+    .item_quantity_badge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: $secondary_color;
+      color: $text_color;
+      border-top-left-radius: 0.9rem;
+      border: 1px solid $primary_color;
+      border-left: none;
+      border-top: none;
+      padding: 0.5rem;
+      font-size: 0.8rem;
+    }
 
-    li {
-      background-color: #ffffff;
+    .slide-rotate-hor-top {
+      -webkit-animation: slide-rotate-hor-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) reverse both;
+      animation: slide-rotate-hor-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) reverse both;
+    }
 
-      &:hover {
+    @-webkit-keyframes slide-rotate-hor-top {
+      0% {
+        -webkit-transform: translateY(0) rotateX(0deg);
+        transform: translateY(0) rotateX(0deg);
+      }
 
-        transform: scale(1.02);
-        transition: transform 0.3s ease-in-out;
+      100% {
+        -webkit-transform: translateY(-150px) rotateX(-90deg);
+        transform: translateY(-150px) rotateX(-90deg);
       }
     }
+
+    @keyframes slide-rotate-hor-top {
+      0% {
+        -webkit-transform: translateY(0) rotateX(0deg);
+        transform: translateY(0) rotateX(0deg);
+      }
+
+      100% {
+        -webkit-transform: translateY(-150px) rotateX(-90deg);
+        transform: translateY(-150px) rotateX(-90deg);
+      }
+    }
+
+
   }
 
-  h4 {
 
-    font-size: 1rem;
-    font-weight: 500;
-    color: $text_color;
-  }
 
-  p {
-    font-size: 0.8rem;
-    color: $text_color;
-  }
 
-  .dish_image {
-    object-fit: cover;
-    width: 115px;
-    height: 115px;
-    border-radius: 1rem;
-    color: $text_color;
-  }
+  li {
+    background-color: #ffffff;
+    border: 1px solid $primary_color;
 
-  // .ingredient {
-  //   border: 1px solid $primary_color;
-  //   border-radius: 0.5rem;
-  //   padding: 0.2rem;
-  //   margin-right: 0.2rem;
-  //   text-decoration: none;
-  //   list-style: none;
-  // }
 
-  .dish_btn {
-    @include shopping_cart_button;
+
+    &:hover {
+
+      transform: scale(1.02);
+      transition: transform 0.3s ease-in-out;
+    }
   }
 }
+
+h4 {
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: $text_color;
+}
+
+p {
+  font-size: 0.8rem;
+  color: $text_color;
+}
+
+.dish_image {
+  object-fit: cover;
+  width: 115px;
+  height: 115px;
+  border-radius: 1rem;
+  color: $text_color;
+}
+
+// .ingredient {
+//   border: 1px solid $primary_color;
+//   border-radius: 0.5rem;
+//   padding: 0.2rem;
+//   margin-right: 0.2rem;
+//   text-decoration: none;
+//   list-style: none;
+// }
+
+.dish_btn {
+  @include shopping_cart_button;
+}
+
 
 
 .cart_responsive {
