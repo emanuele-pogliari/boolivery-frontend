@@ -127,7 +127,7 @@ export default {
 
       <div class="restaurant_main_content d-flex row rounded-4 p-0 m-0">
 
-        <div class="col-6 pt-4 py-3 px-3">
+        <div class="col-8 col-md-10 pt-4 py-3 px-3">
           <div>
             <div class="d-flex align-items-center gap-2">
               <h2 class="roboto-bold fw-bolder">{{ restaurants.name }}</h2>
@@ -137,23 +137,30 @@ export default {
               <p class="m-0">Free delivery for any order over 25€</p>
             </div>
           </div>
-          <hr />
+          <hr>
 
-          <div>
-            <ul class="d-flex p-0">
+          <div class="restaurant_info d-md-flex align-items-center">
+            <!-- variabile inidirizzo -->
+            <ul class="d-flex p-0 col-lg-4">
               <!-- variabile restaurant type -->
-              <li v-for="type in restaurants.types" style="list-style: none">
-                <button class="type_tag_btn">{{ type.type }}</button>
+              <li class="list-unstyled">
+                <button class="type_tag_btn">italian</button>
+                <button class="type_tag_btn">italian</button>
+                <button class="type_tag_btn">italian</button>
               </li>
             </ul>
-            <!-- variabile inidirizzo -->
-            <h4 class="roboto-bold">{{ restaurants.address }}</h4>
-            <div class="d-flex flex-column">
+
+            <div class="col-lg-4">
+              <h4 class="bold">{{ restaurants.address }}</h4>
+            </div>
+
+            <div class="d-flex flex-column col-lg-4">
               <!-- variabile numero di telefono -->
               <span><i class="fa-solid fa-phone me-2"></i>{{ restaurants.phone }}</span>
               <!-- variabile VAT -->
               <span>VAT: {{ restaurants.vat }}</span>
             </div>
+
           </div>
         </div>
         <!-- --------------------------- -->
@@ -168,12 +175,14 @@ export default {
 
               <li class="d-flex p-3 mx-0 flex-column rounded-4 flex-grow-1 position-relative">
 
-                <div class="item_quantity_badge fw-bolder slide-rotate-hor-top" v-for="(item, index) in store.items"
+                <div class="item_quantity_badge  slide-rotate-hor-top" v-for="(item, index) in store.items"
                   :key="index">
-                  {{ item.quantity }}x
+                  <span class="fw-bolder">
+                    {{ item.quantity }}x
+                  </span>
                 </div>
 
-                <div class=" m-0 p-0 m-0 d-flex">
+                <div class="m-0 p-0 m-0 d-flex">
 
                   <img v-if="dish.image" :src="dish.image.startsWith('http')
                     ? dish.image
@@ -281,9 +290,16 @@ export default {
 
   }
 
-  .type_tag_btn {
-    @include tag_type_btn;
+  .restaurant_info {
+
+
+
+    .type_tag_btn {
+      @include tag_type_btn;
+    }
+
   }
+
 }
 
 .dishes_main_content {
@@ -321,7 +337,7 @@ export default {
       border-left: none;
       border-top: none;
       padding: 0.5rem;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
 
     .slide-rotate-hor-top {

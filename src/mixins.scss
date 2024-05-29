@@ -100,10 +100,8 @@
 
 
 @mixin tag_type_btn {
-        cursor: pointer;
-    
         padding: 6px 12px;
-        width: 8rem;
+        min-width: fit-content;
         border-radius: 20px;
         border: 1px solid #fefefe;
     
@@ -113,12 +111,6 @@
         font-weight: 600;
     
         transition: all 0.2s linear;
-    
-        &:hover {
-            background-color: #fbb345;
-            color: #ffffff;
-            border: 1px solid #fefefe;
-        }
 }
 // -----------------------------------------------------------------------------
 
