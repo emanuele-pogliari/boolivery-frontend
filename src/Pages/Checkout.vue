@@ -33,11 +33,6 @@ export default {
   },
 
   methods: {
-    // test orderinfo
-    checkOrderInfo() {
-      console.log(this.orderInfo);
-    },
-
     // Get client token
     getClientToken() {
       axios
@@ -68,8 +63,26 @@ export default {
       );
     },
 
+    updateTotalCartPrice() {
+      const totalCartPrice = this.store.items
+        .reduce((total, item) => {
+          return total + item.price * item.quantity;
+        }, 0)
+        .toFixed(2);
+
+      this.store.totalCartPrice = totalCartPrice;
+      localStorage.setItem("items", JSON.stringify(this.store.items));
+      localStorage.setItem("totalCartPrice", totalCartPrice);
+
+      console.log("Prezzo totale del carrello aggiornato:", totalCartPrice);
+    },
+
+    updateTotalItems() {
+      this.store.totalItems = this.store.items.length;
+      localStorage.setItem("totalItems", this.store.totalItems);
+    },
+
     paymentFunction() {
-      this.checkOrderInfo();
       if (!this.instance) {
         console.error("Drop-in instance is not available.");
         return;
@@ -109,6 +122,18 @@ export default {
             console.log(response);
             console.log("Payment successful");
             this.isProcessing = false; // Set loader to false after payment is successful
+            //svuota il carrello dopo il pagamento
+            localStorage.removeItem("items");
+
+            // Clear Vuex store items and total price
+            this.store.items = [];
+            this.store.totalCartPrice = 0;
+
+            // Update total items after clearing
+            this.updateTotalItems();
+
+            // Update total price after clearing
+            this.updateTotalCartPrice();
           })
           .catch((error) => {
             console.log(error);
@@ -123,11 +148,13 @@ export default {
 
 <template>
   <div class="container my-4">
-    <div class="d-flex row justify-content-center">
+    <div
+      v-if="store.items.length != 0"
+      class="d-flex row justify-content-center"
+    >
       <div class="col-6 d-flex">
         <form method="POST" @submit.prevent class="form_data">
           <div id="dropin-container"></div>
-
           <div class="mb-3 checkout_field">
             <label for="orderInfo.customer_name" class="form-label"
               >Name *</label
@@ -192,7 +219,7 @@ export default {
             ></textarea>
           </div>
 
-          <div class="loader-container"> 
+          <div class="loader-container">
             <button id="submit-button" type="submit" @click="paymentFunction">
               Purchase
             </button>
@@ -202,6 +229,24 @@ export default {
       </div>
       <div class="col-4">
         <AppCart></AppCart>
+      </div>
+    </div>
+    <div v-else class="d-flex row justify-content-center">
+      <div class="col-12">
+        <h2>
+          Your cart is empty. Please, back to restaurant page and add something
+          before continue.
+        </h2>
+        <button class="btn btn-warning">
+          <router-link
+            class="text-decoration-none text-black"
+            :to="{
+              name: 'restaurant',
+              params: { id: store.currentRestaurantId },
+            }"
+            >Back to restaurant</router-link
+          >
+        </button>
       </div>
     </div>
   </div>
@@ -255,5 +300,9 @@ export default {
 .loader {
   @include loader;
 }
-@keyframes l9 {to{transform: rotate(1turn)}}
+@keyframes l9 {
+  to {
+    transform: rotate(1turn);
+  }
+}
 </style>
