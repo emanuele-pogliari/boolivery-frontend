@@ -111,22 +111,35 @@ export default {
 </script>
 
 <template>
-  <div v-if="restaurants" class="container nunito-restaurant-details p-0" style="max-width: 1200px">
+  <div
+    v-if="restaurants"
+    class="container nunito-restaurant-details p-0"
+    style="max-width: 1200px"
+  >
     <router-link to="/">
       <button class="btn">
         <i class="fa-solid fa-arrow-left me-1"></i>Back
       </button>
     </router-link>
-    <img v-if="restaurants.image" :src="restaurants.image.startsWith('http')
-      ? restaurants.image
-      : 'http://localhost:8000/storage/' + restaurants.image
-      " class="store-img restaurant_image" alt="..." />
-    <img v-else class="store-img" src="/img/homepage/placeholdertemp.jpg" alt="..." />
+    <img
+      v-if="restaurants.image"
+      :src="
+        restaurants.image.startsWith('http')
+          ? restaurants.image
+          : 'http://localhost:8000/storage/' + restaurants.image
+      "
+      class="store-img restaurant_image"
+      alt="..."
+    />
+    <img
+      v-else
+      class="store-img"
+      src="/img/homepage/placeholdertemp.jpg"
+      alt="..."
+    />
 
     <div class="d-flex gap-3 position-relative">
-
       <div class="restaurant_main_content d-flex row rounded-4 p-0 m-0">
-
         <div class="col-8 col-md-10 pt-4 py-3 px-3">
           <div>
             <div class="d-flex align-items-center gap-2">
@@ -137,7 +150,7 @@ export default {
               <p class="m-0">Free delivery for any order over 25€</p>
             </div>
           </div>
-          <hr>
+          <hr />
 
           <div class="restaurant_info d-md-flex align-items-center">
             <!-- variabile inidirizzo -->
@@ -156,11 +169,13 @@ export default {
 
             <div class="d-flex flex-column col-lg-4">
               <!-- variabile numero di telefono -->
-              <span><i class="fa-solid fa-phone me-2"></i>{{ restaurants.phone }}</span>
+              <span
+                ><i class="fa-solid fa-phone me-2"></i
+                >{{ restaurants.phone }}</span
+              >
               <!-- variabile VAT -->
               <span>VAT: {{ restaurants.vat }}</span>
             </div>
-
           </div>
         </div>
         <!-- --------------------------- -->
@@ -171,24 +186,37 @@ export default {
             <!-- --------------------------- -->
             <!-- RESTAURANT DISHES-->
             <ul class="m-0 p-3 d-flex" v-for="dish in restaurants.dishes">
-
-
-              <li class="d-flex p-3 mx-0 flex-column rounded-4 flex-grow-1 position-relative">
-
-                <div class="item_quantity_badge  slide-rotate-hor-top" v-for="(item, index) in store.items"
-                  :key="index">
-                  <span class="fw-bolder">
-                    {{ item.quantity }}x
-                  </span>
+              <li
+                class="d-flex p-3 mx-0 flex-column rounded-4 flex-grow-1 position-relative"
+              >
+                <div
+                  class="item_quantity_badge fw-bolder slide-rotate-hor-top"
+                  v-if="store.items.some((cartItem) => cartItem.id === dish.id)"
+                  :key="index"
+                >
+                  {{
+                    store.items.find((cartItem) => cartItem.id === dish.id)
+                      .quantity
+                  }}x
                 </div>
 
                 <div class="m-0 p-0 m-0 d-flex">
-
-                  <img v-if="dish.image" :src="dish.image.startsWith('http')
-                    ? dish.image
-                    : 'http://localhost:8000/storage/' + dish.image
-                    " class="dish_image" alt="..." />
-                  <img v-else class="dish_image" src="/img/homepage/placeholdertemp.jpg" alt="..." />
+                  <img
+                    v-if="dish.image"
+                    :src="
+                      dish.image.startsWith('http')
+                        ? dish.image
+                        : 'http://localhost:8000/storage/' + dish.image
+                    "
+                    class="dish_image"
+                    alt="..."
+                  />
+                  <img
+                    v-else
+                    class="dish_image"
+                    src="/img/homepage/placeholdertemp.jpg"
+                    alt="..."
+                  />
 
                   <div class="px-3">
                     <!-- variabile nome piatto -->
@@ -196,11 +224,11 @@ export default {
                     <!-- variabile descrizione piatto -->
                     <p>{{ dish.description }}</p>
                     <!-- variabile prezzo piatto -->
-
                   </div>
-
                 </div>
-                <div class="d-flex justify-content-between align-content-center pt-2">
+                <div
+                  class="d-flex justify-content-between align-content-center pt-2"
+                >
                   <div class="d-flex align-items-center">
                     <h4 class="m-0 p-0">{{ dish.price }} €</h4>
                   </div>
@@ -208,18 +236,12 @@ export default {
                     <i class="fa-solid fa-plus"></i>
                   </button>
                 </div>
-
               </li>
             </ul>
           </div>
-
         </div>
         <!-- --------------------------- -->
         <!--END RESTAURANT DISHES-->
-
-
-
-
       </div>
       <!-- --------------------------- -->
       <!-- CART -->
@@ -252,7 +274,6 @@ export default {
   border: 10px solid #ffffff;
 }
 
-
 .restaurant_main_content {
   width: 75%;
   background-color: $background_color_dark;
@@ -261,9 +282,7 @@ export default {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 1200px) {
-
     width: 100%;
-
   }
 
   .restaurant_image {
@@ -287,19 +306,13 @@ export default {
     p {
       font-size: 0.8rem;
     }
-
   }
 
   .restaurant_info {
-
-
-
     .type_tag_btn {
       @include tag_type_btn;
     }
-
   }
-
 }
 
 .dishes_main_content {
@@ -312,7 +325,6 @@ export default {
     flex-wrap: nowrap !important;
     width: 100%;
     display: block !important;
-
   }
 
   ul {
@@ -320,9 +332,7 @@ export default {
     flex-grow: 1;
 
     @media (max-width: 1200px) {
-
       max-width: 100%;
-
     }
 
     .item_quantity_badge {
@@ -341,8 +351,10 @@ export default {
     }
 
     .slide-rotate-hor-top {
-      -webkit-animation: slide-rotate-hor-top 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) reverse both;
-      animation: slide-rotate-hor-top 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) reverse both;
+      -webkit-animation: slide-rotate-hor-top 0.2s
+        cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
+      animation: slide-rotate-hor-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+        reverse both;
     }
 
     @-webkit-keyframes slide-rotate-hor-top {
@@ -368,21 +380,13 @@ export default {
         transform: translateY(-20px) rotateX(-90deg);
       }
     }
-
-
   }
-
-
-
 
   li {
     background-color: #ffffff;
     border: 1px solid $primary_color;
 
-
-
     &:hover {
-
       transform: scale(1.02);
       transition: transform 0.3s ease-in-out;
     }
@@ -390,7 +394,6 @@ export default {
 }
 
 h4 {
-
   font-size: 1rem;
   font-weight: 500;
   color: $text_color;
@@ -422,10 +425,7 @@ p {
   @include shopping_cart_button;
 }
 
-
-
 .cart_responsive {
-
   .cart {
     translate: 0rem -5rem;
     flex-grow: 1;
@@ -434,8 +434,6 @@ p {
   @media (max-width: 1200px) {
     position: fixed;
     bottom: 1%;
-
   }
-
 }
 </style>
