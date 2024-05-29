@@ -111,36 +111,21 @@ export default {
 </script>
 
 <template>
-  <div
-    v-if="restaurants"
-    class="container nunito-restaurant-details p-0"
-    style="max-width: 1200px"
-  >
+  <div v-if="restaurants" class="container nunito-restaurant-details p-0" style="max-width: 1200px">
     <router-link to="/">
       <button class="btn">
         <i class="fa-solid fa-arrow-left me-1"></i>Back
       </button>
     </router-link>
-    <img
-      v-if="restaurants.image"
-      :src="
-        restaurants.image.startsWith('http')
-          ? restaurants.image
-          : 'http://localhost:8000/storage/' + restaurants.image
-      "
-      class="store-img restaurant_image"
-      alt="..."
-    />
-    <img
-      v-else
-      class="store-img"
-      src="/img/homepage/placeholdertemp.jpg"
-      alt="..."
-    />
+    <img v-if="restaurants.image" :src="restaurants.image.startsWith('http')
+      ? restaurants.image
+      : 'http://localhost:8000/storage/' + restaurants.image
+      " class="store-img restaurant_image" alt="..." />
+    <img v-else class="store-img" src="/img/homepage/placeholdertemp.jpg" alt="..." />
 
     <div class="d-flex gap-3 position-relative">
       <div class="restaurant_main_content d-flex row rounded-4 p-0 m-0">
-        <div class="col-8 col-md-10 pt-4 py-3 px-3">
+        <div class="col-8 col-md-12 pt-4 py-3 px-3">
           <div>
             <div class="d-flex align-items-center gap-2">
               <h2 class="roboto-bold fw-bolder">{{ restaurants.name }}</h2>
@@ -154,7 +139,7 @@ export default {
 
           <div class="restaurant_info d-md-flex align-items-center">
             <!-- variabile inidirizzo -->
-            <ul class="d-flex p-0 col-lg-4">
+            <ul class="d-flex m-0 mb-3 p-0 col-lg-4 me-2">
               <!-- variabile restaurant type -->
               <li class="list-unstyled">
                 <button class="type_tag_btn">italian</button>
@@ -163,18 +148,17 @@ export default {
               </li>
             </ul>
 
-            <div class="col-lg-4">
-              <h4 class="bold">{{ restaurants.address }}</h4>
+            <div class="col-lg-4 d-flex align-content-center me-2 mb-2">
+              <h4 class="bold m-0">{{ restaurants.address }}</h4>
             </div>
 
-            <div class="d-flex flex-column col-lg-4">
-              <!-- variabile numero di telefono -->
-              <span
-                ><i class="fa-solid fa-phone me-2"></i
-                >{{ restaurants.phone }}</span
-              >
-              <!-- variabile VAT -->
-              <span>VAT: {{ restaurants.vat }}</span>
+            <div class="d-flex col-lg-4">
+              <div class="d-flex flex-column align-items-center flex-md-row gap-2 gap-md-0">
+                <!-- variabile numero di telefono -->
+                <span><i class="fa-solid fa-phone me-2"></i>{{ restaurants.phone }}</span>
+                <!-- variabile VAT -->
+                <span><i class="fa-solid fa-id-card me-2"></i>{{ restaurants.vat }}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -182,18 +166,13 @@ export default {
         <!--END RESTAURANT DETAILS-->
 
         <div class="d-flex p-0 my-2">
-          <div class="dishes_main_content d-flex gap-2 flex-wrap p-0 m-0">
+          <div class="dishes_main_content d-flex justify-content-evenly gap-2 flex-wrap p-0 m-0">
             <!-- --------------------------- -->
             <!-- RESTAURANT DISHES-->
-            <ul class="m-0 p-3 d-flex" v-for="dish in restaurants.dishes">
-              <li
-                class="d-flex p-3 mx-0 flex-column rounded-4 flex-grow-1 position-relative"
-              >
-                <div
-                  class="item_quantity_badge fw-bolder slide-rotate-hor-top"
-                  v-if="store.items.some((cartItem) => cartItem.id === dish.id)"
-                  :key="index"
-                >
+            <ul class="m-0 px-3 p-xl-0 py-3 d-flex" v-for="dish in restaurants.dishes">
+              <li class="d-flex p-3 mx-0 flex-column rounded-4 flex-grow-1 position-relative">
+                <div class="item_quantity_badge fw-bolder slide-rotate-hor-top"
+                  v-if="store.items.some((cartItem) => cartItem.id === dish.id)" :key="index">
                   {{
                     store.items.find((cartItem) => cartItem.id === dish.id)
                       .quantity
@@ -201,22 +180,11 @@ export default {
                 </div>
 
                 <div class="m-0 p-0 m-0 d-flex">
-                  <img
-                    v-if="dish.image"
-                    :src="
-                      dish.image.startsWith('http')
-                        ? dish.image
-                        : 'http://localhost:8000/storage/' + dish.image
-                    "
-                    class="dish_image"
-                    alt="..."
-                  />
-                  <img
-                    v-else
-                    class="dish_image"
-                    src="/img/homepage/placeholdertemp.jpg"
-                    alt="..."
-                  />
+                  <img v-if="dish.image" :src="dish.image.startsWith('http')
+                    ? dish.image
+                    : 'http://localhost:8000/storage/' + dish.image
+                    " class="dish_image" alt="..." />
+                  <img v-else class="dish_image" src="/img/homepage/placeholdertemp.jpg" alt="..." />
 
                   <div class="px-3">
                     <!-- variabile nome piatto -->
@@ -226,9 +194,7 @@ export default {
                     <!-- variabile prezzo piatto -->
                   </div>
                 </div>
-                <div
-                  class="d-flex justify-content-between align-content-center pt-2"
-                >
+                <div class="d-flex justify-content-between align-content-center pt-2">
                   <div class="d-flex align-items-center">
                     <h4 class="m-0 p-0">{{ dish.price }} €</h4>
                   </div>
@@ -312,6 +278,27 @@ export default {
     .type_tag_btn {
       @include tag_type_btn;
     }
+
+    span {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: $text_color;
+      margin-right: 1rem;
+
+      min-width: fit-content;
+
+    }
+
+
+    i {
+      font-size: 0.6rem;
+      padding: 0.5rem;
+      border-radius: 50%;
+      background-color: $background_color;
+      color: $primary_color;
+      border: 1px solid $deactivated_text;
+
+    }
   }
 }
 
@@ -343,7 +330,7 @@ export default {
       color: $text_color;
       border-top-left-radius: 0.9rem;
       border-bottom-right-radius: 0.3rem;
-      border: 1px solid $primary_color;
+
       border-left: none;
       border-top: none;
       padding: 0.5rem;
@@ -351,10 +338,8 @@ export default {
     }
 
     .slide-rotate-hor-top {
-      -webkit-animation: slide-rotate-hor-top 0.2s
-        cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
-      animation: slide-rotate-hor-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-        reverse both;
+      -webkit-animation: slide-rotate-hor-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
+      animation: slide-rotate-hor-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
     }
 
     @-webkit-keyframes slide-rotate-hor-top {
@@ -384,7 +369,7 @@ export default {
 
   li {
     background-color: #ffffff;
-    border: 1px solid $primary_color;
+    border: 1px solid #949494;
 
     &:hover {
       transform: scale(1.02);
