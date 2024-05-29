@@ -316,6 +316,7 @@ export default {
       background-color: $secondary_color;
       color: $text_color;
       border-top-left-radius: 0.9rem;
+      border-bottom-right-radius: 0.3rem;
       border: 1px solid $primary_color;
       border-left: none;
       border-top: none;
