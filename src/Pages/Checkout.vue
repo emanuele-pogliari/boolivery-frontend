@@ -150,75 +150,44 @@ export default {
 
 <template>
   <div class="container my-4">
-    <div
-      v-if="store.items.length != 0"
-      class="d-flex row justify-content-center"
-    >
-      <div class="col-6 d-flex">
+    <!-- v-if="store.items.length != 0" -->
+    <div class="d-flex row justify-content-center flex-xl-row-reverse">
+      <div class="cart_responsive col-12 col-xl-4">
+        <AppCart></AppCart>
+      </div>
+      <div class="col-12 col-xl-6 d-flex">
         <form method="POST" @submit.prevent class="form_data">
           <div id="dropin-container"></div>
           <div class="mb-3 checkout_field">
-            <label for="orderInfo.customer_name" class="form-label"
-              >Name *</label
-            >
-            <input
-              v-model="orderInfo.customer_name"
-              type="text"
-              class="form-control"
-              id="orderInfo.customer_name"
-            />
+            <label for="orderInfo.customer_name" class="form-label">Name *</label>
+            <input v-model="orderInfo.customer_name" type="text" class="form-control" id="orderInfo.customer_name" />
           </div>
 
           <div class="mb-3 checkout_field">
-            <label for="orderInfo.customer_last_name" class="form-label"
-              >Lastname *</label
-            >
-            <input
-              v-model="orderInfo.customer_last_name"
-              type="text"
-              class="form-control"
-              id="orderInfo.customer_last_name"
-            />
+            <label for="orderInfo.customer_last_name" class="form-label">Lastname *</label>
+            <input v-model="orderInfo.customer_last_name" type="text" class="form-control"
+              id="orderInfo.customer_last_name" />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="address" class="form-label">Address *</label>
-            <input
-              v-model="orderInfo.customer_address"
-              type="text"
-              class="form-control"
-              id="address"
-            />
+            <input v-model="orderInfo.customer_address" type="text" class="form-control" id="address" />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="phone" class="form-label">Phone *</label>
-            <input
-              v-model="orderInfo.customer_phone"
-              type="text"
-              class="form-control"
-              id="phone"
-            />
+            <input v-model="orderInfo.customer_phone" type="text" class="form-control" id="phone" />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="email" class="form-label">Email *</label>
-            <input
-              v-model="orderInfo.customer_email"
-              type="text"
-              class="form-control"
-              id="email"
-            />
+            <input v-model="orderInfo.customer_email" type="text" class="form-control" id="email" />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="orderInfo.customer_note" class="form-label">Note</label>
-            <textarea
-              v-model="orderInfo.customer_note"
-              class="form-control"
-              id="orderInfo.customer_note"
-              rows="3"
-            ></textarea>
+            <textarea v-model="orderInfo.customer_note" class="form-control" id="orderInfo.customer_note"
+              rows="3"></textarea>
           </div>
 
           <div class="loader-container">
@@ -229,28 +198,22 @@ export default {
           </div>
         </form>
       </div>
-      <div class="col-4">
-        <AppCart></AppCart>
-      </div>
+
     </div>
-    <div v-else class="d-flex row justify-content-center">
+    <!-- <div v-else class="d-flex row justify-content-center">
       <div class="col-12">
         <h2>
           Your cart is empty. Please, back to restaurant page and add something
           before continue.
         </h2>
         <button class="btn btn-warning">
-          <router-link
-            class="text-decoration-none text-black"
-            :to="{
-              name: 'restaurant',
-              params: { id: store.currentRestaurantId },
-            }"
-            >Back to restaurant</router-link
-          >
+          <router-link class="text-decoration-none text-black" :to="{
+            name: 'restaurant',
+            params: { id: store.currentRestaurantId },
+          }">Back to restaurant</router-link>
         </button>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -302,9 +265,12 @@ export default {
 .loader {
   @include loader;
 }
+
 @keyframes l9 {
   to {
     transform: rotate(1turn);
   }
 }
+
+.cart_responsive {}
 </style>
