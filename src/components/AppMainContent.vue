@@ -363,8 +363,10 @@ section {
   #cards_section {
     display: flex;
     flex-flow: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+
+    gap: .5rem;
 
     width: 100%;
     max-width: 1200px;
