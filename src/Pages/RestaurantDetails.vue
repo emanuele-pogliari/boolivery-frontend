@@ -2,6 +2,11 @@
 import axios from "axios";
 import AppCart from "../components/AppCart.vue";
 import { store } from "../store/store.js";
+import {
+  increaseItem,
+  decreaseItem,
+  updateTotalCartPrice,
+} from "../cartFunctions.js"; // Importa le funzioni
 
 export default {
   name: "RestaurantDetails",
@@ -31,18 +36,15 @@ export default {
   },
 
   mounted() {
-    // Load items from localStorage on component mount
     this.store.items = JSON.parse(localStorage.getItem("items")) || [];
   },
 
   created() {
     this.restaurantsId = this.$route.params.id;
     this.store.currentRestaurantId = this.restaurantsId;
-    console.log(this.baseApiUrl + "restaurants/" + this.restaurantsId);
     axios
       .get(this.baseApiUrl + "restaurants/" + this.restaurantsId)
       .then((res) => {
-        console.log(res.data.results);
         this.restaurants = res.data.results;
       });
   },
@@ -69,32 +71,29 @@ export default {
       };
 
       const alreadyOnCart = this.store.items.find(
-        (item) => item.id === newItem.id
+        (cartItem) => cartItem.id === newItem.id
       );
       if (alreadyOnCart) {
-        alreadyOnCart.total_dish_price += alreadyOnCart.price;
-        alreadyOnCart.quantity++;
+        increaseItem(alreadyOnCart, this.store);
       } else {
-        console.log(newItem);
         this.store.items.push(newItem);
+        updateTotalCartPrice(this.store);
       }
 
       localStorage.setItem("items", JSON.stringify(this.store.items));
-      this.updateTotalCartPrice(newItem);
+    },
+
+    decreaseItem(item) {
+      const cartItem = this.store.items.find(
+        (cartItem) => cartItem.id === item.id
+      );
+      if (cartItem) {
+        decreaseItem(cartItem, this.store);
+      }
     },
 
     updateTotalCartPrice() {
-      const totalCartPrice = this.store.items
-        .reduce((total, item) => {
-          return total + item.price * item.quantity;
-        }, 0)
-        .toFixed(2);
-
-      this.store.totalCartPrice = totalCartPrice;
-      localStorage.setItem("items", JSON.stringify(this.store.items));
-      localStorage.setItem("totalCartPrice", totalCartPrice);
-
-      console.log("Prezzo totale del carrello aggiornato:", totalCartPrice);
+      updateTotalCartPrice(this.store);
     },
 
     updateTotalItems() {
@@ -110,17 +109,32 @@ export default {
 </script>
 
 <template>
-  <div v-if="restaurants" class="container nunito-restaurant-details p-0" style="max-width: 1200px">
+  <div
+    v-if="restaurants"
+    class="container nunito-restaurant-details p-0"
+    style="max-width: 1200px"
+  >
     <router-link to="/">
       <button class="btn">
         <i class="fa-solid fa-arrow-left me-1"></i>Back
       </button>
     </router-link>
-    <img v-if="restaurants.image" :src="restaurants.image.startsWith('http')
-        ? restaurants.image
-        : 'http://localhost:8000/storage/' + restaurants.image
-      " class="store-img restaurant_image" alt="..." />
-    <img v-else class="store-img" src="/img/homepage/placeholdertemp.jpg" alt="..." />
+    <img
+      v-if="restaurants.image"
+      :src="
+        restaurants.image.startsWith('http')
+          ? restaurants.image
+          : 'http://localhost:8000/storage/' + restaurants.image
+      "
+      class="store-img restaurant_image"
+      alt="..."
+    />
+    <img
+      v-else
+      class="store-img"
+      src="/img/homepage/placeholdertemp.jpg"
+      alt="..."
+    />
 
     <div class="d-flex gap-3 position-relative">
       <div class="restaurant_main_content d-flex row rounded-4 p-0 m-0">
@@ -152,11 +166,19 @@ export default {
             </div>
 
             <div class="d-flex col-lg-4">
-              <div class="d-flex flex-column align-items-center flex-md-row gap-2 gap-md-0">
+              <div
+                class="d-flex flex-column align-items-center flex-md-row gap-2 gap-md-0"
+              >
                 <!-- variabile numero di telefono -->
-                <span><i class="fa-solid fa-phone me-2"></i>{{ restaurants.phone }}</span>
+                <span
+                  ><i class="fa-solid fa-phone me-2"></i
+                  >{{ restaurants.phone }}</span
+                >
                 <!-- variabile VAT -->
-                <span><i class="fa-solid fa-id-card me-2"></i>{{ restaurants.vat }}</span>
+                <span
+                  ><i class="fa-solid fa-id-card me-2"></i
+                  >{{ restaurants.vat }}</span
+                >
               </div>
             </div>
           </div>
@@ -169,9 +191,14 @@ export default {
             <!-- --------------------------- -->
             <!-- RESTAURANT DISHES-->
             <ul class="m-0 mb-3 px-3 d-flex" v-for="dish in restaurants.dishes">
-              <li class="d-flex p-3 mx-0 flex-column rounded-4 flex-grow-1 position-relative">
-                <div class="item_quantity_badge fw-bolder slide-rotate-hor-top"
-                  v-if="store.items.some((cartItem) => cartItem.id === dish.id)" :key="index">
+              <li
+                class="d-flex p-3 mx-0 flex-column rounded-4 flex-grow-1 position-relative"
+              >
+                <div
+                  class="item_quantity_badge fw-bolder slide-rotate-hor-top"
+                  v-if="store.items.some((cartItem) => cartItem.id === dish.id)"
+                  :key="index"
+                >
                   {{
                     store.items.find((cartItem) => cartItem.id === dish.id)
                       .quantity
@@ -179,11 +206,22 @@ export default {
                 </div>
 
                 <div class="m-0 p-0 m-0 d-flex">
-                  <img v-if="dish.image" :src="dish.image.startsWith('http')
-                    ? dish.image
-                    : 'http://localhost:8000/storage/' + dish.image
-                    " class="dish_image" alt="..." />
-                  <img v-else class="dish_image" src="/img/homepage/placeholdertemp.jpg" alt="..." />
+                  <img
+                    v-if="dish.image"
+                    :src="
+                      dish.image.startsWith('http')
+                        ? dish.image
+                        : 'http://localhost:8000/storage/' + dish.image
+                    "
+                    class="dish_image"
+                    alt="..."
+                  />
+                  <img
+                    v-else
+                    class="dish_image"
+                    src="/img/homepage/placeholdertemp.jpg"
+                    alt="..."
+                  />
 
                   <div class="px-3">
                     <!-- variabile nome piatto -->
@@ -193,11 +231,19 @@ export default {
                     <!-- variabile prezzo piatto -->
                   </div>
                 </div>
-                <div class="d-flex justify-content-between align-content-center pt-2">
+                <div
+                  class="d-flex justify-content-between align-content-center pt-2"
+                >
                   <div class="d-flex align-items-center">
                     <!-- !!!!!!!!!!!!! -->
                     <!-- REMOVE BUTTON -->
-                    <button class="dish_btn me-3" @click="addItem(dish)">
+                    <button
+                      class="dish_btn me-3"
+                      v-if="
+                        store.items.some((cartItem) => cartItem.id === dish.id)
+                      "
+                      @click="decreaseItem(dish)"
+                    >
                       <i class="fa-solid fa-minus"></i>
                     </button>
                     <!-- !!!!!!!!!!!!! -->
@@ -292,9 +338,7 @@ export default {
       margin-right: 1rem;
 
       min-width: fit-content;
-
     }
-
 
     i {
       font-size: 0.6rem;
@@ -303,7 +347,6 @@ export default {
       background-color: $background_color;
       color: $primary_color;
       border: 1px solid $deactivated_text;
-
     }
   }
 }
@@ -344,8 +387,10 @@ export default {
     }
 
     .slide-rotate-hor-top {
-      -webkit-animation: slide-rotate-hor-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
-      animation: slide-rotate-hor-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
+      -webkit-animation: slide-rotate-hor-top 0.2s
+        cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
+      animation: slide-rotate-hor-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+        reverse both;
     }
 
     @-webkit-keyframes slide-rotate-hor-top {
@@ -429,7 +474,6 @@ p {
 }
 
 .cart_responsive {
-
   .cart {
     translate: 0rem -5rem;
     flex-grow: 1;

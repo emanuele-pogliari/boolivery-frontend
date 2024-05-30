@@ -87,50 +87,53 @@ export default {
 <template>
   <div class="shopping_cart_main_content p-0 m-0">
     <div class="cart_box p-xl-3 p-0">
-
       <div class="cart_title cart_body">
-        <h1 class="text text-capitalize mx-5 px-3">your order</h1>
+        <h1 class="text text-capitalize mx-5 px-3">
+          {{ store.items.length == 0 ? "Cart is empty" : "your order" }}
+        </h1>
       </div>
       <!-- <hr /> -->
 
       <!-- base cart -->
       <div>
         <ul class="cart_body">
-          <li class="cart_item justify-content-between d-flex pb-3" v-for="(item, index) in store.items" :key="index">
+          <li
+            class="cart_item justify-content-between d-flex pb-3"
+            v-for="(item, index) in store.items"
+            :key="index"
+          >
             <div class="d-flex">
               <div class="d-flex flex-column align-items-start">
-
-                <span :v-model="item.quantity" class="quantity_input text-start fw-bolder">
+                <span
+                  :v-model="item.quantity"
+                  class="quantity_input text-start fw-bolder"
+                >
                   {{ item.quantity }}x
                 </span>
 
-
                 <span class="change_quantity">
-                  <i class="fa-solid fa-minus shopping_cart_button" @click="decreaseItem(item)"></i>
+                  <i
+                    class="fa-solid fa-minus shopping_cart_button"
+                    @click="decreaseItem(item)"
+                  ></i>
                 </span>
-
-
               </div>
-
-
 
               <div class="d-flex justify-content-start">
                 <div class="item_name">
                   {{ item.name }}
                 </div>
               </div>
-
             </div>
 
-
             <div class="d-flex justify-content-end flex-column align-items-end">
-
-              <div class="text-end">
-                {{ item.total_dish_price }} €
-              </div>
+              <div class="text-end">{{ item.total_dish_price }} €</div>
 
               <span class="change_quantity">
-                <i class="fa-solid fa-plus shopping_cart_button" @click="increaseItem(item)"></i>
+                <i
+                  class="fa-solid fa-plus shopping_cart_button"
+                  @click="increaseItem(item)"
+                ></i>
               </span>
             </div>
           </li>
@@ -139,11 +142,12 @@ export default {
       </div>
       <!-- <hr /> -->
 
-      <div class="curtain_checkout_btn">
+      <div class="curtain_checkout_btn" v-if="store.items.length != 0">
         <router-link :to="{ name: 'checkout' }">
-          <button class="checkout_btn">Order {{ totalItems }} at {{ store.totalCartPrice }} €</button>
+          <button class="checkout_btn">
+            Order {{ totalItems }} at {{ store.totalCartPrice }} €
+          </button>
         </router-link>
-
       </div>
     </div>
   </div>
@@ -153,8 +157,6 @@ export default {
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
-
-
 .shopping_cart_main_content {
   background-color: $background_color_dark;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
@@ -163,10 +165,8 @@ export default {
   // min-width: 300px;
   height: fit-content;
 
-
   @media (max-width: 1200px) {
     width: 100%;
-
   }
 
   .cart_item {
@@ -322,7 +322,6 @@ export default {
         padding: 0.5rem;
         margin-left: 0.5rem;
         cursor: pointer;
-
       }
 
       .item_name {
@@ -364,7 +363,6 @@ export default {
   }
 
   @media (max-width: 1200px) {
-
     .cart_box {
       padding: 0 !important;
     }
@@ -374,16 +372,11 @@ export default {
       background-color: $primary_color;
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
-
     }
 
     .cart_body {
       display: none;
     }
-
-
-
-
   }
 }
 </style>
