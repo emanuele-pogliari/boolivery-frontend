@@ -134,6 +134,8 @@ export default {
 
             // Update total price after clearing
             this.updateTotalCartPrice();
+
+            this.$router.push({ name: "confirm-order" });
           })
           .catch((error) => {
             console.log(error);

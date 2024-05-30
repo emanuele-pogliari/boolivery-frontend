@@ -1,31 +1,30 @@
 <script>
+import { store } from "../store/store.js";
+export default {
+  data() {
+    return {
+      store,
+    };
+  },
+};
 </script>
 
-
 <template>
-
   <div class="bg_confirmation_order mb-5">
     <div class="container">
-
       <div class="d-flex flex-column py-5">
-        <img class="pb-3" src="/img/logo/Logo.png" alt="">
+        <img class="pb-3" src="/img/logo/Logo.png" alt="" />
         <div class="customer_content">
-          <h1>Hey "your name", your order has been confirmed, enjoy!</h1>
+          <h1>Hey, your order has been confirmed, enjoy!</h1>
           <p>Find below the recipt from "restaurant name"</p>
         </div>
       </div>
 
-
-      <div>
-
-      </div>
-
+      <div></div>
     </div>
   </div>
 
-
   <div class="invoice container mb-5">
-
     <h2>Products</h2>
     <ul>
       <li>
@@ -34,13 +33,7 @@
       </li>
     </ul>
     <h2>total</h2>
-
   </div>
-
-
-
-
-
 </template>
 
 <style lang="scss" scoped>
@@ -48,7 +41,6 @@
 @use "/src/mixins.scss" as *;
 
 .bg_confirmation_order {
-
   background-color: $secondary_color;
   border-bottom-right-radius: 10rem;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
@@ -56,7 +48,6 @@
   img {
     width: 100px;
     display: block;
-
   }
 
   h1 {
@@ -67,8 +58,6 @@
   .customer_content {
     max-width: 600px;
   }
-
-
 }
 
 .invoice {
