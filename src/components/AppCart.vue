@@ -97,25 +97,15 @@ export default {
       <!-- base cart -->
       <div>
         <ul class="cart_body">
-          <li
-            class="cart_item justify-content-between d-flex pb-3"
-            v-for="(item, index) in store.items"
-            :key="index"
-          >
+          <li class="cart_item justify-content-between d-flex pb-3" v-for="(item, index) in store.items" :key="index">
             <div class="d-flex">
               <div class="d-flex flex-column align-items-start">
-                <span
-                  :v-model="item.quantity"
-                  class="quantity_input text-start fw-bolder"
-                >
+                <span :v-model="item.quantity" class="quantity_input text-start fw-bolder">
                   {{ item.quantity }}x
                 </span>
 
                 <span class="change_quantity">
-                  <i
-                    class="fa-solid fa-minus shopping_cart_button"
-                    @click="decreaseItem(item)"
-                  ></i>
+                  <i class="fa-solid fa-minus shopping_cart_button" @click="decreaseItem(item)"></i>
                 </span>
               </div>
 
@@ -130,10 +120,7 @@ export default {
               <div class="text-end">{{ item.total_dish_price }} €</div>
 
               <span class="change_quantity">
-                <i
-                  class="fa-solid fa-plus shopping_cart_button"
-                  @click="increaseItem(item)"
-                ></i>
+                <i class="fa-solid fa-plus shopping_cart_button" @click="increaseItem(item)"></i>
               </span>
             </div>
           </li>
@@ -352,31 +339,7 @@ export default {
   //   border: 0.5px solid $text_color;
   // }
 
-  .checkout_btn {
-    @include checkout_btn;
+  @include shopping_cart_behavior;
 
-    @media (max-width: 1200px) {
-      border-radius: 0;
-      border-top-right-radius: 15px !important;
-      border-top-left-radius: 15px !important;
-    }
-  }
-
-  @media (max-width: 1200px) {
-    .cart_box {
-      padding: 0 !important;
-    }
-
-    .curtain_checkout_btn {
-      height: 100vh;
-      background-color: $primary_color;
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
-    }
-
-    .cart_body {
-      display: none;
-    }
-  }
 }
 </style>

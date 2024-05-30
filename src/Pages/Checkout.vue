@@ -157,7 +157,7 @@ export default {
       </div>
       <div class="col-12 col-xl-6 d-flex">
         <form method="POST" @submit.prevent class="form_data">
-          <div id="dropin-container"></div>
+
           <div class="mb-3 checkout_field">
             <label for="orderInfo.customer_name" class="form-label">Name *</label>
             <input v-model="orderInfo.customer_name" type="text" class="form-control" id="orderInfo.customer_name" />
@@ -190,12 +190,14 @@ export default {
               rows="3"></textarea>
           </div>
 
+          <div id="dropin-container"></div>
           <div class="loader-container">
             <button id="submit-button" type="submit" @click="paymentFunction">
               Purchase
             </button>
             <div v-if="isProcessing" class="loader"></div>
           </div>
+
         </form>
       </div>
 
@@ -272,5 +274,14 @@ export default {
   }
 }
 
-.cart_responsive {}
+.cart_responsive {
+  @include shopping_cart_behavior;
+
+
+  @media (max-width: 1200px) {
+    height: 5rem;
+
+  }
+
+}
 </style>
