@@ -15,7 +15,7 @@ export default {
       <div class="d-flex flex-column py-5">
         <img class="pb-3" src="/img/logo/Logo.png" alt="" />
         <div class="customer_content">
-          <h1>Hey, your order has been confirmed, enjoy!</h1>
+          <h1>Hey,{{}} your order has been confirmed, enjoy!</h1>
           <p>Find below the recipt from "restaurant name"</p>
         </div>
       </div>
@@ -25,10 +25,10 @@ export default {
   </div>
 
   <div class="invoice container mb-5">
-    <h2>Products</h2>
+    <h2>Your Order</h2>
     <ul>
       <li>
-        <p>Product name</p>
+        <p>{{}}</p>
         <p>Product price</p>
       </li>
     </ul>

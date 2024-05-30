@@ -134,7 +134,6 @@ export default {
 
             // Update total price after clearing
             this.updateTotalCartPrice();
-
             this.$router.push({ name: "confirm-order" });
           })
           .catch((error) => {
@@ -166,6 +165,7 @@ export default {
               type="text"
               class="form-control"
               id="orderInfo.customer_name"
+              required
             />
           </div>
 
@@ -178,6 +178,7 @@ export default {
               type="text"
               class="form-control"
               id="orderInfo.customer_last_name"
+              required
             />
           </div>
 
@@ -188,6 +189,7 @@ export default {
               type="text"
               class="form-control"
               id="address"
+              required
             />
           </div>
 
@@ -198,6 +200,9 @@ export default {
               type="text"
               class="form-control"
               id="phone"
+              required
+              title="Phone number must be 10 digits"
+              pattern="d{10}"
             />
           </div>
 
@@ -208,6 +213,7 @@ export default {
               type="text"
               class="form-control"
               id="email"
+              required
             />
           </div>
 
@@ -218,6 +224,7 @@ export default {
               class="form-control"
               id="orderInfo.customer_note"
               rows="3"
+              placeholder="Add a note about your order"
             ></textarea>
           </div>
 
