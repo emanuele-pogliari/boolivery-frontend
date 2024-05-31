@@ -89,7 +89,27 @@ export default {
       localStorage.setItem("totalItems", this.store.totalItems);
     },
 
+    // Funzione di validazione del form
+    validateForm() {
+      if (
+        !this.orderInfo.customer_name ||
+        !this.orderInfo.customer_last_name ||
+        !this.orderInfo.customer_address ||
+        !this.orderInfo.customer_phone ||
+        !this.orderInfo.customer_email
+      ) {
+        alert("Please fill all the required fields");
+        return false;
+      }
+      return true;
+    },
+
     paymentFunction() {
+      // Controlla la validazione del form prima di procedere
+      if (!this.validateForm()) {
+        return;
+      }
+
       if (!this.instance) {
         console.error("Drop-in instance is not available.");
         return;
@@ -123,19 +143,10 @@ export default {
           ),
         };
 
-        localStorage.setItem("customer_name", this.orderInfo.customer_name);
-        localStorage.setItem(
-          "customer_last_name",
-          this.orderInfo.customer_last_name
-        );
-        localStorage.setItem(
-          "customer_address",
-          this.orderInfo.customer_address
-        );
-        localStorage.setItem("customer_email", this.orderInfo.customer_email);
-        localStorage.setItem("customer_phone", this.orderInfo.customer_phone);
-        localStorage.setItem("customer_note", this.orderInfo.customer_note);
-        localStorage.setItem("customer_note", this.orderInfo.customer_note);
+        // Salva i dati del form nel localStorage
+        Object.keys(this.orderInfo).forEach((key) => {
+          localStorage.setItem(key, this.orderInfo[key]);
+        });
 
         axios
           .post(this.baseApiUrl + "payment", paymentData)
@@ -143,7 +154,9 @@ export default {
             console.log(response);
             console.log("Payment successful");
             this.isProcessing = false; // Set loader to false after payment is successful
-            //svuota il carrello dopo il pagamento
+            // Svuota il carrello dopo il pagamento
+            this.store.items = [];
+            localStorage.removeItem("items");
 
             // Update total items after clearing
             this.updateTotalItems();
@@ -165,21 +178,18 @@ export default {
 
 <template>
   <div class="container my-4 mt-5">
-    <!-- v-if="store.items.length != 0" -->
     <div class="d-flex row justify-content-center flex-xl-row-reverse">
       <div class="cart_responsive col-12 col-xl-4 position-relative">
-        <!-- GO BACK TO RESTAURANT BTN HERE -->
         <button class="back_to_store_btn position-absolute">
           <span>back to </span>
           <span class="text-capitalize"> "restaurant"</span>
         </button>
-        <!-- GO BACK TO RESTAURANT BTN HERE -->
 
         <AppCart></AppCart>
       </div>
 
       <div class="col-12 col-xl-6 d-flex">
-        <form method="POST" @submit.prevent class="form_data">
+        <form method="POST" @submit.prevent="paymentFunction" class="form_data">
           <h3>{{ restaurant_name }}</h3>
           <div class="mb-3 checkout_field">
             <label for="orderInfo.customer_name" class="form-label"
@@ -251,7 +261,6 @@ export default {
               id="submit-button"
               class="d-flex justify-content-center align-items-center gap-2"
               type="submit"
-              @click="paymentFunction"
             >
               Pay with
               <div class="paypal_badge">
@@ -263,20 +272,6 @@ export default {
         </form>
       </div>
     </div>
-    <!-- <div v-else class="d-flex row justify-content-center">
-      <div class="col-12">
-        <h2>
-          Your cart is empty. Please, back to restaurant page and add something
-          before continue.
-        </h2>
-        <button class="btn btn-warning">
-          <router-link class="text-decoration-none text-black" :to="{
-            name: 'restaurant',
-            params: { id: store.currentRestaurantId },
-          }">Back to restaurant</router-link>
-        </button>
-      </div>
-    </div> -->
   </div>
 </template>
 
