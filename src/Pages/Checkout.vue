@@ -7,6 +7,11 @@ export default {
   components: {
     AppCart,
   },
+
+  props: {
+    restaurant: Object,
+  },
+
   data() {
     return {
       clientToken: null,
@@ -148,116 +153,88 @@ export default {
 </script>
 
 <template>
-  <div class="container my-4">
-    <div
-      v-if="store.items.length != 0"
-      class="d-flex row justify-content-center"
-    >
-      <div class="col-6 d-flex">
+  <div class="container my-4 mt-5">
+    <!-- v-if="store.items.length != 0" -->
+    <div class="d-flex row justify-content-center flex-xl-row-reverse">
+      <div class="cart_responsive col-12 col-xl-4 position-relative">
+
+        <!-- GO BACK TO RESTAURANT BTN HERE -->
+        <button class="back_to_store_btn position-absolute">
+          <span>back to </span>
+          <span class="text-capitalize"> "restaurant"</span>
+        </button>
+        <!-- GO BACK TO RESTAURANT BTN HERE -->
+
+        <AppCart></AppCart>
+
+      </div>
+
+
+      <div class="col-12 col-xl-6 d-flex">
         <form method="POST" @submit.prevent class="form_data">
-          <div id="dropin-container"></div>
+
           <div class="mb-3 checkout_field">
-            <label for="orderInfo.customer_name" class="form-label"
-              >Name *</label
-            >
-            <input
-              v-model="orderInfo.customer_name"
-              type="text"
-              class="form-control"
-              id="orderInfo.customer_name"
-              required
-            />
+            <label for="orderInfo.customer_name" class="form-label">Name *</label>
+            <input v-model="orderInfo.customer_name" type="text" class="form-control" id="orderInfo.customer_name" />
           </div>
 
           <div class="mb-3 checkout_field">
-            <label for="orderInfo.customer_last_name" class="form-label"
-              >Lastname *</label
-            >
-            <input
-              v-model="orderInfo.customer_last_name"
-              type="text"
-              class="form-control"
-              id="orderInfo.customer_last_name"
-              required
-            />
+            <label for="orderInfo.customer_last_name" class="form-label">Lastname *</label>
+            <input v-model="orderInfo.customer_last_name" type="text" class="form-control"
+              id="orderInfo.customer_last_name" />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="address" class="form-label">Address *</label>
-            <input
-              v-model="orderInfo.customer_address"
-              type="text"
-              class="form-control"
-              id="address"
-              required
-            />
+            <input v-model="orderInfo.customer_address" type="text" class="form-control" id="address" />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="phone" class="form-label">Phone *</label>
-            <input
-              v-model="orderInfo.customer_phone"
-              type="text"
-              class="form-control"
-              id="phone"
-              required
-              title="Phone number must be 10 digits"
-              pattern="d{10}"
-            />
+            <input v-model="orderInfo.customer_phone" type="text" class="form-control" id="phone" />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="email" class="form-label">Email *</label>
-            <input
-              v-model="orderInfo.customer_email"
-              type="text"
-              class="form-control"
-              id="email"
-              required
-            />
+            <input v-model="orderInfo.customer_email" type="text" class="form-control" id="email" />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="orderInfo.customer_note" class="form-label">Note</label>
-            <textarea
-              v-model="orderInfo.customer_note"
-              class="form-control"
-              id="orderInfo.customer_note"
-              rows="3"
-              placeholder="Add a note about your order"
-            ></textarea>
+            <textarea v-model="orderInfo.customer_note" class="form-control" id="orderInfo.customer_note"
+              rows="3"></textarea>
           </div>
 
+          <div id="dropin-container"></div>
           <div class="loader-container">
-            <button id="submit-button" type="submit" @click="paymentFunction">
-              Purchase
+            <button id="submit-button" class="d-flex justify-content-center align-items-center gap-2" type="submit"
+              @click="paymentFunction">
+              Pay with
+              <div class="paypal_badge">
+                <i class="fa-brands fa-paypal"></i> <span>Braintree</span>
+              </div>
             </button>
             <div v-if="isProcessing" class="loader"></div>
           </div>
+
         </form>
       </div>
-      <div class="col-4">
-        <AppCart></AppCart>
-      </div>
+
     </div>
-    <div v-else class="d-flex row justify-content-center">
+    <!-- <div v-else class="d-flex row justify-content-center">
       <div class="col-12">
         <h2>
           Your cart is empty. Please, back to restaurant page and add something
           before continue.
         </h2>
         <button class="btn btn-warning">
-          <router-link
-            class="text-decoration-none text-black"
-            :to="{
-              name: 'restaurant',
-              params: { id: store.currentRestaurantId },
-            }"
-            >Back to restaurant</router-link
-          >
+          <router-link class="text-decoration-none text-black" :to="{
+            name: 'restaurant',
+            params: { id: store.currentRestaurantId },
+          }">Back to restaurant</router-link>
         </button>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -282,21 +259,17 @@ export default {
   }
 
   #submit-button {
-    margin-top: 1rem;
-    padding: 0.5rem 0.8rem;
 
+    @include checkout_btn;
     background-color: $primary_color;
-    color: $secondary_color;
-    border: none;
-    border-radius: 12px;
-
-    transition: all 0.2s linear;
-    font-weight: 500;
+    border: 2px solid $primary_color;
+    color: $background_color;
 
     &:hover {
-      background-color: $secondary_color;
+      background-color: $background_color;
       color: $primary_color;
     }
+
   }
 }
 
@@ -304,14 +277,116 @@ export default {
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  button {
+    font-size: 1.2rem;
+
+    .paypal_badge {
+      @include tag_type_btn;
+      border: none;
+
+      padding-top: 0.2rem;
+      padding-bottom: 0.2rem;
+      padding-left: 0.8rem;
+      padding-right: 0.8rem;
+    }
+
+    i {
+      font-size: 1.2rem;
+    }
+
+    span {
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
+  }
+
 }
 
 .loader {
   @include loader;
 }
+
 @keyframes l9 {
   to {
     transform: rotate(1turn);
+  }
+}
+
+.cart_responsive {
+  @include shopping_cart_behavior;
+
+
+  @media (max-width: 1200px) {
+    height: fit-content;
+  }
+
+  .back_to_store_btn {
+    cursor: pointer;
+    top: -35px;
+    left: 14px;
+    z-index: -1;
+    max-width: fit-content;
+
+    padding: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 2rem;
+
+    border: none;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 5px;
+
+    display: flex;
+    justify-content: start;
+
+
+    color: $background_color;
+    background-color: $primary_color;
+
+    text-align: center;
+    font-weight: 500;
+  }
+
+}
+
+@media screen and (max-width: 1200px) {
+
+  .cart_responsive::v-deep .shopping_cart_main_content {
+    min-height: fit-content;
+    margin-bottom: 2rem !important;
+  }
+
+  .cart_responsive::v-deep .cart_body {
+    display: block;
+
+  }
+
+  .cart_responsive::v-deep .cart_box {
+    padding: 1rem !important;
+  }
+
+  .cart_responsive::v-deep .curtain_checkout_btn {
+    height: fit-content;
+    background-color: $background_color_dark;
+  }
+
+  .cart_responsive::v-deep .checkout_btn {
+
+    border-radius: 2rem;
+
+    &:hover {
+      background-color: $secondary_color;
+      cursor: default;
+    }
+  }
+}
+
+.cart_responsive::v-deep .checkout_btn {
+
+  &:hover {
+    background-color: $secondary_color;
+    cursor: default;
   }
 }
 </style>

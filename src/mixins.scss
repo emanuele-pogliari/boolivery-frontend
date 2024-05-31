@@ -155,3 +155,35 @@
 
     transition: all 0.2s linear;
 }
+
+// SHOPPING CART
+
+@mixin shopping_cart_behavior {
+
+    .checkout_btn {
+            @include checkout_btn;
+    
+            @media (max-width: 1200px) {
+                border-radius: 0;
+                border-top-right-radius: 15px !important;
+                border-top-left-radius: 15px !important;
+            }
+        }
+    
+        @media (max-width: 1200px) {
+            .cart_box {
+                padding: 0 !important;
+            }
+    
+            .curtain_checkout_btn {
+                height: 100vh;
+                background-color: #37373b;
+                border-top-left-radius: 15px;
+                border-top-right-radius: 15px;
+            }
+        
+            .cart_body {
+                display: none;
+            }
+        }
+}
