@@ -4,7 +4,26 @@ export default {
   data() {
     return {
       store,
+      order: JSON.parse(localStorage.getItem("items")) || [],
+      orderInfo: {
+        total_price: localStorage.getItem("totalCartPrice") || 0,
+        customer_name: localStorage.getItem("customer_name") || "",
+        customer_last_name: localStorage.getItem("customer_last_name") || "",
+        customer_address: localStorage.getItem("customer_address") || "",
+        customer_email: localStorage.getItem("customer_email") || "",
+        customer_phone: localStorage.getItem("customer_phone") || "",
+        customer_note: localStorage.getItem("customer_note") || "",
+      },
+      restaurant_name:
+        localStorage.getItem("restaurant_name") || "the restaurant",
     };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.$router.push({ name: "home" });
+    }, 5000);
+    localStorage.removeItem("items");
+    this.store.totalCartPrice = 0;
   },
 };
 </script>
@@ -15,24 +34,35 @@ export default {
       <div class="d-flex flex-column py-5">
         <img class="pb-3" src="/img/logo/Logo.png" alt="" />
         <div class="customer_content">
-          <h1>Hey,{{}} your order has been confirmed, enjoy!</h1>
-          <p>Find below the recipt from "restaurant name"</p>
+          <h1>
+            Hey, {{ orderInfo.customer_name }}
+            {{ orderInfo.customer_last_name }}, your order has been confirmed,
+            enjoy!
+          </h1>
+          <p>Find below the receipt from {{ restaurant_name }}"</p>
         </div>
       </div>
-
-      <div></div>
     </div>
   </div>
 
   <div class="invoice container mb-5">
     <h2>Your Order</h2>
     <ul>
-      <li>
-        <p>{{}}</p>
-        <p>Product price</p>
+      <li v-for="item in order" :key="item.id">
+        <p>{{ item.name }} (x{{ item.quantity }})</p>
+        <p>{{ item.price }} €</p>
       </li>
     </ul>
-    <h2>total</h2>
+    <h2>Total: {{ orderInfo.total_price }} €</h2>
+    <div>
+      <h3>Delivery Address</h3>
+      <p>{{ orderInfo.customer_address }}</p>
+      <h3>Contact Details</h3>
+      <p>Email: {{ orderInfo.customer_email }}</p>
+      <p>Phone: {{ orderInfo.customer_phone }}</p>
+      <h3>Note</h3>
+      <p>{{ orderInfo.customer_note }}</p>
+    </div>
   </div>
 </template>
 

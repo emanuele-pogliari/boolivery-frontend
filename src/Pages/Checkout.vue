@@ -2,6 +2,8 @@
 import axios from "axios";
 import { store } from "../store/store";
 import AppCart from "../components/AppCart.vue";
+import * as bootstrap from "bootstrap";
+import "bootstrap/dist/js/bootstrap.js";
 
 export default {
   components: {
@@ -30,6 +32,8 @@ export default {
         customer_note: "",
       },
       items: JSON.parse(localStorage.getItem("items")) || [],
+      restaurant_name:
+        localStorage.getItem("restaurant_name") || "the restaurant",
     };
   },
 
@@ -78,8 +82,6 @@ export default {
       this.store.totalCartPrice = totalCartPrice;
       localStorage.setItem("items", JSON.stringify(this.store.items));
       localStorage.setItem("totalCartPrice", totalCartPrice);
-
-      console.log("Prezzo totale del carrello aggiornato:", totalCartPrice);
     },
 
     updateTotalItems() {
@@ -87,7 +89,40 @@ export default {
       localStorage.setItem("totalItems", this.store.totalItems);
     },
 
+    validateForm() {
+      if (
+        !this.orderInfo.customer_name ||
+        !this.orderInfo.customer_last_name ||
+        !this.orderInfo.customer_address ||
+        !this.orderInfo.customer_phone ||
+        !this.orderInfo.customer_email
+      ) {
+        this.showModal();
+        return false;
+      }
+      return true;
+    },
+
+    showModal() {
+      const errorModal = new bootstrap.Modal(
+        document.getElementById("errorModal")
+      );
+      errorModal.show();
+    },
+
+    closeModal() {
+      const errorModalEl = document.getElementById("errorModal");
+      const errorModal = bootstrap.Modal.getInstance(errorModalEl);
+      if (errorModal) {
+        errorModal.hide();
+      }
+    },
+
     paymentFunction() {
+      if (!this.validateForm()) {
+        return;
+      }
+
       if (!this.instance) {
         console.error("Drop-in instance is not available.");
         return;
@@ -121,18 +156,17 @@ export default {
           ),
         };
 
+        Object.keys(this.orderInfo).forEach((key) => {
+          localStorage.setItem(key, this.orderInfo[key]);
+        });
+
         axios
           .post(this.baseApiUrl + "payment", paymentData)
-          .then((response) => {
-            console.log(response);
-            console.log("Payment successful");
+          .then(() => {
             this.isProcessing = false; // Set loader to false after payment is successful
-            //svuota il carrello dopo il pagamento
-            localStorage.removeItem("items");
-
-            // Clear Vuex store items and total price
+            // Svuota il carrello dopo il pagamento
             this.store.items = [];
-            this.store.totalCartPrice = 0;
+            localStorage.removeItem("items");
 
             // Update total items after clearing
             this.updateTotalItems();
@@ -141,9 +175,7 @@ export default {
             this.updateTotalCartPrice();
             this.$router.push({ name: "confirm-order" });
           })
-          .catch((error) => {
-            console.log(error);
-            console.log("Payment failed");
+          .catch(() => {
             this.isProcessing = false; // Set loader to false if payment fails
           });
       });
@@ -153,62 +185,118 @@ export default {
 </script>
 
 <template>
+  <div
+    class="modal fade"
+    id="errorModal"
+    tabindex="-1"
+    aria-labelledby="errorModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="errorModalLabel">Error</h5>
+          <button
+            type="button"
+            class="btn-close"
+            @click="closeModal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">Please fill all the required fields!</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" @click="closeModal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container my-4 mt-5">
-    <!-- v-if="store.items.length != 0" -->
     <div class="d-flex row justify-content-center flex-xl-row-reverse">
       <div class="cart_responsive col-12 col-xl-4 position-relative">
-
-        <!-- GO BACK TO RESTAURANT BTN HERE -->
         <button class="back_to_store_btn position-absolute">
           <span>back to </span>
           <span class="text-capitalize"> "restaurant"</span>
         </button>
-        <!-- GO BACK TO RESTAURANT BTN HERE -->
 
         <AppCart></AppCart>
-
       </div>
 
-
       <div class="col-12 col-xl-6 d-flex">
-        <form method="POST" @submit.prevent class="form_data">
-
+        <form method="POST" @submit.prevent="paymentFunction" class="form_data">
+          <h3>{{ restaurant_name }}</h3>
           <div class="mb-3 checkout_field">
-            <label for="orderInfo.customer_name" class="form-label">Name *</label>
-            <input v-model="orderInfo.customer_name" type="text" class="form-control" id="orderInfo.customer_name" />
+            <label for="orderInfo.customer_name" class="form-label"
+              >Name *</label
+            >
+            <input
+              v-model="orderInfo.customer_name"
+              type="text"
+              class="form-control"
+              id="orderInfo.customer_name"
+            />
           </div>
 
           <div class="mb-3 checkout_field">
-            <label for="orderInfo.customer_last_name" class="form-label">Lastname *</label>
-            <input v-model="orderInfo.customer_last_name" type="text" class="form-control"
-              id="orderInfo.customer_last_name" />
+            <label for="orderInfo.customer_last_name" class="form-label"
+              >Lastname *</label
+            >
+            <input
+              v-model="orderInfo.customer_last_name"
+              type="text"
+              class="form-control"
+              id="orderInfo.customer_last_name"
+            />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="address" class="form-label">Address *</label>
-            <input v-model="orderInfo.customer_address" type="text" class="form-control" id="address" />
+            <input
+              v-model="orderInfo.customer_address"
+              type="text"
+              class="form-control"
+              id="address"
+            />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="phone" class="form-label">Phone *</label>
-            <input v-model="orderInfo.customer_phone" type="text" class="form-control" id="phone" />
+            <input
+              v-model="orderInfo.customer_phone"
+              type="text"
+              class="form-control"
+              id="phone"
+            />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="email" class="form-label">Email *</label>
-            <input v-model="orderInfo.customer_email" type="text" class="form-control" id="email" />
+            <input
+              v-model="orderInfo.customer_email"
+              type="text"
+              class="form-control"
+              id="email"
+            />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="orderInfo.customer_note" class="form-label">Note</label>
-            <textarea v-model="orderInfo.customer_note" class="form-control" id="orderInfo.customer_note"
-              rows="3"></textarea>
+            <textarea
+              v-model="orderInfo.customer_note"
+              class="form-control"
+              id="orderInfo.customer_note"
+              rows="3"
+            ></textarea>
           </div>
 
           <div id="dropin-container"></div>
           <div class="loader-container">
-            <button id="submit-button" class="d-flex justify-content-center align-items-center gap-2" type="submit"
-              @click="paymentFunction">
+            <button
+              id="submit-button"
+              class="d-flex justify-content-center align-items-center gap-2"
+              type="submit"
+            >
               Pay with
               <div class="paypal_badge">
                 <i class="fa-brands fa-paypal"></i> <span>Braintree</span>
@@ -216,25 +304,9 @@ export default {
             </button>
             <div v-if="isProcessing" class="loader"></div>
           </div>
-
         </form>
       </div>
-
     </div>
-    <!-- <div v-else class="d-flex row justify-content-center">
-      <div class="col-12">
-        <h2>
-          Your cart is empty. Please, back to restaurant page and add something
-          before continue.
-        </h2>
-        <button class="btn btn-warning">
-          <router-link class="text-decoration-none text-black" :to="{
-            name: 'restaurant',
-            params: { id: store.currentRestaurantId },
-          }">Back to restaurant</router-link>
-        </button>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -259,7 +331,6 @@ export default {
   }
 
   #submit-button {
-
     @include checkout_btn;
     background-color: $primary_color;
     border: 2px solid $primary_color;
@@ -269,7 +340,6 @@ export default {
       background-color: $background_color;
       color: $primary_color;
     }
-
   }
 }
 
@@ -300,7 +370,6 @@ export default {
       font-weight: 900;
     }
   }
-
 }
 
 .loader {
@@ -316,7 +385,6 @@ export default {
 .cart_responsive {
   @include shopping_cart_behavior;
   z-index: 1000;
-
 
   @media (max-width: 1200px) {
     height: fit-content;
@@ -340,7 +408,6 @@ export default {
     display: flex;
     justify-content: start;
 
-
     color: $background_color;
     background-color: $primary_color;
 
@@ -356,11 +423,9 @@ export default {
       border-bottom: none;
     }
   }
-
 }
 
 @media screen and (max-width: 1200px) {
-
   .cart_responsive::v-deep .shopping_cart_main_content {
     min-height: fit-content;
     margin-bottom: 2rem !important;
@@ -368,7 +433,6 @@ export default {
 
   .cart_responsive::v-deep .cart_body {
     display: block;
-
   }
 
   .cart_responsive::v-deep .cart_box {
@@ -381,7 +445,6 @@ export default {
   }
 
   .cart_responsive::v-deep .checkout_btn {
-
     border-radius: 2rem;
 
     &:hover {
@@ -392,7 +455,6 @@ export default {
 }
 
 .cart_responsive::v-deep .checkout_btn {
-
   &:hover {
     background-color: $secondary_color;
     cursor: default;

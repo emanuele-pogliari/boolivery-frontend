@@ -3,7 +3,7 @@ import { reactive } from "vue";
 export const store = reactive({
   items: [],
   currentRestaurantId: null,
-
+  restaurant_name: null,
   totalCartPrice: 0,
-  cartAmount: 34.34,
+  currentOrder: null,
 });
