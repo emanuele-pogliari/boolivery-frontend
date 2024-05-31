@@ -2,11 +2,11 @@
 import axios from "axios";
 import AppCardItem from "./AppCardItem.vue";
 
-// import Swiper JS
-// import Swiper from "swiper";
+// import Swiper bundle with all modules installed
 import Swiper from "swiper/bundle";
-// import Swiper styles
-import "swiper/css";
+
+// import styles bundle
+import "swiper/css/bundle";
 
 const swiper = new Swiper(".swiper", {
   loop: true,
