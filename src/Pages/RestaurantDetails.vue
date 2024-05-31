@@ -7,7 +7,6 @@ import {
   decreaseItem,
   updateTotalCartPrice,
 } from "../cartFunctions.js"; // Importa le funzioni
-import { Modal } from "bootstrap";
 
 export default {
   name: "RestaurantDetails",
@@ -48,6 +47,7 @@ export default {
       .get(this.baseApiUrl + "restaurants/" + this.restaurantsId)
       .then((res) => {
         this.restaurants = res.data.results;
+        localStorage.setItem("restaurant_name", this.restaurants.name);
       });
   },
 

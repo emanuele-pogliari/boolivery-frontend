@@ -30,6 +30,7 @@ export default {
         customer_note: "",
       },
       items: JSON.parse(localStorage.getItem("items")) || [],
+      restaurantName: localStorage.getItem("restaurantName") || "",
     };
   },
 
@@ -121,6 +122,20 @@ export default {
           ),
         };
 
+        localStorage.setItem("customer_name", this.orderInfo.customer_name);
+        localStorage.setItem(
+          "customer_last_name",
+          this.orderInfo.customer_last_name
+        );
+        localStorage.setItem(
+          "customer_address",
+          this.orderInfo.customer_address
+        );
+        localStorage.setItem("customer_email", this.orderInfo.customer_email);
+        localStorage.setItem("customer_phone", this.orderInfo.customer_phone);
+        localStorage.setItem("customer_note", this.orderInfo.customer_note);
+        localStorage.setItem("customer_note", this.orderInfo.customer_note);
+
         axios
           .post(this.baseApiUrl + "payment", paymentData)
           .then((response) => {
@@ -164,6 +179,7 @@ export default {
 
       <div class="col-12 col-xl-6 d-flex">
         <form method="POST" @submit.prevent class="form_data">
+          <h3>{{ restaurantName }}</h3>
           <div class="mb-3 checkout_field">
             <label for="orderInfo.customer_name" class="form-label"
               >Name *</label

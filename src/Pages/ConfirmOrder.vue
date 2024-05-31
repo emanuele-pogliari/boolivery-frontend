@@ -14,13 +14,15 @@ export default {
         customer_phone: localStorage.getItem("customer_phone") || "",
         customer_note: localStorage.getItem("customer_note") || "",
       },
+      restaurant_name:
+        localStorage.getItem("restaurant_name") || "the restaurant",
     };
   },
   mounted() {
+    setTimeout(() => {
+      this.$router.push({ name: "home" }); // Assicurati che il nome della rotta della home sia 'home'
+    }, 5000);
     localStorage.removeItem("items");
-
-    // Clear Vuex store items and total price
-    this.store.items = [];
     this.store.totalCartPrice = 0;
   },
 };
@@ -37,7 +39,7 @@ export default {
             {{ orderInfo.customer_last_name }}, your order has been confirmed,
             enjoy!
           </h1>
-          <p>Find below the receipt from "restaurant name"</p>
+          <p>Find below the receipt from {{ restaurant_name }}"</p>
         </div>
       </div>
     </div>
