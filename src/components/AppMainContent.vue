@@ -108,8 +108,9 @@ export default {
 </script>
 
 <template>
-  <section class="rounded-5 mb-5">
-    <div class="container d-flex flex-column">
+  <div class="bg_container rounded-5 mb-5">
+
+    <div class="container_big container d-flex flex-column">
 
       <nav>
         <h3>Popular <span>Category</span></h3>
@@ -161,7 +162,7 @@ export default {
       </div>
       <!-- FINE -->
 
-      <section id="cards_section d-flex row flex-wrap">
+      <div class="cards_section row flex-wrap justify-content-between p-2 p-md-0">
         <div v-if="isLoading" class="loader"></div>
 
         <template v-else-if="
@@ -173,7 +174,7 @@ export default {
         <div v-else>
           <h3>No restaurants found</h3>
         </div>
-      </section>
+      </div>
 
       <div v-if="restaurants && restaurants.data && restaurants.data.length > 0">
         <vue-awesome-paginate :total-items="total_items" v-model="apiPageNumber" :items-per-page="per_page"
@@ -181,14 +182,33 @@ export default {
           paginate-buttons-class="paginate-buttons" active-page-class="active-page" />
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <style lang="scss">
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
-section {
+.bg_container {
+  background-color: $background_color_dark;
+}
+
+.container_big {
+  display: flex;
+  height: 100%;
+
+
+
+  .cards_section {
+    display: flex !important;
+    border: 3px solid red !important;
+
+    align-items: center;
+    height: 100%;
+
+    gap: .5rem;
+  }
+
 
 
   nav {
@@ -261,6 +281,7 @@ section {
 
     #food_types {
       display: flex;
+      flex-wrap: wrap;
       gap: 1rem;
     }
 
@@ -307,15 +328,6 @@ section {
       width: 100%;
       row-gap: 0.5rem;
     }
-  }
-
-  #cards_section {
-    display: flex;
-    flex-flow: row;
-    justify-content: space-between;
-    align-items: center;
-
-    gap: .5rem;
   }
 
   .more-icon {

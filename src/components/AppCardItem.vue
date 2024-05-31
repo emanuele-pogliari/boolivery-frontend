@@ -14,7 +14,7 @@ export default {
 </script>
 
 <template>
-  <router-link :to="{ name: 'restaurant', params: { id: restaurant.id } }" class="card my_card gap-1">
+  <router-link :to="{ name: 'restaurant', params: { id: restaurant.id } }" class="card my_card p-0">
     <div class="img-container">
       <img v-if="restaurant.image" :src="restaurant.image.startsWith('http')
         ? restaurant.image
@@ -46,17 +46,21 @@ export default {
 
 .my_card {
   border-radius: 24px;
-  border-color: transparent;
-  color: $text_color;
-
-  max-width: 275px;
+  border: none;
+  max-width: 290px;
   min-width: fit-content;
   width: 100%;
 
   background-color: $background_color_dark;
+  color: $text_color;
 
   cursor: pointer;
   text-decoration: none;
+
+  @media screen and (max-width: 768px) {
+    max-width: 100%;
+
+  }
 
   .img-container {
 
@@ -92,10 +96,6 @@ export default {
       }
     }
 
-  }
-
-  .card-body {
-    padding: 0.5rem 0 0;
   }
 
   .restaurant_type {
