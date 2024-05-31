@@ -43,15 +43,24 @@ export default {
   created() {
     this.restaurantsId = this.$route.params.id;
     this.store.currentRestaurantId = this.restaurantsId;
-    axios
-      .get(this.baseApiUrl + "restaurants/" + this.restaurantsId)
-      .then((res) => {
-        this.restaurants = res.data.results;
-        localStorage.setItem("restaurant_name", this.restaurants.name);
-      });
+    this.fetchRestaurantDetails(this.restaurantsId);
+  },
+
+  watch: {
+    "$route.params.id": function (newId) {
+      this.restaurantsId = newId;
+      this.store.currentRestaurantId = newId;
+      this.fetchRestaurantDetails(newId);
+    },
   },
 
   methods: {
+    fetchRestaurantDetails(restaurantId) {
+      axios.get(this.baseApiUrl + "restaurants/" + restaurantId).then((res) => {
+        this.restaurants = res.data.results;
+        localStorage.setItem("restaurant_name", this.restaurants.name);
+      });
+    },
     addItem(item) {
       if (
         this.store.items.length > 0 &&

@@ -30,7 +30,8 @@ export default {
         customer_note: "",
       },
       items: JSON.parse(localStorage.getItem("items")) || [],
-      restaurantName: localStorage.getItem("restaurantName") || "",
+      restaurant_name:
+        localStorage.getItem("restaurant_name") || "the restaurant",
     };
   },
 
@@ -179,7 +180,7 @@ export default {
 
       <div class="col-12 col-xl-6 d-flex">
         <form method="POST" @submit.prevent class="form_data">
-          <h3>{{ restaurantName }}</h3>
+          <h3>{{ restaurant_name }}</h3>
           <div class="mb-3 checkout_field">
             <label for="orderInfo.customer_name" class="form-label"
               >Name *</label
