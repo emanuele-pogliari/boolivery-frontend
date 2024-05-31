@@ -3,11 +3,16 @@ import axios from "axios";
 import AppCardItem from "./AppCardItem.vue";
 
 // import Swiper JS
-import Swiper from "swiper";
+// import Swiper from "swiper";
+import Swiper from "swiper/bundle";
 // import Swiper styles
 import "swiper/css";
 
-const swiper = new Swiper(".swiper");
+const swiper = new Swiper(".swiper", {
+  loop: true,
+  slidesPerView: 3,
+  spaceBetween: 30,
+});
 
 export default {
   name: "AppMainContent",
@@ -109,43 +114,29 @@ export default {
 
 <template>
   <div class="bg_container rounded-5 mb-5">
-
     <div class="container_big container d-flex flex-column">
-
       <nav>
         <h3>Popular <span>Category</span></h3>
 
         <!-- Da implementare una volta realizzati i counter -->
-        <div id="food_types">
-          <button class="type_res_button">Italian</button>
-          <button class="type_res_button">Pizzeria</button>
-          <button class="type_res_button">Fusion</button>
-          <button class="type_res_button">Chinese</button>
-        </div>
-
-        <button type="button" class="btn more" data-bs-toggle="modal" data-bs-target="#restaurantModal">
-          <span class="more-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-          <span class="more-txt">Want more?</span>
-        </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="restaurantModal" tabindex="-1" aria-labelledby="restaurantModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header my_modal_head">
-                <h1 class="modal-title fs-5 text-center" id="restaurantModalLabel">
-                  What are you looking for?
-                </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body my_modal_body">
-                <div v-for="type in types" class="custom-checkbox">
-                  <input class="form-check-input" type="checkbox" role="switch" :value="type.type" :id="type.type"
-                    :name="type.type" v-model="checkButtonValue" @change="apiFilterTypes()" />
-                  <label class="form-check-label custom-checkbox-label" :for="type.type">{{ type.type }}</label>
-                </div>
-              </div>
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide food_types" v-for="type in types">
+              <input
+                class="form-check-input d-none"
+                type="checkbox"
+                role="switch"
+                :value="type.type"
+                :id="type.type"
+                :name="type.type"
+                v-model="checkButtonValue"
+                @change="apiFilterTypes()"
+              />
+              <label
+                class="form-check-label custom-checkbox-label"
+                :for="type.type"
+                >{{ type.type }}</label
+              >
             </div>
           </div>
         </div>
@@ -162,13 +153,21 @@ export default {
       </div>
       <!-- FINE -->
 
-      <div class="cards_section row flex-wrap justify-content-between p-2 p-md-0">
+      <div
+        class="cards_section row flex-wrap justify-content-between p-2 p-md-0"
+      >
         <div v-if="isLoading" class="loader"></div>
 
-        <template v-else-if="
-          restaurants && restaurants.data && restaurants.data.length > 0
-        ">
-          <AppCardItem v-for="restaurant in restaurants.data" :key="restaurant.id" :restaurant="restaurant">
+        <template
+          v-else-if="
+            restaurants && restaurants.data && restaurants.data.length > 0
+          "
+        >
+          <AppCardItem
+            v-for="restaurant in restaurants.data"
+            :key="restaurant.id"
+            :restaurant="restaurant"
+          >
           </AppCardItem>
         </template>
         <div v-else>
@@ -176,10 +175,19 @@ export default {
         </div>
       </div>
 
-      <div v-if="restaurants && restaurants.data && restaurants.data.length > 0">
-        <vue-awesome-paginate :total-items="total_items" v-model="apiPageNumber" :items-per-page="per_page"
-          :max-pages-shown="last_page" :on-click="changePage" :hide-prev-next-when-ends="true"
-          paginate-buttons-class="paginate-buttons" active-page-class="active-page" />
+      <div
+        v-if="restaurants && restaurants.data && restaurants.data.length > 0"
+      >
+        <vue-awesome-paginate
+          :total-items="total_items"
+          v-model="apiPageNumber"
+          :items-per-page="per_page"
+          :max-pages-shown="last_page"
+          :on-click="changePage"
+          :hide-prev-next-when-ends="true"
+          paginate-buttons-class="paginate-buttons"
+          active-page-class="active-page"
+        />
       </div>
     </div>
   </div>
@@ -197,8 +205,6 @@ export default {
   display: flex;
   height: 100%;
 
-
-
   .cards_section {
     display: flex !important;
     border: 3px solid red !important;
@@ -206,10 +212,8 @@ export default {
     align-items: center;
     height: 100%;
 
-    gap: .5rem;
+    gap: 0.5rem;
   }
-
-
 
   nav {
     display: flex;
@@ -279,7 +283,7 @@ export default {
       }
     }
 
-    #food_types {
+    .food_types {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
@@ -389,7 +393,7 @@ export default {
     text-align: center;
   }
 
-  .custom-checkbox input[type="checkbox"]:checked+.custom-checkbox-label {
+  .custom-checkbox input[type="checkbox"]:checked + .custom-checkbox-label {
     background-color: $secondary_color;
     color: $text_color;
   }
@@ -441,7 +445,7 @@ export default {
     border-bottom-right-radius: 0px;
   }
 
-  section nav #food_types {
+  section nav .food_types {
     background-color: $background_color;
     border-radius: 20px;
     gap: 0;
