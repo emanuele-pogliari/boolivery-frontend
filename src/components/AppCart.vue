@@ -340,6 +340,5 @@ export default {
   // }
 
   @include shopping_cart_behavior;
-
 }
 </style>
