@@ -315,6 +315,7 @@ export default {
 
 .cart_responsive {
   @include shopping_cart_behavior;
+  z-index: 1000;
 
 
   @media (max-width: 1200px) {
@@ -323,19 +324,18 @@ export default {
 
   .back_to_store_btn {
     cursor: pointer;
-    top: -35px;
-    left: 14px;
-    z-index: -1;
+    transform: translate(20px, -40px);
     max-width: fit-content;
 
     padding: 1rem;
     padding-top: 0.5rem;
-    padding-bottom: 2rem;
+    padding-bottom: 0.5rem;
 
-    border: none;
+    border: 2px solid $primary_color;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 
     display: flex;
     justify-content: start;
@@ -345,7 +345,16 @@ export default {
     background-color: $primary_color;
 
     text-align: center;
-    font-weight: 500;
+    font-weight: 600;
+
+    &:hover {
+      transition: 0.1s;
+      font-weight: 600;
+      background-color: $background_color;
+      color: $primary_color;
+      border: 2px solid $primary_color;
+      border-bottom: none;
+    }
   }
 
 }
