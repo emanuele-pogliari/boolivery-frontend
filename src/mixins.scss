@@ -100,28 +100,39 @@
 
 
 @mixin tag_type_btn {
-        padding: 6px 12px;
-        min-width: fit-content;
-        border-radius: 20px;
-        border: 1px solid #fefefe;
+    padding: 6px 12px;
+    min-width: fit-content;
+    border-radius: 20px;
+    border: 1px solid #fefefe;
     
     
-        background-color: #37373b;
-        color: #ffffff;
-        font-weight: 600;
+    background-color: #37373b;
+    color: #ffffff;
+    font-weight: 600;
     
-        transition: all 0.2s linear;
+    transition: all 0.2s linear;
 }
+
+@mixin type_single_pill {
+
+    background-color: #37373b;
+    color: #ffffff;
+    padding: 0.1rem 0.3em;
+    
+    border-radius: 5px;
+    text-align: center;
+}            
+
 // -----------------------------------------------------------------------------
 
 @mixin loader {
-    width: 50px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: 
-    radial-gradient(farthest-side,#f2ca39 95%,#0000) 50% 1px/12px 12px no-repeat,
-    radial-gradient(farthest-side,#0000 calc(100% - 14px),#ccc 0);
-    animation: l9 2s infinite linear;
+    // width: 50px;
+    // aspect-ratio: 1;
+    // border-radius: 50%;
+    // background: 
+    // radial-gradient(farthest-side,#f2ca39 95%,#0000) 50% 1px/12px 12px no-repeat,
+    // radial-gradient(farthest-side,#0000 calc(100% - 14px),#ccc 0);
+    // animation: l9 2s infinite linear;
 }
 
 
