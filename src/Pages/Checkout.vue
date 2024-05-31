@@ -348,7 +348,7 @@ export default {
     font-weight: 600;
 
     &:hover {
-      transition: 0.1s;
+      transition: 0.2s;
       font-weight: 600;
       background-color: $background_color;
       color: $primary_color;
