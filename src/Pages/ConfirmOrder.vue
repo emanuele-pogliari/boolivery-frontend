@@ -20,7 +20,7 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      this.$router.push({ name: "home" }); // Assicurati che il nome della rotta della home sia 'home'
+      this.$router.push({ name: "home" });
     }, 5000);
     localStorage.removeItem("items");
     this.store.totalCartPrice = 0;

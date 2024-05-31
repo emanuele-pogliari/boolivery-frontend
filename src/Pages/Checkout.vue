@@ -82,8 +82,6 @@ export default {
       this.store.totalCartPrice = totalCartPrice;
       localStorage.setItem("items", JSON.stringify(this.store.items));
       localStorage.setItem("totalCartPrice", totalCartPrice);
-
-      console.log("Prezzo totale del carrello aggiornato:", totalCartPrice);
     },
 
     updateTotalItems() {
@@ -164,9 +162,7 @@ export default {
 
         axios
           .post(this.baseApiUrl + "payment", paymentData)
-          .then((response) => {
-            console.log(response);
-            console.log("Payment successful");
+          .then(() => {
             this.isProcessing = false; // Set loader to false after payment is successful
             // Svuota il carrello dopo il pagamento
             this.store.items = [];
@@ -179,9 +175,7 @@ export default {
             this.updateTotalCartPrice();
             this.$router.push({ name: "confirm-order" });
           })
-          .catch((error) => {
-            console.log(error);
-            console.log("Payment failed");
+          .catch(() => {
             this.isProcessing = false; // Set loader to false if payment fails
           });
       });
@@ -201,7 +195,7 @@ export default {
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="errorModalLabel">Errore</h5>
+          <h5 class="modal-title" id="errorModalLabel">Error</h5>
           <button
             type="button"
             class="btn-close"
@@ -209,12 +203,10 @@ export default {
             aria-label="Close"
           ></button>
         </div>
-        <div class="modal-body">
-          Per favore, compila tutti i campi obbligatori.
-        </div>
+        <div class="modal-body">Please fill all the required fields!</div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" @click="closeModal">
-            Chiudi
+          <button type="button" class="btn btn-warning" @click="closeModal">
+            Close
           </button>
         </div>
       </div>
