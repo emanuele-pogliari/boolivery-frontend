@@ -128,11 +128,6 @@ export default {
             console.log("Payment successful");
             this.isProcessing = false; // Set loader to false after payment is successful
             //svuota il carrello dopo il pagamento
-            localStorage.removeItem("items");
-
-            // Clear Vuex store items and total price
-            this.store.items = [];
-            this.store.totalCartPrice = 0;
 
             // Update total items after clearing
             this.updateTotalItems();
@@ -157,7 +152,6 @@ export default {
     <!-- v-if="store.items.length != 0" -->
     <div class="d-flex row justify-content-center flex-xl-row-reverse">
       <div class="cart_responsive col-12 col-xl-4 position-relative">
-
         <!-- GO BACK TO RESTAURANT BTN HERE -->
         <button class="back_to_store_btn position-absolute">
           <span>back to </span>
@@ -166,49 +160,82 @@ export default {
         <!-- GO BACK TO RESTAURANT BTN HERE -->
 
         <AppCart></AppCart>
-
       </div>
-
 
       <div class="col-12 col-xl-6 d-flex">
         <form method="POST" @submit.prevent class="form_data">
-
           <div class="mb-3 checkout_field">
-            <label for="orderInfo.customer_name" class="form-label">Name *</label>
-            <input v-model="orderInfo.customer_name" type="text" class="form-control" id="orderInfo.customer_name" />
+            <label for="orderInfo.customer_name" class="form-label"
+              >Name *</label
+            >
+            <input
+              v-model="orderInfo.customer_name"
+              type="text"
+              class="form-control"
+              id="orderInfo.customer_name"
+            />
           </div>
 
           <div class="mb-3 checkout_field">
-            <label for="orderInfo.customer_last_name" class="form-label">Lastname *</label>
-            <input v-model="orderInfo.customer_last_name" type="text" class="form-control"
-              id="orderInfo.customer_last_name" />
+            <label for="orderInfo.customer_last_name" class="form-label"
+              >Lastname *</label
+            >
+            <input
+              v-model="orderInfo.customer_last_name"
+              type="text"
+              class="form-control"
+              id="orderInfo.customer_last_name"
+            />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="address" class="form-label">Address *</label>
-            <input v-model="orderInfo.customer_address" type="text" class="form-control" id="address" />
+            <input
+              v-model="orderInfo.customer_address"
+              type="text"
+              class="form-control"
+              id="address"
+            />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="phone" class="form-label">Phone *</label>
-            <input v-model="orderInfo.customer_phone" type="text" class="form-control" id="phone" />
+            <input
+              v-model="orderInfo.customer_phone"
+              type="text"
+              class="form-control"
+              id="phone"
+            />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="email" class="form-label">Email *</label>
-            <input v-model="orderInfo.customer_email" type="text" class="form-control" id="email" />
+            <input
+              v-model="orderInfo.customer_email"
+              type="text"
+              class="form-control"
+              id="email"
+            />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="orderInfo.customer_note" class="form-label">Note</label>
-            <textarea v-model="orderInfo.customer_note" class="form-control" id="orderInfo.customer_note"
-              rows="3"></textarea>
+            <textarea
+              v-model="orderInfo.customer_note"
+              class="form-control"
+              id="orderInfo.customer_note"
+              rows="3"
+            ></textarea>
           </div>
 
           <div id="dropin-container"></div>
           <div class="loader-container">
-            <button id="submit-button" class="d-flex justify-content-center align-items-center gap-2" type="submit"
-              @click="paymentFunction">
+            <button
+              id="submit-button"
+              class="d-flex justify-content-center align-items-center gap-2"
+              type="submit"
+              @click="paymentFunction"
+            >
               Pay with
               <div class="paypal_badge">
                 <i class="fa-brands fa-paypal"></i> <span>Braintree</span>
@@ -216,10 +243,8 @@ export default {
             </button>
             <div v-if="isProcessing" class="loader"></div>
           </div>
-
         </form>
       </div>
-
     </div>
     <!-- <div v-else class="d-flex row justify-content-center">
       <div class="col-12">
@@ -259,7 +284,6 @@ export default {
   }
 
   #submit-button {
-
     @include checkout_btn;
     background-color: $primary_color;
     border: 2px solid $primary_color;
@@ -269,7 +293,6 @@ export default {
       background-color: $background_color;
       color: $primary_color;
     }
-
   }
 }
 
@@ -300,7 +323,6 @@ export default {
       font-weight: 900;
     }
   }
-
 }
 
 .loader {
@@ -315,7 +337,6 @@ export default {
 
 .cart_responsive {
   @include shopping_cart_behavior;
-
 
   @media (max-width: 1200px) {
     height: fit-content;
@@ -340,18 +361,15 @@ export default {
     display: flex;
     justify-content: start;
 
-
     color: $background_color;
     background-color: $primary_color;
 
     text-align: center;
     font-weight: 500;
   }
-
 }
 
 @media screen and (max-width: 1200px) {
-
   .cart_responsive::v-deep .shopping_cart_main_content {
     min-height: fit-content;
     margin-bottom: 2rem !important;
@@ -359,7 +377,6 @@ export default {
 
   .cart_responsive::v-deep .cart_body {
     display: block;
-
   }
 
   .cart_responsive::v-deep .cart_box {
@@ -372,7 +389,6 @@ export default {
   }
 
   .cart_responsive::v-deep .checkout_btn {
-
     border-radius: 2rem;
 
     &:hover {
@@ -383,7 +399,6 @@ export default {
 }
 
 .cart_responsive::v-deep .checkout_btn {
-
   &:hover {
     background-color: $secondary_color;
     cursor: default;
