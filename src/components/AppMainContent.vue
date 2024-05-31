@@ -109,119 +109,77 @@ export default {
 
 <template>
   <section class="rounded-5 mb-5">
-    <nav>
-      <h3>Popular <span>Category</span></h3>
+    <div class="container d-flex flex-column">
 
-      <!-- Da implementare una volta realizzati i counter -->
-      <div id="food_types">
-        <button class="type_res_button">Italian</button>
-        <button class="type_res_button">Pizzeria</button>
-        <button class="type_res_button">Fusion</button>
-        <button class="type_res_button">Chinese</button>
-      </div>
+      <nav>
+        <h3>Popular <span>Category</span></h3>
 
-      <button
-        type="button"
-        class="btn more"
-        data-bs-toggle="modal"
-        data-bs-target="#restaurantModal"
-      >
-        <span class="more-icon"
-          ><i class="fa-solid fa-magnifying-glass"></i
-        ></span>
-        <span class="more-txt">Want more?</span>
-      </button>
+        <!-- Da implementare una volta realizzati i counter -->
+        <div id="food_types">
+          <button class="type_res_button">Italian</button>
+          <button class="type_res_button">Pizzeria</button>
+          <button class="type_res_button">Fusion</button>
+          <button class="type_res_button">Chinese</button>
+        </div>
 
-      <!-- Modal -->
-      <div
-        class="modal fade"
-        id="restaurantModal"
-        tabindex="-1"
-        aria-labelledby="restaurantModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header my_modal_head">
-              <h1
-                class="modal-title fs-5 text-center"
-                id="restaurantModalLabel"
-              >
-                What are you looking for?
-              </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body my_modal_body">
-              <div v-for="type in types" class="custom-checkbox">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  :value="type.type"
-                  :id="type.type"
-                  :name="type.type"
-                  v-model="checkButtonValue"
-                  @change="apiFilterTypes()"
-                />
-                <label
-                  class="form-check-label custom-checkbox-label"
-                  :for="type.type"
-                  >{{ type.type }}</label
-                >
+        <button type="button" class="btn more" data-bs-toggle="modal" data-bs-target="#restaurantModal">
+          <span class="more-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <span class="more-txt">Want more?</span>
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="restaurantModal" tabindex="-1" aria-labelledby="restaurantModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header my_modal_head">
+                <h1 class="modal-title fs-5 text-center" id="restaurantModalLabel">
+                  What are you looking for?
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body my_modal_body">
+                <div v-for="type in types" class="custom-checkbox">
+                  <input class="form-check-input" type="checkbox" role="switch" :value="type.type" :id="type.type"
+                    :name="type.type" v-model="checkButtonValue" @change="apiFilterTypes()" />
+                  <label class="form-check-label custom-checkbox-label" :for="type.type">{{ type.type }}</label>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </nav>
+
+      <!-- CATEGORIE SELEZIONATE -->
+      <div v-if="checkButtonValue.length != 0" class="food_selected">
+        <h4>Selected Categories:</h4>
+        <div class="in_food_selected">
+          <p class="type_res_button" v-for="category in checkButtonValue">
+            {{ category }}
+          </p>
+        </div>
       </div>
-    </nav>
+      <!-- FINE -->
 
-    <!-- CATEGORIE SELEZIONATE -->
-    <div v-if="checkButtonValue.length != 0" class="food_selected">
-      <h4>Selected Categories:</h4>
-      <div class="in_food_selected">
-        <p class="type_res_button" v-for="category in checkButtonValue">
-          {{ category }}
-        </p>
-      </div>
-    </div>
-    <!-- FINE -->
+      <section id="cards_section d-flex row flex-wrap">
+        <div v-if="isLoading" class="loader"></div>
 
-    <section id="cards_section">
-      <div v-if="isLoading" class="loader"></div>
-
-      <template
-        v-else-if="
+        <template v-else-if="
           restaurants && restaurants.data && restaurants.data.length > 0
-        "
-      >
-        <AppCardItem
-          v-for="restaurant in restaurants.data"
-          :key="restaurant.id"
-          :restaurant="restaurant"
-        >
-        </AppCardItem>
-      </template>
-      <div v-else>
-        <h3>No restaurants found</h3>
-      </div>
-    </section>
+        ">
+          <AppCardItem v-for="restaurant in restaurants.data" :key="restaurant.id" :restaurant="restaurant">
+          </AppCardItem>
+        </template>
+        <div v-else>
+          <h3>No restaurants found</h3>
+        </div>
+      </section>
 
-    <div v-if="restaurants && restaurants.data && restaurants.data.length > 0">
-      <vue-awesome-paginate
-        :total-items="total_items"
-        v-model="apiPageNumber"
-        :items-per-page="per_page"
-        :max-pages-shown="last_page"
-        :on-click="changePage"
-        :hide-prev-next-when-ends="true"
-        paginate-buttons-class="paginate-buttons"
-        active-page-class="active-page"
-      />
+      <div v-if="restaurants && restaurants.data && restaurants.data.length > 0">
+        <vue-awesome-paginate :total-items="total_items" v-model="apiPageNumber" :items-per-page="per_page"
+          :max-pages-shown="last_page" :on-click="changePage" :hide-prev-next-when-ends="true"
+          paginate-buttons-class="paginate-buttons" active-page-class="active-page" />
+      </div>
     </div>
   </section>
 </template>
@@ -231,22 +189,13 @@ export default {
 @use "/src/mixins.scss" as *;
 
 section {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
 
-  background-color: $background_color_dark;
-  padding: 30px 0 40px;
-
-  margin-bottom: 1rem;
 
   nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    max-width: 1200px;
     width: 100%;
 
     h3 {
@@ -363,13 +312,10 @@ section {
   #cards_section {
     display: flex;
     flex-flow: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
     gap: .5rem;
-
-    width: 100%;
-    max-width: 1200px;
   }
 
   .more-icon {
@@ -431,7 +377,7 @@ section {
     text-align: center;
   }
 
-  .custom-checkbox input[type="checkbox"]:checked + .custom-checkbox-label {
+  .custom-checkbox input[type="checkbox"]:checked+.custom-checkbox-label {
     background-color: $secondary_color;
     color: $text_color;
   }
@@ -468,6 +414,7 @@ section {
 .loader {
   @include loader;
 }
+
 @keyframes l9 {
   to {
     transform: rotate(1turn);

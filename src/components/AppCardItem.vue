@@ -14,26 +14,13 @@ export default {
 </script>
 
 <template>
-  <router-link
-        :to="{ name: 'restaurant', params: { id: restaurant.id } }"
-        class="card my_card gap-1">
+  <router-link :to="{ name: 'restaurant', params: { id: restaurant.id } }" class="card my_card gap-1">
     <div class="img-container">
-      <img
-        v-if="restaurant.image"
-        :src="
-          restaurant.image.startsWith('http')
-            ? restaurant.image
-            : 'http://localhost:8000/storage/' + restaurant.image
-        "
-        class="card-img-top"
-        alt="..."
-      />
-      <img
-        v-else
-        class="card-img-top"
-        src="/img/homepage/placeholdertemp.jpg"
-        alt="..."
-      />
+      <img v-if="restaurant.image" :src="restaurant.image.startsWith('http')
+        ? restaurant.image
+        : 'http://localhost:8000/storage/' + restaurant.image
+        " class="card-img-top" alt="..." />
+      <img v-else class="card-img-top" src="/img/homepage/placeholdertemp.jpg" alt="..." />
       <div class="types-pill d-flex">
         <div class="types-single-pill" v-for="type in restaurant.types">
           <i class="fa-solid fa-pizza-slice"></i> {{ type.type }}
@@ -63,6 +50,7 @@ export default {
   color: $text_color;
 
   max-width: 275px;
+  min-width: fit-content;
   width: 100%;
 
   background-color: $background_color_dark;
@@ -154,7 +142,7 @@ export default {
   }
 }
 
-.my_card:hover .my_btn{
+.my_card:hover .my_btn {
   transform: translate(0%, 0%) scale(1.1);
 }
 </style>
