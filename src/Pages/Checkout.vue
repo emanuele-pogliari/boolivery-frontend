@@ -2,6 +2,8 @@
 import axios from "axios";
 import { store } from "../store/store";
 import AppCart from "../components/AppCart.vue";
+import * as bootstrap from "bootstrap";
+import "bootstrap/dist/js/bootstrap.js";
 
 export default {
   components: {
@@ -89,7 +91,6 @@ export default {
       localStorage.setItem("totalItems", this.store.totalItems);
     },
 
-    // Funzione di validazione del form
     validateForm() {
       if (
         !this.orderInfo.customer_name ||
@@ -98,14 +99,28 @@ export default {
         !this.orderInfo.customer_phone ||
         !this.orderInfo.customer_email
       ) {
-        alert("Please fill all the required fields");
+        this.showModal();
         return false;
       }
       return true;
     },
 
+    showModal() {
+      const errorModal = new bootstrap.Modal(
+        document.getElementById("errorModal")
+      );
+      errorModal.show();
+    },
+
+    closeModal() {
+      const errorModalEl = document.getElementById("errorModal");
+      const errorModal = bootstrap.Modal.getInstance(errorModalEl);
+      if (errorModal) {
+        errorModal.hide();
+      }
+    },
+
     paymentFunction() {
-      // Controlla la validazione del form prima di procedere
       if (!this.validateForm()) {
         return;
       }
@@ -143,7 +158,6 @@ export default {
           ),
         };
 
-        // Salva i dati del form nel localStorage
         Object.keys(this.orderInfo).forEach((key) => {
           localStorage.setItem(key, this.orderInfo[key]);
         });
@@ -177,6 +191,35 @@ export default {
 </script>
 
 <template>
+  <div
+    class="modal fade"
+    id="errorModal"
+    tabindex="-1"
+    aria-labelledby="errorModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="errorModalLabel">Errore</h5>
+          <button
+            type="button"
+            class="btn-close"
+            @click="closeModal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          Per favore, compila tutti i campi obbligatori.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" @click="closeModal">
+            Chiudi
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container my-4 mt-5">
     <div class="d-flex row justify-content-center flex-xl-row-reverse">
       <div class="cart_responsive col-12 col-xl-4 position-relative">
