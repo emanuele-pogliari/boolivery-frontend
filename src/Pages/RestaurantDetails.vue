@@ -62,16 +62,13 @@ export default {
       });
     },
     addItem(item) {
-      if (
-        this.store.items.length > 0 &&
-        this.store.items[0].restaurantsId !== item.restaurant_id
-      ) {
-        this.openModal();
-        // alert(
-        //   "Cart contains dishes from another restaurant, please, remove all dishes from cart before continue."
-        // );
-        return;
-      }
+    if (
+      this.store.items.length > 0 &&
+      this.store.items[0].restaurantsId !== item.restaurant_id
+    ) {
+      this.showModal = true;
+      return;
+    }
 
       const newItem = {
         id: item.id,
@@ -104,9 +101,11 @@ export default {
       }
     },
 
+    closeModal() {
+      this.showModal = false;
+    },
     openModal() {
       this.showModal = true;
-      console.log("cassone e palanga");
     },
 
     updateTotalCartPrice() {
@@ -273,36 +272,26 @@ export default {
             </ul>
           </div>
         </div>
-        <div v-if="showModal" class="modal fade" tabindex="-1">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <p>Modal body text goes here.</p>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" class="btn btn-primary">
-                  Save changes
-                </button>
-              </div>
-            </div>
+        <!--Modal-->
+        <div v-if="showModal">
+    <div class="modal-backdrop-custom"></div>
+    <div class="modal fade show d-block" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Errore</h5>
+            <button type="button" class="btn-close" aria-label="Close" @click="closeModal"></button>
+          </div>
+          <div class="modal-body">
+            <p>Il carrello contiene piatti da un altro ristorante. Rimuovi tutti i piatti dal carrello prima di continuare.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" @click="closeModal">Chiudi</button>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
         <!-- --------------------------- -->
         <!--END RESTAURANT DISHES-->
       </div>
@@ -317,7 +306,7 @@ export default {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
