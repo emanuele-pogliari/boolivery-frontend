@@ -22,22 +22,23 @@ export default {
           ? restaurant.image
           : 'http://localhost:8000/storage/' + restaurant.image
           " class="card-img-top" alt="..." />
-        <img v-else class="card-img-top" src="/img/homepage/placeholdertemp.jpg" alt="..." />
+        <img v-else class="card-img-top scale-up-center" src="/img/homepage/placeholdertemp.jpg" alt="..." />
 
 
       </div>
       <div>
         <div class="card-body px-1 py-2">
-          <h5 class="card-title text-start">{{ restaurant.name }}</h5>
+          <h5 class="card-title text-start m-0">{{ restaurant.name }}</h5>
         </div>
 
-        <div class="d-flex">
-          <span class="type_text types-single-pill d-flex type_bg" v-for="type in restaurant.types">
+        <div class="d-flex px-1 gap-2">
+          <span v-for="type in restaurant.types" class="types-pill types-single-pill d-flex type_bg px-2">
             {{ type.type }}
           </span>
         </div>
 
       </div>
+
     </div>
   </router-link>
 </template>
@@ -56,7 +57,6 @@ export default {
 }
 
 .my_card {
-  border-radius: 24px;
   border: none;
   max-width: 290px;
   min-width: fit-content;
@@ -67,6 +67,7 @@ export default {
 
   cursor: pointer;
   text-decoration: none;
+  overflow: hidden;
 
 
   @media screen and (min-width: 768px) {
@@ -84,9 +85,45 @@ export default {
 
   }
 
-  .img-container {
+  &:hover {
 
-    position: relative;
+    img {
+      -webkit-animation: scale-up-center 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+      animation: scale-up-center 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+
+      @-webkit-keyframes scale-up-center {
+        0% {
+          -webkit-transform: scale(1);
+          transform: scale(1);
+        }
+
+        100% {
+          -webkit-transform: scale(1.05);
+          transform: scale(1.07);
+        }
+      }
+
+      @keyframes scale-up-center {
+        0% {
+          -webkit-transform: scale(1);
+          transform: scale(1);
+        }
+
+        100% {
+          -webkit-transform: scale(1);
+          transform: scale(1.05);
+        }
+      }
+
+    }
+
+  }
+
+
+
+  .img-container {
+    overflow: hidden;
+    border-radius: 16px;
 
     img {
       border-radius: 16px;
@@ -95,31 +132,8 @@ export default {
       height: 125px;
 
       box-shadow: 10px 10px 15px rgba(20, 20, 20, 0.15);
+
     }
-
-    .types-pill {
-      font-weight: 700;
-      gap: .1rem;
-
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-
-
-      .type_bg {
-        background-color: $primary_color;
-        opacity: 0.8;
-
-        .type_text {
-          color: white (1);
-        }
-      }
-
-      @include type_single_pill;
-      font-size: 0.8;
-      color: #ffffff (1);
-    }
-
   }
 
   .restaurant_type {
@@ -144,7 +158,7 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: 800;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 
   // .my_btn {
@@ -168,5 +182,16 @@ export default {
 
 .my_card:hover .my_btn {
   transform: translate(0%, 0%) scale(1.1);
+}
+
+.types-pill {
+  font-weight: 700;
+  gap: .1rem;
+  font-size: 0.9rem;
+  color: #ffffff (1);
+
+  opacity: 0.9;
+
+  @include type_single_pill;
 }
 </style>

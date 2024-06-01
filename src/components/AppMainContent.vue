@@ -198,10 +198,9 @@ export default {
   height: 100%;
 
 
-
   .cards_section {
     display: flex !important;
-    border: 3px solid red !important;
+
 
     align-items: center;
     height: 100%;
