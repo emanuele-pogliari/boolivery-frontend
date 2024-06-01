@@ -3,7 +3,8 @@ import "./style.scss";
 import App from "./App.vue";
 import { router } from "./router.js";
 import "bootstrap/dist/css/bootstrap.css";
-
+import Swiper from "swiper/bundle";
+import "swiper/css/bundle";
 // import the package
 import VueAwesomePaginate from "vue-awesome-paginate";
 
