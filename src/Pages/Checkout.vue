@@ -412,7 +412,7 @@ export default {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 
-    border: 2px solid $primary_color;
+    border: 2px solid $background_color_dark;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 5px;
