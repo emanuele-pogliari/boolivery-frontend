@@ -20,7 +20,7 @@ export default {
       instance: null,
       baseApiUrl: "http://127.0.0.1:8000/api/",
       store,
-      isProcessing: false, // Add loader state
+      isLoading: false, // Add loader state
 
       orderInfo: {
         total_price: localStorage.getItem("totalCartPrice") || 0,
@@ -128,7 +128,7 @@ export default {
         return;
       }
 
-      this.isProcessing = true; // Set loader to true before processing payment
+      this.isLoading = true; // Set loader to true before processing payment
 
       this.instance.requestPaymentMethod((err, payload) => {
         if (err) {
@@ -165,8 +165,6 @@ export default {
           .then(() => {
             this.isProcessing = false; // Set loader to false after payment is successful
             // Svuota il carrello dopo il pagamento
-            this.store.items = [];
-            localStorage.removeItem("items");
 
             // Update total items after clearing
             this.updateTotalItems();
@@ -302,7 +300,9 @@ export default {
                 <i class="fa-brands fa-paypal"></i> <span>Braintree</span>
               </div>
             </button>
-            <div v-if="isProcessing" class="loader"></div>
+            <div v-if="isLoading" class="loader-overlay">
+              <div class="loader"></div>
+            </div>
           </div>
         </form>
       </div>
@@ -372,15 +372,48 @@ export default {
   }
 }
 
-.loader {
-  @include loader;
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Sfondo scuro con opacità */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Assicura che il loader sia sopra tutti gli altri elementi */
 }
 
-@keyframes l9 {
-  to {
-    transform: rotate(1turn);
+/* Stile per il loader */
+.loader {
+  border: 5px solid #f3f3f3; /* Grigio chiaro */
+  border-top: 5px solid $secondary_color; /* Blu */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite; /* Animazione di rotazione */
+  transform: translateY(-50%);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
+
+// .loader {
+//   @include loader;
+// }
+
+// @keyframes l9 {
+//   to {
+//     transform: rotate(1turn);
+//   }
+// }
 
 .cart_responsive {
   @include shopping_cart_behavior;

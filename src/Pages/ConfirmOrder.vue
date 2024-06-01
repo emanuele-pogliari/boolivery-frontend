@@ -35,7 +35,7 @@ export default {
         <img class="pb-3" src="/img/logo/Logo.png" alt="" />
         <div class="customer_content">
           <h1>
-            Hey, {{ orderInfo.customer_name }}
+            Thank You, {{ orderInfo.customer_name }}
             {{ orderInfo.customer_last_name }}, your order has been confirmed,
             enjoy!
           </h1>

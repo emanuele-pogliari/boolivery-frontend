@@ -62,13 +62,13 @@ export default {
       });
     },
     addItem(item) {
-    if (
-      this.store.items.length > 0 &&
-      this.store.items[0].restaurantsId !== item.restaurant_id
-    ) {
-      this.showModal = true;
-      return;
-    }
+      if (
+        this.store.items.length > 0 &&
+        this.store.items[0].restaurantsId !== item.restaurant_id
+      ) {
+        this.showModal = true;
+        return;
+      }
 
       const newItem = {
         id: item.id,
@@ -274,24 +274,38 @@ export default {
         </div>
         <!--Modal-->
         <div v-if="showModal">
-    <div class="modal-backdrop-custom"></div>
-    <div class="modal fade show d-block" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Errore</h5>
-            <button type="button" class="btn-close" aria-label="Close" @click="closeModal"></button>
-          </div>
-          <div class="modal-body">
-            <p>Il carrello contiene piatti da un altro ristorante. Rimuovi tutti i piatti dal carrello prima di continuare.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" @click="closeModal">Chiudi</button>
+          <div class="modal-backdrop-custom"></div>
+          <div class="modal fade show d-block" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Errore</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    aria-label="Close"
+                    @click="closeModal"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <p>
+                    Il carrello contiene piatti da un altro ristorante. Rimuovi
+                    tutti i piatti dal carrello prima di continuare.
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    @click="closeModal"
+                  >
+                    Chiudi
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
         <!-- --------------------------- -->
         <!--END RESTAURANT DISHES-->
       </div>
@@ -306,7 +320,7 @@ export default {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
