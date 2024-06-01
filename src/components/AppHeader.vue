@@ -102,6 +102,10 @@ export default {
             font-weight: 800;
 
             color: $text_color;
+
+            @media (max-width: 320px) {
+                font-size: 3rem;
+            }
         }
 
         h2 {

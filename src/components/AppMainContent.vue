@@ -162,7 +162,7 @@ export default {
       </div>
       <!-- FINE -->
 
-      <div class="cards_section row flex-wrap justify-content-between p-3 mb-3">
+      <div class="cards_section row flex-wrap justify-content-between p-3 mb-1">
         <div v-if="isLoading" class="loader"></div>
 
         <template v-else-if="
@@ -202,10 +202,9 @@ export default {
 
   .cards_section {
     display: flex !important;
-
-
     align-items: center;
     height: 100%;
+    min-height: 260px;
 
     gap: .5rem;
   }
