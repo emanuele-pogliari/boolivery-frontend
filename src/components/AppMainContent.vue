@@ -193,6 +193,7 @@ export default {
 
 .bg_container {
   background-color: $background_color_dark;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 .container_big {
