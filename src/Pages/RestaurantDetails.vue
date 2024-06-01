@@ -126,32 +126,17 @@ export default {
 </script>
 
 <template>
-  <div
-    v-if="restaurants"
-    class="container nunito-restaurant-details p-0"
-    style="max-width: 1200px"
-  >
+  <div v-if="restaurants" class="container nunito-restaurant-details p-0" style="max-width: 1200px">
     <router-link to="/">
-      <button class="btn">
+      <button class="btn_back_to_home ms-1">
         <i class="fa-solid fa-arrow-left me-1"></i>Back
       </button>
     </router-link>
-    <img
-      v-if="restaurants.image"
-      :src="
-        restaurants.image.startsWith('http')
-          ? restaurants.image
-          : 'http://localhost:8000/storage/' + restaurants.image
-      "
-      class="store-img restaurant_image"
-      alt="..."
-    />
-    <img
-      v-else
-      class="store-img"
-      src="/img/homepage/placeholdertemp.jpg"
-      alt="..."
-    />
+    <img v-if="restaurants.image" :src="restaurants.image.startsWith('http')
+      ? restaurants.image
+      : 'http://localhost:8000/storage/' + restaurants.image
+      " class="store-img restaurant_image" alt="..." />
+    <img v-else class="store-img" src="/img/homepage/placeholdertemp.jpg" alt="..." />
 
     <div class="d-flex gap-3 position-relative">
       <div class="restaurant_main_content d-flex row rounded-4 p-0 m-0">
@@ -181,19 +166,11 @@ export default {
             </div>
 
             <div class="d-flex col-lg-4">
-              <div
-                class="d-flex flex-column align-items-center flex-md-row gap-2 gap-md-0"
-              >
+              <div class="d-flex flex-column align-items-center flex-md-row gap-2 gap-md-0">
                 <!-- variabile numero di telefono -->
-                <span
-                  ><i class="fa-solid fa-phone me-2"></i
-                  >{{ restaurants.phone }}</span
-                >
+                <span><i class="fa-solid fa-phone me-2"></i>{{ restaurants.phone }}</span>
                 <!-- variabile VAT -->
-                <span
-                  ><i class="fa-solid fa-id-card me-2"></i
-                  >{{ restaurants.vat }}</span
-                >
+                <span><i class="fa-solid fa-id-card me-2"></i>{{ restaurants.vat }}</span>
               </div>
             </div>
           </div>
@@ -206,14 +183,9 @@ export default {
             <!-- --------------------------- -->
             <!-- RESTAURANT DISHES-->
             <ul class="m-0 mb-3 px-3 d-flex" v-for="dish in restaurants.dishes">
-              <li
-                class="d-flex p-3 mx-0 flex-column rounded-4 flex-grow-1 position-relative"
-              >
-                <div
-                  class="item_quantity_badge fw-bolder slide-rotate-hor-top"
-                  v-if="store.items.some((cartItem) => cartItem.id === dish.id)"
-                  :key="index"
-                >
+              <li class="d-flex p-3 mx-0 flex-column rounded-4 flex-grow-1 position-relative">
+                <div class="item_quantity_badge fw-bolder slide-rotate-hor-top"
+                  v-if="store.items.some((cartItem) => cartItem.id === dish.id)" :key="index">
                   {{
                     store.items.find((cartItem) => cartItem.id === dish.id)
                       .quantity
@@ -221,22 +193,11 @@ export default {
                 </div>
 
                 <div class="m-0 p-0 m-0 d-flex">
-                  <img
-                    v-if="dish.image"
-                    :src="
-                      dish.image.startsWith('http')
-                        ? dish.image
-                        : 'http://localhost:8000/storage/' + dish.image
-                    "
-                    class="dish_image"
-                    alt="..."
-                  />
-                  <img
-                    v-else
-                    class="dish_image"
-                    src="/img/homepage/placeholdertemp.jpg"
-                    alt="..."
-                  />
+                  <img v-if="dish.image" :src="dish.image.startsWith('http')
+                    ? dish.image
+                    : 'http://localhost:8000/storage/' + dish.image
+                    " class="dish_image" alt="..." />
+                  <img v-else class="dish_image" src="/img/homepage/placeholdertemp.jpg" alt="..." />
 
                   <div class="px-3">
                     <!-- variabile nome piatto -->
@@ -246,19 +207,13 @@ export default {
                     <!-- variabile prezzo piatto -->
                   </div>
                 </div>
-                <div
-                  class="d-flex justify-content-between align-content-center pt-2"
-                >
+                <div class="d-flex justify-content-between align-content-center pt-2">
                   <div class="d-flex align-items-center">
                     <!-- !!!!!!!!!!!!! -->
                     <!-- REMOVE BUTTON -->
-                    <button
-                      class="dish_btn me-3"
-                      v-if="
-                        store.items.some((cartItem) => cartItem.id === dish.id)
-                      "
-                      @click="decreaseItem(dish)"
-                    >
+                    <button class="dish_btn me-3" v-if="
+                      store.items.some((cartItem) => cartItem.id === dish.id)
+                    " @click="decreaseItem(dish)">
                       <i class="fa-solid fa-minus"></i>
                     </button>
                     <!-- !!!!!!!!!!!!! -->
@@ -281,12 +236,7 @@ export default {
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Errore</h5>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    aria-label="Close"
-                    @click="closeModal"
-                  ></button>
+                  <button type="button" class="btn-close" aria-label="Close" @click="closeModal"></button>
                 </div>
                 <div class="modal-body">
                   <p>
@@ -295,11 +245,7 @@ export default {
                   </p>
                 </div>
                 <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    @click="closeModal"
-                  >
+                  <button type="button" class="btn btn-secondary" @click="closeModal">
                     Chiudi
                   </button>
                 </div>
@@ -329,6 +275,20 @@ export default {
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+}
+
+.btn_back_to_home {
+  background-color: $primary_color;
+  color: $background_color;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.3rem 0.8rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+
 }
 
 .store-img {
@@ -436,10 +396,8 @@ export default {
     }
 
     .slide-rotate-hor-top {
-      -webkit-animation: slide-rotate-hor-top 0.2s
-        cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
-      animation: slide-rotate-hor-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-        reverse both;
+      -webkit-animation: slide-rotate-hor-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
+      animation: slide-rotate-hor-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
     }
 
     @-webkit-keyframes slide-rotate-hor-top {

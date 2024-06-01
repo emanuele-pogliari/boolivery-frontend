@@ -186,23 +186,12 @@ export default {
 </script>
 
 <template>
-  <div
-    class="modal fade"
-    id="errorModal"
-    tabindex="-1"
-    aria-labelledby="errorModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="errorModalLabel">Error</h5>
-          <button
-            type="button"
-            class="btn-close"
-            @click="closeModal"
-            aria-label="Close"
-          ></button>
+          <button type="button" class="btn-close" @click="closeModal" aria-label="Close"></button>
         </div>
         <div class="modal-body">Please fill all the required fields!</div>
         <div class="modal-footer">
@@ -217,99 +206,55 @@ export default {
     <div class="d-flex row justify-content-center flex-xl-row-reverse">
       <div class="cart_responsive col-12 col-xl-4 position-relative">
         <button class="back_to_store_btn position-absolute">
-          <router-link
-            class="text-decoration-none"
-            :to="{
-              name: 'restaurant',
-              params: { id: id },
-            }"
-            ><span class="back_store_link"
-              >Back to Restaurant Page</span
-            ></router-link
-          >
+          <router-link class="text-decoration-none" :to="{
+            name: 'restaurant',
+            params: { id: id },
+          }">
+            Back to Restaurant Page
+          </router-link>
         </button>
 
         <AppCart></AppCart>
       </div>
 
       <div class="col-12 col-xl-6 d-flex">
-        <form
-          method="POST"
-          @submit.prevent="paymentFunction"
-          class="form_data pt-3"
-        >
+        <form method="POST" @submit.prevent="paymentFunction" class="form_data pt-3">
           <h3>{{ restaurant_name }}</h3>
           <div class="mb-3 checkout_field">
-            <label for="orderInfo.customer_name" class="form-label"
-              >Name *</label
-            >
-            <input
-              v-model="orderInfo.customer_name"
-              type="text"
-              class="form-control"
-              id="orderInfo.customer_name"
-            />
+            <label for="orderInfo.customer_name" class="form-label">Name *</label>
+            <input v-model="orderInfo.customer_name" type="text" class="form-control" id="orderInfo.customer_name" />
           </div>
 
           <div class="mb-3 checkout_field">
-            <label for="orderInfo.customer_last_name" class="form-label"
-              >Lastname *</label
-            >
-            <input
-              v-model="orderInfo.customer_last_name"
-              type="text"
-              class="form-control"
-              id="orderInfo.customer_last_name"
-            />
+            <label for="orderInfo.customer_last_name" class="form-label">Lastname *</label>
+            <input v-model="orderInfo.customer_last_name" type="text" class="form-control"
+              id="orderInfo.customer_last_name" />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="address" class="form-label">Address *</label>
-            <input
-              v-model="orderInfo.customer_address"
-              type="text"
-              class="form-control"
-              id="address"
-            />
+            <input v-model="orderInfo.customer_address" type="text" class="form-control" id="address" />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="phone" class="form-label">Phone *</label>
-            <input
-              v-model="orderInfo.customer_phone"
-              type="text"
-              class="form-control"
-              id="phone"
-            />
+            <input v-model="orderInfo.customer_phone" type="text" class="form-control" id="phone" />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="email" class="form-label">Email *</label>
-            <input
-              v-model="orderInfo.customer_email"
-              type="text"
-              class="form-control"
-              id="email"
-            />
+            <input v-model="orderInfo.customer_email" type="text" class="form-control" id="email" />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="orderInfo.customer_note" class="form-label">Note</label>
-            <textarea
-              v-model="orderInfo.customer_note"
-              class="form-control"
-              id="orderInfo.customer_note"
-              rows="3"
-            ></textarea>
+            <textarea v-model="orderInfo.customer_note" class="form-control" id="orderInfo.customer_note"
+              rows="3"></textarea>
           </div>
 
           <div id="dropin-container"></div>
           <div class="loader-container">
-            <button
-              id="submit-button"
-              class="d-flex justify-content-center align-items-center gap-2"
-              type="submit"
-            >
+            <button id="submit-button" class="d-flex justify-content-center align-items-center gap-2" type="submit">
               Pay with
               <div class="paypal_badge">
                 <i class="fa-brands fa-paypal"></i> <span>Braintree</span>
@@ -427,20 +372,26 @@ export default {
     text-align: center;
     font-weight: 600;
 
+    a {
+      color: $background_color;
+    }
+
     &:hover {
       transition: 0.2s;
       font-weight: 600;
-      background-color: $background_color;
+      background-color: $background_color-dark;
       color: $primary_color;
       border-bottom: none;
+
+      a {
+        color: $primary_color;
+      }
     }
+
+
+
   }
-  .back_store_link {
-    color: white;
-    &:hover {
-      color: black;
-    }
-  }
+
 }
 
 @media screen and (max-width: 1200px) {
