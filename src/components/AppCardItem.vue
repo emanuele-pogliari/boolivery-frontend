@@ -125,13 +125,14 @@ export default {
     overflow: hidden;
     border-radius: 16px;
 
+
     img {
       border-radius: 16px;
       object-fit: cover;
 
       height: 125px;
 
-      box-shadow: 10px 10px 15px rgba(20, 20, 20, 0.15);
+
 
     }
   }
