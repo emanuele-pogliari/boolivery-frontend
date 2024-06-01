@@ -88,7 +88,7 @@ export default {
   <div class="shopping_cart_main_content p-0 m-0">
     <div class="cart_box p-xl-3 p-0">
       <div class="cart_title cart_body">
-        <h1 class="text text-capitalize mx-5 px-3">
+        <h1 class="text text-capitalize mx-5 px-3 mb-0">
           {{ store.items.length == 0 ? "Cart is empty" : "your order" }}
         </h1>
       </div>
@@ -104,8 +104,8 @@ export default {
                   {{ item.quantity }}x
                 </span>
 
-                <span class="change_quantity">
-                  <i class="fa-solid fa-minus shopping_cart_button" @click="decreaseItem(item)"></i>
+                <span class="change_quantity circular_badge">
+                  <i class="fa-solid fa-minus" @click="decreaseItem(item)"></i>
                 </span>
               </div>
 
@@ -119,8 +119,8 @@ export default {
             <div class="d-flex justify-content-end flex-column align-items-end">
               <div class="text-end">{{ item.total_dish_price }} €</div>
 
-              <span class="change_quantity">
-                <i class="fa-solid fa-plus shopping_cart_button" @click="increaseItem(item)"></i>
+              <span class="change_quantity circular_badge">
+                <i class="fa-solid fa-plus" @click="increaseItem(item)"></i>
               </span>
             </div>
           </li>
@@ -303,23 +303,37 @@ export default {
     margin: 0;
 
     li {
-      .delete_cart_item_btn {
-        background-color: transparent;
-        border: none;
-        padding: 0.5rem;
-        margin-left: 0.5rem;
-        cursor: pointer;
+
+      .circular_badge {
+        width: 23px;
+        height: 23px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 1px;
+        border-radius: 50%;
+        background-color: $background_color;
+        border: 1px solid $deactivated_text;
+
+        i {
+          font-size: 0.7rem;
+          margin: 0 !important;
+          color: $primary_color;
+        }
+
+        &:hover {
+          background-color: $secondary_color;
+          border: 1px solid $secondary_color;
+          color: $text_color;
+        }
+
       }
 
       .item_name {
         font-size: 0.9rem;
         font-weight: 500;
-      }
-
-      .shopping_cart_button {
-        font-size: 0.5rem;
-        @include shopping_cart_button_small;
-        padding: 0.4rem;
       }
     }
 

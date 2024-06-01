@@ -168,9 +168,13 @@ export default {
             <div class="d-flex col-lg-4">
               <div class="d-flex flex-column align-items-center flex-md-row gap-2 gap-md-0">
                 <!-- variabile numero di telefono -->
-                <span><i class="fa-solid fa-phone me-2"></i>{{ restaurants.phone }}</span>
+                <span class="d-flex align-items-center gap-1">
+                  <div class="circular_badge"><i class="fa-solid fa-phone me-2 fs-6"></i></div>{{ restaurants.phone }}
+                </span>
                 <!-- variabile VAT -->
-                <span><i class="fa-solid fa-id-card me-2"></i>{{ restaurants.vat }}</span>
+                <span class="d-flex align-items-center gap-1">
+                  <div class="circular_badge"><i class="fa-solid fa-id-card me-2 fs-6"></i></div>-{{ restaurants.vat }}
+                </span>
               </div>
             </div>
           </div>
@@ -211,7 +215,7 @@ export default {
                   <div class="d-flex align-items-center">
                     <!-- !!!!!!!!!!!!! -->
                     <!-- REMOVE BUTTON -->
-                    <button class="dish_btn me-3" v-if="
+                    <button class="dish_btn circular_badge me-3" v-if="
                       store.items.some((cartItem) => cartItem.id === dish.id)
                     " @click="decreaseItem(dish)">
                       <i class="fa-solid fa-minus"></i>
@@ -220,7 +224,7 @@ export default {
                     <!-- REMOVE BUTTON -->
                     <h4 class="m-0 p-0">{{ dish.price }} €</h4>
                   </div>
-                  <button class="dish_btn" @click="addItem(dish)">
+                  <button class="dish_btn circular_badge" @click="addItem(dish)">
                     <i class="fa-solid fa-plus"></i>
                   </button>
                 </div>
@@ -331,11 +335,13 @@ export default {
     max-width: fit-content;
 
     p {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
+      font-weight: 700;
     }
   }
 
   .restaurant_info {
+
     .type_tag_btn {
       @include type_single_pill;
     }
@@ -349,14 +355,15 @@ export default {
       min-width: fit-content;
     }
 
-    i {
-      font-size: 0.6rem;
-      padding: 0.5rem;
-      border-radius: 50%;
-      background-color: $background_color;
-      color: $primary_color;
-      border: 1px solid $deactivated_text;
+    @include circular_btn;
+
+    .circular_badge {
+      border: none;
     }
+
+
+
+
   }
 }
 
@@ -467,18 +474,36 @@ p {
   color: $text_color;
 }
 
-// .ingredient {
-//   border: 1px solid $primary_color;
-//   border-radius: 0.5rem;
-//   padding: 0.2rem;
-//   margin-right: 0.2rem;
-//   text-decoration: none;
-//   list-style: none;
-// }
 
-.dish_btn {
-  @include shopping_cart_button;
+
+.circular_badge {
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 1px;
+  border-radius: 50%;
+  background-color: $background_color_dark;
+  border: 1px solid #949494;
+
+  i {
+    font-size: 0.7rem;
+    margin: 0 !important;
+    color: #37373b;
+  }
+
+  &:hover {
+    background-color: $secondary_color;
+    border: 1px solid $secondary_color;
+    color: $text_color;
+  }
+
 }
+
+
 
 .cart_responsive {
   .cart {
