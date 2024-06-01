@@ -8,12 +8,6 @@ import Swiper from "swiper/bundle";
 // import styles bundle
 import "swiper/css/bundle";
 
-const swiper = new Swiper(".swiper", {
-  loop: true,
-  slidesPerView: 3,
-  spaceBetween: 30,
-});
-
 export default {
   name: "AppMainContent",
 
@@ -108,6 +102,40 @@ export default {
 
   mounted() {
     this.apiCall();
+
+    //load carousel after DOM is loaded
+    this.$nextTick(() => {
+      new Swiper(".swiper", {
+        loop: true,
+        slidesPerView: 3,
+        spaceBetween: 30,
+        pagination: {
+          clickable: true,
+        },
+        breakpoints: {
+          1024: {
+            slidesPerView: 6,
+            spaceBetween: 1,
+          },
+          768: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+          320: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    });
   },
 };
 </script>
@@ -139,6 +167,9 @@ export default {
               >
             </div>
           </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
         </div>
       </nav>
 
@@ -229,30 +260,6 @@ export default {
 
       cursor: default;
 
-      .more {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        color: $background_color;
-        background-color: $text_color;
-
-        font-weight: 600;
-        word-spacing: 2px;
-        letter-spacing: 0.5px;
-
-        border: 2px solid $text_color;
-        border-radius: 20px;
-
-        transition: all 0.2s linear;
-
-        &:hover {
-          background-color: $secondary_color;
-          border-color: $secondary_color;
-          color: $text_color;
-        }
-      }
-
       .type_res_button {
         padding: 6px 12px;
         width: 8rem;
@@ -270,14 +277,6 @@ export default {
         }
       }
 
-      .my_modal_body {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: flex-start;
-        width: 50%;
-        row-gap: 3rem;
-      }
-
       span {
         font-weight: normal;
       }
@@ -289,33 +288,6 @@ export default {
       gap: 1rem;
     }
 
-    .more {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      color: $background_color;
-      background-color: $text_color;
-
-      font-weight: 600;
-      word-spacing: 2px;
-      letter-spacing: 0.5px;
-
-      border: 2px solid $text_color;
-      border-radius: 20px;
-
-      padding: 6px 12px;
-      width: 12rem;
-
-      transition: all 0.2s linear;
-
-      &:hover {
-        background-color: $secondary_color;
-        border-color: $secondary_color;
-        color: $text_color;
-      }
-    }
-
     .type_res_button {
       @include restaurant_button_style;
 
@@ -324,18 +296,6 @@ export default {
         color: $text_color;
       }
     }
-
-    .my_modal_body {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-around;
-      width: 100%;
-      row-gap: 0.5rem;
-    }
-  }
-
-  .more-icon {
-    display: none;
   }
 
   .pagination-container {
@@ -440,11 +400,6 @@ export default {
 /* ----- RESPONSIVE ----- */
 
 @media screen and (max-width: 1200px) {
-  section nav .more {
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-  }
-
   section nav .food_types {
     background-color: $background_color;
     border-radius: 20px;
@@ -471,7 +426,7 @@ export default {
     display: none;
   }
 
-  section nav #food_types {
+  section nav .food_types {
     background-color: $background_color_dark;
     border-radius: 20px;
 
@@ -495,18 +450,6 @@ export default {
 
   section nav .type_res_button {
     width: 10rem;
-  }
-
-  section nav .more {
-    width: 5rem;
-  }
-
-  section nav .more .more-icon {
-    display: inline !important;
-  }
-
-  section nav .more .more-txt {
-    display: none;
   }
 }
 
