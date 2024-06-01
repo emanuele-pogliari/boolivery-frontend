@@ -10,7 +10,7 @@ export default {
     <div class="container-md mb-5 nunito-header">
         <div class="jumbotron gap-5 gap-md-0 row d-flex align-items-center">
 
-            <div class="col-md-6 col-12 h-100 d-flex justify-content-center">
+            <div class="col-lg-6 col-12 h-100 d-flex justify-content-center">
                 <div class="d-flex justify-content-center jumbotron-content">
                     <h1 class="text-uppercase">Boolivery</h1>
                     <h2 class="text-capitalize">Delivery</h2>
@@ -80,12 +80,7 @@ export default {
 
         @media (max-width: 768px) {
             text-align: center;
-
         }
-
-
-
-
 
         animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
         animation-delay: 0.3s;
@@ -104,9 +99,6 @@ export default {
                 opacity: 1;
             }
         }
-
-
-
 
         h1 {
             font-size: 4rem;
@@ -166,15 +158,11 @@ export default {
                     }
                 }
 
-
-
-
             }
 
         }
 
     }
-
 
 }
 </style>
