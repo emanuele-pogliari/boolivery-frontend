@@ -25,29 +25,25 @@ export default {
         <img v-else class="card-img-top" src="/img/homepage/placeholdertemp.jpg" alt="..." />
 
 
-        <div class="types-pill d-flex">
-          <div class="types-single-pill" v-for="type in restaurant.types">
-            <div class="type_bg">
-              <span class="type_text">
-                {{ type.type }}
-              </span>
-            </div>
-          </div>
-        </div>
       </div>
+      <div>
+        <div class="card-body px-1 py-2">
+          <h5 class="card-title text-start">{{ restaurant.name }}</h5>
+        </div>
 
-      <div class="card-body px-1 py-2">
-        <h5 class="card-title text-start">{{ restaurant.name }}</h5>
+        <div class="d-flex">
+          <span class="type_text types-single-pill d-flex type_bg" v-for="type in restaurant.types">
+            {{ type.type }}
+          </span>
+        </div>
 
-        <!-- <p class="m-0"><i class="fa-solid fa-thumbs-up"></i> 90%</p> -->
-
-        <!-- <btn class="btn btn-primary my_btn">
-          <i class="fa-solid fa-person-biking"></i>
-        </btn> -->
       </div>
     </div>
   </router-link>
 </template>
+
+
+
 
 <style lang="scss" scoped>
 @use "/src/variabiles.scss" as *;
