@@ -103,15 +103,47 @@ export default {
 
   mounted() {
     this.apiCall();
+
+    //load carousel after DOM is loaded
+    this.$nextTick(() => {
+      new Swiper(".swiper", {
+        loop: true,
+        slidesPerView: 3,
+        spaceBetween: 30,
+        pagination: {
+          clickable: true,
+        },
+        breakpoints: {
+          1024: {
+            slidesPerView: 8,
+            spaceBetween: 1,
+          },
+          768: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+          320: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    });
   },
 };
 </script>
 
 <template>
   <div class="bg_container rounded-5 mb-5">
-
     <div class="container_big container d-flex flex-column">
-
       <nav class="mb-5 mt-5">
         <h3>Popular <span>Category</span></h3>
 
@@ -123,27 +155,59 @@ export default {
           <button class="type_res_button">Chinese</button>
         </div>
 
-        <button type="button" class="btn more" data-bs-toggle="modal" data-bs-target="#restaurantModal">
-          <span class="more-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+        <button
+          type="button"
+          class="btn more"
+          data-bs-toggle="modal"
+          data-bs-target="#restaurantModal"
+        >
+          <span class="more-icon"
+            ><i class="fa-solid fa-magnifying-glass"></i
+          ></span>
           <span class="more-txt">Want more?</span>
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="restaurantModal" tabindex="-1" aria-labelledby="restaurantModalLabel"
-          aria-hidden="true">
+        <div
+          class="modal fade"
+          id="restaurantModal"
+          tabindex="-1"
+          aria-labelledby="restaurantModalLabel"
+          aria-hidden="true"
+        >
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header my_modal_head">
-                <h1 class="modal-title fs-5 text-center" id="restaurantModalLabel">
+                <h1
+                  class="modal-title fs-5 text-center"
+                  id="restaurantModalLabel"
+                >
                   What are you looking for?
                 </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
               </div>
               <div class="modal-body my_modal_body">
                 <div v-for="type in types" class="custom-checkbox">
-                  <input class="form-check-input" type="checkbox" role="switch" :value="type.type" :id="type.type"
-                    :name="type.type" v-model="checkButtonValue" @change="apiFilterTypes()" />
-                  <label class="form-check-label custom-checkbox-label" :for="type.type">{{ type.type }}</label>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    :value="type.type"
+                    :id="type.type"
+                    :name="type.type"
+                    v-model="checkButtonValue"
+                    @change="apiFilterTypes()"
+                  />
+                  <label
+                    class="form-check-label custom-checkbox-label"
+                    :for="type.type"
+                    >{{ type.type }}</label
+                  >
                 </div>
               </div>
             </div>
@@ -165,10 +229,16 @@ export default {
       <div class="cards_section row flex-wrap justify-content-between p-3 mb-1">
         <div v-if="isLoading" class="loader"></div>
 
-        <template v-else-if="
-          restaurants && restaurants.data && restaurants.data.length > 0
-        ">
-          <AppCardItem v-for="restaurant in restaurants.data" :key="restaurant.id" :restaurant="restaurant">
+        <template
+          v-else-if="
+            restaurants && restaurants.data && restaurants.data.length > 0
+          "
+        >
+          <AppCardItem
+            v-for="restaurant in restaurants.data"
+            :key="restaurant.id"
+            :restaurant="restaurant"
+          >
           </AppCardItem>
         </template>
         <div v-else>
@@ -177,10 +247,19 @@ export default {
       </div>
 
       <div class="d-flex justify-content-center mb-5">
-        <div v-if="restaurants && restaurants.data && restaurants.data.length > 0">
-          <vue-awesome-paginate :total-items="total_items" v-model="apiPageNumber" :items-per-page="per_page"
-            :max-pages-shown="last_page" :on-click="changePage" :hide-prev-next-when-ends="true"
-            paginate-buttons-class="paginate-buttons" active-page-class="active-page" />
+        <div
+          v-if="restaurants && restaurants.data && restaurants.data.length > 0"
+        >
+          <vue-awesome-paginate
+            :total-items="total_items"
+            v-model="apiPageNumber"
+            :items-per-page="per_page"
+            :max-pages-shown="last_page"
+            :on-click="changePage"
+            :hide-prev-next-when-ends="true"
+            paginate-buttons-class="paginate-buttons"
+            active-page-class="active-page"
+          />
         </div>
       </div>
     </div>
@@ -200,17 +279,14 @@ export default {
   display: flex;
   height: 100%;
 
-
   .cards_section {
     display: flex !important;
     align-items: center;
     height: 100%;
     min-height: 260px;
 
-    gap: .5rem;
+    gap: 0.5rem;
   }
-
-
 
   nav {
     display: flex;
@@ -390,7 +466,7 @@ export default {
     text-align: center;
   }
 
-  .custom-checkbox input[type="checkbox"]:checked+.custom-checkbox-label {
+  .custom-checkbox input[type="checkbox"]:checked + .custom-checkbox-label {
     background-color: $secondary_color;
     color: $text_color;
   }
