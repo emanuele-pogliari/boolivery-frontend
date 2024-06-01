@@ -34,6 +34,7 @@ export default {
       items: JSON.parse(localStorage.getItem("items")) || [],
       restaurant_name:
         localStorage.getItem("restaurant_name") || "the restaurant",
+      id: localStorage.getItem("currentRestaurantId"),
     };
   },
 
@@ -216,15 +217,27 @@ export default {
     <div class="d-flex row justify-content-center flex-xl-row-reverse">
       <div class="cart_responsive col-12 col-xl-4 position-relative">
         <button class="back_to_store_btn position-absolute">
-          <span>back to </span>
-          <span class="text-capitalize"> "restaurant"</span>
+          <router-link
+            class="text-decoration-none"
+            :to="{
+              name: 'restaurant',
+              params: { id: id },
+            }"
+            ><span class="back_store_link"
+              >Back to Restaurant Page</span
+            ></router-link
+          >
         </button>
 
         <AppCart></AppCart>
       </div>
 
       <div class="col-12 col-xl-6 d-flex">
-        <form method="POST" @submit.prevent="paymentFunction" class="form_data">
+        <form
+          method="POST"
+          @submit.prevent="paymentFunction"
+          class="form_data pt-3"
+        >
           <h3>{{ restaurant_name }}</h3>
           <div class="mb-3 checkout_field">
             <label for="orderInfo.customer_name" class="form-label"
@@ -419,8 +432,13 @@ export default {
       font-weight: 600;
       background-color: $background_color;
       color: $primary_color;
-      border: 2px solid $primary_color;
       border-bottom: none;
+    }
+  }
+  .back_store_link {
+    color: white;
+    &:hover {
+      color: black;
     }
   }
 }
