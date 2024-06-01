@@ -112,7 +112,7 @@ export default {
 
     <div class="container_big container d-flex flex-column">
 
-      <nav>
+      <nav class="mb-5 mt-5">
         <h3>Popular <span>Category</span></h3>
 
         <!-- Da implementare una volta realizzati i counter -->
@@ -162,7 +162,7 @@ export default {
       </div>
       <!-- FINE -->
 
-      <div class="cards_section row flex-wrap justify-content-between p-2 p-md-0">
+      <div class="cards_section row flex-wrap justify-content-between p-3 mb-3">
         <div v-if="isLoading" class="loader"></div>
 
         <template v-else-if="
@@ -176,10 +176,12 @@ export default {
         </div>
       </div>
 
-      <div v-if="restaurants && restaurants.data && restaurants.data.length > 0">
-        <vue-awesome-paginate :total-items="total_items" v-model="apiPageNumber" :items-per-page="per_page"
-          :max-pages-shown="last_page" :on-click="changePage" :hide-prev-next-when-ends="true"
-          paginate-buttons-class="paginate-buttons" active-page-class="active-page" />
+      <div class="d-flex justify-content-center mb-5">
+        <div v-if="restaurants && restaurants.data && restaurants.data.length > 0">
+          <vue-awesome-paginate :total-items="total_items" v-model="apiPageNumber" :items-per-page="per_page"
+            :max-pages-shown="last_page" :on-click="changePage" :hide-prev-next-when-ends="true"
+            paginate-buttons-class="paginate-buttons" active-page-class="active-page" />
+        </div>
       </div>
     </div>
   </div>
@@ -335,7 +337,7 @@ export default {
 
   .pagination-container {
     display: flex;
-    column-gap: 10px;
+    column-gap: 1rem;
     margin-top: 1rem;
   }
 

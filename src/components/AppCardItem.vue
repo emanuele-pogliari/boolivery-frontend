@@ -14,7 +14,7 @@ export default {
 </script>
 
 <template>
-  <router-link :to="{ name: 'restaurant', params: { id: restaurant.id } }" class="card my_card p-0">
+  <router-link :to="{ name: 'restaurant', params: { id: restaurant.id } }" class="card my_card p-0 mb-4">
     <div class="nunito-card">
 
       <div class="img-container">

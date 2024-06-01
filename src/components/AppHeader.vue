@@ -7,8 +7,9 @@ export default {
 </script>
 
 <template>
-    <div class="container-md mb-5 nunito-header">
-        <div class="jumbotron gap-5 gap-md-0 row d-flex align-items-center">
+    <div class="container-md mt-3 mt-lg-5 mb-5 nunito-header">
+
+        <div class="jumbotron gap-5 gap-lg-0 row d-flex align-items-center">
 
             <div class="col-lg-6 col-12 h-100 d-flex justify-content-center">
                 <div class="d-flex justify-content-center jumbotron-content">
@@ -19,17 +20,13 @@ export default {
                 </div>
             </div>
 
-            <div class="col-md-6 col-12 justify-content-center">
-                <img class="" src="/img/homepage/boolivery_hamburger_2.jpg" alt="">
-
+            <div class="col-lg-6 col-12 justify-content-center p-0 m-0">
+                <img src="/img/homepage/boolivery_hamburger_2.jpg" alt="">
             </div>
 
         </div>
 
     </div>
-
-
-
 </template>
 
 <style lang="scss" scoped>
@@ -57,7 +54,7 @@ export default {
         border-top-right-radius: 100px;
         border-bottom-right-radius: 1rem;
 
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             border-radius: 1rem;
             border-radius: 1rem;
 
@@ -78,7 +75,7 @@ export default {
         text-align: start;
         color: $background_color;
 
-        @media (max-width: 768px) {
+        @media (max-width: 992pxpx) {
             text-align: center;
         }
 
