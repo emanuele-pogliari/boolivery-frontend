@@ -185,13 +185,6 @@ export default {
 }
 
 .types-pill {
-  font-weight: 700;
-  gap: .1rem;
-  font-size: 0.9rem;
-  color: #ffffff (1);
-
-  opacity: 0.9;
-
   @include type_single_pill;
 }
 </style>
