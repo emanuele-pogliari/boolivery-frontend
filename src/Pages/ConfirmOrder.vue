@@ -32,7 +32,6 @@ export default {
   <div class="bg_confirmation_order mb-5">
     <div class="container">
       <div class="d-flex flex-column py-5">
-        <img class="pb-3" src="/img/logo/Logo.png" alt="" />
         <div class="customer_content">
           <h1>
             Thank You, {{ orderInfo.customer_name }}
