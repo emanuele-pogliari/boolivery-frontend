@@ -22,6 +22,7 @@ export default {
       baseApiUrl: "http://127.0.0.1:8000/api/",
       store,
       showModal: false,
+      loading: false,
     };
   },
 
@@ -56,9 +57,11 @@ export default {
 
   methods: {
     fetchRestaurantDetails(restaurantId) {
+      this.loading = true;
       axios.get(this.baseApiUrl + "restaurants/" + restaurantId).then((res) => {
         this.restaurants = res.data.results;
         localStorage.setItem("restaurant_name", this.restaurants.name);
+        this.loading = false;
       });
     },
     addItem(item) {
@@ -201,6 +204,7 @@ export default {
         <!--END RESTAURANT DETAILS-->
 
         <div class="d-flex p-0 my-2">
+          <div v-if="loading" class="loader">Loading...</div>
           <div class="dishes_main_content d-flex gap-2 flex-wrap p-0 m-0">
             <!-- --------------------------- -->
             <!-- RESTAURANT DISHES-->
@@ -517,6 +521,15 @@ p {
 //   list-style: none;
 // }
 
+.loader {
+  border: 5px solid #f3f3f3; /* Grigio chiaro */
+  border-top: 5px solid $secondary_color; /* Blu */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite; /* Animazione di rotazione */
+  transform: translateY(-50%);
+}
 .dish_btn {
   @include shopping_cart_button;
 }

@@ -183,6 +183,7 @@ export default {
 </script>
 
 <template>
+  <!-- checkout modal that appears if user don't filled form fields -->
   <div
     class="modal fade"
     id="errorModal"
@@ -210,6 +211,7 @@ export default {
       </div>
     </div>
   </div>
+
   <div class="container my-4 mt-5">
     <div class="d-flex row justify-content-center flex-xl-row-reverse">
       <div class="cart_responsive col-12 col-xl-4 position-relative">
