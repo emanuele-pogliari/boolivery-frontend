@@ -13,9 +13,9 @@ export default {
 <template>
   <footer class="p-0">
     <!-- <hr class=""> -->
-    <div class="container d-flex justify-content-around py-5">
+    <div class="container d-flex py-5">
 
-      <div class="row d-flex flex-grow-1 gap-5 gap-sm-0 gap-md-0 inside-container ">
+      <div class="row d-flex flex-grow-1 gap-5 gap-sm-0 gap-md-0 inside-container">
 
         <div
           class="footer_links d-flex align-items-center align-items-sm-start col-12 col-sm-6 col-md-3 flex-column py-3">
@@ -97,7 +97,7 @@ export default {
             <h5>Subscribe</h5>
           </div>
 
-          <form>
+          <form class="w-100">
             <div class="d-flex flex-column">
               <label for="exampleInputEmail1" class="form-label"></label>
               <input type="email" class="form-control mb-2" id="exampleInputEmail1" placeholder="enter email adress"
@@ -110,44 +110,22 @@ export default {
 
         </div>
 
-        <!-- <div class="d-flex flex-column align-items-start gap-1">
-        
-        <h5 class="pt-2">Boolivery</h5>
-        <a href="#" class="btn primary-btn">ORDER NOW</a>
-      </div> -->
-
-
-
 
       </div>
+
 
 
     </div>
 
     <div class="d-flex justify-content-center py-4 developers-pills">
-
-      <div class="d-flex justify-content-between flex-column align-items-center">
+      <div class="d-flex  flex-column align-items-center">
         <span>Website created by</span>
-
-        <!-- <div class="d-flex flex-column gap-3">
-          <span class="badge ">
-            <a href="https://github.com/lucafagiolini">Luca F.</a>
-          </span>
-          <span class="badge">
-            <a href="">Christian DG.</a>
-          </span>
-          <span class="badge">
-            <a href="https://github.com/emanuele-pogliari">Emanuele P.</a>
-          </span>
-          <span class="badge">
-            <a href="">Christian S.</a>
-          </span>
-        </div> -->
-
       </div>
     </div>
 
-    <div class="d-flex justify-content-center text-white p-4">Boolean class 118</div>
+    <div class="d-flex justify-content-center text-white p-4">
+      Boolean class 118
+    </div>
 
   </footer>
 </template>
@@ -160,10 +138,7 @@ footer {
   color: $deactivated_text;
   background-color: $primary_color;
   border-top-right-radius: 100px;
-
-  .inside-container {
-    max-width: 1200px !important;
-  }
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
 
 
   h5 {

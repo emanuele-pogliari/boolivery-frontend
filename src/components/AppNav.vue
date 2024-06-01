@@ -39,14 +39,8 @@ export default {
         </a>
       </router-link>
       <!-- Toggle button for mobile view -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        id="navbarToggle"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button class="navbar-toggler" type="button" id="navbarToggle" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -64,7 +58,7 @@ export default {
             <!-- Login Button -->
             <a class="text-center" href="http://127.0.0.1:8000">
               <button class="btn btn-sm ms-auto my_button" type="button">
-                <i class="fa-solid fa-house-user"></i> 
+                <i class="fa-solid fa-house-user"></i>
                 <span> Restaurant Owner Login</span>
               </button>
             </a>
@@ -84,6 +78,7 @@ export default {
 .navbar {
   width: 100%;
   padding: 1rem 0;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 
   .my_nav {
     max-width: 1200px;

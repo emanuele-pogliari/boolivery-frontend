@@ -46,11 +46,22 @@ export default {
     position: relative;
     margin: 1rem 0;
 
+
+    @media screen and (min-width: 992px) {
+        background-color: $background_color_dark;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 100px;
+        border-bottom-right-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    }
+
+
     img {
         width: 100%;
         height: 100%;
         object-fit: center;
-        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+        // box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
         border-top-right-radius: 100px;
         border-bottom-right-radius: 1rem;
 
@@ -69,6 +80,7 @@ export default {
     }
 
     .jumbotron-content {
+
         display: flex;
         flex-direction: column;
         justify-content: start;
