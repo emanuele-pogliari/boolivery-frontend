@@ -114,7 +114,7 @@ export default {
         },
         breakpoints: {
           1024: {
-            slidesPerView: 8,
+            slidesPerView: 6,
             spaceBetween: 1,
           },
           768: {
@@ -122,12 +122,18 @@ export default {
             spaceBetween: 30,
           },
           640: {
-            slidesPerView: 2,
+            slidesPerView: 3,
             spaceBetween: 30,
           },
+
+          420: {
+            slidesPerView: 3,
+            spaceBetween: 15,
+          },
+
           320: {
-            slidesPerView: 2,
-            spaceBetween: 30,
+            slidesPerView: 3,
+            spaceBetween: 15,
           },
         },
         navigation: {
@@ -141,30 +147,18 @@ export default {
 </script>
 
 <template>
-  <div class="bg_container rounded-5 mb-5">
+  <div class="bg_container nunito-main-content rounded-5 mb-5">
     <div class="container_big container d-flex flex-column">
-      <nav>
-        <h3>Popular <span>Category</span></h3>
+      <nav class="mb-3">
+        <h3 class="p-0 m-0 mb-3 mt-4"><span>Categories</span></h3>
 
         <!-- Da implementare una volta realizzati i counter -->
-        <div class="swiper">
+        <div class="swiper px-3">
           <div class="swiper-wrapper">
-            <div class="swiper-slide food_types" v-for="type in types">
-              <input
-                class="form-check-input d-none"
-                type="checkbox"
-                role="switch"
-                :value="type.type"
-                :id="type.type"
-                :name="type.type"
-                v-model="checkButtonValue"
-                @change="apiFilterTypes()"
-              />
-              <label
-                class="form-check-label custom-checkbox-label"
-                :for="type.type"
-                >{{ type.type }}</label
-              >
+            <div class="swiper-slide food_types justify-content-center" v-for="type in types">
+              <input class="form-check-input d-none" type="checkbox" role="switch" :value="type.type" :id="type.type"
+                :name="type.type" v-model="checkButtonValue" @change="apiFilterTypes()" />
+              <label class="form-check-label custom-checkbox-label" :for="type.type">{{ type.type }}</label>
             </div>
           </div>
           <div class="swiper-pagination"></div>
@@ -172,6 +166,7 @@ export default {
           <div class="swiper-button-next"></div>
         </div>
       </nav>
+      <hr>
 
       <!-- CATEGORIE SELEZIONATE -->
       <div v-if="checkButtonValue.length != 0" class="food_selected">
@@ -187,16 +182,10 @@ export default {
       <div class="cards_section row flex-wrap justify-content-between p-3 mb-1">
         <div v-if="isLoading" class="loader"></div>
 
-        <template
-          v-else-if="
-            restaurants && restaurants.data && restaurants.data.length > 0
-          "
-        >
-          <AppCardItem
-            v-for="restaurant in restaurants.data"
-            :key="restaurant.id"
-            :restaurant="restaurant"
-          >
+        <template v-else-if="
+          restaurants && restaurants.data && restaurants.data.length > 0
+        ">
+          <AppCardItem v-for="restaurant in restaurants.data" :key="restaurant.id" :restaurant="restaurant">
           </AppCardItem>
         </template>
         <div v-else>
@@ -205,19 +194,10 @@ export default {
       </div>
 
       <div class="d-flex justify-content-center mb-5">
-        <div
-          v-if="restaurants && restaurants.data && restaurants.data.length > 0"
-        >
-          <vue-awesome-paginate
-            :total-items="total_items"
-            v-model="apiPageNumber"
-            :items-per-page="per_page"
-            :max-pages-shown="last_page"
-            :on-click="changePage"
-            :hide-prev-next-when-ends="true"
-            paginate-buttons-class="paginate-buttons"
-            active-page-class="active-page"
-          />
+        <div v-if="restaurants && restaurants.data && restaurants.data.length > 0">
+          <vue-awesome-paginate :total-items="total_items" v-model="apiPageNumber" :items-per-page="per_page"
+            :max-pages-shown="last_page" :on-click="changePage" :hide-prev-next-when-ends="true"
+            paginate-buttons-class="paginate-buttons" active-page-class="active-page" />
         </div>
       </div>
     </div>
@@ -227,6 +207,12 @@ export default {
 <style lang="scss">
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
+
+.nunito-main-content {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
 
 .bg_container {
   background-color: $background_color_dark;
@@ -247,45 +233,28 @@ export default {
   }
 
   nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
     width: 100%;
 
     h3 {
-      font-size: 2.1rem;
+      font-size: 1.7rem;
+      font-weight: 800;
       color: $text_color;
-      padding-left: 0.5rem;
-
       cursor: default;
-
-      .type_res_button {
-        padding: 6px 12px;
-        width: 8rem;
-        border-radius: 20px;
-        border: 1px solid $background_color;
-
-        background-color: $background_color;
-        color: $text_color;
-        font-weight: 600;
-
-        transition: all 0.2s linear;
-
-        &:hover {
-          background-color: $secondary_color;
-        }
-      }
-
-      span {
-        font-weight: normal;
-      }
     }
 
     .food_types {
+      font-weight: 900;
+      font-size: 0.8rem;
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
+
+      .custom-checkbox-label {
+        font-weight: 800;
+      }
     }
 
     .type_res_button {
@@ -337,7 +306,6 @@ export default {
   .back-button {
     background-color: $primary_color;
     color: $text_color_highlight;
-
     font-weight: 600;
   }
 
@@ -345,13 +313,29 @@ export default {
   .swiper-button-next {
     width: 25px;
     color: $primary_color;
-    border: 1px solid red;
+    right: -7px;
+
+    &:hover {
+      color: $secondary_color;
+    }
   }
 
   .swiper-button-prev {
-    width: 25px;
+    font-size: small;
     color: $primary_color;
-    border: 1px solid red;
+    left: -7px;
+
+    &:hover {
+      color: $secondary_color;
+    }
+  }
+
+  .swiper-button-prev::after {
+    font-size: 1.3rem;
+  }
+
+  .swiper-button-next::after {
+    font-size: 1.3rem;
   }
 
   .custom-checkbox input[type="checkbox"] {
@@ -364,7 +348,7 @@ export default {
     text-align: center;
   }
 
-  .custom-checkbox input[type="checkbox"]:checked + .custom-checkbox-label {
+  .custom-checkbox input[type="checkbox"]:checked+.custom-checkbox-label {
     background-color: $secondary_color;
     color: $text_color;
   }

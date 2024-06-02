@@ -239,18 +239,18 @@ export default {
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Errore</h5>
+                  <h5 class="modal-title fw-bold">Attention</h5>
                   <button type="button" class="btn-close" aria-label="Close" @click="closeModal"></button>
                 </div>
                 <div class="modal-body">
                   <p>
-                    Il carrello contiene piatti da un altro ristorante. Rimuovi
-                    tutti i piatti dal carrello prima di continuare.
+                    The cart contains dishes from another restaurant. Please remove all dishes from the cart before
+                    continuing.
                   </p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" @click="closeModal">
-                    Chiudi
+                  <button type="button" class="modal_btn" @click="closeModal">
+                    Close
                   </button>
                 </div>
               </div>
@@ -514,6 +514,30 @@ p {
   @media (max-width: 1200px) {
     position: fixed;
     bottom: -3%;
+  }
+}
+
+
+.modal-body {
+  p {
+    font-weight: 800;
+    color: $text_color;
+  }
+}
+
+.modal_btn {
+  background-color: $primary_color;
+  color: $background_color;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.3rem 0.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $secondary_color;
+    color: $primary_color;
   }
 }
 </style>
