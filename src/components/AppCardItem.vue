@@ -61,6 +61,7 @@ export default {
   max-width: 290px;
   min-width: fit-content;
   width: 100%;
+  user-select: none;
 
   background-color: $background_color_dark;
   color: $text_color;

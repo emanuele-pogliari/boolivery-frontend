@@ -280,6 +280,7 @@ export default {
     border: 1px solid $deactivated_text;
     color: black;
 
+    user-select: none;
     font-weight: 600;
   }
 

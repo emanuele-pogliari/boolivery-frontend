@@ -19,23 +19,24 @@ export default {
     };
   },
   mounted() {
-    setTimeout(() => {
-      this.$router.push({ name: "home" });
-    }, 8000);
-    localStorage.removeItem("items");
-    this.store.totalCartPrice = 0;
+    // setTimeout(() => {
+    //   this.$router.push({ name: "home" });
+    // }, 8000);
+    // localStorage.removeItem("items");
+    // this.store.totalCartPrice = 0;
   },
 };
 </script>
 
 <template>
-  <div class="bg_confirmation_order mb-5">
+  <div class="bg_confirmation_order mb-5 nunito-confirm-order">
     <div class="container">
       <div class="d-flex flex-column py-5">
         <div class="customer_content">
-          <h1>
-            Thank You, {{ orderInfo.customer_name }}
-            {{ orderInfo.customer_last_name }}, your order has been confirmed,
+          <h1 class="">
+            Thank You, <span class="text-capitalize fw-bolder">{{ orderInfo.customer_name }} <span></span> </span>
+            <span class="text-capitalize fw-bolder">{{ orderInfo.customer_last_name }}</span>, your order has been
+            confirmed,
             enjoy!
           </h1>
           <p>Find below the receipt from {{ restaurant_name }}"</p>
@@ -44,23 +45,26 @@ export default {
     </div>
   </div>
 
-  <div class="invoice container mb-5">
-    <h2>Your Order</h2>
-    <ul>
-      <li v-for="item in order" :key="item.id">
-        <p>{{ item.name }} (x{{ item.quantity }})</p>
-        <p>{{ item.price }} €</p>
-      </li>
-    </ul>
-    <h2>Total: {{ orderInfo.total_price }} €</h2>
+  <div
+    class="invoice container mb-5 d-flex justify-content-evenly flex-column align-items-center align-items-md-start text-center text-md-start flex-md-row gap-5 gap-md-0 align-text-top nunito-confirm-order">
     <div>
-      <h3>Delivery Address</h3>
-      <p>{{ orderInfo.customer_address }}</p>
-      <h3>Contact Details</h3>
-      <p>Email: {{ orderInfo.customer_email }}</p>
-      <p>Phone: {{ orderInfo.customer_phone }}</p>
-      <h3>Note</h3>
-      <p>{{ orderInfo.customer_note }}</p>
+      <h2 class="fw-bolder py-0 my-0 fs-2">Your Order</h2>
+      <ul>
+        <li v-for="item in order" :key="item.id">
+          <p>{{ item.name }} (x{{ item.quantity }})</p>
+          <p>{{ item.price }} €</p>
+        </li>
+      </ul>
+      <h2 class="fw-bolder fs-2 py-0 my-0">Total: {{ orderInfo.total_price }} €</h2>
+    </div>
+    <div>
+      <h3 class="fw-bolder fs-4">Delivery Address</h3>
+      <p class="fw-bold">{{ orderInfo.customer_address }}</p>
+      <h3 class="fw-bold fs-4">Contact Details</h3>
+      <p class="fw-bold mb-1">Email: {{ orderInfo.customer_email }}</p>
+      <p class="fw-bold">Phone: {{ orderInfo.customer_phone }}</p>
+      <h3 class="fw-bold fs-4 mb-1">Note</h3>
+      <p class="fw-bold">{{ orderInfo.customer_note }}</p>
     </div>
   </div>
 </template>
@@ -69,8 +73,14 @@ export default {
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
+.nunito-confirm-order {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 .bg_confirmation_order {
-  background-color: $secondary_color;
+  background-color: #f2ca39;
   border-bottom-right-radius: 10rem;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
 
@@ -80,7 +90,7 @@ export default {
   }
 
   h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
   }
 
@@ -90,11 +100,12 @@ export default {
 }
 
 .invoice {
-  color: $background_color_dark;
-  background-color: $primary_color;
+  color: #37373b;
+  background-color: #f6f7f8;
   border-radius: 24px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   padding: 1rem;
+
 
   ul {
     list-style: none;
@@ -106,7 +117,7 @@ export default {
     display: flex;
     justify-content: space-between;
     padding: 1rem 0;
-    border-bottom: 1px solid $background_color_dark;
+    border-bottom: 1px solid #f6f7f8;
   }
 
   h2 {
