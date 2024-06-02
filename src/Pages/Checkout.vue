@@ -20,7 +20,7 @@ export default {
       instance: null,
       baseApiUrl: "http://127.0.0.1:8000/api/",
       store,
-      isProcessing: false, // Add loader state
+      isLoading: false, // Add loader state
 
       orderInfo: {
         total_price: localStorage.getItem("totalCartPrice") || 0,
@@ -129,7 +129,7 @@ export default {
         return;
       }
 
-      this.isProcessing = true; // Set loader to true before processing payment
+      this.isLoading = true; // Set loader to true before processing payment
 
       this.instance.requestPaymentMethod((err, payload) => {
         if (err) {
@@ -166,8 +166,6 @@ export default {
           .then(() => {
             this.isProcessing = false; // Set loader to false after payment is successful
             // Svuota il carrello dopo il pagamento
-            this.store.items = [];
-            localStorage.removeItem("items");
 
             // Update total items after clearing
             this.updateTotalItems();
@@ -186,12 +184,23 @@ export default {
 </script>
 
 <template>
-  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div
+    class="modal fade"
+    id="errorModal"
+    tabindex="-1"
+    aria-labelledby="errorModalLabel"
+    aria-hidden="true"
+  >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="errorModalLabel">Error</h5>
-          <button type="button" class="btn-close" @click="closeModal" aria-label="Close"></button>
+          <button
+            type="button"
+            class="btn-close"
+            @click="closeModal"
+            aria-label="Close"
+          ></button>
         </div>
         <div class="modal-body">Please fill all the required fields!</div>
         <div class="modal-footer">
@@ -202,14 +211,18 @@ export default {
       </div>
     </div>
   </div>
+
   <div class="container my-4 mt-5">
     <div class="d-flex row justify-content-center flex-xl-row-reverse">
       <div class="cart_responsive col-12 col-xl-4 position-relative">
         <button class="back_to_store_btn position-absolute">
-          <router-link class="text-decoration-none" :to="{
-            name: 'restaurant',
-            params: { id: id },
-          }">
+          <router-link
+            class="text-decoration-none"
+            :to="{
+              name: 'restaurant',
+              params: { id: id },
+            }"
+          >
             Back to Restaurant Page
           </router-link>
         </button>
@@ -218,49 +231,91 @@ export default {
       </div>
 
       <div class="col-12 col-xl-6 d-flex">
-        <form method="POST" @submit.prevent="paymentFunction" class="form_data pt-3">
+        <form
+          method="POST"
+          @submit.prevent="paymentFunction"
+          class="form_data pt-3"
+        >
           <h3>{{ restaurant_name }}</h3>
           <div class="mb-3 checkout_field">
-            <label for="orderInfo.customer_name" class="form-label">Name *</label>
-            <input v-model="orderInfo.customer_name" type="text" class="form-control" id="orderInfo.customer_name" />
+            <label for="orderInfo.customer_name" class="form-label"
+              >Name *</label
+            >
+            <input
+              v-model="orderInfo.customer_name"
+              type="text"
+              class="form-control"
+              id="orderInfo.customer_name"
+            />
           </div>
 
           <div class="mb-3 checkout_field">
-            <label for="orderInfo.customer_last_name" class="form-label">Lastname *</label>
-            <input v-model="orderInfo.customer_last_name" type="text" class="form-control"
-              id="orderInfo.customer_last_name" />
+            <label for="orderInfo.customer_last_name" class="form-label"
+              >Lastname *</label
+            >
+            <input
+              v-model="orderInfo.customer_last_name"
+              type="text"
+              class="form-control"
+              id="orderInfo.customer_last_name"
+            />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="address" class="form-label">Address *</label>
-            <input v-model="orderInfo.customer_address" type="text" class="form-control" id="address" />
+            <input
+              v-model="orderInfo.customer_address"
+              type="text"
+              class="form-control"
+              id="address"
+            />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="phone" class="form-label">Phone *</label>
-            <input v-model="orderInfo.customer_phone" type="text" class="form-control" id="phone" />
+            <input
+              v-model="orderInfo.customer_phone"
+              type="text"
+              class="form-control"
+              id="phone"
+            />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="email" class="form-label">Email *</label>
-            <input v-model="orderInfo.customer_email" type="text" class="form-control" id="email" />
+            <input
+              v-model="orderInfo.customer_email"
+              type="text"
+              class="form-control"
+              id="email"
+            />
           </div>
 
           <div class="mb-3 checkout_field">
             <label for="orderInfo.customer_note" class="form-label">Note</label>
-            <textarea v-model="orderInfo.customer_note" class="form-control" id="orderInfo.customer_note"
-              rows="3"></textarea>
+            <textarea
+              v-model="orderInfo.customer_note"
+              class="form-control"
+              id="orderInfo.customer_note"
+              rows="3"
+            ></textarea>
           </div>
 
           <div id="dropin-container"></div>
           <div class="loader-container">
-            <button id="submit-button" class="d-flex justify-content-center align-items-center gap-2" type="submit">
+            <button
+              id="submit-button"
+              class="d-flex justify-content-center align-items-center gap-2"
+              type="submit"
+            >
               Pay with
               <div class="paypal_badge">
                 <i class="fa-brands fa-paypal"></i> <span>Braintree</span>
               </div>
             </button>
-            <div v-if="isProcessing" class="loader"></div>
+            <div v-if="isLoading" class="loader-overlay">
+              <div class="loader"></div>
+            </div>
           </div>
         </form>
       </div>
@@ -330,15 +385,48 @@ export default {
   }
 }
 
-.loader {
-  @include loader;
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Sfondo scuro con opacità */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Assicura che il loader sia sopra tutti gli altri elementi */
 }
 
-@keyframes l9 {
-  to {
-    transform: rotate(1turn);
+/* Stile per il loader */
+.loader {
+  border: 5px solid #f3f3f3; /* Grigio chiaro */
+  border-top: 5px solid $secondary_color; /* Blu */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite; /* Animazione di rotazione */
+  transform: translateY(-50%);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
+
+// .loader {
+//   @include loader;
+// }
+
+// @keyframes l9 {
+//   to {
+//     transform: rotate(1turn);
+//   }
+// }
 
 .cart_responsive {
   @include shopping_cart_behavior;
@@ -387,11 +475,7 @@ export default {
         color: $primary_color;
       }
     }
-
-
-
   }
-
 }
 
 @media screen and (max-width: 1200px) {

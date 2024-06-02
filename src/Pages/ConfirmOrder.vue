@@ -21,7 +21,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.$router.push({ name: "home" });
-    }, 5000);
+    }, 8000);
     localStorage.removeItem("items");
     this.store.totalCartPrice = 0;
   },
@@ -32,10 +32,9 @@ export default {
   <div class="bg_confirmation_order mb-5">
     <div class="container">
       <div class="d-flex flex-column py-5">
-        <img class="pb-3" src="/img/logo/Logo.png" alt="" />
         <div class="customer_content">
           <h1>
-            Hey, {{ orderInfo.customer_name }}
+            Thank You, {{ orderInfo.customer_name }}
             {{ orderInfo.customer_last_name }}, your order has been confirmed,
             enjoy!
           </h1>
