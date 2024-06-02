@@ -354,6 +354,7 @@ export default {
     text-wrap: nowrap;
     text-align: center;
     border: 1px solid $deactivated_text;
+    user-select: none;
   }
 
   .custom-checkbox input[type="checkbox"]:checked+.custom-checkbox-label {

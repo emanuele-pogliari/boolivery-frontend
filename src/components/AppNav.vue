@@ -31,7 +31,7 @@ export default {
 
 <template>
   <nav class="navbar navbar-expand-md nunito-navbar">
-    <div class="container-fluid my_container my_nav">
+    <div class="container my_nav">
       <!-- Home Icon -->
       <router-link to="/">
         <a class="navbar-brand">
@@ -50,15 +50,11 @@ export default {
             <router-link class="text-decoration-none" to="/">
               <a class="nav-link text-center nav_voice" aria-current="page">Home</a>
             </router-link>
-            <a class="nav-link text-center nav_voice" href="#">Delivery</a>
-            <a class="nav-link text-center nav_voice" href="#">Payment</a>
-            <a class="nav-link text-center nav_voice" href="#">Contact</a>
-            <a class="nav-link text-center nav_voice" href="#">About</a>
             <span id="space"></span>
             <!-- Login Button -->
             <a class="text-center" href="http://127.0.0.1:8000">
               <button class="btn btn-sm ms-auto my_button" type="button">
-                <span class=" text-capitalize">start</span>
+                <span class=" text-capitalize">join us</span>
               </button>
             </a>
           </div>
@@ -87,7 +83,6 @@ export default {
   background-color: $background_color_dark;
 
   .my_nav {
-    max-width: 1200px;
 
     button:focus:not(:focus-visible) {
       border: none;

@@ -71,7 +71,6 @@ export default {
     .my_jumbo {
         background-color: $secondary_color;
         width: 100%;
-        height: 28rem;
     }
 
     .jumbotron-content {
@@ -82,7 +81,7 @@ export default {
         text-align: start;
         color: $background_color;
 
-        @media (max-width: 992pxpx) {
+        @media (max-width: 992px) {
             text-align: center;
         }
 
@@ -109,6 +108,22 @@ export default {
             font-weight: 800;
 
             color: $text_color;
+
+            @media (max-width: 992px) {
+                font-size: 6rem;
+            }
+
+            @media (max-width: 768px) {
+                font-size: 5rem;
+            }
+
+            @media (max-width: 576px) {
+                font-size: 4rem;
+            }
+
+            @media (max-width: 360px) {
+                font-size: 3rem;
+            }
 
             @media (max-width: 320px) {
                 font-size: 3rem;

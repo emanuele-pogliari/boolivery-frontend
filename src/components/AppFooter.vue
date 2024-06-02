@@ -102,7 +102,7 @@ export default {
               <label for="exampleInputEmail1" class="form-label"></label>
               <input type="email" class="form-control mb-2" id="exampleInputEmail1" placeholder="enter email adress"
                 aria-describedby="emailHelp" />
-              <div id="emailHelp" class="my_text">
+              <div id="emailHelp" class="my_text text-center text-sm-start">
                 Subscribe to our newsletter
               </div>
             </div>
