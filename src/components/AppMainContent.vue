@@ -188,8 +188,8 @@ export default {
           <AppCardItem v-for="restaurant in restaurants.data" :key="restaurant.id" :restaurant="restaurant">
           </AppCardItem>
         </template>
-        <div v-else>
-          <h3>No restaurants found</h3>
+        <div v-else class="text-center">
+          <h3>No restaurants found <i class="fa-regular fa-face-frown"></i></h3>
         </div>
       </div>
 
@@ -229,14 +229,6 @@ export default {
     height: 100%;
     min-height: 260px;
     gap: 0.5rem;
-
-    @media screen and (max-width: 992px) {
-      min-height: 500px;
-    }
-
-    @media screen and (max-width: 428px) {
-      min-height: 900px;
-    }
   }
 
 
