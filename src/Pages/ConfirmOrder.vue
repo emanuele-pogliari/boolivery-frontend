@@ -21,7 +21,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.$router.push({ name: "home" });
-    }, 5000);
+    }, 8000);
     localStorage.removeItem("items");
     this.store.totalCartPrice = 0;
   },
