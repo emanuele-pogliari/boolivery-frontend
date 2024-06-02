@@ -30,7 +30,7 @@ export default {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-md bg-body-tertiary">
+  <nav class="navbar navbar-expand-md nunito-navbar">
     <div class="container-fluid my_container my_nav">
       <!-- Home Icon -->
       <router-link to="/">
@@ -48,7 +48,7 @@ export default {
           <!-- Centered Navigation Links -->
           <div class="navbar-nav ms-auto w-100">
             <router-link class="text-decoration-none" to="/">
-              <a class="nav-link text-center active nav_voice" aria-current="page">Home</a>
+              <a class="nav-link text-center nav_voice" aria-current="page">Home</a>
             </router-link>
             <a class="nav-link text-center nav_voice" href="#">Delivery</a>
             <a class="nav-link text-center nav_voice" href="#">Payment</a>
@@ -58,8 +58,7 @@ export default {
             <!-- Login Button -->
             <a class="text-center" href="http://127.0.0.1:8000">
               <button class="btn btn-sm ms-auto my_button" type="button">
-                <i class="fa-solid fa-house-user"></i>
-                <span> Restaurant Owner Login</span>
+                <span class=" text-capitalize">start</span>
               </button>
             </a>
           </div>
@@ -75,17 +74,28 @@ export default {
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
+.nunito-navbar {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 .navbar {
   width: 100%;
   padding: 1rem 0;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  background-color: $background_color_dark;
 
   .my_nav {
     max-width: 1200px;
 
+    button:focus:not(:focus-visible) {
+      border: none;
+    }
+
     .navbar-toggler {
-      border: 2px solid $text_color;
-      border-radius: 12px;
+      border: 1px solid $deactivated_text;
+      border-radius: 10px;
 
       .navbar-toggler-icon {
         color: $deactivated_text;
@@ -97,8 +107,9 @@ export default {
     }
 
     .right-side {
+
       a {
-        font-weight: 600;
+        font-weight: 700;
         position: relative;
       }
 
@@ -117,29 +128,29 @@ export default {
         transform: translateX(-50%);
       }
 
-      .nav_voice:hover::after,
-      .nav_voice.active::after {
+      .nav_voice:hover::after {
         width: 75%;
         background: $secondary_color;
       }
+
 
       .my_button {
         @include primary_button_style;
 
         font-weight: 600;
-        border: 2px solid $secondary_color;
+        border: 1px solid $deactivated_text;
 
         margin-left: auto;
         margin-right: auto;
 
         &:hover {
-          background-color: $secondary_color;
-          color: $text_color;
+          background-color: $primary_color;
+          color: $background_color;
+          border: 1px solid $primary_color;
         }
 
-        i {
-          font-size: 1.2rem;
-          margin-right: 0.25rem;
+        span {
+          font-weight: 800;
         }
       }
     }
@@ -151,12 +162,7 @@ export default {
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 800px) {
 
-  .my_button span {
-    display: none;
-  }
-}
 
 @media screen and (max-width: 767px) {
 

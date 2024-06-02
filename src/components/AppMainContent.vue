@@ -128,12 +128,12 @@ export default {
 
           420: {
             slidesPerView: 3,
-            spaceBetween: 15,
+            spaceBetween: 17,
           },
 
           320: {
             slidesPerView: 3,
-            spaceBetween: 15,
+            spaceBetween: 17,
           },
         },
         navigation: {
@@ -228,14 +228,20 @@ export default {
     align-items: center;
     height: 100%;
     min-height: 260px;
-
     gap: 0.5rem;
+
+    @media screen and (max-width: 992px) {
+      min-height: 500px;
+    }
+
+    @media screen and (max-width: 428px) {
+      min-height: 900px;
+    }
   }
 
+
+
   nav {
-    // display: flex;
-    // justify-content: space-between;
-    // align-items: center;
     width: 100%;
 
     h3 {
@@ -279,7 +285,7 @@ export default {
     border-radius: 50%;
     cursor: pointer;
     background-color: rgb(242, 242, 242);
-    border: 1px solid $text_color;
+    border: 1px solid $deactivated_text;
     color: black;
 
     font-weight: 600;
@@ -305,6 +311,7 @@ export default {
   .next-button,
   .back-button {
     background-color: $primary_color;
+    border: 1px solid $primary_color;
     color: $text_color_highlight;
     font-weight: 600;
   }
@@ -346,6 +353,7 @@ export default {
     @include restaurant_button_style;
     text-wrap: nowrap;
     text-align: center;
+    border: 1px solid $deactivated_text;
   }
 
   .custom-checkbox input[type="checkbox"]:checked+.custom-checkbox-label {
@@ -355,6 +363,7 @@ export default {
 
   .custom-checkbox-label:hover {
     background-color: $secondary_color;
+    border: 1px solid $secondary_color;
     color: $text_color;
   }
 }

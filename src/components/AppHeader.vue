@@ -33,19 +33,15 @@ export default {
 @use "/src/variabiles.scss" as *;
 @use "/src/mixins.scss" as *;
 
-
 .nunito-header {
     font-family: "Nunito", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
 }
 
-
-
 .jumbotron {
     position: relative;
     margin: 1rem 0;
-
 
     @media screen and (min-width: 992px) {
         background-color: $background_color_dark;
@@ -55,7 +51,6 @@ export default {
         border-bottom-left-radius: 1rem;
         box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     }
-
 
     img {
         width: 100%;
@@ -136,41 +131,10 @@ export default {
             @include shopping_cart_button;
 
             &:hover {
-
                 background-color: $primary_color;
                 color: #ffffff;
-                animation: jello-horizontal 0.9s both;
-
-                @keyframes jello-horizontal {
-                    0% {
-                        transform: scale3d(1, 1, 1);
-                    }
-
-                    30% {
-                        transform: scale3d(1.25, 0.75, 1);
-                    }
-
-                    40% {
-                        transform: scale3d(0.75, 1.25, 1);
-                    }
-
-                    50% {
-                        transform: scale3d(1.15, 0.85, 1);
-                    }
-
-                    65% {
-                        transform: scale3d(0.95, 1.05, 1);
-                    }
-
-                    75% {
-                        transform: scale3d(1.05, 0.95, 1);
-                    }
-
-                    100% {
-                        transform: scale3d(1, 1, 1);
-                    }
-                }
-
+                transition: 0.3s ease;
+                scale: 1.05;
             }
 
         }
