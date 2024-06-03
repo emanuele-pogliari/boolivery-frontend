@@ -19,11 +19,11 @@ export default {
     };
   },
   mounted() {
-    // setTimeout(() => {
-    //   this.$router.push({ name: "home" });
-    // }, 8000);
-    // localStorage.removeItem("items");
-    // this.store.totalCartPrice = 0;
+    setTimeout(() => {
+      this.$router.push({ name: "home" });
+    }, 8000);
+    localStorage.removeItem("items");
+    this.store.totalCartPrice = 0;
   },
 };
 </script>
@@ -34,10 +34,14 @@ export default {
       <div class="d-flex flex-column py-5">
         <div class="customer_content">
           <h1 class="">
-            Thank You, <span class="text-capitalize fw-bolder">{{ orderInfo.customer_name }} <span></span> </span>
-            <span class="text-capitalize fw-bolder">{{ orderInfo.customer_last_name }}</span>, your order has been
-            confirmed,
-            enjoy!
+            Thank You,
+            <span class="text-capitalize fw-bolder"
+              >{{ orderInfo.customer_name }} <span></span>
+            </span>
+            <span class="text-capitalize fw-bolder">{{
+              orderInfo.customer_last_name
+            }}</span
+            >, your order has been confirmed, enjoy!
           </h1>
           <p>Find below the receipt from {{ restaurant_name }}"</p>
         </div>
@@ -46,7 +50,8 @@ export default {
   </div>
 
   <div
-    class="invoice container mb-5 d-flex justify-content-evenly flex-column align-items-center align-items-md-start text-center text-md-start flex-md-row gap-5 gap-md-0 align-text-top nunito-confirm-order">
+    class="invoice container mb-5 d-flex justify-content-evenly flex-column align-items-center align-items-md-start text-center text-md-start flex-md-row gap-5 gap-md-0 align-text-top nunito-confirm-order"
+  >
     <div>
       <h2 class="fw-bolder py-0 my-0 fs-2">Your Order</h2>
       <ul>
@@ -55,7 +60,9 @@ export default {
           <p>{{ item.price }} €</p>
         </li>
       </ul>
-      <h2 class="fw-bolder fs-2 py-0 my-0">Total: {{ orderInfo.total_price }} €</h2>
+      <h2 class="fw-bolder fs-2 py-0 my-0">
+        Total: {{ orderInfo.total_price }} €
+      </h2>
     </div>
     <div>
       <h3 class="fw-bolder fs-4">Delivery Address</h3>
@@ -105,7 +112,6 @@ export default {
   border-radius: 24px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-
 
   ul {
     list-style: none;
